@@ -30,6 +30,8 @@
 
 - \subpage SegLCD1
 - \subpage SegLCD1
+- \subpage USART0_DEBUG
+- \subpage I2C1
 
 
 */

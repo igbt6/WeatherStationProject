@@ -6,7 +6,7 @@
 **     Component   : SegLCD_LDD
 **     Version     : Component 01.017, Driver 01.06, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-08-19, 00:03, # CodeGen: 3
+**     Date/Time   : 2014-08-22, 00:56, # CodeGen: 5
 **     Abstract    :
 **         This component "SegLCD_LDD" implements the segment Liquid Crystal Display (SegLCD)
 **         driver module. It can drive an LCD which is composed of variable number

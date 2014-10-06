@@ -12,48 +12,54 @@
   </ToolchainSettings>
   <GeneratedFilesList>
     <GeneratedByPE>
-      <File Name="Documentation/WeatherStation_Settings.xml" FileDate="2014-08-19, 00:03:59" FileAge="1408399439784" FileType="3072" />
+      <File Name="Documentation/WeatherStation_Settings.xml" FileDate="2014-10-06, 20:29:51" FileAge="1412620191530" FileType="3072" />
       <File Name="Static_Code/PDD/DMA_PDD.h" FileDate="2014-02-28, 13:07:24" FileAge="1393589244000" FileType="262144" />
       <File Name="Static_Code/PDD/ADC_PDD.h" FileDate="2014-02-28, 13:07:24" FileAge="1393589244000" FileType="262144" />
-      <File Name="Documentation/WeatherStation.txt" FileDate="2014-08-19, 00:04:03" FileAge="1408399443556" FileType="3072" />
+      <File Name="Documentation/WeatherStation.txt" FileDate="2014-10-06, 20:29:55" FileAge="1412620195308" FileType="3072" />
       <File Name="Static_Code/PDD/DAC_PDD.h" FileDate="2014-02-28, 13:07:24" FileAge="1393589244000" FileType="262144" />
+      <File Name="Generated_Code/USART0_DEBUG.h" FileDate="2014-10-06, 20:24:54" FileAge="1412619894761" FileType="45637" CompNumb="38" />
       <File Name="Static_Code/PDD/MCM_PDD.h" FileDate="2014-02-28, 13:07:24" FileAge="1393589244000" FileType="262144" />
       <File Name="Static_Code/PDD/TPM_PDD.h" FileDate="2014-02-28, 13:07:24" FileAge="1393589244000" FileType="262144" />
-      <File Name="Documentation/doxygen/WeatherStation.txt" FileDate="2014-08-19, 00:03:58" FileAge="1408399438746" FileType="45637" CompNumb="2" />
+      <File Name="Documentation/doxygen/WeatherStation.txt" FileDate="2014-10-06, 20:29:51" FileAge="1412620191076" FileType="45637" CompNumb="2" />
       <File Name="Static_Code/PDD/SIM_PDD.h" FileDate="2014-05-14, 12:09:28" FileAge="1400062168000" FileType="262144" />
       <File Name="Generated_Code/SegLCD1.h" FileDate="2014-08-19, 00:03:58" FileAge="1408399438063" FileType="45637" CompNumb="11" />
+      <File Name="Generated_Code/USART0_DEBUG.c" FileDate="2014-10-06, 20:24:54" FileAge="1412619894743" FileType="45637" CompNumb="38" />
       <File Name="Static_Code/PDD/UART0_PDD.h" FileDate="2014-02-28, 13:07:24" FileAge="1393589244000" FileType="262144" />
-      <File Name="Sources/main.c" FileDate="2014-08-19, 00:03:58" FileAge="1408399438234" FileType="128" />
-      <File Name="Generated_Code/SegLCD1.c" FileDate="2014-08-19, 00:03:58" FileAge="1408399438019" FileType="45637" CompNumb="11" />
-      <File Name="Generated_Code/PE_LDD.h" FileDate="2014-08-19, 00:03:58" FileAge="1408399438885" FileType="45637" CompNumb="2" />
+      <File Name="Sources/main.c" FileDate="2014-10-06, 20:29:50" FileAge="1412620190907" FileType="128" />
+      <File Name="Generated_Code/SegLCD1.c" FileDate="2014-08-22, 00:56:25" FileAge="1408661785965" FileType="45637" CompNumb="11" />
+      <File Name="Generated_Code/PE_LDD.h" FileDate="2014-10-06, 20:29:51" FileAge="1412620191149" FileType="45637" CompNumb="2" />
       <File Name="Static_Code/PDD/PDD_Types.h" FileDate="2013-09-23, 15:52:22" FileAge="1379944342000" FileType="262144" />
       <File Name="Static_Code/PDD/GPIO_PDD.h" FileDate="2014-02-28, 13:07:24" FileAge="1393589244000" FileType="262144" />
-      <File Name="Generated_Code/PE_LDD.c" FileDate="2014-08-19, 00:03:58" FileAge="1408399438850" FileType="45637" CompNumb="2" />
+      <File Name="Generated_Code/PE_LDD.c" FileDate="2014-10-06, 20:29:51" FileAge="1412620191121" FileType="45637" CompNumb="2" />
+      <File Name="Sources/mqx_tasks.h" FileDate="1970-01-01, 00:59:59" FileAge="-1" FileType="131328" />
+      <File Name="Sources/mqx_tasks.c" FileDate="1970-01-01, 00:59:59" FileAge="-1" FileType="131328" />
       <File Name="Generated_Code/PE_Const.h" FileDate="2014-08-13, 22:56:15" FileAge="1407963375559" FileType="45637" />
-      <File Name="Documentation/WeatherStation_SIGNALS.txt" FileDate="2014-08-19, 00:03:59" FileAge="1408399439165" FileType="3072" />
-      <File Name="ProjectInfo.xml" FileDate="2014-08-19, 00:04:03" FileAge="1408399443520" FileType="45637" />
-      <File Name="Generated_Code/Vectors.c" FileDate="2014-08-19, 00:03:58" FileAge="1408399438934" FileType="45637" CompNumb="2" />
-      <File Name="Generated_Code/PE_Types.h" FileDate="2014-08-19, 00:03:58" FileAge="1408399438182" FileType="45637" />
+      <File Name="Documentation/WeatherStation_SIGNALS.txt" FileDate="2014-10-06, 20:29:51" FileAge="1412620191319" FileType="3072" />
+      <File Name="ProjectInfo.xml" FileDate="2014-10-06, 20:29:55" FileAge="1412620195227" FileType="45637" />
+      <File Name="Generated_Code/Vectors.c" FileDate="2014-10-06, 20:29:51" FileAge="1412620191194" FileType="45637" CompNumb="2" />
+      <File Name="Generated_Code/PE_Types.h" FileDate="2014-10-06, 20:29:50" FileAge="1412620190869" FileType="45637" />
       <File Name="Generated_Code/PE_Error.h" FileDate="2014-08-13, 22:56:15" FileAge="1407963375568" FileType="45637" />
-      <File Name="Generated_Code/Cpu.h" FileDate="2014-08-13, 22:56:15" FileAge="1407963375522" FileType="45637" CompNumb="2" />
+      <File Name="Generated_Code/I2C1.h" FileDate="2014-10-06, 20:24:54" FileAge="1412619894644" FileType="45637" CompNumb="39" />
       <File Name="Static_Code/PDD/PORT_PDD.h" FileDate="2014-02-28, 13:07:24" FileAge="1393589244000" FileType="262144" />
+      <File Name="Generated_Code/Cpu.h" FileDate="2014-08-22, 00:56:26" FileAge="1408661786295" FileType="45637" CompNumb="2" />
       <File Name="Static_Code/PDD/SAI_PDD.h" FileDate="2014-02-28, 13:07:24" FileAge="1393589244000" FileType="262144" />
-      <File Name="Sources/Events.h" FileDate="2014-08-19, 00:03:59" FileAge="1408399439001" FileType="131328" />
-      <File Name="Generated_Code/Cpu.c" FileDate="2014-08-19, 00:03:58" FileAge="1408399438294" FileType="45637" CompNumb="2" />
+      <File Name="Sources/Events.h" FileDate="2014-10-06, 20:29:51" FileAge="1412620191241" FileType="131328" />
+      <File Name="Generated_Code/I2C1.c" FileDate="2014-10-06, 20:24:54" FileAge="1412619894610" FileType="45637" CompNumb="39" />
+      <File Name="Generated_Code/Cpu.c" FileDate="2014-10-06, 20:29:51" FileAge="1412620191049" FileType="45637" CompNumb="2" />
       <File Name="Static_Code/PDD/FTFA_PDD.h" FileDate="2014-02-28, 13:07:24" FileAge="1393589244000" FileType="262144" />
       <File Name="Static_Code/PDD/I2C_PDD.h" FileDate="2014-02-28, 13:07:24" FileAge="1393589244000" FileType="262144" />
       <File Name="Static_Code/PDD/RTC_PDD.h" FileDate="2014-02-28, 13:07:24" FileAge="1393589244000" FileType="262144" />
       <File Name="Static_Code/PDD/UART_PDD.h" FileDate="2014-02-28, 13:07:24" FileAge="1393589244000" FileType="262144" />
       <File Name="Static_Code/PDD/DMAMUX_PDD.h" FileDate="2014-02-28, 13:07:24" FileAge="1393589244000" FileType="262144" />
-      <File Name="Project_Settings/Linker_Files/ProcessorExpert.ld" FileDate="2014-08-13, 22:56:15" FileAge="1407963375424" FileType="8" CompNumb="2" />
-      <File Name="Sources/Events.c" FileDate="2014-08-13, 22:56:15" FileAge="1407963375396" FileType="131328" />
+      <File Name="Project_Settings/Linker_Files/ProcessorExpert.ld" FileDate="2014-08-22, 00:56:26" FileAge="1408661786628" FileType="8" CompNumb="2" />
+      <File Name="Sources/Events.c" FileDate="2014-10-06, 20:29:51" FileAge="1412620191256" FileType="131328" />
       <File Name="Documentation/doxygen/pex.css" FileDate="2014-08-13, 22:56:14" FileAge="1407963374985" FileType="16384" CompNumb="2" />
       <File Name="Static_Code/PDD/CMP_PDD.h" FileDate="2014-02-28, 13:07:24" FileAge="1393589244000" FileType="262144" />
       <File Name="Static_Code/PDD/LCD_PDD.h" FileDate="2013-09-23, 15:52:22" FileAge="1379944342000" FileType="262144" />
       <File Name="Documentation/doxygen/RoutingReport.txt" FileDate="2014-08-13, 22:56:15" FileAge="1407963375472" FileType="45637" CompNumb="2" />
       <File Name="Static_Code/PDD/SPI_PDD.h" FileDate="2014-02-28, 13:07:24" FileAge="1393589244000" FileType="262144" />
       <File Name="Static_Code/PDD/USB_PDD.h" FileDate="2014-02-28, 13:07:24" FileAge="1393589244000" FileType="262144" />
-      <File Name="Documentation/doxygen/pex.doxyfile" FileDate="2014-08-13, 22:56:15" FileAge="1407963375465" FileType="45637" CompNumb="2" />
+      <File Name="Documentation/doxygen/pex.doxyfile" FileDate="2014-10-01, 21:36:17" FileAge="1412192177990" FileType="45637" CompNumb="2" />
       <File Name="Static_Code/PDD/COP_PDD.h" FileDate="2014-02-28, 13:07:24" FileAge="1393589244000" FileType="262144" />
       <File Name="Project_Settings/Startup_Code/startup.c" FileDate="2014-08-13, 22:56:14" FileAge="1407963374673" FileType="16384" CompNumb="2" />
       <File Name="Static_Code/PDD/SysTick_PDD.h" FileDate="2014-02-28, 13:07:24" FileAge="1393589244000" FileType="262144" />
@@ -62,7 +68,9 @@
       <File Name="Documentation/doxygen/SegLCD1.txt" FileDate="2014-08-19, 00:03:57" FileAge="1408399437997" FileType="45637" CompNumb="11" />
       <File Name="Static_Code/PDD/PIT_PDD.h" FileDate="2014-02-28, 13:07:24" FileAge="1393589244000" FileType="262144" />
       <File Name="Static_Code/IO_Map/MKL46Z4.h" FileDate="2014-02-28, 13:07:24" FileAge="1393589244000" FileType="262144" />
+      <File Name="Documentation/doxygen/I2C1.txt" FileDate="2014-10-06, 20:29:50" FileAge="1412620190824" FileType="45637" CompNumb="39" />
+      <File Name="Documentation/doxygen/USART0_DEBUG.txt" FileDate="2014-10-06, 20:29:50" FileAge="1412620190793" FileType="45637" CompNumb="38" />
     </GeneratedByPE>
   </GeneratedFilesList>
-  <CodeGenReference>4</CodeGenReference>
+  <CodeGenReference>11</CodeGenReference>
 </CodeGenerationInfo>

@@ -24,8 +24,11 @@ S_UPPER_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+Sources/usb \
 Sources \
 Sources/lcd \
+Sources/bsp \
+Sources/I2C \
 Project_Settings/Startup_Code \
 Generated_Code \
 

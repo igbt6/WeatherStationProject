@@ -357,5 +357,485 @@ PE_DEBUGHALT();
       </boolgroup>
     </CompilerProperties>
   </CPU_Bean>
+  <Bean name="SegLCD1" type="SegLCD_LDD">
+    <Enabled v="Y" />
+    <Properties>
+      <Component_name v="SegLCD1" />
+      <Segment_LCD_module v="LCD" />
+      <boolgroup name="Interrupt service/event" v="Disabled" />
+      <Stop_in_Wait_mode v="no" />
+      <Stop_in_Stop_mode v="no" />
+      <group name="Power supply">
+        <LCD_operation_voltage v="3V" />
+        <Power_mode_selection v="Charge Pump" />
+        <Voltage_supply_control v="Drive VLL3 internally from VDD" />
+        <boolgroup name="Charge pump" v="Enabled">
+          <Charge_pump_clock_adjust v="Slowest clock" />
+          <Charge_pump_clock v="1.365 kHz" />
+          <boolgroup name="Voltage regulator" v="Disabled" />
+        </boolgroup>
+        <Bias_voltage_VLL1 v="(VLL3 * 1/3) = 0.99V" />
+        <Bias_voltage_VLL2 v="(VLL3 * 2/3) = 1.98V" />
+        <Bias_voltage_VLL3 v="Connect internally to VDD(must be 3V)" />
+      </group>
+      <Blink_rate_bits_value v="0" />
+      <Blink_rate v="16 Hz" />
+      <LCD_frame_frequency v="64 Hz" />
+      <Base_clock v="1.024 kHz" />
+      <boolgroup name="Fault detect" v="Disabled" />
+      <list name="Backplane pins" v="4">
+        <group name="Backplane pin0">
+          <Backplane_pin v="LCD_P40/PTD0/SPI0_PCS0/TPM0_CH0" />
+        </group>
+        <group name="Backplane pin1">
+          <Backplane_pin v="LCD_P52/PTE4/SPI1_PCS0" />
+        </group>
+        <group name="Backplane pin2">
+          <Backplane_pin v="LCD_P19/PTB23" />
+        </group>
+        <group name="Backplane pin3">
+          <Backplane_pin v="LCD_P18/PTB22" />
+        </group>
+      </list>
+      <list name="Frontplane pins" v="8">
+        <group name="Frontplane pin0">
+          <Frontplane__pin v="LCD_P37/PTC17" />
+        </group>
+        <group name="Frontplane pin1">
+          <Frontplane__pin v="LCD_P17/PTB21" />
+        </group>
+        <group name="Frontplane pin2">
+          <Frontplane__pin v="LCD_P7/PTB7" />
+        </group>
+        <group name="Frontplane pin3">
+          <Frontplane__pin v="LCD_P8/PTB8/SPI1_PCS0/EXTRG_IN" />
+        </group>
+        <group name="Frontplane pin4">
+          <Frontplane__pin v="LCD_P53/PTE5" />
+        </group>
+        <group name="Frontplane pin5">
+          <Frontplane__pin v="LCD_P38/PTC18" />
+        </group>
+        <group name="Frontplane pin6">
+          <Frontplane__pin v="LCD_P10/PTB10/SPI1_PCS0" />
+        </group>
+        <group name="Frontplane pin7">
+          <Frontplane__pin v="LCD_P11/PTB11/SPI1_SCK" />
+        </group>
+      </list>
+      <group name="Initialization">
+        <Enable_in_init__code v="yes" />
+        <list name="Auto Initialization" v="1">
+          <Auto_initialization v="yes" />
+        </list>
+        <group name="Event mask">
+          <OnFaultDetectComplete v="Disabled" />
+        </group>
+      </group>
+      <list name="CPU clock/configuration selection (included)" v="1">
+        <group name="CPU clock/configuration selection">
+          <Clock_configuration_0 v="This component enabled" />
+          <Clock_configuration_1 v="This component disabled" />
+          <Clock_configuration_2 v="This component disabled" />
+          <Clock_configuration_3 v="This component disabled" />
+          <Clock_configuration_4 v="This component disabled" />
+          <Clock_configuration_5 v="This component disabled" />
+          <Clock_configuration_6 v="This component disabled" />
+          <Clock_configuration_7 v="This component disabled" />
+        </group>
+      </list>
+    </Properties>
+    <Methods>
+      <Init v="generate code" />
+      <Deinit v="don&amp;apos;t generate code" />
+      <Enable v="don&amp;apos;t generate code" />
+      <Disable v="don&amp;apos;t generate code" />
+      <SetEventMask v="don&amp;apos;t generate code" />
+      <GetEventMask v="don&amp;apos;t generate code" />
+      <GetEventStatus v="don&amp;apos;t generate code" />
+      <SetFrontplaneData v="generate code" />
+      <GetFrontplaneData v="don&amp;apos;t generate code" />
+      <SetAlternateFrontplaneData v="don&amp;apos;t generate code" />
+      <GetAlternateFrontplaneData v="don&amp;apos;t generate code" />
+      <SetBlinking v="don&amp;apos;t generate code" />
+      <SetBlank v="don&amp;apos;t generate code" />
+      <StartFaultDetectFrame v="don&amp;apos;t generate code" />
+      <GetFaultDetectCounter v="don&amp;apos;t generate code" />
+      <SetOperationMode v="don&amp;apos;t generate code" />
+      <GetDriverState v="don&amp;apos;t generate code" />
+    </Methods>
+    <Events>
+      <Event_module_name v="Events" />
+      <event name="OnFaultDetectComplete" v="don&amp;apos;t generate code" />
+    </Events>
+  </Bean>
+  <Bean name="CI2C1" type="I2C_LDD">
+    <Enabled v="Y" />
+    <Properties>
+      <Component_name v="CI2C1" />
+      <I2C_channel v="I2C0" />
+      <boolgroup name="Interrupt service" v="Enabled">
+        <Interrupt v="INT_I2C0" />
+        <Interrupt_priority v="medium priority" />
+      </boolgroup>
+      <group name="Settings">
+        <Mode_selection v="MASTER" />
+        <boolgroup name="MASTER mode" v="Enabled">
+          <group name="Initialization">
+            <Address_mode v="7-bit addressing" />
+            <Target_slave_address_init v="0" />
+          </group>
+        </boolgroup>
+        <boolgroup name="SLAVE mode" v="Disabled" />
+        <group name="Pins">
+          <group name="SDA pin">
+            <SDA_pin v="LCD_P57/ADC0_DP2/ADC0_SE2/PTE18/SPI0_MOSI/I2C0_SDA/SPI0_MISO" />
+          </group>
+          <group name="SCL pin">
+            <SCL_pin v="LCD_P58/ADC0_DM2/ADC0_SE6a/PTE19/SPI0_MISO/I2C0_SCL/SPI0_MOSI" />
+          </group>
+          <High_drive_select v="Disabled" />
+          <Input_Glitch_filter v="0" />
+        </group>
+        <Internal_frequency__multiplier_factor_ v="5.24288 MHz" />
+        <Bits_0_2_of_Frequency_divider_register v="000" />
+        <Bits_3_5_of_Frequency_divider_register v="000" />
+        <SCL_frequency v="262.144 kHz" />
+        <SDA_Hold v="1.335 us" />
+        <SCL_start_Hold v="1.144 us" />
+        <SCL_stop_Hold v="2.098 us" />
+        <boolgroup name="Control acknowledge bit" v="Disabled" />
+        <boolgroup name="Low timeout" v="Disabled" />
+      </group>
+      <group name="Initialization">
+        <Enabled_in_init_code v="yes" />
+        <list name="Auto Initialization" v="1">
+          <Auto_initialization v="no" />
+        </list>
+        <group name="Event mask">
+          <OnMasterBlockSent v="Enabled" />
+          <OnMasterBlockReceived v="Enabled" />
+          <OnMasterByteReceived v="Disabled" />
+          <OnSlaveBlockSent v="Disabled" />
+          <OnSlaveBlockReceived v="Disabled" />
+          <OnSlaveByteReceived v="Disabled" />
+          <OnSlaveRxRequest v="Disabled" />
+          <OnSlaveTxRequest v="Disabled" />
+          <OnSlaveGeneralCallAddr v="Disabled" />
+          <OnSlaveSmBusCallAddr v="Disabled" />
+          <OnSlaveSmBusAlertResponse v="Disabled" />
+          <OnError v="Disabled" />
+          <OnBusStopDetected v="Disabled" />
+        </group>
+      </group>
+      <list name="CPU clock/configuration selection (included)" v="1">
+        <group name="CPU clock/configuration selection">
+          <Clock_configuration_0 v="This component enabled" />
+          <Clock_configuration_1 v="This component disabled" />
+          <Clock_configuration_2 v="This component disabled" />
+          <Clock_configuration_3 v="This component disabled" />
+          <Clock_configuration_4 v="This component disabled" />
+          <Clock_configuration_5 v="This component disabled" />
+          <Clock_configuration_6 v="This component disabled" />
+          <Clock_configuration_7 v="This component disabled" />
+        </group>
+      </list>
+    </Properties>
+    <Methods>
+      <Init v="generate code" />
+      <Deinit v="don&amp;apos;t generate code" />
+      <Enable v="don&amp;apos;t generate code" />
+      <Disable v="don&amp;apos;t generate code" />
+      <SetEventMask v="don&amp;apos;t generate code" />
+      <GetEventMask v="don&amp;apos;t generate code" />
+      <MasterSendBlock v="generate code" />
+      <MasterGetBlockSentStatus v="don&amp;apos;t generate code" />
+      <MasterGetSentDataNum v="don&amp;apos;t generate code" />
+      <MasterReceiveBlock v="generate code" />
+      <MasterGetBlockReceivedStatus v="don&amp;apos;t generate code" />
+      <MasterGetReceivedDataNum v="don&amp;apos;t generate code" />
+      <MasterUpdateReceiveBlockSize v="don&amp;apos;t generate code" />
+      <SlaveSendBlock v="don&amp;apos;t generate code" />
+      <SlaveGetBlockSentStatus v="don&amp;apos;t generate code" />
+      <SlaveGetSentDataNum v="don&amp;apos;t generate code" />
+      <SlaveCancelTransmissionBlock v="don&amp;apos;t generate code" />
+      <SlaveReceiveBlock v="don&amp;apos;t generate code" />
+      <SlaveGetBlockReceivedStatus v="don&amp;apos;t generate code" />
+      <SlaveGetReceivedDataNum v="don&amp;apos;t generate code" />
+      <SlaveUpdateReceiveBlockSize v="don&amp;apos;t generate code" />
+      <SlaveCancelReceptionBlock v="don&amp;apos;t generate code" />
+      <SelectSlaveDevice v="don&amp;apos;t generate code" />
+      <SendAcknowledge v="don&amp;apos;t generate code" />
+      <GetError v="don&amp;apos;t generate code" />
+      <CheckBus v="don&amp;apos;t generate code" />
+      <GetStats v="don&amp;apos;t generate code" />
+      <ClearStats v="don&amp;apos;t generate code" />
+      <Main v="don&amp;apos;t generate code" />
+      <ConnectPin v="don&amp;apos;t generate code" />
+      <SetOperationMode v="don&amp;apos;t generate code" />
+      <GetDriverState v="don&amp;apos;t generate code" />
+    </Methods>
+    <Events>
+      <Event_module_name v="Events" />
+      <event name="OnMasterBlockSent" v="generate code">
+        <Event_procedure_name v="CI2C1_OnMasterBlockSent" />
+      </event>
+      <event name="OnMasterBlockReceived" v="generate code">
+        <Event_procedure_name v="CI2C1_OnMasterBlockReceived" />
+      </event>
+      <event name="OnMasterByteReceived" v="don&amp;apos;t generate code" />
+      <event name="OnSlaveBlockSent" v="don&amp;apos;t generate code" />
+      <event name="OnSlaveBlockReceived" v="don&amp;apos;t generate code" />
+      <event name="OnSlaveByteReceived" v="don&amp;apos;t generate code" />
+      <event name="OnSlaveRxRequest" v="don&amp;apos;t generate code" />
+      <event name="OnSlaveTxRequest" v="don&amp;apos;t generate code" />
+      <event name="OnSlaveGeneralCallAddr" v="don&amp;apos;t generate code" />
+      <event name="OnSlaveSmBusCallAddr" v="don&amp;apos;t generate code" />
+      <event name="OnSlaveSmBusAlertResponse" v="don&amp;apos;t generate code" />
+      <event name="OnError" v="don&amp;apos;t generate code" />
+      <event name="OnBusStopDetected" v="don&amp;apos;t generate code" />
+    </Events>
+  </Bean>
+  <Bean name="USART0_DEBUG" type="Serial_LDD">
+    <Enabled v="Y" />
+    <Properties>
+      <Component_name v="USART0_DEBUG" />
+      <Device v="UART0" />
+      <boolgroup name="Interrupt service/event" v="Enabled">
+        <Interrupt_RxD v="INT_UART0" />
+        <Interrupt_RxD_priority v="medium priority" />
+        <Interrupt_TxD v="INT_UART0" />
+        <Interrupt_TxD_priority v="medium priority" />
+        <Interrupt_Error v="INT_UART0" />
+        <Interrupt_Error_priority v="medium priority" />
+      </boolgroup>
+      <group name="Settings">
+        <Data_width v="8 bits" />
+        <Parity v="None" />
+        <Stop_bits v="1" />
+        <Loop_mode v="Normal" />
+        <Baud_rate v="38400 baud" />
+        <Wakeup_condition v="Idle line wakeup" />
+        <Stop_in_wait_mode v="no" />
+        <Idle_line_mode v="Starts after start bit" />
+        <Transmitter_output v="Not inverted" />
+        <Receiver_input v="Not inverted" />
+        <Break_generation_length v="10/11 bits" />
+        <boolgroup name="Receiver" v="Enabled">
+          <RxD v="TSI0_CH2/PTA1/UART0_RX/TPM2_CH0" />
+        </boolgroup>
+        <boolgroup name="Transmitter" v="Enabled">
+          <TxD v="TSI0_CH3/PTA2/UART0_TX/TPM2_CH1" />
+        </boolgroup>
+        <enumgroup name="Flow control" v="None">
+          <EmptySection_DummyValue />
+        </enumgroup>
+      </group>
+      <group name="Initialization">
+        <Enabled_in_init__code v="yes" />
+        <list name="Auto Initialization" v="1">
+          <Auto_initialization v="no" />
+        </list>
+        <group name="Event mask">
+          <OnBlockSent v="Enabled" />
+          <OnBlockReceived v="Enabled" />
+          <OnTxComplete v="Disabled" />
+          <OnError v="Disabled" />
+          <OnBreak v="Disabled" />
+        </group>
+      </group>
+      <list name="CPU clock/configuration selection (included)" v="1">
+        <group name="CPU clock/configuration selection">
+          <Clock_configuration_0 v="This component enabled" />
+          <Clock_configuration_1 v="This component disabled" />
+          <Clock_configuration_2 v="This component disabled" />
+          <Clock_configuration_3 v="This component disabled" />
+          <Clock_configuration_4 v="This component disabled" />
+          <Clock_configuration_5 v="This component disabled" />
+          <Clock_configuration_6 v="This component disabled" />
+          <Clock_configuration_7 v="This component disabled" />
+        </group>
+      </list>
+    </Properties>
+    <Methods>
+      <Init v="generate code" />
+      <Deinit v="don&amp;apos;t generate code" />
+      <Enable v="don&amp;apos;t generate code" />
+      <Disable v="don&amp;apos;t generate code" />
+      <SendBlock v="generate code" />
+      <ReceiveBlock v="generate code" />
+      <CancelBlockTransmission v="don&amp;apos;t generate code" />
+      <CancelBlockReception v="don&amp;apos;t generate code" />
+      <GetError v="don&amp;apos;t generate code" />
+      <GetSentDataNum v="don&amp;apos;t generate code" />
+      <GetReceivedDataNum v="don&amp;apos;t generate code" />
+      <GetTxCompleteStatus v="don&amp;apos;t generate code" />
+      <SetEventMask v="don&amp;apos;t generate code" />
+      <GetEventMask v="don&amp;apos;t generate code" />
+      <SelectBaudRate v="don&amp;apos;t generate code" />
+      <GetSelectedBaudRate v="don&amp;apos;t generate code" />
+      <SetParity v="don&amp;apos;t generate code" />
+      <GetParity v="don&amp;apos;t generate code" />
+      <SetDataWidth v="don&amp;apos;t generate code" />
+      <GetDataWidth v="don&amp;apos;t generate code" />
+      <SetStopBitLength v="don&amp;apos;t generate code" />
+      <GetStopBitLength v="don&amp;apos;t generate code" />
+      <SetLoopMode v="don&amp;apos;t generate code" />
+      <GetLoopMode v="don&amp;apos;t generate code" />
+      <GetStats v="don&amp;apos;t generate code" />
+      <ClearStats v="don&amp;apos;t generate code" />
+      <SendBreak v="don&amp;apos;t generate code" />
+      <GetBreak v="don&amp;apos;t generate code" />
+      <TurnTxOn v="don&amp;apos;t generate code" />
+      <TurnTxOff v="don&amp;apos;t generate code" />
+      <TurnRxOn v="don&amp;apos;t generate code" />
+      <TurnRxOff v="don&amp;apos;t generate code" />
+      <ConnectPin v="don&amp;apos;t generate code" />
+      <Main v="don&amp;apos;t generate code" />
+      <SetOperationMode v="don&amp;apos;t generate code" />
+      <GetDriverState v="don&amp;apos;t generate code" />
+    </Methods>
+    <Events>
+      <Event_module_name v="Events" />
+      <event name="OnBlockReceived" v="generate code">
+        <Event_procedure_name v="USART0_DEBUG_OnBlockReceived" />
+      </event>
+      <event name="OnBlockSent" v="generate code">
+        <Event_procedure_name v="USART0_DEBUG_OnBlockSent" />
+      </event>
+      <event name="OnBreak" v="don&amp;apos;t generate code" />
+      <event name="OnError" v="don&amp;apos;t generate code" />
+      <event name="OnTxComplete" v="don&amp;apos;t generate code" />
+    </Events>
+  </Bean>
+  <Bean name="I2C1" type="I2C_LDD">
+    <Enabled v="Y" />
+    <Properties>
+      <Component_name v="I2C1" />
+      <I2C_channel v="I2C1" />
+      <boolgroup name="Interrupt service" v="Enabled">
+        <Interrupt v="INT_I2C1" />
+        <Interrupt_priority v="medium priority" />
+      </boolgroup>
+      <group name="Settings">
+        <Mode_selection v="MASTER" />
+        <boolgroup name="MASTER mode" v="Enabled">
+          <group name="Initialization">
+            <Address_mode v="7-bit addressing" />
+            <Target_slave_address_init v="0" />
+          </group>
+        </boolgroup>
+        <boolgroup name="SLAVE mode" v="Disabled" />
+        <group name="Pins">
+          <group name="SDA pin">
+            <SDA_pin v="LCD_P48/PTE0/SPI1_MISO/UART1_TX/RTC_CLKOUT/CMP0_OUT/I2C1_SDA" />
+          </group>
+          <group name="SCL pin">
+            <SCL_pin v="LCD_P49/PTE1/SPI1_MOSI/UART1_RX/SPI1_MISO/I2C1_SCL" />
+          </group>
+          <High_drive_select v="Disabled" />
+          <Input_Glitch_filter v="0" />
+        </group>
+        <Internal_frequency__multiplier_factor_ v="10.48576 MHz" />
+        <Bits_0_2_of_Frequency_divider_register v="111" />
+        <Bits_3_5_of_Frequency_divider_register v="010" />
+        <SCL_frequency v="81.92 kHz" />
+        <SDA_Hold v="2.003 us" />
+        <SCL_start_Hold v="5.531 us" />
+        <SCL_stop_Hold v="6.199 us" />
+        <boolgroup name="Control acknowledge bit" v="Disabled" />
+        <boolgroup name="Low timeout" v="Disabled" />
+      </group>
+      <group name="Initialization">
+        <Enabled_in_init_code v="yes" />
+        <list name="Auto Initialization" v="1">
+          <Auto_initialization v="no" />
+        </list>
+        <group name="Event mask">
+          <OnMasterBlockSent v="Enabled" />
+          <OnMasterBlockReceived v="Enabled" />
+          <OnMasterByteReceived v="Enabled" />
+          <OnSlaveBlockSent v="Disabled" />
+          <OnSlaveBlockReceived v="Disabled" />
+          <OnSlaveByteReceived v="Disabled" />
+          <OnSlaveRxRequest v="Disabled" />
+          <OnSlaveTxRequest v="Disabled" />
+          <OnSlaveGeneralCallAddr v="Disabled" />
+          <OnSlaveSmBusCallAddr v="Disabled" />
+          <OnSlaveSmBusAlertResponse v="Disabled" />
+          <OnError v="Disabled" />
+          <OnBusStopDetected v="Disabled" />
+        </group>
+      </group>
+      <list name="CPU clock/configuration selection (included)" v="1">
+        <group name="CPU clock/configuration selection">
+          <Clock_configuration_0 v="This component enabled" />
+          <Clock_configuration_1 v="This component disabled" />
+          <Clock_configuration_2 v="This component disabled" />
+          <Clock_configuration_3 v="This component disabled" />
+          <Clock_configuration_4 v="This component disabled" />
+          <Clock_configuration_5 v="This component disabled" />
+          <Clock_configuration_6 v="This component disabled" />
+          <Clock_configuration_7 v="This component disabled" />
+        </group>
+      </list>
+    </Properties>
+    <Methods>
+      <Init v="generate code" />
+      <Deinit v="don&amp;apos;t generate code" />
+      <Enable v="generate code" />
+      <Disable v="generate code" />
+      <SetEventMask v="don&amp;apos;t generate code" />
+      <GetEventMask v="don&amp;apos;t generate code" />
+      <MasterSendBlock v="generate code" />
+      <MasterGetBlockSentStatus v="don&amp;apos;t generate code" />
+      <MasterGetSentDataNum v="don&amp;apos;t generate code" />
+      <MasterReceiveBlock v="generate code" />
+      <MasterGetBlockReceivedStatus v="don&amp;apos;t generate code" />
+      <MasterGetReceivedDataNum v="don&amp;apos;t generate code" />
+      <MasterUpdateReceiveBlockSize v="don&amp;apos;t generate code" />
+      <SlaveSendBlock v="don&amp;apos;t generate code" />
+      <SlaveGetBlockSentStatus v="don&amp;apos;t generate code" />
+      <SlaveGetSentDataNum v="don&amp;apos;t generate code" />
+      <SlaveCancelTransmissionBlock v="don&amp;apos;t generate code" />
+      <SlaveReceiveBlock v="don&amp;apos;t generate code" />
+      <SlaveGetBlockReceivedStatus v="don&amp;apos;t generate code" />
+      <SlaveGetReceivedDataNum v="don&amp;apos;t generate code" />
+      <SlaveUpdateReceiveBlockSize v="don&amp;apos;t generate code" />
+      <SlaveCancelReceptionBlock v="don&amp;apos;t generate code" />
+      <SelectSlaveDevice v="don&amp;apos;t generate code" />
+      <SendAcknowledge v="don&amp;apos;t generate code" />
+      <GetError v="don&amp;apos;t generate code" />
+      <CheckBus v="don&amp;apos;t generate code" />
+      <GetStats v="don&amp;apos;t generate code" />
+      <ClearStats v="don&amp;apos;t generate code" />
+      <Main v="don&amp;apos;t generate code" />
+      <ConnectPin v="don&amp;apos;t generate code" />
+      <SetOperationMode v="don&amp;apos;t generate code" />
+      <GetDriverState v="don&amp;apos;t generate code" />
+    </Methods>
+    <Events>
+      <Event_module_name v="Events" />
+      <event name="OnMasterBlockSent" v="generate code">
+        <Event_procedure_name v="I2C1_OnMasterBlockSent" />
+      </event>
+      <event name="OnMasterBlockReceived" v="generate code">
+        <Event_procedure_name v="I2C1_OnMasterBlockReceived" />
+      </event>
+      <event name="OnMasterByteReceived" v="generate code">
+        <Event_procedure_name v="I2C1_OnMasterByteReceived" />
+      </event>
+      <event name="OnSlaveBlockSent" v="don&amp;apos;t generate code" />
+      <event name="OnSlaveBlockReceived" v="don&amp;apos;t generate code" />
+      <event name="OnSlaveByteReceived" v="don&amp;apos;t generate code" />
+      <event name="OnSlaveRxRequest" v="don&amp;apos;t generate code" />
+      <event name="OnSlaveTxRequest" v="don&amp;apos;t generate code" />
+      <event name="OnSlaveGeneralCallAddr" v="don&amp;apos;t generate code" />
+      <event name="OnSlaveSmBusCallAddr" v="don&amp;apos;t generate code" />
+      <event name="OnSlaveSmBusAlertResponse" v="don&amp;apos;t generate code" />
+      <event name="OnError" v="don&amp;apos;t generate code" />
+      <event name="OnBusStopDetected" v="don&amp;apos;t generate code" />
+    </Events>
+  </Bean>
 </PE_PROJECT_SETTINGS_DOCUMENTATION>
 

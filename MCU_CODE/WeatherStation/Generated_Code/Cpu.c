@@ -7,7 +7,7 @@
 **     Version     : Component 01.002, Driver 01.04, CPU db: 3.00.000
 **     Datasheet   : KL46P121M48SF4RM, Rev.2, Dec 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-08-19, 00:03, # CodeGen: 3
+**     Date/Time   : 2014-10-06, 20:29, # CodeGen: 10
 **     Abstract    :
 **
 **     Settings    :
@@ -61,6 +61,8 @@
 
 /* {Default RTOS Adapter} No RTOS includes */
 #include "SegLCD1.h"
+#include "USART0_DEBUG.h"
+#include "I2C1.h"
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"

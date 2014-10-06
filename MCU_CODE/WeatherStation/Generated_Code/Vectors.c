@@ -5,7 +5,7 @@
 **     Processor   : MKL46Z256VMC4
 **     Version     : Component 01.002, Driver 01.04, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-08-19, 00:03, # CodeGen: 3
+**     Date/Time   : 2014-10-06, 20:29, # CodeGen: 10
 **     Abstract    :
 **
 **     Settings    :
@@ -55,6 +55,8 @@
 
   #include "Cpu.h"
   #include "SegLCD1.h"
+  #include "USART0_DEBUG.h"
+  #include "I2C1.h"
   #include "Events.h"
 
 
@@ -99,10 +101,10 @@
     (tIsrFunc)&Cpu_Interrupt,          /* 0x16  0x00000058   -   ivINT_LVD_LVW                 unused by PE */
     (tIsrFunc)&Cpu_Interrupt,          /* 0x17  0x0000005C   -   ivINT_LLW                     unused by PE */
     (tIsrFunc)&Cpu_Interrupt,          /* 0x18  0x00000060   -   ivINT_I2C0                    unused by PE */
-    (tIsrFunc)&Cpu_Interrupt,          /* 0x19  0x00000064   -   ivINT_I2C1                    unused by PE */
+    (tIsrFunc)&I2C1_Interrupt,         /* 0x19  0x00000064   2   ivINT_I2C1                    used by PE */
     (tIsrFunc)&Cpu_Interrupt,          /* 0x1A  0x00000068   -   ivINT_SPI0                    unused by PE */
     (tIsrFunc)&Cpu_Interrupt,          /* 0x1B  0x0000006C   -   ivINT_SPI1                    unused by PE */
-    (tIsrFunc)&Cpu_Interrupt,          /* 0x1C  0x00000070   -   ivINT_UART0                   unused by PE */
+    (tIsrFunc)&USART0_DEBUG_Interrupt, /* 0x1C  0x00000070   2   ivINT_UART0                   used by PE */
     (tIsrFunc)&Cpu_Interrupt,          /* 0x1D  0x00000074   -   ivINT_UART1                   unused by PE */
     (tIsrFunc)&Cpu_Interrupt,          /* 0x1E  0x00000078   -   ivINT_UART2                   unused by PE */
     (tIsrFunc)&Cpu_Interrupt,          /* 0x1F  0x0000007C   -   ivINT_ADC0                    unused by PE */

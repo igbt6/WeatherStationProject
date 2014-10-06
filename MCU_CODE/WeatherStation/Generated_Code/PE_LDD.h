@@ -5,7 +5,7 @@
 **     Processor   : MKL46Z256VMC4
 **     Version     : Component 01.002, Driver 01.04, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-08-19, 00:03, # CodeGen: 3
+**     Date/Time   : 2014-10-06, 20:29, # CodeGen: 10
 **     Abstract    :
 **
 **     Settings    :
@@ -61,6 +61,8 @@
 #include "PE_Error.h"
 #include "PE_Const.h"
 #include "SegLCD1.h"
+#include "USART0_DEBUG.h"
+#include "I2C1.h"
 
 
 /*
