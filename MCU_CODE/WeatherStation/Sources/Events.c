@@ -29,6 +29,7 @@
 
 #include "Cpu.h"
 #include "Events.h"
+#include "mqx_tasks.h"
 
 #ifdef __cplusplus
 extern "C" {

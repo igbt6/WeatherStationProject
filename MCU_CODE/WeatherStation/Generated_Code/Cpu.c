@@ -7,7 +7,7 @@
 **     Version     : Component 01.002, Driver 01.04, CPU db: 3.00.000
 **     Datasheet   : KL46P121M48SF4RM, Rev.2, Dec 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-10-06, 20:29, # CodeGen: 10
+**     Date/Time   : 2014-10-06, 23:33, # CodeGen: 11
 **     Abstract    :
 **
 **     Settings    :
@@ -59,15 +59,22 @@
 
 /* MODULE Cpu. */
 
-/* {Default RTOS Adapter} No RTOS includes */
+/* MQX Lite include files */
+#include "mqxlite.h"
+#include "mqxlite_prv.h"
 #include "SegLCD1.h"
 #include "USART0_DEBUG.h"
 #include "I2C1.h"
+#include "MQX1.h"
+#include "SystemTimer1.h"
+#include "WDog1.h"
+#include "TU1.h"
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
 #include "IO_Map.h"
 #include "Events.h"
+#include "mqx_tasks.h"
 #include "Cpu.h"
 
 #ifdef __cplusplus
@@ -88,7 +95,7 @@ volatile uint8_t SR_lock = 0x00U;      /* Lock */
 **         This method is internal. It is used by Processor Expert only.
 ** ===================================================================
 */
-PE_ISR(Cpu_INT_NMIInterrupt)
+void Cpu_INT_NMIInterrupt(void)
 {
   Cpu_OnNMIINT();
 }
@@ -121,10 +128,6 @@ void __init_hardware(void)
   /*** ### MKL46Z256VMC4 "Cpu" init code ... ***/
   /*** PE initialization code after reset ***/
   SCB_VTOR = (uint32_t)(&__vect_table); /* Set the interrupt vector table position */
-  /* Disable the WDOG module */
-  /* SIM_COPC: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,COPT=0,COPCLKS=0,COPW=0 */
-  SIM_COPC = SIM_COPC_COPT(0x00);
-
   /* System clock initialization */
   /* SIM_CLKDIV1: OUTDIV1=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,OUTDIV4=3,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0 */
   SIM_CLKDIV1 = (SIM_CLKDIV1_OUTDIV1(0x00) | SIM_CLKDIV1_OUTDIV4(0x03)); /* Set the system prescalers to safe value */
@@ -134,6 +137,8 @@ void __init_hardware(void)
                SIM_SCGC5_PORTC_MASK |
                SIM_SCGC5_PORTB_MASK |
                SIM_SCGC5_PORTA_MASK;   /* Enable clock gate for ports to enable pin routing */
+  /* SIM_SCGC5: LPTMR=1 */
+  SIM_SCGC5 |= SIM_SCGC5_LPTMR_MASK;
   if ((PMC_REGSC & PMC_REGSC_ACKISO_MASK) != 0x0U) {
     /* PMC_REGSC: ACKISO=1 */
     PMC_REGSC |= PMC_REGSC_ACKISO_MASK; /* Release IO pads after wakeup from VLLS mode. */
@@ -201,6 +206,7 @@ void PE_low_level_init(void)
   #ifdef PEX_RTOS_INIT
     PEX_RTOS_INIT();                   /* Initialization of the selected RTOS. Macro is defined by the RTOS component. */
   #endif
+  /* {MQXLite RTOS Adapter} Set new interrupt vector (function handler and ISR parameter) */
       /* Initialization of the SIM module */
   /* PORTA_PCR4: ISF=0,MUX=7 */
   PORTA_PCR4 = (uint32_t)((PORTA_PCR4 & (uint32_t)~(uint32_t)(
@@ -252,7 +258,6 @@ void PE_low_level_init(void)
   NVIC_IPR1 &= (uint32_t)~(uint32_t)(NVIC_IP_PRI_6(0xFF));
   /* ### SegLCD_LDD "SegLCD1" component auto initialization. Auto initialization feature can be disabled by component property "Auto initialization". */
   (void)SegLCD1_Init(NULL);
-  __EI();
 }
   /* Flash configuration field */
   __attribute__ ((section (".cfmconfig"))) const uint8_t _cfm[0x10] = {

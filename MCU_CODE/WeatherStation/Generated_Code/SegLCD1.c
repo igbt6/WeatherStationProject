@@ -6,7 +6,7 @@
 **     Component   : SegLCD_LDD
 **     Version     : Component 01.017, Driver 01.06, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-08-22, 00:56, # CodeGen: 5
+**     Date/Time   : 2014-10-06, 23:33, # CodeGen: 11
 **     Abstract    :
 **         This component "SegLCD_LDD" implements the segment Liquid Crystal Display (SegLCD)
 **         driver module. It can drive an LCD which is composed of variable number
@@ -138,7 +138,9 @@
 
 #include "SegLCD1.h"
 #include "LCD_PDD.h"
-/* {Default RTOS Adapter} No RTOS includes */
+/* MQX Lite include files */
+#include "mqxlite.h"
+#include "mqxlite_prv.h"
 #include "IO_Map.h"
 
 #ifdef __cplusplus
@@ -152,7 +154,7 @@ typedef struct {
 typedef SegLCD1_TDeviceData *SegLCD1_TDeviceDataPtr; /* Pointer to the device data structure. */
 
 
-/* {Default RTOS Adapter} Static object used for simulation of dynamic driver memory allocation */
+/* {MQXLite RTOS Adapter} Static object used for simulation of dynamic driver memory allocation */
 static SegLCD1_TDeviceData DeviceDataPrv__DEFAULT_RTOS_ALLOC;
 
 #define  BACKPLANE_NUMBER        0x04U
@@ -188,7 +190,7 @@ LDD_TDeviceData* SegLCD1_Init(LDD_TUserData *UserDataPtr)
 {
   /* Allocate HAL device structure */
   SegLCD1_TDeviceData *DeviceDataPrv;
-  /* {Default RTOS Adapter} Driver memory allocation: Dynamic allocation is simulated by a pointer to the static object */
+  /* {MQXLite RTOS Adapter} Driver memory allocation: Dynamic allocation is simulated by a pointer to the static object */
   DeviceDataPrv = &DeviceDataPrv__DEFAULT_RTOS_ALLOC;
 
   DeviceDataPrv->UserData = UserDataPtr; /* Store the RTOS device structure */

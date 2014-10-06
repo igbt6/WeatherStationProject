@@ -37,6 +37,12 @@
   <PATHS>
     <LinkerCommandFile>C:\Users\lukasz\workspace.kds\WeatherStation\Project_Settings\Linker_Files\ProcessorExpert.ld</LinkerCommandFile>
     <IncludePaths>
+      <Path>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\include\</Path>
+      <Path>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\config\</Path>
+      <Path>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\kernel\</Path>
+      <Path>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\</Path>
+      <Path>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\core\M0\</Path>
+      <Path>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\compiler\cwgcc\</Path>
       <Path>C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert\lib\Kinetis\pdd\inc\</Path>
       <Path>C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert\lib\Kinetis\iofiles\</Path>
       <Path>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\</Path>
@@ -44,22 +50,66 @@
     </IncludePaths>
     <SourceCodePaths>
       <Path>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\</Path>
+      <Path>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\config\</Path>
+      <Path>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\kernel\</Path>
+      <Path>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\</Path>
       <Path>C:\Users\lukasz\workspace.kds\WeatherStation\Project_Settings\Startup_Code\</Path>
       <Path>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\</Path>
       <Path>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\I2C\</Path>
       <Path>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\bsp\</Path>
       <Path>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\lcd\</Path>
       <Path>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\usb\</Path>
+      <Path>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\core\M0\</Path>
     </SourceCodePaths>
   </PATHS>
   <FILES>
     <GeneratedCs>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\Cpu.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\I2C1.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\MQX1.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\PE_LDD.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\SegLCD1.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\SystemTimer1.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\TU1.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\USART0_DEBUG.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\Vectors.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\WDog1.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\config\task_template_list.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\kernel\idletask.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\kernel\int.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\kernel\klog.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\kernel\lwevent.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\kernel\lwlog.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\kernel\lwmem.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\kernel\lwmsgq.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\kernel\lwsem.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\kernel\lwtimer.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\kernel\mqx_utils.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\kernel\mqxlite.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\kernel\mutex.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\kernel\qu_test.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\kernel\sched.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\kernel\task.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\kernel\time_ticks.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\cortex.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\int_gkis.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\int_inst.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\int_kisr.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\int_pvta.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\int_unx.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\int_vtab.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\int_xcpt.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\mem_zero.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\psp_iinit.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\psp_supp.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\psp_tiad.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\psp_tinm.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\psp_tipr.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\psp_tisu.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\sc_irdyq.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\stack_bu.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\stack_de.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\stack_st.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Project_Settings\Startup_Code\startup.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\Events.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\I2C\hal_dev_mag3110.c</PathName>
@@ -69,6 +119,7 @@
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\lcd\LCD.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\lcd\s401.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\main.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\mqx_tasks.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\usb\ring_buffer.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\usb\usb.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\usb\usb_cdc.c</PathName>
@@ -78,12 +129,55 @@
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\Cpu.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\I2C1.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\IO_Map.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\MQX1.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\PE_Const.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\PE_Error.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\PE_LDD.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\PE_Types.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\SegLCD1.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\SystemTimer1.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\TU1.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\USART0_DEBUG.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\WDog1.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\config\task_template_list.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\config\user_config.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\include\klog.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\include\log.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\include\lwevent.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\include\lwevent_prv.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\include\lwlog.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\include\lwlog_prv.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\include\lwmem.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\include\lwmem_prv.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\include\lwmsgq.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\include\lwmsgq_prv.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\include\lwsem.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\include\lwsem_prv.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\include\lwtimer.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\include\lwtimer_prv.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\include\mqx_cnfg.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\include\mqx_cpudef.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\include\mqx_inc.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\include\mqx_macros.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\include\mqx_str.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\include\mqxlite.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\include\mqxlite_cnfg.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\include\mqxlite_prv.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\include\mutex.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\include\mutex_prv.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\include\queue.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\compiler\cwgcc\asm_mac.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\compiler\cwgcc\comp.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\cortex.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\kinetis.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\psp_comp.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\psp_cpu.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\psp_cpudef.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\psp_prv.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\psp_supp.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\psp_ticks.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\psplite.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\psptypes.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\Events.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\I2C\hal_dev_mag3110.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\I2C\hal_dev_mma8451.h</PathName>
@@ -93,6 +187,7 @@
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\lcd\LCD.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\lcd\LCDConfig.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\lcd\LCDHDW.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\mqx_tasks.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\usb\ring_buffer.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\usb\usb.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\usb\usb_cdc.h</PathName>
@@ -124,6 +219,10 @@
       <PathName>C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert\lib\Kinetis\pdd\inc\UART_PDD.h</PathName>
       <PathName>C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert\lib\Kinetis\pdd\inc\USB_PDD.h</PathName>
     </GeneratedHs>
+    <GeneratedASMs>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\core\M0\boot.S</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\core\M0\dispatch.S</PathName>
+    </GeneratedASMs>
   </FILES>
   <OPTIONS>
   </OPTIONS>

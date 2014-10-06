@@ -37,6 +37,10 @@
 #include "SegLCD1.h"
 #include "USART0_DEBUG.h"
 #include "I2C1.h"
+#include "MQX1.h"
+#include "SystemTimer1.h"
+#include "WDog1.h"
+#include "TU1.h"
 
 #ifdef __cplusplus
 extern "C" {

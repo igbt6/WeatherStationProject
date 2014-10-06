@@ -7,7 +7,7 @@
 **     Version     : Component 01.002, Driver 01.04, CPU db: 3.00.000
 **     Datasheet   : KL46P121M48SF4RM, Rev.2, Dec 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-08-22, 00:56, # CodeGen: 5
+**     Date/Time   : 2014-10-06, 23:33, # CodeGen: 11
 **     Abstract    :
 **
 **     Settings    :
@@ -158,8 +158,8 @@ extern volatile uint8_t SR_lock;
 */
 void PE_low_level_init(void);
 
-/* {Default RTOS Adapter} ISR function prototype */
-PE_ISR(Cpu_INT_NMIInterrupt);
+/* {MQXLite RTOS Adapter} ISR function prototype */
+void Cpu_INT_NMIInterrupt(void);
 /*
 ** ===================================================================
 **     Method      :  Cpu_INT_NMIInterrupt (component MKL46Z256MC4)

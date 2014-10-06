@@ -5,7 +5,7 @@
 **     Processor   : MKL46Z256VMC4
 **     Version     : Component 01.002, Driver 01.04, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-10-06, 20:29, # CodeGen: 10
+**     Date/Time   : 2014-10-06, 23:33, # CodeGen: 11
 **     Abstract    :
 **
 **     Settings    :
@@ -63,6 +63,10 @@
 #include "SegLCD1.h"
 #include "USART0_DEBUG.h"
 #include "I2C1.h"
+#include "MQX1.h"
+#include "SystemTimer1.h"
+#include "WDog1.h"
+#include "TU1.h"
 
 
 /*

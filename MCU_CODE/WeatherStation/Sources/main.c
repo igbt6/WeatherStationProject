@@ -29,9 +29,14 @@
 /* Including needed modules to compile this module/procedure */
 #include "Cpu.h"
 #include "Events.h"
+#include "mqx_tasks.h"
 #include "SegLCD1.h"
 #include "USART0_DEBUG.h"
 #include "I2C1.h"
+#include "MQX1.h"
+#include "SystemTimer1.h"
+#include "WDog1.h"
+#include "TU1.h"
 #include "lcd/LCD.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
@@ -46,16 +51,17 @@
 
 #include "I2C/hal_dev_mag3110.h"
 #include "I2C/hal_dev_mma8451.h"
+/*
+ typedef struct {
+ LDD_TDeviceData *handle;
+ volatile uint8_t isSent;
+ uint8_t rxChar;
+ uint8_t (*rxPutFct)(uint8_t);
+ } UART_Debug_Desc;
 
-typedef struct {
-  LDD_TDeviceData *handle; /* LDD device handle */
-  volatile uint8_t isSent; /* this will be set to 1 once the block has been sent */
-  uint8_t rxChar; /* single character buffer for receiving chars */
-  uint8_t (*rxPutFct)(uint8_t); /* callback to put received character into buffer */
-} UART_Debug_Desc;
-
-static UART_Debug_Desc debugData;
-static const char* string ="TEST_EXAMPLE_FRDM46_KLZ_DEVELOPmentBoard\n";
+ static UART_Debug_Desc debugData;
+ static const char* string ="TEST_EXAMPLE_FRDM46_KLZ_DEVELOPmentBoard\n";
+ */
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
@@ -68,40 +74,38 @@ int main(void)
 	/*** End of Processor Expert internal initialization.                    ***/
 
 	/* Write your code here */
-	debugData.handle= USART0_DEBUG_Init(&debugData);
+//	debugData.handle= USART0_DEBUG_Init(&debugData);
+//	USART0_DEBUG_SendBlock(debugData.handle, string, strlen(string));
+	/*
+	 int i = 0xFFFFF;
+	 SIM_SCGC4;
+	 for (;;) {
+	 //	USART0_DEBUG_SendBlock(debugData.handle, string, strlen(string));
+	 vfnLCD_Write_Char('H');
+	 while (--i)
+	 ;
+	 i = 0xFFFFF;
+	 vfnLCD_Write_Char('E');
+	 while (--i)
+	 ;
+	 i = 0xFFFFF;
+	 vfnLCD_Write_Char('L');
+	 while (--i)
+	 ;
+	 i = 0xFFFFF;
+	 vfnLCD_Write_Msg("  ");  // TURN ON all characters
+	 vfnLCD_Home();
 
-	USART0_DEBUG_SendBlock(debugData.handle, string, strlen(string));
-
-
-	int i = 0xFFFFF;
-	SIM_SCGC4;
-	for (;;) {
-		USART0_DEBUG_SendBlock(debugData.handle, string, strlen(string));
-		vfnLCD_Write_Char('H');
-		while (--i)
-			;
-		i = 0xFFFFF;
-		vfnLCD_Write_Char('E');
-		while (--i)
-			;
-		i = 0xFFFFF;
-		vfnLCD_Write_Char('L');
-		while (--i)
-			;
-		i = 0xFFFFF;
-		vfnLCD_Write_Msg("  ");  // TURN ON all characters
-		vfnLCD_Home();
-		/*printf("TES");*/
-		while (--i)
-			;
-		vfnLCD_Write_Char('0');
-		i = 0xFFFFF;
-		while (--i)
-			;
-		i = 0xFFFFF;
-		vfnLCD_Home();
-	}
-
+	 while (--i)
+	 ;
+	 vfnLCD_Write_Char('0');
+	 i = 0xFFFFF;
+	 while (--i)
+	 ;
+	 i = 0xFFFFF;
+	 vfnLCD_Home();
+	 }
+	 */
 	/*** Don't write any code pass this line, or it will be deleted during code generation. ***/
   /*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/
   #ifdef PEX_RTOS_START
@@ -111,4 +115,5 @@ int main(void)
   /*** Processor Expert end of main routine. DON'T MODIFY THIS CODE!!! ***/
   for(;;){}
   /*** Processor Expert end of main routine. DON'T WRITE CODE BELOW!!! ***/
+
 }

@@ -5,7 +5,7 @@
 **     Processor   : MKL46Z256VMC4
 **     Version     : Component 01.002, Driver 01.04, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-10-06, 20:29, # CodeGen: 10
+**     Date/Time   : 2014-10-06, 23:33, # CodeGen: 11
 **     Abstract    :
 **
 **     Settings    :
@@ -55,8 +55,9 @@
 
 /* MODULE PE_LDD. */
 
-/* {Default RTOS Adapter} No RTOS includes */
-/* {Default RTOS Adapter} No RTOS driver includes */
+/* MQX Lite include files */
+#include "mqxlite.h"
+#include "mqxlite_prv.h"
 
 #include "PE_LDD.h"
 #include "Cpu.h"
@@ -68,7 +69,10 @@
 ** Array of initialized device structures of LDD components.
 ** ===========================================================================
 */
-LDD_TDeviceData *PE_LDD_DeviceDataList[3] = {
+LDD_TDeviceData *PE_LDD_DeviceDataList[6] = {
+    NULL,
+    NULL,
+    NULL,
     NULL,
     NULL,
     NULL
@@ -147,6 +151,12 @@ bool PE_PeripheralUsed(uint32_t PrphBaseAddress)
     case 0x4006A000UL:
     /* Base address allocated by peripheral(s) I2C1 */
     case 0x40067000UL:
+    /* Base address allocated by peripheral(s) SysTick */
+    case 0xE000E010UL:
+    /* Base address allocated by peripheral(s) COP */
+    case 0x00UL:
+    /* Base address allocated by peripheral(s) LPTMR0 */
+    case 0x40040000UL:
       result = TRUE;
       break;
     default:

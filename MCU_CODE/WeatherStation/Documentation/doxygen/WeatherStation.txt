@@ -32,6 +32,9 @@
 - \subpage SegLCD1
 - \subpage USART0_DEBUG
 - \subpage I2C1
+- \subpage SystemTimer1
+- \subpage WDog1
+- \subpage TU1
 
 
 */

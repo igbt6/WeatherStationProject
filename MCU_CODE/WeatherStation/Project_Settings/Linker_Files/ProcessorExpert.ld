@@ -10,7 +10,7 @@
 /*##                                   */
 /*##     Compiler  : GNU C Compiler    */
 /*##                                   */
-/*##     Date/Time : 2014-08-22, 00:56, # CodeGen: 5 */
+/*##     Date/Time : 2014-10-06, 23:33, # CodeGen: 11 */
 /*##                                   */
 /*##     Abstract  :                   */
 /*##                                   */
@@ -25,7 +25,7 @@
 
 
 /* Entry Point */
-ENTRY(__thumb_startup)
+ENTRY(__boot)
 
 /* Highest address of the user mode stack */
 _estack = 0x20006000;    /* end of m_data */
@@ -77,6 +77,24 @@ SECTIONS
     KEEP (*(.fini))
 
     . = ALIGN(4);
+
+    /* Additional code content defined by components BEGIN */
+
+    /* MQX Lite component BEGIN */
+    * (KERNEL)
+    __VECTOR_TABLE_START = __vector_table;
+    . = ALIGN(0x4);
+    *(.rdata)
+    . = ALIGN(0x4);
+    *(.exception)
+    . = ALIGN(0x4);
+    __exception_table_start__ = .;
+    /* EXCEPTION */
+    __exception_table_end__ = .;
+    __sinit__ = .;
+    /* STATICINIT */
+    /* MQX Lite component END */
+    /* Additional code content defined by components END */
 
     _etext = .;        /* define a global symbols at end of code */
   } > m_text

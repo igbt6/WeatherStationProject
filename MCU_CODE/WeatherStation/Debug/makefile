@@ -14,6 +14,10 @@ RM := rm -rf
 -include Sources/I2C/subdir.mk
 -include Sources/subdir.mk
 -include Project_Settings/Startup_Code/subdir.mk
+-include MQXLITE/psp/cortex_m/core/M0/subdir.mk
+-include MQXLITE/psp/cortex_m/subdir.mk
+-include MQXLITE/kernel/subdir.mk
+-include MQXLITE/config/subdir.mk
 -include Generated_Code/subdir.mk
 -include subdir.mk
 -include objects.mk

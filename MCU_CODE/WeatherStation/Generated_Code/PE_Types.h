@@ -6,7 +6,7 @@
 **     Component   : PE_Types
 **     Version     : Driver 01.01
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-10-06, 20:29, # CodeGen: 10
+**     Date/Time   : 2014-10-06, 23:33, # CodeGen: 11
 **     Abstract    :
 **         PE_Types.h - contains definitions of basic types,
 **         register access macros and hardware specific macros
@@ -206,6 +206,9 @@ typedef unsigned long int       uint32;
 #define PE_LDD_COMPONENT_SegLCD1_ID              0x00U
 #define PE_LDD_COMPONENT_USART0_DEBUG_ID         0x01U
 #define PE_LDD_COMPONENT_I2C1_ID                 0x02U
+#define PE_LDD_COMPONENT_SystemTimer1_ID         0x03U
+#define PE_LDD_COMPONENT_WDog1_ID                0x04U
+#define PE_LDD_COMPONENT_TU1_ID                  0x05U
 
 /*
 ** ===================================================================
@@ -246,7 +249,14 @@ extern void PE_FillMemory(register void* SourceAddressPtr, register uint8_t c, r
 ** RTOS specific types and constants
 ** ===================================================================
 */
-/* {Default RTOS Adapter} RTOS specific definition of type of Ioctl() command constants */
+/*! {MQXLite RTOS Adapter} Type of the parameter passed into ISR from RTOS interrupt dispatcher */
+typedef void *LDD_RTOS_TISRParameter;
+
+/*! {MQXLite RTOS Adapter} Structure for saving/restoring interrupt vector */
+typedef struct {
+  void (*isrFunction)(LDD_RTOS_TISRParameter); /*!< ISR function handler */
+  LDD_RTOS_TISRParameter isrData;      /*!< ISR parameter */
+} LDD_RTOS_TISRVectorSettings;
 
 
 /*
@@ -254,7 +264,6 @@ extern void PE_FillMemory(register void* SourceAddressPtr, register uint8_t c, r
 ** Published RTOS settings and constants
 ** ===================================================================
 */
-/* {Default RTOS Adapter} No published RTOS settings */
 
 
 /*
