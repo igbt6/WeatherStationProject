@@ -41,6 +41,7 @@
 #include "SystemTimer1.h"
 #include "WDog1.h"
 #include "TU1.h"
+#include "sensors/adt7410.h"
 
 #ifdef __cplusplus
 extern "C" {

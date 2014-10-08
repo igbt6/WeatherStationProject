@@ -595,7 +595,7 @@ PE_DEBUGHALT();
         <boolgroup name="MASTER mode" v="Enabled">
           <group name="Initialization">
             <Address_mode v="7-bit addressing" />
-            <Target_slave_address_init v="0" />
+            <Target_slave_address_init v="75" />
           </group>
         </boolgroup>
         <boolgroup name="SLAVE mode" v="Disabled" />
@@ -655,7 +655,7 @@ PE_DEBUGHALT();
     </Properties>
     <Methods>
       <Init v="generate code" />
-      <Deinit v="don&amp;apos;t generate code" />
+      <Deinit v="generate code" />
       <Enable v="generate code" />
       <Disable v="generate code" />
       <SetEventMask v="don&amp;apos;t generate code" />
@@ -676,14 +676,14 @@ PE_DEBUGHALT();
       <SlaveGetReceivedDataNum v="don&amp;apos;t generate code" />
       <SlaveUpdateReceiveBlockSize v="don&amp;apos;t generate code" />
       <SlaveCancelReceptionBlock v="don&amp;apos;t generate code" />
-      <SelectSlaveDevice v="don&amp;apos;t generate code" />
+      <SelectSlaveDevice v="generate code" />
       <SendAcknowledge v="don&amp;apos;t generate code" />
       <GetError v="don&amp;apos;t generate code" />
       <CheckBus v="don&amp;apos;t generate code" />
       <GetStats v="don&amp;apos;t generate code" />
       <ClearStats v="don&amp;apos;t generate code" />
       <Main v="don&amp;apos;t generate code" />
-      <ConnectPin v="don&amp;apos;t generate code" />
+      <ConnectPin v="generate code" />
       <SetOperationMode v="don&amp;apos;t generate code" />
       <GetDriverState v="don&amp;apos;t generate code" />
     </Methods>

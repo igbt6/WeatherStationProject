@@ -45,6 +45,8 @@ Generated_Code/Vectors.o: ../Generated_Code/Vectors.c \
  C:/Users/lukasz/workspace.kds/WeatherStation/Generated_Code/SystemTimer1.h \
  C:/Users/lukasz/workspace.kds/WeatherStation/Generated_Code/WDog1.h \
  C:/Users/lukasz/workspace.kds/WeatherStation/Generated_Code/TU1.h \
+ C:/Users/lukasz/workspace.kds/WeatherStation/Sources/sensors/adt7410.h \
+ C:/Users/lukasz/workspace.kds/WeatherStation/Sources/i2c/i2c.h \
  C:/Users/lukasz/workspace.kds/WeatherStation/Sources/mqx_tasks.h
 
 ../Generated_Code/Cpu.h:
@@ -146,5 +148,9 @@ C:/Users/lukasz/workspace.kds/WeatherStation/Generated_Code/SystemTimer1.h:
 C:/Users/lukasz/workspace.kds/WeatherStation/Generated_Code/WDog1.h:
 
 C:/Users/lukasz/workspace.kds/WeatherStation/Generated_Code/TU1.h:
+
+C:/Users/lukasz/workspace.kds/WeatherStation/Sources/sensors/adt7410.h:
+
+C:/Users/lukasz/workspace.kds/WeatherStation/Sources/i2c/i2c.h:
 
 C:/Users/lukasz/workspace.kds/WeatherStation/Sources/mqx_tasks.h:

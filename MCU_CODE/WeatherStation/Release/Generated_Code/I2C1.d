@@ -43,6 +43,8 @@ Generated_Code/I2C1.o: ../Generated_Code/I2C1.c \
  C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert/lib/Kinetis/pdd/inc/COP_PDD.h \
  C:/Users/lukasz/workspace.kds/WeatherStation/Generated_Code/TU1.h \
  C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert/lib/Kinetis/pdd/inc/LPTMR_PDD.h \
+ C:/Users/lukasz/workspace.kds/WeatherStation/Sources/sensors/adt7410.h \
+ C:/Users/lukasz/workspace.kds/WeatherStation/Sources/i2c/i2c.h \
  ../Generated_Code/I2C1.h \
  C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert/lib/Kinetis/pdd/inc/PORT_PDD.h \
  C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert/lib/Kinetis/pdd/inc/I2C_PDD.h \
@@ -135,6 +137,10 @@ C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert/lib/Kinetis/pdd/inc/COP_PDD.h:
 C:/Users/lukasz/workspace.kds/WeatherStation/Generated_Code/TU1.h:
 
 C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert/lib/Kinetis/pdd/inc/LPTMR_PDD.h:
+
+C:/Users/lukasz/workspace.kds/WeatherStation/Sources/sensors/adt7410.h:
+
+C:/Users/lukasz/workspace.kds/WeatherStation/Sources/i2c/i2c.h:
 
 ../Generated_Code/I2C1.h:
 

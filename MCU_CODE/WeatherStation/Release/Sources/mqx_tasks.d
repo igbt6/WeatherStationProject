@@ -44,6 +44,8 @@ Sources/mqx_tasks.o: ../Sources/mqx_tasks.c \
  C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert/lib/Kinetis/pdd/inc/COP_PDD.h \
  C:/Users/lukasz/workspace.kds/WeatherStation/Generated_Code/TU1.h \
  C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert/lib/Kinetis/pdd/inc/LPTMR_PDD.h \
+ ../Sources/sensors/adt7410.h \
+ C:/Users/lukasz/workspace.kds/WeatherStation/Sources/i2c/i2c.h \
  ../Sources/mqx_tasks.h ../Sources/lcd/LCD.h ../Sources/lcd/LCDConfig.h \
  ../Sources/lcd/FRDM-s401.h
 
@@ -136,6 +138,10 @@ C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert/lib/Kinetis/pdd/inc/COP_PDD.h:
 C:/Users/lukasz/workspace.kds/WeatherStation/Generated_Code/TU1.h:
 
 C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert/lib/Kinetis/pdd/inc/LPTMR_PDD.h:
+
+../Sources/sensors/adt7410.h:
+
+C:/Users/lukasz/workspace.kds/WeatherStation/Sources/i2c/i2c.h:
 
 ../Sources/mqx_tasks.h:
 

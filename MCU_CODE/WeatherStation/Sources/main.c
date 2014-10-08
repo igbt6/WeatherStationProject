@@ -47,10 +47,8 @@
 /* User includes (#include below this line is not maintained by Processor Expert) */
 #include "usb/usb_cdc.h"
 #include "usb/usb_reg.h"
-#include "I2C/hal_i2c.h"
 
-#include "I2C/hal_dev_mag3110.h"
-#include "I2C/hal_dev_mma8451.h"
+
 /*
  typedef struct {
  LDD_TDeviceData *handle;

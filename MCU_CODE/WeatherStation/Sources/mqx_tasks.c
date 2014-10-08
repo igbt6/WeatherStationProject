@@ -32,6 +32,7 @@
 #include "mqx_tasks.h"
 #include "lcd/LCD.h"
 #include "SegLCD1.h"
+#include "sensors/adt7410.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -63,12 +64,12 @@ void UsartDebug_task(uint32_t task_init_data) {
 	} UART_Debug_Desc;
 
 	static UART_Debug_Desc debugData;
-	static const char* string = "TEST_EXAMPLE_FRDM46_KLZ_DEVELOPmentBoard\n";
+	//static const char* string = "TEST_EXAMPLE_FRDM46_KLZ_DEVELOPmentBoard\n";
 	debugData.handle = USART0_DEBUG_Init(&debugData);
 	while (1) {
 		counter++;
-		_time_delay_ticks(1000);
-		USART0_DEBUG_SendBlock(debugData.handle, string, strlen(string));
+		_time_delay_ticks(100000);
+		//USART0_DEBUG_SendBlock(debugData.handle, string, strlen(string));
 		/* Write your code here ... */
 
 	}
@@ -95,7 +96,7 @@ void Lcd_task(uint32_t task_init_data) {
 		counter++;
 
 		_time_delay_ticks(1000);
-		if (counter % 2) {
+			if (counter % 2) {
 			vfnLCD_Write_Char('H');
 
 			vfnLCD_Write_Char('E');
@@ -128,11 +129,20 @@ void Lcd_task(uint32_t task_init_data) {
  */
 void Task3_task(uint32_t task_init_data) {
 	int counter = 0;
-
+	initADT7410();
+	LDD_TDeviceData *handle =USART0_DEBUG_Init(NULL);
 	while (1) {
 		counter++;
+		int iInt= getIdNumber();
+		if(iInt==2)	USART0_DEBUG_SendBlock(handle, "AAAAA", 4);
+		char id =(char)iInt;
+		vfnLCD_Write_Msg("  ");
+		vfnLCD_Write_Char(id);
+		static const char* string = "TEMPERATURE:";
+	    USART0_DEBUG_SendBlock(handle, string, strlen(string));
 
-		_time_delay_ticks(10000);
+	    USART0_DEBUG_SendBlock(handle, &id, 1);
+		_time_delay_ticks(2000);
 
 	}
 }

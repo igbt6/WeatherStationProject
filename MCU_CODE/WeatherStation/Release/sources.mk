@@ -25,10 +25,11 @@ S_UPPER_DEPS :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 Sources/usb \
+Sources/sensors \
 Sources \
 Sources/lcd \
+Sources/i2c \
 Sources/bsp \
-Sources/I2C \
 Project_Settings/Startup_Code \
 MQXLITE/psp/cortex_m \
 MQXLITE/psp/cortex_m/core/M0 \

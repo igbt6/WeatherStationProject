@@ -44,11 +44,12 @@ Sources/main.o: ../Sources/main.c \
  C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert/lib/Kinetis/pdd/inc/COP_PDD.h \
  C:/Users/lukasz/workspace.kds/WeatherStation/Generated_Code/TU1.h \
  C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert/lib/Kinetis/pdd/inc/LPTMR_PDD.h \
+ ../Sources/sensors/adt7410.h \
+ C:/Users/lukasz/workspace.kds/WeatherStation/Sources/i2c/i2c.h \
  ../Sources/mqx_tasks.h ../Sources/lcd/LCD.h ../Sources/lcd/LCDConfig.h \
  ../Sources/lcd/FRDM-s401.h ../Sources/usb/usb_cdc.h ../Sources/usb/usb.h \
  ../Sources/usb/usb_cdc.h ../Sources/usb/ring_buffer.h \
- ../Sources/usb/usb_reg.h ../Sources/I2C/hal_i2c.h \
- ../Sources/I2C/hal_dev_mag3110.h ../Sources/I2C/hal_dev_mma8451.h
+ ../Sources/usb/usb_reg.h
 
 C:/Users/lukasz/workspace.kds/WeatherStation/Generated_Code/Cpu.h:
 
@@ -140,6 +141,10 @@ C:/Users/lukasz/workspace.kds/WeatherStation/Generated_Code/TU1.h:
 
 C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert/lib/Kinetis/pdd/inc/LPTMR_PDD.h:
 
+../Sources/sensors/adt7410.h:
+
+C:/Users/lukasz/workspace.kds/WeatherStation/Sources/i2c/i2c.h:
+
 ../Sources/mqx_tasks.h:
 
 ../Sources/lcd/LCD.h:
@@ -157,9 +162,3 @@ C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert/lib/Kinetis/pdd/inc/LPTMR_PDD.h:
 ../Sources/usb/ring_buffer.h:
 
 ../Sources/usb/usb_reg.h:
-
-../Sources/I2C/hal_i2c.h:
-
-../Sources/I2C/hal_dev_mag3110.h:
-
-../Sources/I2C/hal_dev_mma8451.h:

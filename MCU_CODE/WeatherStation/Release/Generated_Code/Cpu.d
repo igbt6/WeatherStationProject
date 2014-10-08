@@ -44,6 +44,8 @@ Generated_Code/Cpu.o: ../Generated_Code/Cpu.c \
  C:/Users/lukasz/workspace.kds/WeatherStation/Generated_Code/SystemTimer1.h \
  C:/Users/lukasz/workspace.kds/WeatherStation/Generated_Code/WDog1.h \
  C:/Users/lukasz/workspace.kds/WeatherStation/Generated_Code/TU1.h \
+ C:/Users/lukasz/workspace.kds/WeatherStation/Sources/sensors/adt7410.h \
+ C:/Users/lukasz/workspace.kds/WeatherStation/Sources/i2c/i2c.h \
  C:/Users/lukasz/workspace.kds/WeatherStation/Sources/mqx_tasks.h
 
 C:/Users/lukasz/workspace.kds/WeatherStation/MQXLITE/include/mqxlite.h:
@@ -145,5 +147,9 @@ C:/Users/lukasz/workspace.kds/WeatherStation/Generated_Code/SystemTimer1.h:
 C:/Users/lukasz/workspace.kds/WeatherStation/Generated_Code/WDog1.h:
 
 C:/Users/lukasz/workspace.kds/WeatherStation/Generated_Code/TU1.h:
+
+C:/Users/lukasz/workspace.kds/WeatherStation/Sources/sensors/adt7410.h:
+
+C:/Users/lukasz/workspace.kds/WeatherStation/Sources/i2c/i2c.h:
 
 C:/Users/lukasz/workspace.kds/WeatherStation/Sources/mqx_tasks.h:

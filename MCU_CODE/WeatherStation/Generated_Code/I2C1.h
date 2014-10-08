@@ -6,7 +6,7 @@
 **     Component   : I2C_LDD
 **     Version     : Component 01.016, Driver 01.07, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-10-06, 23:33, # CodeGen: 11
+**     Date/Time   : 2014-10-08, 13:27, # CodeGen: 25
 **     Abstract    :
 **          This component encapsulates the internal I2C communication
 **          interface. The implementation of the interface is based
@@ -35,7 +35,7 @@
 **            MASTER mode                                  : Enabled
 **              Initialization                             : 
 **                Address mode                             : 7-bit addressing
-**                Target slave address init                : 0
+**                Target slave address init                : 4B
 **            SLAVE mode                                   : Disabled
 **            Pins                                         : 
 **              SDA pin                                    : 
@@ -83,10 +83,13 @@
 **            Clock configuration 7                        : This component disabled
 **     Contents    :
 **         Init               - LDD_TDeviceData* I2C1_Init(LDD_TUserData *UserDataPtr);
+**         Deinit             - void I2C1_Deinit(LDD_TDeviceData *DeviceDataPtr);
 **         Enable             - LDD_TError I2C1_Enable(LDD_TDeviceData *DeviceDataPtr);
 **         Disable            - LDD_TError I2C1_Disable(LDD_TDeviceData *DeviceDataPtr);
 **         MasterSendBlock    - LDD_TError I2C1_MasterSendBlock(LDD_TDeviceData *DeviceDataPtr, LDD_TData...
 **         MasterReceiveBlock - LDD_TError I2C1_MasterReceiveBlock(LDD_TDeviceData *DeviceDataPtr, LDD_TData...
+**         SelectSlaveDevice  - LDD_TError I2C1_SelectSlaveDevice(LDD_TDeviceData *DeviceDataPtr,...
+**         ConnectPin         - LDD_TError I2C1_ConnectPin(LDD_TDeviceData *DeviceDataPtr, LDD_TPinMask...
 **
 **     Copyright : 1997 - 2014 Freescale Semiconductor, Inc. 
 **     All Rights Reserved.
@@ -169,10 +172,13 @@ extern "C" {
   
 /* Methods configuration constants - generated for all enabled component's methods */
 #define I2C1_Init_METHOD_ENABLED       /*!< Init method of the component I2C1 is enabled (generated) */
+#define I2C1_Deinit_METHOD_ENABLED     /*!< Deinit method of the component I2C1 is enabled (generated) */
 #define I2C1_Enable_METHOD_ENABLED     /*!< Enable method of the component I2C1 is enabled (generated) */
 #define I2C1_Disable_METHOD_ENABLED    /*!< Disable method of the component I2C1 is enabled (generated) */
 #define I2C1_MasterSendBlock_METHOD_ENABLED /*!< MasterSendBlock method of the component I2C1 is enabled (generated) */
 #define I2C1_MasterReceiveBlock_METHOD_ENABLED /*!< MasterReceiveBlock method of the component I2C1 is enabled (generated) */
+#define I2C1_SelectSlaveDevice_METHOD_ENABLED /*!< SelectSlaveDevice method of the component I2C1 is enabled (generated) */
+#define I2C1_ConnectPin_METHOD_ENABLED /*!< ConnectPin method of the component I2C1 is enabled (generated) */
 
 /* Events configuration constants - generated for all enabled component's events */
 #define I2C1_OnMasterBlockSent_EVENT_ENABLED /*!< OnMasterBlockSent event of the component I2C1 is enabled (generated) */
@@ -205,6 +211,21 @@ extern "C" {
 */
 /* ===================================================================*/
 LDD_TDeviceData* I2C1_Init(LDD_TUserData *UserDataPtr);
+
+/*
+** ===================================================================
+**     Method      :  I2C1_Deinit (component I2C_LDD)
+*/
+/*!
+**     @brief
+**         Deinitializes the device. Switches off the device, frees the
+**         device data structure memory, interrupts vectors, etc.
+**     @param
+**         DeviceDataPtr   - Device data structure
+**                           pointer returned by <Init> method.
+*/
+/* ===================================================================*/
+void I2C1_Deinit(LDD_TDeviceData *DeviceDataPtr);
 
 /*
 ** ===================================================================
@@ -345,6 +366,41 @@ LDD_TError I2C1_MasterReceiveBlock(LDD_TDeviceData *DeviceDataPtr, LDD_TData *Bu
 
 /*
 ** ===================================================================
+**     Method      :  I2C1_SelectSlaveDevice (component I2C_LDD)
+*/
+/*!
+**     @brief
+**         This method selects a new slave for communication by its
+**         7-bit slave, 10-bit address or general call value. Any send
+**         or receive method directs to or from selected device, until
+**         a new slave device is selected by this method. This method
+**         is available for the MASTER mode.
+**     @param
+**         DeviceDataPtr   - Device data structure
+**                           pointer returned by <Init> method.
+**     @param
+**         AddrType        - Specify type of slave address
+**                           (7bit, 10bit or general call address), e.g.
+**                           LDD_I2C_ADDRTYPE_7BITS.
+**     @param
+**         Addr            - 7bit or 10bit slave address value.
+**     @return
+**                         - Error code, possible codes:
+**                           ERR_OK - OK
+**                           ERR_BUSY - The device is busy, wait until
+**                           the current operation is finished.
+**                           ERR_DISABLED -  The device is disabled.
+**                           ERR_SPEED - This device does not work in
+**                           the active clock configuration
+**                           ERR_PARAM_ADDRESS_TYPE -  Invalid address
+**                           type.
+**                           ERR_PARAM_ADDRESS -  Invalid address value.
+*/
+/* ===================================================================*/
+LDD_TError I2C1_SelectSlaveDevice(LDD_TDeviceData *DeviceDataPtr, LDD_I2C_TAddrType AddrType, LDD_I2C_TAddr Addr);
+
+/*
+** ===================================================================
 **     Method      :  I2C1_Interrupt (component I2C_LDD)
 **
 **     Description :
@@ -355,6 +411,37 @@ LDD_TError I2C1_MasterReceiveBlock(LDD_TDeviceData *DeviceDataPtr, LDD_TData *Bu
 */
 /* {MQXLite RTOS Adapter} ISR function prototype */
 void I2C1_Interrupt(LDD_RTOS_TISRParameter _isrParameter);
+
+/*
+** ===================================================================
+**     Method      :  I2C1_ConnectPin (component I2C_LDD)
+*/
+/*!
+**     @brief
+**         This method reconnects the requested pin associated with the
+**         selected peripheral in this component. This method is only
+**         available for CPU derivatives and peripherals that support
+**         the runtime pin sharing with other internal on-chip
+**         peripherals.
+**     @param
+**         DeviceDataPtr   - Device data structure
+**                           pointer returned by <Init> method.
+**     @param
+**         PinMask         - Mask for the requested pins. The
+**                           peripheral pins are reconnected according
+**                           to this mask.
+**                           Possible parameters:
+**                           LDD_I2C_SDA_PIN - Data pin
+**                           LDD_I2C_SCL_PIN - Clock pin
+**     @return
+**                         - Error code, possible codes:
+**                           ERR_OK - OK
+**                           ERR_SPEED - This device does not work in
+**                           the active clock configuration
+**                           ERR_PARAM_MASK - Invalid PinMask value.
+*/
+/* ===================================================================*/
+LDD_TError I2C1_ConnectPin(LDD_TDeviceData *DeviceDataPtr, LDD_TPinMask PinMask);
 
 /* END I2C1. */
 

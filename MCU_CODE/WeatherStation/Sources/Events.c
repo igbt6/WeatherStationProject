@@ -76,7 +76,8 @@ void Cpu_OnNMIINT(void)
 /* ===================================================================*/
 void I2C1_OnMasterBlockSent(LDD_TUserData *UserDataPtr)
 {
-  /* Write your code here ... */
+  I2C_DeviceData* ptr = (I2C_DeviceData*)UserDataPtr;
+  ptr->dataTransmitFlag=TRUE;
 }
 
 /*
@@ -99,7 +100,8 @@ void I2C1_OnMasterBlockSent(LDD_TUserData *UserDataPtr)
 /* ===================================================================*/
 void I2C1_OnMasterBlockReceived(LDD_TUserData *UserDataPtr)
 {
-  /* Write your code here ... */
+	 I2C_DeviceData* ptr = (I2C_DeviceData*)UserDataPtr;
+	  ptr->dataReceivedFlag=TRUE;
 }
 
 /*

@@ -46,6 +46,8 @@ Generated_Code/USART0_DEBUG.o: ../Generated_Code/USART0_DEBUG.c \
  C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert/lib/Kinetis/pdd/inc/COP_PDD.h \
  C:/Users/lukasz/workspace.kds/WeatherStation/Generated_Code/TU1.h \
  C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert/lib/Kinetis/pdd/inc/LPTMR_PDD.h \
+ C:/Users/lukasz/workspace.kds/WeatherStation/Sources/sensors/adt7410.h \
+ C:/Users/lukasz/workspace.kds/WeatherStation/Sources/i2c/i2c.h \
  C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert/lib/Kinetis/pdd/inc/UART0_PDD.h \
  C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert/lib/Kinetis/pdd/inc/SIM_PDD.h
 
@@ -148,6 +150,10 @@ C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert/lib/Kinetis/pdd/inc/COP_PDD.h:
 C:/Users/lukasz/workspace.kds/WeatherStation/Generated_Code/TU1.h:
 
 C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert/lib/Kinetis/pdd/inc/LPTMR_PDD.h:
+
+C:/Users/lukasz/workspace.kds/WeatherStation/Sources/sensors/adt7410.h:
+
+C:/Users/lukasz/workspace.kds/WeatherStation/Sources/i2c/i2c.h:
 
 C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert/lib/Kinetis/pdd/inc/UART0_PDD.h:
 

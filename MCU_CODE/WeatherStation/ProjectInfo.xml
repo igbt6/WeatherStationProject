@@ -55,7 +55,6 @@
       <Path>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\</Path>
       <Path>C:\Users\lukasz\workspace.kds\WeatherStation\Project_Settings\Startup_Code\</Path>
       <Path>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\</Path>
-      <Path>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\I2C\</Path>
       <Path>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\bsp\</Path>
       <Path>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\lcd\</Path>
       <Path>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\usb\</Path>
@@ -112,9 +111,7 @@
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\stack_st.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Project_Settings\Startup_Code\startup.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\Events.c</PathName>
-      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\I2C\hal_dev_mag3110.c</PathName>
-      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\I2C\hal_dev_mma8451.c</PathName>
-      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\I2C\hal_i2c.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\adt7410.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\bsp\bsp_KL25.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\lcd\LCD.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\lcd\s401.c</PathName>
@@ -179,9 +176,7 @@
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\psplite.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\psptypes.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\Events.h</PathName>
-      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\I2C\hal_dev_mag3110.h</PathName>
-      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\I2C\hal_dev_mma8451.h</PathName>
-      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\I2C\hal_i2c.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\adt7410.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\bsp\bsp_KL25.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\lcd\FRDM-s401.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\lcd\LCD.h</PathName>
