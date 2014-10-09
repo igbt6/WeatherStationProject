@@ -27,10 +27,10 @@ typedef struct{
 
 void i2cInit(I2C_MODULE module, uint8_t slaveAddr );
 
-bool i2cRead(uint8_t regAddress, uint8_t *data,int length,I2C_MODULE module);
+bool i2cRead(uint8_t slaveAddr,uint8_t regAddress, uint8_t *data,int length,I2C_MODULE module);
 
 
-bool i2cWrite(uint8_t regAddress, uint8_t *data, int dataLength,I2C_MODULE module);
+bool i2cWrite(uint8_t slaveAddr,uint8_t regAddress, uint8_t *data, int dataLength,I2C_MODULE module);
 
 
 

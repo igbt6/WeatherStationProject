@@ -1,2 +1,3 @@
 /MCU_CODE/WeatherStation/Release/Sources/i2c/*.o
 *.o
+*.d

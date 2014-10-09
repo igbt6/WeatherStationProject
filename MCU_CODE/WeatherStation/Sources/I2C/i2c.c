@@ -39,13 +39,19 @@ void i2cInit(I2C_MODULE module, uint8_t slaveAddr) {
 
 }
 
-bool i2cRead(uint8_t regAddress, uint8_t *data, int dataLength,
-		I2C_MODULE module) {
+bool i2cRead(uint8_t slaveAddr, uint8_t regAddress, uint8_t *data,
+		int dataLength, I2C_MODULE module) {
 
 	if (module == I2C0_mod) {
 
 	} else {
 		LDD_TError res;
+
+		res = I2C1_SelectSlaveDevice(mI2c1Handle.mI2c, LDD_I2C_ADDRTYPE_7BITS,
+				slaveAddr);
+		if (res != ERR_OK) {
+			return false;
+		}
 		res = I2C1_MasterSendBlock(mI2c1Handle.mI2c, &regAddress, 1,
 				LDD_I2C_NO_SEND_STOP);
 		if (res != ERR_OK) {
@@ -66,11 +72,19 @@ bool i2cRead(uint8_t regAddress, uint8_t *data, int dataLength,
 	}
 }
 
-bool i2cWrite(uint8_t regAddress, uint8_t *data, int dataLength,I2C_MODULE module) {
+bool i2cWrite(uint8_t slaveAddr, uint8_t regAddress, uint8_t *data,
+		int dataLength, I2C_MODULE module) {
 	if (module == I2C0_mod) {
 
 	} else {
 		LDD_TError res;
+
+		res = I2C1_SelectSlaveDevice(mI2c1Handle.mI2c, LDD_I2C_ADDRTYPE_7BITS,
+					slaveAddr);
+			if (res != ERR_OK) {
+				return false;
+			}
+
 		res = I2C1_MasterSendBlock(mI2c1Handle.mI2c, &regAddress, 1,
 				LDD_I2C_NO_SEND_STOP);
 		if (res != ERR_OK) {

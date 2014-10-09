@@ -456,7 +456,7 @@
     </GenFiles>
     <SignalListFile>Documentation\WeatherStation_SIGNALS.txt</SignalListFile>
     <DestinationCompiler>GNUC</DestinationCompiler>
-    <ProjectModificationStamp>22</ProjectModificationStamp>
+    <ProjectModificationStamp>23</ProjectModificationStamp>
   </Options>
   <CpuID_2>
     <Generated>true</Generated>

@@ -33,6 +33,7 @@
 #include "lcd/LCD.h"
 #include "SegLCD1.h"
 #include "sensors/adt7410.h"
+#include <stdio.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -96,7 +97,7 @@ void Lcd_task(uint32_t task_init_data) {
 		counter++;
 
 		_time_delay_ticks(1000);
-			if (counter % 2) {
+		if (counter % 2) {
 			vfnLCD_Write_Char('H');
 
 			vfnLCD_Write_Char('E');
@@ -129,21 +130,31 @@ void Lcd_task(uint32_t task_init_data) {
  */
 void Task3_task(uint32_t task_init_data) {
 	int counter = 0;
-	initADT7410();
-	LDD_TDeviceData *handle =USART0_DEBUG_Init(NULL);
+	adt7410Init();
+	LDD_TDeviceData *handle = USART0_DEBUG_Init(NULL);
+	uint8_t tempBuf[10];
 	while (1) {
+
 		counter++;
-		int iInt= getIdNumber();
-		if(iInt==2)	USART0_DEBUG_SendBlock(handle, "AAAAA", 4);
-		char id =(char)iInt;
-		vfnLCD_Write_Msg("  ");
-		vfnLCD_Write_Char(id);
-		static const char* string = "TEMPERATURE:";
-	    USART0_DEBUG_SendBlock(handle, string, strlen(string));
+		int iInt = adt7410GetIdNumber();
+		snprintf(tempBuf, 4, "%d", iInt);
+		vfnLCD_Write_Msg("  ");  // TURN ON all characters
+		vfnLCD_Home();
+		//vfnLCD_Write_MsgPlace(tempBuf, 4);
+		 vfnLCD_Write_Msg(tempBuf);
+		static const char* string[3] =
+				{ "TEMPERATURE:", "readFailed", "readOk" };
+		//USART0_DEBUG_SendBlock(handle, string[0], strlen(string[0]));
+		if (!adt7410ReadTemp())
+			USART0_DEBUG_SendBlock(handle, string[1], strlen(string[1]));
+		else {
+			double temp = adt7410GetTemperature();
+			//gcvt (1365.249,6,tempBuf);
+			snprintf(tempBuf, 9, "%5.2f", temp);
+			USART0_DEBUG_SendBlock(handle, tempBuf, 8);
 
-	    USART0_DEBUG_SendBlock(handle, &id, 1);
-		_time_delay_ticks(2000);
-
+		}
+		_time_delay_ticks(1200);
 	}
 }
 

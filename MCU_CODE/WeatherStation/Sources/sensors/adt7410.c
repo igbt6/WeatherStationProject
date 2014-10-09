@@ -1,92 +1,91 @@
 #include "adt7410.h"
+#include <string.h>
 
-/*  static LDD_TDeviceData* mI2c;
+/*************typedefs:*************/
 
+typedef enum {
+	CONT_CONV = 0, ONE_SHOT, SPS_MODE, SHUTDOWN
+} CONF_OPERATION_MODE;
 
- static I2C_DeviceData mI2C1_DeviceData;
- */
+typedef enum {
+	INTERRUPT_MODE = 0, COMPARATOR_MODE = 1
+} CONF_INT_CT_MODE;
 
-/*
- ADT7410::ADT7410(LDD_TDeviceData* i2c,CONF_RESOLUTION res ){
- mI2c = i2c;
- if(res==_16_BIT){
- setResolution(_16_BIT);
- }
- }
- */
+typedef enum {
+	INT_ACTIVE_LOW = 0, INT_ACTIVE_HIGH = 1
+} CONF_INT_PIN_POLARITY;
 
-void initADT7410(void) {
-	/*	  mI2C1_DeviceData.dataReceivedFlag=0;
-	 mI2C1_DeviceData.dataReceivedFlag=0;
-	 mI2c=  I2C1_Init(&mI2C1_DeviceData);
+typedef enum {
+	CT_ACTIVE_LOW = 0, CT_ACTIVE_HIGH = 1
+} CONF_CT_PIN_POLARITY;
 
-	 I2C1_SelectSlaveDevice( mI2c, LDD_I2C_ADDRTYPE_7BITS, ADT7410_I2C_ADDRESS);
-	 */
-	i2cInit(I2C1_mod, ADT7410_I2C_ADDRESS);
-}
+typedef enum {
+	_1_FAULT = 0, _2_FAULTS, _3_FAULTS, _4_FAULTS
+} CONF_FAULT_QUEUE;
 
-bool /*ADT7410::*/write(uint8_t regAddress, uint8_t data) {
+/*************private variables:*************/
+static float mAdt7410CurrentTemperature;
+static uint8_t mAdt7410Resolution;
+
+/*************private methods:*************/
+
+//transmit data to the sensor
+static bool adt7410Write(uint8_t regAddress, uint8_t *data, int dataLength) {
 	LDD_TError retValue;
-	char temp[2];
+	uint8_t temp[dataLength + 1];
 	temp[0] = regAddress;
-	temp[1] = data;
-	// return mI2c.write(i2cAddr,temp,2)==0;
-	// return I2C1_MasterSendBlock(mI2c,temp,2,LDD_I2C_SEND_STOP);
-	return i2cWrite(regAddress, temp, 2, I2C1_mod);
+	memcpy(&temp[1], data, dataLength);
+	return i2cWrite(ADT7410_I2C_ADDRESS, regAddress, temp, dataLength + 1,
+			I2C1_mod);
 }
 
 //read data from the sensor
-int /*ADT7410::*/read(uint8_t regAddress, uint8_t *data, int length) {
-	//mI2c.write(i2cAddr,(char*)&regAddress,1);
-	// if(mI2c.read(i2cAddr,(char*)data,length)==0) return 1;
-	/*
-	 LDD_TError retValue;
-	 I2C1_MasterSendBlock(mI2c,&regAddress,1,LDD_I2C_NO_SEND_STOP);
-	 while(!mI2C1_DeviceData.dataTransmitFlag);
-	 mI2C1_DeviceData.dataTransmitFlag=0;
-	 retValue=I2C1_MasterReceiveBlock( mI2c,data,length,LDD_I2C_SEND_STOP);
-	 while(!mI2C1_DeviceData.dataReceivedFlag);
-	 mI2C1_DeviceData.dataReceivedFlag=0;
-	 if(retValue==ERR_OK)return 1;
-
-
-	 return -1;
-
-	 */
-
-	return i2cRead(regAddress, data, length, I2C1_mod);
+static bool adt7410Read(uint8_t regAddress, uint8_t *data, int dataLength) {
+	return i2cRead(ADT7410_I2C_ADDRESS, regAddress, data, dataLength, I2C1_mod);
 }
 
 //configuration of ADT7410 sensor
-/*int ADT7410::initADT7410(CONF_FAULT_QUEUE faultQueue, CONF_CT_PIN_POLARITY ctPinPolarity, CONF_INT_PIN_POLARITY intPinPolarity, CONF_INT_CT_MODE intCtMode, CONF_OPERATION_MODE operMode, CONF_RESOLUTION res){
+static bool adt7410SetConfiguration(CONF_FAULT_QUEUE faultQueue,
+		CONF_CT_PIN_POLARITY ctPinPolarity,
+		CONF_INT_PIN_POLARITY intPinPolarity, CONF_INT_CT_MODE intCtMode,
+		CONF_OPERATION_MODE operMode, CONF_RESOLUTION res) {
 
- uint8_t confByte=0;
- int retVal=0;
+	uint8_t confByte = 0;
+	bool retVal = 0;
 
- confByte=(res<<7|operMode<<5|intCtMode<<4|intPinPolarity<<3|ctPinPolarity<<2|faultQueue);
- if(!write(0x03,confByte))retVal=-1;
- else retVal=1;
- return retVal;
+	confByte = (res << 7 | operMode << 5 | intCtMode << 4 | intPinPolarity << 3
+			| ctPinPolarity << 2 | faultQueue);
+	if (!adt7410Write(0x03, &confByte, 1))
+		retVal = false;
+	else
+		retVal = true;
+	return retVal;
 
- }
- */
+}
+
+/*************public methods:*************/
+//Init method, modify values here;
+// NOTIFY!!! - this function must be used before using other functions for the sensor
+void adt7410Init(void) {
+	i2cInit(I2C1_mod, ADT7410_I2C_ADDRESS);
+	//adt7410SetConfiguration(...);
+	adt7410SetResolution(_16_BIT);
+
+}
+
 // read 13 bit temperature
-int /*ADT7410::*/readTemp() {
+int adt7410ReadTemp() {
 
 	char rData[2] = { 0, 0 };
 	float tempFin = 0;
 	int tempRaw = 0;
-
-	// set address pointer to temperature register
-	//   if(mI2c.write(i2cAddr, 0x00, 1))return -1;
-
-	// read temperature register, two bytes
-	//  if(mI2c.read(i2cAddr, rData, 2))return -1;
+	if (!adt7410Read(0x00, rData, 2))
+		return false;
 
 	// temperature returned is only 13 bits
 	// discard alarm flags in lower bits
 	tempRaw = (rData[0] << 8) | (rData[1]);
-	if (resolution == _13_BIT) { ////resolution 13 --- bit 0.0625°C
+	if (mAdt7410Resolution == _13_BIT) { ////resolution 13 --- bit 0.0625°C
 		tempRaw >>= 3;
 		if (tempRaw & 0x1000) {
 			tempFin = (float) (tempRaw - 8192) / 16;
@@ -101,38 +100,38 @@ int /*ADT7410::*/readTemp() {
 			tempFin = (float) tempRaw / 128;
 	}
 
-	currentTemperature = tempFin;
+	mAdt7410CurrentTemperature = tempFin;
 	return 1;
 }
 
-int /*ADT7410::*/setResolution(CONF_RESOLUTION res) {
+int adt7410SetResolution(CONF_RESOLUTION res) {
 
 	uint8_t temp = 0;
 
 	int retVal = 0;
-	if (!read(0x03, &temp, 1))
+	if (!adt7410Read(0x03, &temp, 1))
 		return -1;
 	temp |= res << 7;
-	if (!write(0x03, temp))
+	if (!adt7410Write(0x03, &temp, 1))
 
 		retVal = 0;
 	else
 		retVal = 1;
-
+	mAdt7410Resolution = res;
 	return retVal;
 }
 
-int /* ADT7410::*/getIdNumber(void) {
+int adt7410GetIdNumber(void) {
 
 	uint8_t data = 0;
 	uint8_t regAddress = 0x0B;
-
-	//if(mI2c.write(i2cAddr,(char*)&regAddress,1,true)) return -1;
-	//if(mI2c.read(i2cAddr,(char*)&data,1)) return -1;
-	// if(I2C1_MasterReceiveBlock( mI2c,&data,1,LDD_I2C_SEND_STOP)==ERR_OK)
-	if (read(regAddress, &data, 1))
+	if (adt7410Read(regAddress, &data, 1))
 		return data;
 	else
-		return 2;
+		return -1;
 
+}
+
+float adt7410GetTemperature(void) {
+	return mAdt7410CurrentTemperature;
 }

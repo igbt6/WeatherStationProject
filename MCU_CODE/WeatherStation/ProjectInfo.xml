@@ -55,9 +55,9 @@
       <Path>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\</Path>
       <Path>C:\Users\lukasz\workspace.kds\WeatherStation\Project_Settings\Startup_Code\</Path>
       <Path>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\</Path>
-      <Path>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\bsp\</Path>
+      <Path>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\i2c\</Path>
       <Path>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\lcd\</Path>
-      <Path>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\usb\</Path>
+      <Path>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\sensors\</Path>
       <Path>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\core\M0\</Path>
     </SourceCodePaths>
   </PATHS>
@@ -111,16 +111,12 @@
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\stack_st.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Project_Settings\Startup_Code\startup.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\Events.c</PathName>
-      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\adt7410.c</PathName>
-      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\bsp\bsp_KL25.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\i2c\i2c.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\lcd\LCD.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\lcd\s401.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\main.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\mqx_tasks.c</PathName>
-      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\usb\ring_buffer.c</PathName>
-      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\usb\usb.c</PathName>
-      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\usb\usb_cdc.c</PathName>
-      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\usb\usb_reg.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\sensors\adt7410.c</PathName>
     </GeneratedCs>
     <GeneratedHs>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\Cpu.h</PathName>
@@ -176,18 +172,13 @@
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\psplite.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\psptypes.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\Events.h</PathName>
-      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\adt7410.h</PathName>
-      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\bsp\bsp_KL25.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\i2c\i2c.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\lcd\FRDM-s401.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\lcd\LCD.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\lcd\LCDConfig.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\lcd\LCDHDW.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\mqx_tasks.h</PathName>
-      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\usb\ring_buffer.h</PathName>
-      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\usb\usb.h</PathName>
-      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\usb\usb_cdc.h</PathName>
-      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\usb\usb_descriptor.h</PathName>
-      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\usb\usb_reg.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\sensors\adt7410.h</PathName>
       <PathName>C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert\lib\Kinetis\iofiles\MKL46Z4.h</PathName>
       <PathName>C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert\lib\Kinetis\pdd\inc\ADC_PDD.h</PathName>
       <PathName>C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert\lib\Kinetis\pdd\inc\CMP_PDD.h</PathName>
