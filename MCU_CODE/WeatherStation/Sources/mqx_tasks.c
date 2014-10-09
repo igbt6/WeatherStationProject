@@ -128,6 +128,16 @@ void Lcd_task(uint32_t task_init_data) {
  **     Returns     : Nothing
  ** ===================================================================
  */
+static void sprintfDouble(double v, int decimalDigits,uint8_t* buf, uint8_t bufSize)
+{
+  int i = 1;
+  int intPart, fractPart;
+  for (;decimalDigits!=0; i*=10, decimalDigits--);
+  intPart = (int)v;
+  fractPart = (int)((v-(double)(int)v)*i);
+  snprintf(buf,bufSize,"%2i.%2i", intPart, fractPart);
+}
+
 void Task3_task(uint32_t task_init_data) {
 	int counter = 0;
 	adt7410Init();
@@ -149,8 +159,8 @@ void Task3_task(uint32_t task_init_data) {
 			USART0_DEBUG_SendBlock(handle, string[1], strlen(string[1]));
 		else {
 			double temp = adt7410GetTemperature();
-			//gcvt (1365.249,6,tempBuf);
-			snprintf(tempBuf, 9, "%5.2f", temp);
+			sprintfDouble(temp,2,tempBuf,8);
+			//snprintf(tempBuf, 9, "%5.2f", temp);
 			USART0_DEBUG_SendBlock(handle, tempBuf, 8);
 
 		}
