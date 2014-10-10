@@ -34,6 +34,12 @@ bool i2cWrite(uint8_t slaveAddr,uint8_t regAddress, uint8_t *data, int dataLengt
 
 
 
+/* this method returns a pointer to initialized I2C protocol earlier */
+
+LDD_TDeviceData* i2cGetI2CHandle(I2C_MODULE i2cModule);
+
+
+
 
 #endif /* I2C_H_ */
 

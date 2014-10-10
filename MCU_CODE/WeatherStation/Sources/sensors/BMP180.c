@@ -97,14 +97,16 @@ static int bmp180SetConfiguration(float altitude, int overSamplingSetting) {
 	md = 2868;
 	m_oss = 0;
 	errors = 0;
-#endif // #ifdef BMP180_TEST_FORMULA
-	return errors ? 0 : 1;
+#endif // #ifdef BMP180_TEST_FORMULA	return errors ? 0 : 1;
 }
 
 /*************public methods:*************/
 //Init method, modify values here;
 // NOTIFY!!! - this function must be used before using other functions for the sensor
-void bmp180Init(void) {
+void bmp180Init(LDD_TDeviceData* i2cHandlePtr,I2C_MODULE i2cModule) {
+	if (i2cHandlePtr == NULL)
+		while (1)
+			;  //do something here. i2C has not been not initialized
 	m_altitude = 0;
 	m_oss = BMP180_OSS_NORMAL;
 	mTemperature = UNSET_BMP180_TEMPERATURE_VALUE;
@@ -112,24 +114,18 @@ void bmp180Init(void) {
 	bmp180SetConfiguration(0.F, BMP180_OSS_NORMAL);
 }
 
-int bmp180ReadData(float* pTemperature, float* pPressure) {
+bool bmp180ReadData(void) {
 	long t, p;
 
 	if (!bmp180ReadRawTemperature(&t) || !bmp180ReadRawPressure(&p)) {
 		mTemperature = UNSET_BMP180_TEMPERATURE_VALUE;
 		mPressure = UNSET_BMP180_PRESSURE_VALUE;
-		return 0;
+		return false;
 	}
 
 	mTemperature = bmp180TrueTemperature(t);
 	mPressure = bmp180TruePressure(p);
-
-	if (pPressure)
-		*pPressure = mPressure;
-	if (pTemperature)
-		*pTemperature = mTemperature;
-
-	return 1;
+	return true;
 }
 
 int bmp180ReadRawTemperature(long* pUt) {
@@ -150,16 +146,14 @@ int bmp180ReadRawTemperature(long* pUt) {
 
 #ifdef BMP180_TEST_FORMULA
 	errors = 0;
-#endif // #ifdef BMP180_TEST_FORMULA
-	if (errors)
+#endif // #ifdef BMP180_TEST_FORMULA	if (errors)
 		return 0;
 	else
 		*pUt = data[0] << 8 | data[1];
 
 #ifdef BMP180_TEST_FORMULA
 	*pUt = 27898;
-#endif // #ifdef BMP180_TEST_FORMULA
-	return 1;
+#endif // #ifdef BMP180_TEST_FORMULA	return 1;
 }
 
 int bmp180ReadRawPressure(long* pUp) {
@@ -189,15 +183,13 @@ int bmp180ReadRawPressure(long* pUp) {
 
 #ifdef BMP180_TEST_FORMULA
 	errors = 0;
-#endif // #ifdef BMP180_TEST_FORMULA
-	if (errors)
+#endif // #ifdef BMP180_TEST_FORMULA	if (errors)
 		return 0;
 	else
 		*pUp = (data[0] << 16 | data[1] << 8) >> (8 - m_oss);
 #ifdef BMP180_TEST_FORMULA
 	*pUp = 23843;
-#endif // #ifdef BMP180_TEST_FORMULA
-	return 1;
+#endif // #ifdef BMP180_TEST_FORMULA	return 1;
 }
 
 float bmp180TrueTemperature(long ut) {

@@ -35,6 +35,7 @@
 - \subpage SystemTimer1
 - \subpage WDog1
 - \subpage TU1
+- \subpage DHT22_DataPin
 
 
 */

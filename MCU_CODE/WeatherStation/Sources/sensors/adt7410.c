@@ -26,6 +26,7 @@ typedef enum {
 /*************private variables:*************/
 static float mAdt7410CurrentTemperature;
 static uint8_t mAdt7410Resolution;
+static I2C_MODULE mI2cModule;
 
 /*************private methods:*************/
 
@@ -36,12 +37,12 @@ static bool adt7410Write(uint8_t regAddress, uint8_t *data, int dataLength) {
 	temp[0] = regAddress;
 	memcpy(&temp[1], data, dataLength);
 	return i2cWrite(ADT7410_I2C_ADDRESS, regAddress, temp, dataLength + 1,
-			I2C1_mod);
+			mI2cModule);
 }
 
 //read data from the sensor
 static bool adt7410Read(uint8_t regAddress, uint8_t *data, int dataLength) {
-	return i2cRead(ADT7410_I2C_ADDRESS, regAddress, data, dataLength, I2C1_mod);
+	return i2cRead(ADT7410_I2C_ADDRESS, regAddress, data, dataLength, mI2cModule);
 }
 
 //configuration of ADT7410 sensor
@@ -66,9 +67,13 @@ static bool adt7410SetConfiguration(CONF_FAULT_QUEUE faultQueue,
 /*************public methods:*************/
 //Init method, modify values here;
 // NOTIFY!!! - this function must be used before using other functions for the sensor
-void adt7410Init(void) {
-	i2cInit(I2C1_mod, ADT7410_I2C_ADDRESS);
+void adt7410Init(LDD_TDeviceData* i2cHandlePtr,I2C_MODULE i2cModule) {
+	//i2cInit(I2C1_mod, ADT7410_I2C_ADDRESS);
 	//adt7410SetConfiguration(...);
+	if (i2cHandlePtr == NULL)
+		while (1)  //do something here. i2C has not been not initialized
+			;
+	mI2cModule =i2cModule;
 	adt7410SetResolution(_16_BIT);
 
 }

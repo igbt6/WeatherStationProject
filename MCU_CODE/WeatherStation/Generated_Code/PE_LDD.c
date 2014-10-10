@@ -5,7 +5,7 @@
 **     Processor   : MKL46Z256VMC4
 **     Version     : Component 01.002, Driver 01.04, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-10-06, 23:33, # CodeGen: 11
+**     Date/Time   : 2014-10-10, 02:07, # CodeGen: 28
 **     Abstract    :
 **
 **     Settings    :
@@ -69,7 +69,8 @@
 ** Array of initialized device structures of LDD components.
 ** ===========================================================================
 */
-LDD_TDeviceData *PE_LDD_DeviceDataList[6] = {
+LDD_TDeviceData *PE_LDD_DeviceDataList[7] = {
+    NULL,
     NULL,
     NULL,
     NULL,
@@ -157,6 +158,8 @@ bool PE_PeripheralUsed(uint32_t PrphBaseAddress)
     case 0x00UL:
     /* Base address allocated by peripheral(s) LPTMR0 */
     case 0x40040000UL:
+    /* Base address allocated by peripheral(s) PTA */
+    case 0x400FF000UL:
       result = TRUE;
       break;
     default:

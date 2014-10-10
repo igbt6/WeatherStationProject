@@ -33,6 +33,7 @@
 #include "lcd/LCD.h"
 #include "SegLCD1.h"
 #include "sensors/adt7410.h"
+#include "sensors/BMP180.h"
 #include <stdio.h>
 
 #ifdef __cplusplus
@@ -128,42 +129,52 @@ void Lcd_task(uint32_t task_init_data) {
  **     Returns     : Nothing
  ** ===================================================================
  */
-static void sprintfDouble(double v, int decimalDigits,uint8_t* buf, uint8_t bufSize)
-{
-  int i = 1;
-  int intPart, fractPart;
-  for (;decimalDigits!=0; i*=10, decimalDigits--);
-  intPart = (int)v;
-  fractPart = (int)((v-(double)(int)v)*i);
-  snprintf(buf,bufSize,"%2i.%2i", intPart, fractPart);
+static void sprintfDouble(double v, int decimalDigits, uint8_t* buf,
+		uint8_t bufSize) {
+	int i = 1;
+	int intPart, fractPart;
+	for (; decimalDigits != 0; i *= 10, decimalDigits--)
+		;
+	intPart = (int) v;
+	fractPart = (int) ((v - (double) (int) v) * i);
+	snprintf(buf, bufSize, "%2i.%2i", intPart, fractPart);
 }
 
 void Task3_task(uint32_t task_init_data) {
-	int counter = 0;
-	adt7410Init();
+	static const char* string[] = { "ADT7410:", "readFailed", "readOk",
+			"BMP180:" };
 	LDD_TDeviceData *handle = USART0_DEBUG_Init(NULL);
 	uint8_t tempBuf[10];
+	i2cInit(I2C1_mod, 0x00); /*0x00 fake address, init of the bus , selecting devices is made further methods*/
+	adt7410Init(i2cGetI2CHandle(I2C1_mod), I2C1_mod);
+	bmp180Init(i2cGetI2CHandle(I2C1_mod), I2C1_mod);
 	while (1) {
-
-		counter++;
-		int iInt = adt7410GetIdNumber();
-		snprintf(tempBuf, 4, "%d", iInt);
-		vfnLCD_Write_Msg("  ");  // TURN ON all characters
-		vfnLCD_Home();
-		//vfnLCD_Write_MsgPlace(tempBuf, 4);
+		/*
+		 int iInt = adt7410GetIdNumber();
+		 snprintf(tempBuf, 4, "%d", iInt);
+		 vfnLCD_Write_Msg("  ");  // TURN ON all characters
+		 vfnLCD_Home();
+		 vfnLCD_Write_MsgPlace(tempBuf, 4);
 		 vfnLCD_Write_Msg(tempBuf);
-		static const char* string[3] =
-				{ "TEMPERATURE:", "readFailed", "readOk" };
-		//USART0_DEBUG_SendBlock(handle, string[0], strlen(string[0]));
+		 */
+
+		USART0_DEBUG_SendBlock(handle, string[0], strlen(string[0]));
 		if (!adt7410ReadTemp())
 			USART0_DEBUG_SendBlock(handle, string[1], strlen(string[1]));
 		else {
-			double temp = adt7410GetTemperature();
-			sprintfDouble(temp,2,tempBuf,8);
+			sprintfDouble(adt7410GetTemperature(), 2, tempBuf, 8);
 			//snprintf(tempBuf, 9, "%5.2f", temp);
 			USART0_DEBUG_SendBlock(handle, tempBuf, 8);
 
 		}
+		if (!bmp180ReadData())
+			USART0_DEBUG_SendBlock(handle, string[3], strlen(string[3]));
+		else {
+			sprintfDouble(bmp180GetPressure(), 2, tempBuf, 8);
+			//snprintf(tempBuf, 9, "%5.2f", temp);
+			USART0_DEBUG_SendBlock(handle, tempBuf, 8);
+		}
+
 		_time_delay_ticks(1200);
 	}
 }

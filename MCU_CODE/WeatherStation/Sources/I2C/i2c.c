@@ -80,10 +80,10 @@ bool i2cWrite(uint8_t slaveAddr, uint8_t regAddress, uint8_t *data,
 		LDD_TError res;
 
 		res = I2C1_SelectSlaveDevice(mI2c1Handle.mI2c, LDD_I2C_ADDRTYPE_7BITS,
-					slaveAddr);
-			if (res != ERR_OK) {
-				return false;
-			}
+				slaveAddr);
+		if (res != ERR_OK) {
+			return false;
+		}
 
 		res = I2C1_MasterSendBlock(mI2c1Handle.mI2c, &regAddress, 1,
 				LDD_I2C_NO_SEND_STOP);
@@ -106,4 +106,13 @@ bool i2cWrite(uint8_t slaveAddr, uint8_t regAddress, uint8_t *data,
 		return true;
 	}
 
+}
+
+LDD_TDeviceData* i2cGetI2CHandle(I2C_MODULE i2cModule) {
+
+	if (i2cModule == I2C0_mod) {
+		return mI2c0Handle.mI2c;
+	}
+	else
+		return mI2c1Handle.mI2c;
 }

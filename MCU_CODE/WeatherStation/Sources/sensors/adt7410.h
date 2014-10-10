@@ -28,7 +28,7 @@ typedef enum {
 	_13_BIT = 0, _16_BIT = 1
 } CONF_RESOLUTION;
 
-void adt7410Init(void);
+void adt7410Init(LDD_TDeviceData* i2cHandlePtr,I2C_MODULE i2cModule);
 /** Read temperature from the ADT7410.
  * @param temperature (C)
  * @returns

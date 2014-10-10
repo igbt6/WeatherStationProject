@@ -24,8 +24,7 @@ extern "C" {
 #define UNSET_BMP180_TEMPERATURE_VALUE -273.15F // absolute zero
 /** Init method of bmp180 sensor
  */
-void bmp180Init(void);
-
+void bmp180Init(LDD_TDeviceData* i2cHandlePtr,I2C_MODULE i2cModule);
 /** Initialization: set member values and read BMP180 calibration parameters
  * @param altitude (in meter)
  * @param overSamplingSetting
@@ -34,13 +33,11 @@ void bmp180Init(void);
 //		int overSamplingSetting = BMP180_OSS_NORMAL);
 
 /** Read pressure and temperature from the BMP180.
- * @param pressure (hPa)
- * @param temperature (C)
  * @returns
  *   1 on success,
  *   0 on error
  */
-int bmp180ReadData(float* pTemperature, float* pPressure);
+bool bmp180ReadData(void);
 
 /** Get temperature from a previous measurement
  *

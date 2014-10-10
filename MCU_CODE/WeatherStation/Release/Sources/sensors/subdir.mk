@@ -5,14 +5,17 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../Sources/sensors/BMP180.c \
+../Sources/sensors/DHT22.c \
 ../Sources/sensors/adt7410.c 
 
 OBJS += \
 ./Sources/sensors/BMP180.o \
+./Sources/sensors/DHT22.o \
 ./Sources/sensors/adt7410.o 
 
 C_DEPS += \
 ./Sources/sensors/BMP180.d \
+./Sources/sensors/DHT22.d \
 ./Sources/sensors/adt7410.d 
 
 
