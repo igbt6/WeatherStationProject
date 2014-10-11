@@ -34,6 +34,7 @@
 #include "SegLCD1.h"
 #include "sensors/adt7410.h"
 #include "sensors/BMP180.h"
+#include "uart/uart.h"
 #include <stdio.h>
 
 #ifdef __cplusplus
@@ -141,10 +142,13 @@ static void sprintfDouble(double v, int decimalDigits, uint8_t* buf,
 }
 
 void Task3_task(uint32_t task_init_data) {
-	static const char* string[] = { "ADT7410:", "readFailed", "readOk",
-			"BMP180:" };
-	LDD_TDeviceData *handle = USART0_DEBUG_Init(NULL);
+	static const char* string[] = { "\n\rADT7410: ", "readFailed", "readOk",
+			"\n\rBMP180: " };
+	//LDD_TDeviceData *handle = USART0_DEBUG_Init(NULL);
 	uint8_t tempBuf[10];
+	if (!uartInit(UART0_mod))
+		while (1)
+			; //TODO add calback
 	i2cInit(I2C1_mod, 0x00); /*0x00 fake address, init of the bus , selecting devices is made further methods*/
 	adt7410Init(i2cGetI2CHandle(I2C1_mod), I2C1_mod);
 	bmp180Init(i2cGetI2CHandle(I2C1_mod), I2C1_mod);
@@ -158,21 +162,22 @@ void Task3_task(uint32_t task_init_data) {
 		 vfnLCD_Write_Msg(tempBuf);
 		 */
 
-		USART0_DEBUG_SendBlock(handle, string[0], strlen(string[0]));
+		uartSendData(string[0], strlen(string[0]));
 		if (!adt7410ReadTemp())
-			USART0_DEBUG_SendBlock(handle, string[1], strlen(string[1]));
+			uartSendData(string[1], strlen(string[1]));
 		else {
-			sprintfDouble(adt7410GetTemperature(), 2, tempBuf, 8);
+			sprintfDouble(adt7410GetTemperature(), 2, tempBuf, 6);
 			//snprintf(tempBuf, 9, "%5.2f", temp);
-			USART0_DEBUG_SendBlock(handle, tempBuf, 8);
+			uartSendData(tempBuf, 5);
 
 		}
+		uartSendData(string[3], strlen(string[3]));
 		if (!bmp180ReadData())
-			USART0_DEBUG_SendBlock(handle, string[3], strlen(string[3]));
+			uartSendData(string[3], strlen(string[3]));
 		else {
-			sprintfDouble(bmp180GetPressure(), 2, tempBuf, 8);
+			sprintfDouble(bmp180GetPressure(), 3, tempBuf, 6);
 			//snprintf(tempBuf, 9, "%5.2f", temp);
-			USART0_DEBUG_SendBlock(handle, tempBuf, 8);
+			uartSendData(tempBuf, 5);
 		}
 
 		_time_delay_ticks(1200);

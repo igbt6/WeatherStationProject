@@ -1165,7 +1165,7 @@ PE_DEBUGHALT();
         <Counter_frequency v="Auto select" />
       </enumgroup>
       <enumgroup name="Counter restart" v="On-overrun">
-        <Overrun_period v="65.536 sec" />
+        <Overrun_period v="8 sec" />
         <boolgroup name="Interrupt" v="Disabled" />
       </enumgroup>
       <list name="Channel list" v="0">

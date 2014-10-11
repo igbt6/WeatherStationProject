@@ -8,6 +8,7 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include Sources/uart/subdir.mk
 -include Sources/sensors/subdir.mk
 -include Sources/lcd/subdir.mk
 -include Sources/i2c/subdir.mk

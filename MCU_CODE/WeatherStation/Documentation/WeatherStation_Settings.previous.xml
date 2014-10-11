@@ -1165,7 +1165,7 @@ PE_DEBUGHALT();
         <Counter_frequency v="Auto select" />
       </enumgroup>
       <enumgroup name="Counter restart" v="On-overrun">
-        <Overrun_period v="65.536 sec" />
+        <Overrun_period v="2 sec" />
         <boolgroup name="Interrupt" v="Disabled" />
       </enumgroup>
       <list name="Channel list" v="0">
@@ -1238,10 +1238,10 @@ PE_DEBUGHALT();
       <event name="OnChannel7" v="don&amp;apos;t generate code" />
     </Events>
   </Bean>
-  <Bean name="Bit1" type="BitIO_LDD">
+  <Bean name="DHT22_DataPin" type="BitIO_LDD">
     <Enabled v="Y" />
     <Properties>
-      <Component_name v="Bit1" />
+      <Component_name v="DHT22_DataPin" />
       <Pin_for_I_O v="PTA13/TPM1_CH1/I2S0_TX_FS" />
       <Direction v="Input/Output" />
       <group name="Initialization">

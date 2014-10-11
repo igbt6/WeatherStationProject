@@ -42,7 +42,7 @@
 #include "WDog1.h"
 #include "TU1.h"
 #include "DHT22_DataPin.h"
-#include "sensors/adt7410.h"
+
 
 #ifdef __cplusplus
 extern "C" {

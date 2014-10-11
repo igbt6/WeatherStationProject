@@ -6,7 +6,7 @@
 **     Component   : TimerUnit_LDD
 **     Version     : Component 01.164, Driver 01.11, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-10-06, 23:33, # CodeGen: 11
+**     Date/Time   : 2014-10-11, 13:32, # CodeGen: 33
 **     Abstract    :
 **          This TimerUnit component provides a low level API for unified hardware access across
 **          various timer devices using the Prescaler-Counter-Compare-Capture timer structure.
@@ -20,7 +20,7 @@
 **          Input clock source                             : Internal
 **            Counter frequency                            : Auto select
 **          Counter restart                                : On-overrun
-**            Overrun period                               : 65.536 sec
+**            Overrun period                               : 8 sec
 **            Interrupt                                    : Disabled
 **          Channel list                                   : 0
 **          Initialization                                 : 
@@ -152,8 +152,8 @@ LDD_TDeviceData* TU1_Init(LDD_TUserData *UserDataPtr)
   SIM_SCGC5 |= SIM_SCGC5_LPTMR_MASK;
   /* LPTMR0_CSR: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,TCF=1,TIE=0,TPS=0,TPP=0,TFC=0,TMS=0,TEN=0 */
   LPTMR0_CSR = (LPTMR_CSR_TCF_MASK | LPTMR_CSR_TPS(0x00)); /* Clear control register */
-  /* LPTMR0_PSR: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,PRESCALE=4,PBYP=0,PCS=0 */
-  LPTMR0_PSR = (LPTMR_PSR_PRESCALE(0x04) | LPTMR_PSR_PCS(0x00)); /* Set up prescaler register */
+  /* LPTMR0_PSR: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,PRESCALE=1,PBYP=0,PCS=0 */
+  LPTMR0_PSR = (LPTMR_PSR_PRESCALE(0x01) | LPTMR_PSR_PCS(0x00)); /* Set up prescaler register */
   /* LPTMR0_CSR: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,TCF=0,TIE=0,TPS=0,TPP=0,TFC=1,TMS=0,TEN=1 */
   LPTMR0_CSR = (LPTMR_CSR_TPS(0x00) | LPTMR_CSR_TFC_MASK | LPTMR_CSR_TEN_MASK); /* Set up control register */
   /* Registration of the device structure */

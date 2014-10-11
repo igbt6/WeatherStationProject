@@ -460,7 +460,7 @@
     </GenFiles>
     <SignalListFile>Documentation\WeatherStation_SIGNALS.txt</SignalListFile>
     <DestinationCompiler>GNUC</DestinationCompiler>
-    <ProjectModificationStamp>27</ProjectModificationStamp>
+    <ProjectModificationStamp>30</ProjectModificationStamp>
   </Options>
   <CpuID_2>
     <Generated>true</Generated>
@@ -1636,8 +1636,8 @@
     <GenComponentVersion>01.164</GenComponentVersion>
     <GenDriverVersion>01.11</GenDriverVersion>
     <GenEventModule>Events</GenEventModule>
-    <HeaderAge>1162263621</HeaderAge>
-    <CodeAge>1162263621</CodeAge>
+    <HeaderAge>1162570794</HeaderAge>
+    <CodeAge>1162570794</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>22</GenNumMethods>
     <Init>true</Init>

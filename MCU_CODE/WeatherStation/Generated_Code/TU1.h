@@ -6,7 +6,7 @@
 **     Component   : TimerUnit_LDD
 **     Version     : Component 01.164, Driver 01.11, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-10-06, 23:33, # CodeGen: 11
+**     Date/Time   : 2014-10-11, 13:32, # CodeGen: 33
 **     Abstract    :
 **          This TimerUnit component provides a low level API for unified hardware access across
 **          various timer devices using the Prescaler-Counter-Compare-Capture timer structure.
@@ -20,7 +20,7 @@
 **          Input clock source                             : Internal
 **            Counter frequency                            : Auto select
 **          Counter restart                                : On-overrun
-**            Overrun period                               : 65.536 sec
+**            Overrun period                               : 8 sec
 **            Interrupt                                    : Disabled
 **          Channel list                                   : 0
 **          Initialization                                 : 
@@ -117,8 +117,8 @@ extern "C" {
 #define __BWUserType_TU1_TValueType
   typedef uint32_t TU1_TValueType ;    /* Type for data parameters of methods */
 #endif
-#define TU1_CNT_INP_FREQ_U_0 0x0400UL  /* Counter input frequency in Hz */
-#define TU1_CNT_INP_FREQ_R_0 1024.0F   /* Counter input frequency in Hz */
+#define TU1_CNT_INP_FREQ_U_0 0x2000UL  /* Counter input frequency in Hz */
+#define TU1_CNT_INP_FREQ_R_0 8192.000033554432F /* Counter input frequency in Hz */
 #define TU1_CNT_INP_FREQ_COUNT 0U      /* Count of predefined counter input frequencies */
 #define TU1_PERIOD_TICKS   0x00010000UL /* Initialization value of period in 'counter ticks' */
 #define TU1_NUMBER_OF_CHANNELS 0x00U   /* Count of predefined channels */
