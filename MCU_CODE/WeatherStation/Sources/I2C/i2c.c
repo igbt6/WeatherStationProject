@@ -6,6 +6,7 @@
  */
 
 #include "i2c.h"
+#include "timeout/timeout.h"
 
 #define IS_I2C_MODULE(x) if(x==I2C0_mod||x==I2C1_mod)
 
@@ -18,7 +19,7 @@
 
 typedef struct {
 	LDD_TDeviceData* mI2c;
-	I2C_DeviceData mI2c_DeviceData;
+	I2C_UsrData mI2c_UsrData;
 } I2cHandle;
 
 static I2cHandle mI2c1Handle;
@@ -29,14 +30,17 @@ void i2cInit(I2C_MODULE module, uint8_t slaveAddr) {
 	if (module == I2C0_mod) {
 
 	} else {
-		mI2c1Handle.mI2c_DeviceData.dataReceivedFlag = false;
-		mI2c1Handle.mI2c_DeviceData.dataTransmitFlag = false;
-		mI2c1Handle.mI2c = I2C1_Init(&mI2c1Handle.mI2c_DeviceData);
+		mI2c1Handle.mI2c_UsrData.dataReceivedFlag = false;
+		mI2c1Handle.mI2c_UsrData.dataTransmitFlag = false;
+		mI2c1Handle.mI2c = I2C1_Init(&mI2c1Handle.mI2c_UsrData);
+		if (mI2c1Handle.mI2c == NULL)
+			while (1)
+				; //init failed
 		I2C1_SelectSlaveDevice(mI2c1Handle.mI2c, LDD_I2C_ADDRTYPE_7BITS,
 				slaveAddr);
 
 	}
-
+	timeoutInit(); //timeout for I2C
 }
 
 bool i2cRead(uint8_t slaveAddr, uint8_t regAddress, uint8_t *data,
@@ -57,17 +61,23 @@ bool i2cRead(uint8_t slaveAddr, uint8_t regAddress, uint8_t *data,
 		if (res != ERR_OK) {
 			return false;
 		}
-		while (!mI2c1Handle.mI2c_DeviceData.dataTransmitFlag)
-			;
-		mI2c1Handle.mI2c_DeviceData.dataTransmitFlag = false;
+		timeoutSetTimeout(1000);
+		do {
+			if (timeoutIsTimeoutOccured())
+				return false;
+		} while (!mI2c1Handle.mI2c_UsrData.dataTransmitFlag);
+		mI2c1Handle.mI2c_UsrData.dataTransmitFlag = false;
 		res = I2C1_MasterReceiveBlock(mI2c1Handle.mI2c, data, dataLength,
 				LDD_I2C_SEND_STOP);
 		if (res != ERR_OK) {
 			return false;
 		}
-		while (!mI2c1Handle.mI2c_DeviceData.dataReceivedFlag)
-			;
-		mI2c1Handle.mI2c_DeviceData.dataReceivedFlag = false;
+		timeoutSetTimeout(1000);
+		do {
+			if (timeoutIsTimeoutOccured())
+				return false;
+		} while (!mI2c1Handle.mI2c_UsrData.dataReceivedFlag);
+		mI2c1Handle.mI2c_UsrData.dataReceivedFlag = false;
 		return true;
 	}
 }
@@ -90,18 +100,24 @@ bool i2cWrite(uint8_t slaveAddr, uint8_t regAddress, uint8_t *data,
 		if (res != ERR_OK) {
 			return false;
 		}
-		while (!mI2c1Handle.mI2c_DeviceData.dataTransmitFlag)
-			;
-		mI2c1Handle.mI2c_DeviceData.dataTransmitFlag = false;
+		timeoutSetTimeout(1000);
+		do {
+			if (timeoutIsTimeoutOccured())
+				return false;
+		} while (!mI2c1Handle.mI2c_UsrData.dataTransmitFlag);
+		mI2c1Handle.mI2c_UsrData.dataTransmitFlag = false;
 
 		res = I2C1_MasterSendBlock(mI2c1Handle.mI2c, data, dataLength,
 				LDD_I2C_SEND_STOP);
 		if (res != ERR_OK) {
 			return false;
 		}
-		while (!mI2c1Handle.mI2c_DeviceData.dataTransmitFlag)
-			;
-		mI2c1Handle.mI2c_DeviceData.dataTransmitFlag = false;
+		timeoutSetTimeout(1000);
+		do {
+			if (timeoutIsTimeoutOccured())
+				return false;
+		} while (!mI2c1Handle.mI2c_UsrData.dataTransmitFlag);
+		mI2c1Handle.mI2c_UsrData.dataTransmitFlag = false;
 
 		return true;
 	}
@@ -112,7 +128,6 @@ LDD_TDeviceData* i2cGetI2CHandle(I2C_MODULE i2cModule) {
 
 	if (i2cModule == I2C0_mod) {
 		return mI2c0Handle.mI2c;
-	}
-	else
+	} else
 		return mI2c1Handle.mI2c;
 }

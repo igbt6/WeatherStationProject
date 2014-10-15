@@ -5,7 +5,7 @@
 **     Processor   : MKL46Z256VMC4
 **     Version     : Component 01.107, Driver 01.00, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-10-07, 01:10, # CodeGen: 17
+**     Date/Time   : 2014-10-15, 23:06, # CodeGen: 41
 **     Abstract    :
 **         MQX Lite RTOS Adapter component.
 **     Settings    :
@@ -129,7 +129,7 @@ extern INTERRUPT_TABLE_STRUCT          mqx_static_isr_table[MQX_INTERRUPT_TABLE_
 
 
 /* Task ready queue */
-#define MQX_IDLE_TASK_PRIORITY         (9)
+#define MQX_IDLE_TASK_PRIORITY         (11)
 #define MQX_READY_QUEUE_ITEMS          (MQX_IDLE_TASK_PRIORITY + 1)
 extern READY_Q_STRUCT                  mqx_static_ready_queue[MQX_READY_QUEUE_ITEMS];
 

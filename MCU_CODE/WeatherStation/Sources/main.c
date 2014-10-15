@@ -37,6 +37,7 @@
 #include "SystemTimer1.h"
 #include "WDog1.h"
 #include "TU1.h"
+#include "FC1.h"
 #include "DHT22_DataPin.h"
 #include "lcd/LCD.h"
 /* Including shared modules, which are used for whole project */

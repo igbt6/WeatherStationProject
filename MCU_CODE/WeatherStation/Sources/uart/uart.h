@@ -25,7 +25,7 @@ typedef struct {
   volatile bool uartDataReceivedFlag;
   volatile bool uartDataSentFlag;
 
-} UART_DeviceData;
+} UART_UsrData;
 
 bool uartInit(UART_MODULE uartMod);
 bool uartSendData(uint8_t* buf, uint16_t sizeOfBuf);

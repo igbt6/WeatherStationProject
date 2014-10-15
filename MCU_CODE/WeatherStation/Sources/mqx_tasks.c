@@ -97,8 +97,8 @@ void Lcd_task(uint32_t task_init_data) {
 
 	while (1) {
 		counter++;
-
 		_time_delay_ticks(1000);
+
 		if (counter % 2) {
 			vfnLCD_Write_Char('H');
 
@@ -161,18 +161,17 @@ void Task3_task(uint32_t task_init_data) {
 		 vfnLCD_Write_MsgPlace(tempBuf, 4);
 		 vfnLCD_Write_Msg(tempBuf);
 		 */
-
+		_time_delay_ticks(6000);
 		uartSendData(string[0], strlen(string[0]));
-		if (!adt7410ReadTemp())
+		if (adt7410ReadTemp()==0)
 			uartSendData(string[1], strlen(string[1]));
 		else {
 			sprintfDouble(adt7410GetTemperature(), 2, tempBuf, 6);
-			//snprintf(tempBuf, 9, "%5.2f", temp);
+		 	//snprintf(tempBuf, 9, "%5.2f", temp);
 			uartSendData(tempBuf, 5);
-
 		}
 		uartSendData(string[3], strlen(string[3]));
-		if (!bmp180ReadData())
+		if (bmp180ReadData()==0)
 			uartSendData(string[3], strlen(string[3]));
 		else {
 			sprintfDouble(bmp180GetPressure(), 3, tempBuf, 6);
@@ -180,7 +179,7 @@ void Task3_task(uint32_t task_init_data) {
 			uartSendData(tempBuf, 5);
 		}
 
-		_time_delay_ticks(1200);
+
 	}
 }
 

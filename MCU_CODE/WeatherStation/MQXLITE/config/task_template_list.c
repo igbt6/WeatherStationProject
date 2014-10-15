@@ -5,7 +5,7 @@
 **     Processor   : MKL46Z256VMC4
 **     Version     : Component 01.107, Driver 01.00, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-10-07, 01:23, # CodeGen: 20
+**     Date/Time   : 2014-10-15, 23:06, # CodeGen: 41
 **
 **     Copyright : 1997 - 2014 Freescale Semiconductor, Inc. 
 **     All Rights Reserved.
@@ -60,7 +60,7 @@ const TASK_TEMPLATE_STRUCT MQX_template_list[] =
   /* Task number                      */  LCDTASK_TASK,
   /* Entry point                      */  (TASK_FPTR)Lcd_task,
   /* Stack size                       */  LCDTASK_TASK_STACK_SIZE,
-  /* Task priority                    */  8U,
+  /* Task priority                    */  10U,
   /* Task name                        */  "lcdtask",
   /* Task attributes                  */  (MQX_AUTO_START_TASK),
   /* Task parameter                   */  (uint32_t)(0)
@@ -70,7 +70,7 @@ const TASK_TEMPLATE_STRUCT MQX_template_list[] =
   /* Task number                      */  USARTDEBUGTASK_TASK,
   /* Entry point                      */  (TASK_FPTR)UsartDebug_task,
   /* Stack size                       */  USARTDEBUGTASK_TASK_STACK_SIZE,
-  /* Task priority                    */  8U,
+  /* Task priority                    */  7U,
   /* Task name                        */  "usartdebugtask",
   /* Task attributes                  */  (MQX_AUTO_START_TASK),
   /* Task parameter                   */  (uint32_t)(0)

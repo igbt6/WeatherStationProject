@@ -359,18 +359,6 @@ Module "WDog1"     (component WatchDog_LDD)
                 second call of Init the <Deinit> must be called first.
    - WDog1_Clear -Clears the watchdog timer (it makes the timer restart from zero).
 
-Module "TU1"       (component TimerUnit_LDD)
-   - TU1_Init -Initializes the device. Allocates memory for the device data structure, allocates interrupt vectors and sets 
-                interrupt priority, sets pin routing, sets timing, etc. If the property <"Enable in init. code"> is set to 
-                "yes" value then the device is also enabled (see the description of the <Enable> method). In this case the 
-                <Enable> method is not necessary and needn't to be generated. This method can be called only once. Before the 
-                second call of Init the <Deinit> must be called first.
-   - TU1_ResetCounter -Resets counter. If counter is counting up then it is set to zero. If counter is counting down then 
-                counter is updated to the reload value.   The method is not available if HW doesn't allow resetting of the 
-                counter.
-   - TU1_GetCounterValue -Returns the content of counter register. This method can be used both if counter is enabled and if 
-                counter is disabled. The method is not available if HW doesn't allow reading of the counter.
-
 Module "DHT22_DataPin" (component BitIO_LDD)
    - DHT22_DataPin_Init -Initializes the device. Allocates memory for the device data structure, allocates interrupt vectors 
                 and sets interrupt priority, sets pin routing, sets timing, etc. If the "Enable in init. code" is set to "yes" 
@@ -393,6 +381,36 @@ Module "DHT22_DataPin" (component BitIO_LDD)
                 available only if the direction = _[output]_ or _[input/output]_.
    - DHT22_DataPin_SetVal -Sets (to one) the output value. It is equivalent to the [PutVal(TRUE)]. This method is available 
                 only if the direction = _[output]_ or _[input/output]_.
+
+Module "TU1"       (component TimerUnit_LDD)
+   - TU1_Init -Initializes the device. Allocates memory for the device data structure, allocates interrupt vectors and sets 
+                interrupt priority, sets pin routing, sets timing, etc. If the property <"Enable in init. code"> is set to 
+                "yes" value then the device is also enabled (see the description of the <Enable> method). In this case the 
+                <Enable> method is not necessary and needn't to be generated. This method can be called only once. Before the 
+                second call of Init the <Deinit> must be called first.
+   - TU1_Deinit -Deinitializes the device. Switches off the device, frees the device data structure memory, interrupts vectors, 
+                etc.
+   - TU1_GetEventStatus -Returns current pending flags and clears them.   Note: If corresponding events are generated then 
+                these interrupt flags are deleted directly in the ISR. See Properties "Interrupt" and related events.
+   - TU1_ResetCounter -Resets counter. If counter is counting up then it is set to zero. If counter is counting down then 
+                counter is updated to the reload value.   The method is not available if HW doesn't allow resetting of the 
+                counter.
+   - TU1_GetCounterValue -Returns the content of counter register. This method can be used both if counter is enabled and if 
+                counter is disabled. The method is not available if HW doesn't allow reading of the counter.
+
+Module "FC1"       (component FreeCntr_LDD)
+   - FC1_Init -Initializes the device. Allocates memory for the device data structure, allocates interrupt vectors and sets 
+                interrupt priority, sets pin routing, sets timing, etc. If the property <"Enable in init. code"> is set to 
+                "yes" value then the device is also enabled (see the description of the <Enable> method). In this case the 
+                <Enable> method is not necessary and needn't to be generated. This method can be called only once. Before the 
+                second call of Init the <Deinit> must be called first.
+   - FC1_Deinit -Deinitializes the device. Switches off the device, frees the device data structure memory, interrupts vectors, 
+                etc.
+   - FC1_GetCounterValue -Returns the content of counter register. This method can be used both if counter is enabled and if 
+                counter is disabled.
+   - FC1_ResetCounter -Resets counter. If counter is counting up then it is set to zero. If counter is counting down then 
+                counter is updated to the reload value.   The method is not available if HW doesn't allow resetting of the 
+                counter.
 
 Module "Cpu"       (component MKL46Z256MC4)
 

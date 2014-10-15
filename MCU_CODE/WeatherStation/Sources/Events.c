@@ -75,7 +75,7 @@ void Cpu_OnNMIINT(void) {
  */
 /* ===================================================================*/
 void I2C1_OnMasterBlockSent(LDD_TUserData *UserDataPtr) {
-	I2C_DeviceData* ptr = (I2C_DeviceData*) UserDataPtr;
+	I2C_UsrData* ptr = (I2C_UsrData*) UserDataPtr;
 	ptr->dataTransmitFlag = TRUE;
 }
 
@@ -98,7 +98,7 @@ void I2C1_OnMasterBlockSent(LDD_TUserData *UserDataPtr) {
  */
 /* ===================================================================*/
 void I2C1_OnMasterBlockReceived(LDD_TUserData *UserDataPtr) {
-	I2C_DeviceData* ptr = (I2C_DeviceData*) UserDataPtr;
+	I2C_UsrData* ptr = (I2C_UsrData*) UserDataPtr;
 	ptr->dataReceivedFlag = TRUE;
 }
 
@@ -141,7 +141,7 @@ void I2C1_OnMasterByteReceived(LDD_TUserData *UserDataPtr) {
  */
 /* ===================================================================*/
 void USART0_DEBUG_OnBlockReceived(LDD_TUserData *UserDataPtr) {
-   UART_DeviceData* ptr =  (UART_DeviceData*) UserDataPtr;
+   UART_UsrData* ptr =  (UART_UsrData*) UserDataPtr;
    ptr->uartDataReceivedFlag = TRUE;
 }
 
@@ -162,7 +162,7 @@ void USART0_DEBUG_OnBlockReceived(LDD_TUserData *UserDataPtr) {
  */
 /* ===================================================================*/
 void USART0_DEBUG_OnBlockSent(LDD_TUserData *UserDataPtr) {
-	 UART_DeviceData* ptr =  (UART_DeviceData*) UserDataPtr;
+	 UART_UsrData* ptr =  (UART_UsrData*) UserDataPtr;
 	 ptr->uartDataSentFlag = TRUE;
 }
 

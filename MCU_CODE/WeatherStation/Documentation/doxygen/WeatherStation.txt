@@ -34,8 +34,9 @@
 - \subpage I2C1
 - \subpage SystemTimer1
 - \subpage WDog1
-- \subpage TU1
 - \subpage DHT22_DataPin
+- \subpage TU1
+- \subpage FC1
 
 
 */

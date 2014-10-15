@@ -21,7 +21,7 @@ typedef struct{
  	 volatile bool dataReceivedFlag;  /*set TRUE by interrupt, when we have received a block of data*/
  	 volatile bool dataTransmitFlag;
 
-}I2C_DeviceData;
+}I2C_UsrData;
 
 
 

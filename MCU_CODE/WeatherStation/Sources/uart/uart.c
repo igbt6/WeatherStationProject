@@ -9,19 +9,18 @@
 
 typedef struct {
 	LDD_TDeviceData* mUart;
-	UART_DeviceData mUart_DeviceData;
+	UART_UsrData mUart_UsrData;
 } UartHandle;
 
 static UartHandle mUart0Handle;
 
 bool uartInit(UART_MODULE uartMod) {
 	if (uartMod == UART0_mod) {
-		mUart0Handle.mUart = USART0_DEBUG_Init(&mUart0Handle.mUart_DeviceData);
+		mUart0Handle.mUart = USART0_DEBUG_Init(&mUart0Handle.mUart_UsrData);
 		if (mUart0Handle.mUart == NULL)
 			return false;
 	} else
 		return false; //not supported yet
-
 }
 
 bool uartSendData(uint8_t* buf, uint16_t sizeOfBuf) {
@@ -31,9 +30,9 @@ bool uartSendData(uint8_t* buf, uint16_t sizeOfBuf) {
 		res = USART0_DEBUG_SendBlock(mUart0Handle.mUart, buf, sizeOfBuf);
 	if (res != ERR_OK)
 		return false;
-	while (!mUart0Handle.mUart_DeviceData.uartDataSentFlag)
+	while (!mUart0Handle.mUart_UsrData.uartDataSentFlag)
 		;
-	mUart0Handle.mUart_DeviceData.uartDataSentFlag = false;
+	mUart0Handle.mUart_UsrData.uartDataSentFlag = false;
 	return true;
 
 }
@@ -44,8 +43,8 @@ bool uartReceiveData(uint8_t* buf, uint16_t sizeOfBuf) {
 		res = USART0_DEBUG_ReceiveBlock(mUart0Handle.mUart, buf, sizeOfBuf);
 	if (res != ERR_OK)
 		return false;
-	while (!mUart0Handle.mUart_DeviceData.uartDataReceivedFlag)
+	while (!mUart0Handle.mUart_UsrData.uartDataReceivedFlag)
 		;
-	mUart0Handle.mUart_DeviceData.uartDataReceivedFlag = false;
+	mUart0Handle.mUart_UsrData.uartDataReceivedFlag = false;
 	return true;
 }

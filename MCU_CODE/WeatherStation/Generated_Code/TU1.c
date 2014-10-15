@@ -6,7 +6,7 @@
 **     Component   : TimerUnit_LDD
 **     Version     : Component 01.164, Driver 01.11, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-10-11, 13:32, # CodeGen: 33
+**     Date/Time   : 2014-10-15, 20:22, # CodeGen: 40
 **     Abstract    :
 **          This TimerUnit component provides a low level API for unified hardware access across
 **          various timer devices using the Prescaler-Counter-Compare-Capture timer structure.
@@ -16,11 +16,11 @@
 **          Counter                                        : LPTMR0_CNR
 **          Counter direction                              : Up
 **          Counter width                                  : 16 bits
-**          Value type                                     : Optimal
+**          Value type                                     : uint16_t
 **          Input clock source                             : Internal
-**            Counter frequency                            : Auto select
+**            Counter frequency                            : 32.768 kHz
 **          Counter restart                                : On-overrun
-**            Overrun period                               : 8 sec
+**            Overrun period                               : 2 sec
 **            Interrupt                                    : Disabled
 **          Channel list                                   : 0
 **          Initialization                                 : 
@@ -47,6 +47,8 @@
 **            Clock configuration 7                        : This component disabled
 **     Contents    :
 **         Init            - LDD_TDeviceData* TU1_Init(LDD_TUserData *UserDataPtr);
+**         Deinit          - void TU1_Deinit(LDD_TDeviceData *DeviceDataPtr);
+**         GetEventStatus  - LDD_TEventMask TU1_GetEventStatus(LDD_TDeviceData *DeviceDataPtr);
 **         ResetCounter    - LDD_TError TU1_ResetCounter(LDD_TDeviceData *DeviceDataPtr);
 **         GetCounterValue - TU1_TValueType TU1_GetCounterValue(LDD_TDeviceData *DeviceDataPtr);
 **
@@ -107,6 +109,7 @@ extern "C" {
 
 
 typedef struct {
+  uint8_t InitCntr;                    /* Number of initialization */
   LDD_TUserData *UserDataPtr;          /* RTOS device data structure */
 } TU1_TDeviceData;
 
@@ -143,22 +146,96 @@ static TU1_TDeviceData DeviceDataPrv__DEFAULT_RTOS_ALLOC;
 /* ===================================================================*/
 LDD_TDeviceData* TU1_Init(LDD_TUserData *UserDataPtr)
 {
-  /* Allocate device structure */
   TU1_TDeviceData *DeviceDataPrv;
-  /* {MQXLite RTOS Adapter} Driver memory allocation: Dynamic allocation is simulated by a pointer to the static object */
-  DeviceDataPrv = &DeviceDataPrv__DEFAULT_RTOS_ALLOC;
-  DeviceDataPrv->UserDataPtr = UserDataPtr; /* Store the RTOS device structure */
+
+  if (PE_LDD_DeviceDataList[PE_LDD_COMPONENT_TU1_ID] == NULL) {
+    /* Allocate device structure */
+    /* {MQXLite RTOS Adapter} Driver memory allocation: Dynamic allocation is simulated by a pointer to the static object */
+    DeviceDataPrv = &DeviceDataPrv__DEFAULT_RTOS_ALLOC;
+    DeviceDataPrv->UserDataPtr = UserDataPtr; /* Store the RTOS device structure */
+    DeviceDataPrv->InitCntr = 1U;      /* First initialization */
+  }
+  else {
+    /* Memory is already allocated */
+    DeviceDataPrv = (TU1_TDeviceDataPtr) PE_LDD_DeviceDataList[PE_LDD_COMPONENT_TU1_ID];
+    DeviceDataPrv->UserDataPtr = UserDataPtr; /* Store the RTOS device structure */
+    DeviceDataPrv->InitCntr++;         /* Increment counter of initialization */
+    return ((LDD_TDeviceData *)DeviceDataPrv); /* Return pointer to the device data structure */
+  }
   /* SIM_SCGC5: LPTMR=1 */
   SIM_SCGC5 |= SIM_SCGC5_LPTMR_MASK;
   /* LPTMR0_CSR: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,TCF=1,TIE=0,TPS=0,TPP=0,TFC=0,TMS=0,TEN=0 */
   LPTMR0_CSR = (LPTMR_CSR_TCF_MASK | LPTMR_CSR_TPS(0x00)); /* Clear control register */
-  /* LPTMR0_PSR: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,PRESCALE=1,PBYP=0,PCS=0 */
-  LPTMR0_PSR = (LPTMR_PSR_PRESCALE(0x01) | LPTMR_PSR_PCS(0x00)); /* Set up prescaler register */
+  /* LPTMR0_PSR: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,PRESCALE=0,PBYP=1,PCS=0 */
+  LPTMR0_PSR = LPTMR_PSR_PRESCALE(0x00) |
+               LPTMR_PSR_PBYP_MASK |
+               LPTMR_PSR_PCS(0x00);    /* Set up prescaler register */
   /* LPTMR0_CSR: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,TCF=0,TIE=0,TPS=0,TPP=0,TFC=1,TMS=0,TEN=1 */
   LPTMR0_CSR = (LPTMR_CSR_TPS(0x00) | LPTMR_CSR_TFC_MASK | LPTMR_CSR_TEN_MASK); /* Set up control register */
   /* Registration of the device structure */
   PE_LDD_RegisterDeviceStructure(PE_LDD_COMPONENT_TU1_ID,DeviceDataPrv);
   return ((LDD_TDeviceData *)DeviceDataPrv); /* Return pointer to the device data structure */
+}
+
+/*
+** ===================================================================
+**     Method      :  TU1_Deinit (component TimerUnit_LDD)
+*/
+/*!
+**     @brief
+**         Deinitializes the device. Switches off the device, frees the
+**         device data structure memory, interrupts vectors, etc.
+**     @param
+**         DeviceDataPtr   - Device data structure
+**                           pointer returned by Init method
+*/
+/* ===================================================================*/
+void TU1_Deinit(LDD_TDeviceData *DeviceDataPtr)
+{
+  TU1_TDeviceData *DeviceDataPrv = (TU1_TDeviceData *)DeviceDataPtr;
+
+  DeviceDataPrv->InitCntr--;           /* Decrement counter of initialization */
+  if ((DeviceDataPrv->InitCntr) > 0U) { /* Is the result greater or equal than zero ? */
+    return;                            /* If yes then de-initialization isn't complete */
+  }
+  LPTMR_PDD_EnableDevice(LPTMR0_BASE_PTR, PDD_DISABLE);
+  /* Unregistration of the device structure */
+  PE_LDD_UnregisterDeviceStructure(PE_LDD_COMPONENT_TU1_ID);
+  /* Deallocation of the device structure */
+  /* {MQXLite RTOS Adapter} Driver memory deallocation: Dynamic allocation is simulated, no deallocation code is generated */
+}
+
+/*
+** ===================================================================
+**     Method      :  TU1_GetEventStatus (component TimerUnit_LDD)
+*/
+/*!
+**     @brief
+**         Returns current pending flags and clears them.
+**         Note: If corresponding events are generated then these
+**         interrupt flags are deleted directly in the ISR. See
+**         Properties "Interrupt" and related events.
+**     @param
+**         DeviceDataPtr   - Device data structure
+**                           pointer returned by [Init] method.
+**     @return
+**                         - Current status flags
+*/
+/* ===================================================================*/
+LDD_TEventMask TU1_GetEventStatus(LDD_TDeviceData *DeviceDataPtr)
+{
+  LDD_TEventMask Mask = 0U;
+
+  (void)DeviceDataPtr;                 /* Parameter is not used, suppress unused argument warning */
+  /* {MQXLite RTOS Adapter} Critical section begin (RTOS function call is defined by MQXLite RTOS Adapter property) */
+  _int_disable();
+  if ((LPTMR_PDD_GetInterruptFlag(LPTMR0_BASE_PTR)) != 0U) { /* Is the LPT interrupt flag pending? */
+    LPTMR_PDD_ClearInterruptFlag(LPTMR0_BASE_PTR); /* If yes then clear them */
+    Mask |= LDD_TIMERUNIT_ON_CHANNEL_0; /* and set mask */
+  }
+  /* {MQXLite RTOS Adapter} Critical section ends (RTOS function call is defined by MQXLite RTOS Adapter property) */
+  _int_enable();
+  return Mask;                         /* Return the mask. */
 }
 
 /*

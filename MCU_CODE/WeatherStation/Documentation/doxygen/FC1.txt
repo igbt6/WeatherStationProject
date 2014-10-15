@@ -1,31 +1,33 @@
 /*!
-\page TU1 TU1 (TimerUnit_LDD)
-**          This TimerUnit component provides a low level API for unified hardware access across
-**          various timer devices using the Prescaler-Counter-Compare-Capture timer structure.
+\page FC1 FC1 (FreeCntr_LDD)
+**          This device "FreeCntr_LDD" implements Free Running Counter
+**          This FreeCntr component provides a high level API for unified
+**          hardware access to various timer devices using the TimerUnit
+**          component.
 
-- \subpage TU1_settings
-- \subpage TU1_regs_overview  
-- \subpage TU1_regs_details
-- \ref TU1_module "Component documentation" 
+- \subpage FC1_settings
+- \subpage FC1_regs_overview  
+- \subpage FC1_regs_details
+- \ref FC1_module "Component documentation" 
 
-\page TU1_regs_overview Registers Initialization Overview
+\page FC1_regs_overview Registers Initialization Overview
 This page initialization values for the registers of the peripheral(s) configured
 by the component. 
 <table>
-<tr><td colspan="4" class="ttitle1">TU1 Initialization</td></tr>
+<tr><td colspan="4" class="ttitle1">FC1 Initialization</td></tr>
 <tr><td class="ttitle2">Address</td><td class="ttitle2">Register</td><td class="ttitle2">Register Value</td><td class="ttitle2">Register Description</td></tr>
 <tr><td>0x40048038</td><td>SIM_SCGC5</td><td>
     0x00080001
- </td><td>SIM_SCGC5 register, peripheral TU1.</td></tr>
+ </td><td>SIM_SCGC5 register, peripheral FC1.</td></tr>
 <tr><td>0x40040000</td><td>LPTMR0_CSR</td><td>
     0x00000085
- </td><td>LPTMR0_CSR register, peripheral TU1.</td></tr>
+ </td><td>LPTMR0_CSR register, peripheral FC1.</td></tr>
 <tr><td>0x40040004</td><td>LPTMR0_PSR</td><td>
     0x00000004
- </td><td>LPTMR0_PSR register, peripheral TU1.</td></tr>
+ </td><td>LPTMR0_PSR register, peripheral FC1.</td></tr>
 </table>
 <br/>
-\page TU1_regs_details Register Initialization Details
+\page FC1_regs_details Register Initialization Details
 This page contains detailed description of initialization values for the 
 registers of the peripheral(s) configured by the component. 
 
@@ -199,33 +201,22 @@ registers of the peripheral(s) configured by the component.
 </tr></table>
 */
 /*!
-\page TU1_settings Component Settings
+\page FC1_settings Component Settings
 \code
-**          Component name                                 : TU1
+**          Component name                                 : FC1
 **          Module name                                    : LPTMR0
 **          Counter                                        : LPTMR0_CNR
 **          Counter direction                              : Up
-**          Counter width                                  : 16 bits
-**          Value type                                     : uint16_t
-**          Input clock source                             : Internal
-**            Counter frequency                            : 32.768 kHz
-**          Counter restart                                : On-overrun
+**          Counter frequency                              : 32.768 kHz
+**          Mode                                           : Free-running
 **            Overrun period                               : 2 sec
-**            Interrupt                                    : Disabled
-**          Channel list                                   : 0
+**            Interrupt service/event                      : Disabled
+**          Value type                                     : Optimal
 **          Initialization                                 : 
 **            Enabled in init. code                        : yes
 **            Auto initialization                          : no
 **            Event mask                                   : 
-**              OnCounterRestart                           : Disabled
-**              OnChannel0                                 : Disabled
-**              OnChannel1                                 : Disabled
-**              OnChannel2                                 : Disabled
-**              OnChannel3                                 : Disabled
-**              OnChannel4                                 : Disabled
-**              OnChannel5                                 : Disabled
-**              OnChannel6                                 : Disabled
-**              OnChannel7                                 : Disabled
+**              OnInterrupt                                : Disabled
 **          CPU clock/configuration selection              : 
 **            Clock configuration 0                        : This component enabled
 **            Clock configuration 1                        : This component disabled
@@ -235,5 +226,7 @@ registers of the peripheral(s) configured by the component.
 **            Clock configuration 5                        : This component disabled
 **            Clock configuration 6                        : This component disabled
 **            Clock configuration 7                        : This component disabled
+**          Referenced components                          : 
+**            Linked TimerUnit                             : TU1
 \endcode
 */

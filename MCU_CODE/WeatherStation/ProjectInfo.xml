@@ -58,6 +58,7 @@
       <Path>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\i2c\</Path>
       <Path>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\lcd\</Path>
       <Path>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\sensors\</Path>
+      <Path>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\timeout\</Path>
       <Path>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\uart\</Path>
       <Path>C:\Users\lukasz\workspace.kds\WeatherStation\MQXLITE\psp\cortex_m\core\M0\</Path>
     </SourceCodePaths>
@@ -66,6 +67,7 @@
     <GeneratedCs>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\Cpu.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\DHT22_DataPin.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\FC1.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\I2C1.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\MQX1.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\PE_LDD.c</PathName>
@@ -121,11 +123,13 @@
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\sensors\BMP180.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\sensors\DHT22.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\sensors\adt7410.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\timeout\timeout.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\uart\uart.c</PathName>
     </GeneratedCs>
     <GeneratedHs>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\Cpu.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\DHT22_DataPin.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\FC1.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\I2C1.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\IO_Map.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\MQX1.h</PathName>
@@ -187,6 +191,7 @@
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\sensors\BMP180.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\sensors\DHT22.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\sensors\adt7410.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\timeout\timeout.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\uart\uart.h</PathName>
       <PathName>C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert\lib\Kinetis\iofiles\MKL46Z4.h</PathName>
       <PathName>C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert\lib\Kinetis\pdd\inc\ADC_PDD.h</PathName>

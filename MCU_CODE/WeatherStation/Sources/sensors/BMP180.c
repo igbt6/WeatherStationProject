@@ -1,5 +1,5 @@
 /*
- @file BMP180.cpp
+  @file BMP180.cpp
 
  @brief Barometric Pressure and Temperature Sensor BMP180 Breakout I2C Library
 
@@ -17,6 +17,7 @@
 #include "BMP180.h"
 #include <string.h>
 #include <math.h>
+
 
 // Uncomment to test the documentation algorithm against the documentation example 
 // Result should be 699.64 hPa and 15°C
@@ -69,6 +70,7 @@ static int bmp180SetConfiguration(float altitude, int overSamplingSetting) {
 	// errors = bmp180Write(m_addr, data, 1);  // set the eeprom pointer position to 0xAA
 	errors += bmp180Read(data[0], data, 22); // read 11 x 16 bits at this position
 	//wait_ms(10);
+	//WAIT1_Waitms(10);
 
 	// store calibration data for further calculus
 	ac1 = data[0] << 8 | data[1];
@@ -138,6 +140,7 @@ int bmp180ReadRawTemperature(long* pUt) {
 	errors = bmp180Write(m_addr, data, 2); // write 0XF2 into reg 0XF4
 
 	// wait_ms(4.5F);
+//	WAIT1_Waitms(5);
 
 	// read raw temperature data
 	data[0] = 0xF6;
@@ -149,7 +152,7 @@ int bmp180ReadRawTemperature(long* pUt) {
 #endif // #ifdef BMP180_TEST_FORMULA	if (errors)
 		return 0;
 	else
-		*pUt = data[0] << 8 | data[1];
+		*pUt = ((data[0] << 8) | data[1]);
 
 #ifdef BMP180_TEST_FORMULA
 	*pUt = 27898;
