@@ -96,8 +96,10 @@ void Lcd_task(uint32_t task_init_data) {
 	int counter = 0;
 
 	while (1) {
+
+		_time_delay_ticks(500);
 		counter++;
-		_time_delay_ticks(1000);
+
 
 		if (counter % 2) {
 			vfnLCD_Write_Char('H');
@@ -111,8 +113,7 @@ void Lcd_task(uint32_t task_init_data) {
 		else {
 			vfnLCD_Write_Msg("  ");  // TURN ON all characters
 			vfnLCD_Home();
-		}
-
+		}//
 	}
 }
 
@@ -153,6 +154,7 @@ void Task3_task(uint32_t task_init_data) {
 	adt7410Init(i2cGetI2CHandle(I2C1_mod), I2C1_mod);
 	bmp180Init(i2cGetI2CHandle(I2C1_mod), I2C1_mod);
 	while (1) {
+		_time_delay_ticks(100);
 		/*
 		 int iInt = adt7410GetIdNumber();
 		 snprintf(tempBuf, 4, "%d", iInt);
@@ -161,7 +163,7 @@ void Task3_task(uint32_t task_init_data) {
 		 vfnLCD_Write_MsgPlace(tempBuf, 4);
 		 vfnLCD_Write_Msg(tempBuf);
 		 */
-		_time_delay_ticks(6000);
+
 		uartSendData(string[0], strlen(string[0]));
 		if (adt7410ReadTemp()==0)
 			uartSendData(string[1], strlen(string[1]));

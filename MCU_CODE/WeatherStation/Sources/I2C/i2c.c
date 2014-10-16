@@ -9,7 +9,7 @@
 #include "timeout/timeout.h"
 
 #define IS_I2C_MODULE(x) if(x==I2C0_mod||x==I2C1_mod)
-
+#define TIMEOUT 500
 /*
  static LDD_TDeviceData* mI2C1 =NULL;
  static LDD_TDeviceData* mI2C0 =NULL;
@@ -61,7 +61,7 @@ bool i2cRead(uint8_t slaveAddr, uint8_t regAddress, uint8_t *data,
 		if (res != ERR_OK) {
 			return false;
 		}
-		timeoutSetTimeout(1000);
+		timeoutSetTimeout(TIMEOUT);
 		do {
 			if (timeoutIsTimeoutOccured())
 				return false;
@@ -72,7 +72,7 @@ bool i2cRead(uint8_t slaveAddr, uint8_t regAddress, uint8_t *data,
 		if (res != ERR_OK) {
 			return false;
 		}
-		timeoutSetTimeout(1000);
+		timeoutSetTimeout(TIMEOUT);
 		do {
 			if (timeoutIsTimeoutOccured())
 				return false;
@@ -100,7 +100,7 @@ bool i2cWrite(uint8_t slaveAddr, uint8_t regAddress, uint8_t *data,
 		if (res != ERR_OK) {
 			return false;
 		}
-		timeoutSetTimeout(1000);
+		timeoutSetTimeout(TIMEOUT);
 		do {
 			if (timeoutIsTimeoutOccured())
 				return false;
@@ -112,7 +112,7 @@ bool i2cWrite(uint8_t slaveAddr, uint8_t regAddress, uint8_t *data,
 		if (res != ERR_OK) {
 			return false;
 		}
-		timeoutSetTimeout(1000);
+		timeoutSetTimeout(TIMEOUT);
 		do {
 			if (timeoutIsTimeoutOccured())
 				return false;

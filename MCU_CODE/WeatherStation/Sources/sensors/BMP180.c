@@ -17,6 +17,7 @@
 #include "BMP180.h"
 #include <string.h>
 #include <math.h>
+#include "timeout/timeout.h"
 
 
 // Uncomment to test the documentation algorithm against the documentation example 
@@ -71,6 +72,8 @@ static int bmp180SetConfiguration(float altitude, int overSamplingSetting) {
 	errors += bmp180Read(data[0], data, 22); // read 11 x 16 bits at this position
 	//wait_ms(10);
 	//WAIT1_Waitms(10);
+	timeoutSetTimeout(10);
+	    while (!timeoutIsTimeoutOccured());
 
 	// store calibration data for further calculus
 	ac1 = data[0] << 8 | data[1];
@@ -141,6 +144,8 @@ int bmp180ReadRawTemperature(long* pUt) {
 
 	// wait_ms(4.5F);
 //	WAIT1_Waitms(5);
+	timeoutSetTimeout(5);
+    while (!timeoutIsTimeoutOccured());
 
 	// read raw temperature data
 	data[0] = 0xF6;

@@ -819,11 +819,11 @@ PE_DEBUGHALT();
             <Properties>
               <Name v="LcdTask" />
               <Entry_point_function v="Lcd_task" />
-              <Stack_size v="512" />
-              <Priority v="8" />
+              <Stack_size v="200" />
+              <Priority v="10" />
               <Creation_parameter v="0" />
               <group name="Attributes">
-                <MQX_AUTO_START_TASK v="Enabled" />
+                <MQX_AUTO_START_TASK v="Disabled" />
                 <MQX_FLOATING_POINT_TASK v="Disabled" />
               </group>
             </Properties>
@@ -846,10 +846,10 @@ PE_DEBUGHALT();
               <Name v="UsartDebugTask" />
               <Entry_point_function v="UsartDebug_task" />
               <Stack_size v="512" />
-              <Priority v="8" />
+              <Priority v="7" />
               <Creation_parameter v="0" />
               <group name="Attributes">
-                <MQX_AUTO_START_TASK v="Enabled" />
+                <MQX_AUTO_START_TASK v="Disabled" />
                 <MQX_FLOATING_POINT_TASK v="Disabled" />
               </group>
             </Properties>
@@ -896,7 +896,7 @@ PE_DEBUGHALT();
           <Lightweight_Semaphores v="yes" />
           <Lightweight_Events v="no" />
           <Lightweight_Message_Queues v="yes" />
-          <Mutexes v="yes" />
+          <Mutexes v="no" />
           <Lightweight_Timer v="yes" />
           <Kernel_Logging v="no" />
           <Lightweight_Memory_Allocation v="yes" />
@@ -907,8 +907,8 @@ PE_DEBUGHALT();
         </group>
         <group name="Idle Task">
           <Use_Idle_Task v="yes" />
-          <Enable_sleep_in_idle v="yes" />
-          <Enable_idle_counters v="yes" />
+          <Enable_sleep_in_idle v="no" />
+          <Enable_idle_counters v="no" />
         </group>
         <group name="User settings">
           <Definitions>
@@ -1113,43 +1113,6 @@ PE_DEBUGHALT();
     </Methods>
     <Events>
       <EmptySection_DummyValue />
-    </Events>
-  </Bean>
-  <Bean name="WDog1" type="WatchDog_LDD">
-    <Enabled v="Y" />
-    <Properties>
-      <Component_name v="WDog1" />
-      <Device v="COP" />
-      <enumgroup name="Action" v="Reset CPU">
-        <EmptySection_DummyValue />
-      </enumgroup>
-      <Period v="1.024 sec" />
-      <enumgroup name="Windowed mode" v="Disabled">
-        <EmptySection_DummyValue />
-      </enumgroup>
-      <group name="Initialization">
-        <Enabled_in_init__code v="yes" />
-        <Protected v="yes" />
-        <list name="Auto Initialization" v="1">
-          <Auto_initialization v="no" />
-        </list>
-      </group>
-      <boolgroup name="CPU clock/configuration selection" v="Ignored" />
-    </Properties>
-    <Methods>
-      <Init v="generate code" />
-      <Deinit v="don&amp;apos;t generate code" />
-      <Enable v="don&amp;apos;t generate code" />
-      <Disable v="don&amp;apos;t generate code" />
-      <Clear v="generate code" />
-      <Protect v="don&amp;apos;t generate code" />
-      <ConnectPin v="don&amp;apos;t generate code" />
-      <SetOperationMode v="don&amp;apos;t generate code" />
-      <GetDriverState v="don&amp;apos;t generate code" />
-    </Methods>
-    <Events>
-      <Event_module_name v="Events" />
-      <event name="OnWatchDog" v="don&amp;apos;t generate code" />
     </Events>
   </Bean>
   <Bean name="DHT22_DataPin" type="BitIO_LDD">

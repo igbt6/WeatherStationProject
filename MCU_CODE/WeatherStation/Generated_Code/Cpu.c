@@ -7,7 +7,7 @@
 **     Version     : Component 01.002, Driver 01.04, CPU db: 3.00.000
 **     Datasheet   : KL46P121M48SF4RM, Rev.2, Dec 2012
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-10-15, 20:22, # CodeGen: 40
+**     Date/Time   : 2014-10-16, 01:48, # CodeGen: 54
 **     Abstract    :
 **
 **     Settings    :
@@ -67,7 +67,6 @@
 #include "I2C1.h"
 #include "MQX1.h"
 #include "SystemTimer1.h"
-#include "WDog1.h"
 #include "DHT22_DataPin.h"
 #include "TU1.h"
 #include "FC1.h"

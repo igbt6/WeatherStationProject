@@ -8,10 +8,11 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
--include Sources/usb/subdir.mk
+-include Sources/uart/subdir.mk
+-include Sources/timeout/subdir.mk
+-include Sources/sensors/subdir.mk
 -include Sources/lcd/subdir.mk
--include Sources/bsp/subdir.mk
--include Sources/I2C/subdir.mk
+-include Sources/i2c/subdir.mk
 -include Sources/subdir.mk
 -include Project_Settings/Startup_Code/subdir.mk
 -include MQXLITE/psp/cortex_m/core/M0/subdir.mk

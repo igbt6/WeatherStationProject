@@ -39,7 +39,6 @@
 #include "I2C1.h"
 #include "MQX1.h"
 #include "SystemTimer1.h"
-#include "WDog1.h"
 #include "TU1.h"
 #include "FC1.h"
 #include "DHT22_DataPin.h"

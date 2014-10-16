@@ -351,14 +351,6 @@ Module "MQX1"      (component MQXLite)
                 below.
    - MQX1__usr_lwmsgq_init -
 
-Module "WDog1"     (component WatchDog_LDD)
-   - WDog1_Init -Initializes the device. Allocates memory for the device data structure, allocates interrupt vectors and sets 
-                interrupt priority, sets pin routing, sets timing, etc. If the property <"Enable in init. code"> is set to 
-                "yes" value then the device is also enabled (see the description of the <Enable> method). In this case the 
-                <Enable> method is not necessary and needn't to be generated. This method can be called only once. Before the 
-                second call of Init the <Deinit> must be called first.
-   - WDog1_Clear -Clears the watchdog timer (it makes the timer restart from zero).
-
 Module "DHT22_DataPin" (component BitIO_LDD)
    - DHT22_DataPin_Init -Initializes the device. Allocates memory for the device data structure, allocates interrupt vectors 
                 and sets interrupt priority, sets pin routing, sets timing, etc. If the "Enable in init. code" is set to "yes" 

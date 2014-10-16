@@ -14,8 +14,7 @@ C_SRCS += \
 ../Generated_Code/SystemTimer1.c \
 ../Generated_Code/TU1.c \
 ../Generated_Code/USART0_DEBUG.c \
-../Generated_Code/Vectors.c \
-../Generated_Code/WDog1.c 
+../Generated_Code/Vectors.c 
 
 OBJS += \
 ./Generated_Code/Cpu.o \
@@ -28,8 +27,7 @@ OBJS += \
 ./Generated_Code/SystemTimer1.o \
 ./Generated_Code/TU1.o \
 ./Generated_Code/USART0_DEBUG.o \
-./Generated_Code/Vectors.o \
-./Generated_Code/WDog1.o 
+./Generated_Code/Vectors.o 
 
 C_DEPS += \
 ./Generated_Code/Cpu.d \
@@ -42,8 +40,7 @@ C_DEPS += \
 ./Generated_Code/SystemTimer1.d \
 ./Generated_Code/TU1.d \
 ./Generated_Code/USART0_DEBUG.d \
-./Generated_Code/Vectors.d \
-./Generated_Code/WDog1.d 
+./Generated_Code/Vectors.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

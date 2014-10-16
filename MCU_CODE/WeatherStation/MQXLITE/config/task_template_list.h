@@ -5,7 +5,7 @@
 **     Processor   : MKL46Z256VMC4
 **     Version     : Component 01.107, Driver 01.00, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-10-07, 01:20, # CodeGen: 19
+**     Date/Time   : 2014-10-16, 00:25, # CodeGen: 46
 **
 **     Copyright : 1997 - 2014 Freescale Semiconductor, Inc. 
 **     All Rights Reserved.
@@ -57,7 +57,7 @@
 #define TASK3_TASK           3U
 
 /* MQX Lite task stack sizes */
-#define LCDTASK_TASK_STACK_SIZE (sizeof(TD_STRUCT) + 512 + PSP_STACK_ALIGNMENT + 1)
+#define LCDTASK_TASK_STACK_SIZE (sizeof(TD_STRUCT) + 200 + PSP_STACK_ALIGNMENT + 1)
 #define USARTDEBUGTASK_TASK_STACK_SIZE (sizeof(TD_STRUCT) + 512 + PSP_STACK_ALIGNMENT + 1)
 #define TASK3_TASK_STACK_SIZE (sizeof(TD_STRUCT) + 512 + PSP_STACK_ALIGNMENT + 1)
 
