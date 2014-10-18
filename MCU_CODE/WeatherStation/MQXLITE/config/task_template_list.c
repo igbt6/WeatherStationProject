@@ -5,7 +5,7 @@
 **     Processor   : MKL46Z256VMC4
 **     Version     : Component 01.107, Driver 01.00, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-10-16, 10:15, # CodeGen: 56
+**     Date/Time   : 2014-10-18, 11:54, # CodeGen: 69
 **
 **     Copyright : 1997 - 2014 Freescale Semiconductor, Inc. 
 **     All Rights Reserved.
@@ -65,23 +65,23 @@ const TASK_TEMPLATE_STRUCT MQX_template_list[] =
   /* Task attributes                  */  (MQX_AUTO_START_TASK),
   /* Task parameter                   */  (uint32_t)(0)
   },
-  /* Task: UsartDebugTask */
+  /* Task: InitHwTask */
   {
-  /* Task number                      */  USARTDEBUGTASK_TASK,
-  /* Entry point                      */  (TASK_FPTR)UsartDebug_task,
-  /* Stack size                       */  USARTDEBUGTASK_TASK_STACK_SIZE,
-  /* Task priority                    */  7U,
-  /* Task name                        */  "usartdebugtask",
+  /* Task number                      */  INITHWTASK_TASK,
+  /* Entry point                      */  (TASK_FPTR)InitHw_task,
+  /* Stack size                       */  INITHWTASK_TASK_STACK_SIZE,
+  /* Task priority                    */  10U,
+  /* Task name                        */  "inithwtask",
   /* Task attributes                  */  (0),
   /* Task parameter                   */  (uint32_t)(0)
   },
-  /* Task: Task3 */
+  /* Task: SensorsTask */
   {
-  /* Task number                      */  TASK3_TASK,
-  /* Entry point                      */  (TASK_FPTR)Task3_task,
-  /* Stack size                       */  TASK3_TASK_STACK_SIZE,
+  /* Task number                      */  SENSORSTASK_TASK,
+  /* Entry point                      */  (TASK_FPTR)Sensors_task,
+  /* Stack size                       */  SENSORSTASK_TASK_STACK_SIZE,
   /* Task priority                    */  8U,
-  /* Task name                        */  "task3",
+  /* Task name                        */  "sensorstask",
   /* Task attributes                  */  (MQX_AUTO_START_TASK),
   /* Task parameter                   */  (uint32_t)(0)
   },

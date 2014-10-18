@@ -11,7 +11,7 @@
 **         Put your event handler code here.
 **     Settings    :
 **     Contents    :
-**         UsartDebug_task - void UsartDebug_task(uint32_t task_init_data);
+**         InitHw_task - void InitHw_task(uint32_t task_init_data);
 **
 ** ###################################################################*/
 /*!
@@ -49,7 +49,7 @@ extern "C" {
 
 /*
 ** ===================================================================
-**     Event       :  UsartDebug_task (module mqx_tasks)
+**     Event       :  InitHw_task (module mqx_tasks)
 **
 **     Component   :  Task1 [MQXLite_task]
 **     Description :
@@ -61,7 +61,7 @@ extern "C" {
 **     Returns     : Nothing
 ** ===================================================================
 */
-void UsartDebug_task(uint32_t task_init_data);
+void InitHw_task(uint32_t task_init_data);
 
 
 /*
@@ -82,7 +82,7 @@ void Lcd_task(uint32_t task_init_data);
 
 /*
 ** ===================================================================
-**     Event       :  Task3_task (module mqx_tasks)
+**     Event       :  Sensors_task (module mqx_tasks)
 **
 **     Component   :  Task3 [MQXLite_task]
 **     Description :
@@ -94,7 +94,7 @@ void Lcd_task(uint32_t task_init_data);
 **     Returns     : Nothing
 ** ===================================================================
 */
-void Task3_task(uint32_t task_init_data);
+void Sensors_task(uint32_t task_init_data);
 
 /*
 ** ===================================================================

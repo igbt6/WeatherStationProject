@@ -6,7 +6,7 @@
 **     Component   : TimerUnit_LDD
 **     Version     : Component 01.164, Driver 01.11, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-10-06, 23:51, # CodeGen: 13
+**     Date/Time   : 2014-10-17, 14:23, # CodeGen: 58
 **     Abstract    :
 **          This TimerUnit component provides a low level API for unified hardware access across
 **          various timer devices using the Prescaler-Counter-Compare-Capture timer structure.
@@ -21,7 +21,7 @@
 **            Counter frequency                            : Auto select
 **          Counter restart                                : On-match
 **            Period device                                : SYST_RVR
-**            Period                                       : 1 ms
+**            Period                                       : 5 ms
 **            Interrupt                                    : Enabled
 **              Interrupt                                  : INT_SysTick
 **              Interrupt priority                         : medium priority
@@ -166,8 +166,8 @@ LDD_TDeviceData* SystemTimer1_Init(LDD_TUserData *UserDataPtr)
   DeviceDataPrv->SavedISRSettings_TUInterrupt.isrFunction = _int_install_isr(LDD_ivIndex_INT_SysTick, SystemTimer1_Interrupt, DeviceDataPrv);
   /* SYST_CSR: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,COUNTFLAG=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,CLKSOURCE=0,TICKINT=0,ENABLE=0 */
   SYST_CSR = 0x00U;                    /* Clear control register */
-  /* SYST_RVR: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,RELOAD=0x51EB */
-  SYST_RVR = SysTick_RVR_RELOAD(0x51EB); /* Setup reload value */
+  /* SYST_RVR: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,RELOAD=0x00019999 */
+  SYST_RVR = SysTick_RVR_RELOAD(0x00019999); /* Setup reload value */
   /* SYST_CVR: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,CURRENT=0 */
   SYST_CVR = SysTick_CVR_CURRENT(0x00); /* Clear current value */
   /* SCB_SHPR3: PRI_15=0x80 */

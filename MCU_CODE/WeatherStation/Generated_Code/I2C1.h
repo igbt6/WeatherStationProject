@@ -6,7 +6,7 @@
 **     Component   : I2C_LDD
 **     Version     : Component 01.016, Driver 01.07, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-10-08, 13:27, # CodeGen: 25
+**     Date/Time   : 2014-10-18, 13:55, # CodeGen: 70
 **     Abstract    :
 **          This component encapsulates the internal I2C communication
 **          interface. The implementation of the interface is based
@@ -35,7 +35,7 @@
 **            MASTER mode                                  : Enabled
 **              Initialization                             : 
 **                Address mode                             : 7-bit addressing
-**                Target slave address init                : 4B
+**                Target slave address init                : 0
 **            SLAVE mode                                   : Disabled
 **            Pins                                         : 
 **              SDA pin                                    : 
@@ -46,13 +46,13 @@
 **                SCL pin signal                           : 
 **              High drive select                          : Disabled
 **              Input Glitch filter                        : 0
-**            Internal frequency (multiplier factor)       : 10.48576 MHz
+**            Internal frequency (multiplier factor)       : 20.97152 MHz
 **            Bits 0-2 of Frequency divider register       : 111
-**            Bits 3-5 of Frequency divider register       : 010
-**            SCL frequency                                : 81.92 kHz
-**            SDA Hold                                     : 2.003 us
-**            SCL start Hold                               : 5.531 us
-**            SCL stop Hold                                : 6.199 us
+**            Bits 3-5 of Frequency divider register       : 011
+**            SCL frequency                                : 87.381 kHz
+**            SDA Hold                                     : 1.574 us
+**            SCL start Hold                               : 5.627 us
+**            SCL stop Hold                                : 5.77 us
 **            Control acknowledge bit                      : Disabled
 **            Low timeout                                  : Disabled
 **          Initialization                                 : 

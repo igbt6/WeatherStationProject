@@ -5,7 +5,7 @@
 **     Processor   : MKL46Z256VMC4
 **     Version     : Component 01.107, Driver 01.00, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-10-07, 01:10, # CodeGen: 17
+**     Date/Time   : 2014-10-17, 15:10, # CodeGen: 59
 **     Abstract    :
 **         MQX Lite RTOS Adapter component.
 **     Settings    :
@@ -61,14 +61,14 @@
 
 /* Task stacks definition */
 uint8_t LcdTask_task_stack[LCDTASK_TASK_STACK_SIZE];
-uint8_t UsartDebugTask_task_stack[USARTDEBUGTASK_TASK_STACK_SIZE];
-uint8_t Task3_task_stack[TASK3_TASK_STACK_SIZE];
+uint8_t InitHwTask_task_stack[INITHWTASK_TASK_STACK_SIZE];
+uint8_t SensorsTask_task_stack[SENSORSTASK_TASK_STACK_SIZE];
 
 /* Task stacks array of pointers */
 const uint8_t * mqx_task_stack_pointers[] = {
 /* "LcdTask" task                      */  LcdTask_task_stack,
-/* "UsartDebugTask" task               */  UsartDebugTask_task_stack,
-/* "Task3" task                        */  Task3_task_stack,
+/* "InitHwTask" task                   */  InitHwTask_task_stack,
+/* "SensorsTask" task                  */  SensorsTask_task_stack,
 /* Stack array end                     */  NULL
 };
 

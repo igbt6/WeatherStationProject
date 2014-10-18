@@ -1,5 +1,5 @@
 /*
-  @file BMP180.cpp
+ @file BMP180.cpp
 
  @brief Barometric Pressure and Temperature Sensor BMP180 Breakout I2C Library
 
@@ -19,10 +19,9 @@
 #include <math.h>
 #include "timeout/timeout.h"
 
-
 // Uncomment to test the documentation algorithm against the documentation example 
 // Result should be 699.64 hPa and 15°C
-// #define BMP180_TEST_FORMULA 
+//#define BMP180_TEST_FORMULA
 
 /*************private variables:*************/
 int m_oss;
@@ -45,10 +44,10 @@ unsigned long b4, b7;
 //transmit data to the sensor
 static bool bmp180Write(uint8_t regAddress, uint8_t *data, int dataLength) {
 	LDD_TError retValue;
-	uint8_t temp[dataLength + 1];
-	temp[0] = regAddress;
-	memcpy(&temp[1], data, dataLength);
-	return i2cWrite(BMP180_I2C_ADDRESS, regAddress, temp, dataLength + 1,
+	//uint8_t temp[dataLength + 1];
+	//temp[0] = regAddress;
+	//memcpy(&temp[1], data, dataLength);
+	return i2cWrite(BMP180_I2C_ADDRESS, regAddress, data, dataLength,
 			I2C1_mod);
 }
 
@@ -73,7 +72,8 @@ static int bmp180SetConfiguration(float altitude, int overSamplingSetting) {
 	//wait_ms(10);
 	//WAIT1_Waitms(10);
 	timeoutSetTimeout(10);
-	    while (!timeoutIsTimeoutOccured());
+	while (!timeoutIsTimeoutOccured())
+		;
 
 	// store calibration data for further calculus
 	ac1 = data[0] << 8 | data[1];
@@ -102,161 +102,169 @@ static int bmp180SetConfiguration(float altitude, int overSamplingSetting) {
 	md = 2868;
 	m_oss = 0;
 	errors = 0;
-#endif // #ifdef BMP180_TEST_FORMULA	return errors ? 0 : 1;
-}
-
-/*************public methods:*************/
+#endif // #ifdef BMP180_TEST_FORMULA	return errors ? 1 : 0;}
+	/*************public methods:*************/
 //Init method, modify values here;
 // NOTIFY!!! - this function must be used before using other functions for the sensor
-void bmp180Init(LDD_TDeviceData* i2cHandlePtr,I2C_MODULE i2cModule) {
-	if (i2cHandlePtr == NULL)
-		while (1)
-			;  //do something here. i2C has not been not initialized
-	m_altitude = 0;
-	m_oss = BMP180_OSS_NORMAL;
-	mTemperature = UNSET_BMP180_TEMPERATURE_VALUE;
-	mPressure = UNSET_BMP180_PRESSURE_VALUE;
-	bmp180SetConfiguration(0.F, BMP180_OSS_NORMAL);
-}
-
-bool bmp180ReadData(void) {
-	long t, p;
-
-	if (!bmp180ReadRawTemperature(&t) || !bmp180ReadRawPressure(&p)) {
+	void bmp180Init(LDD_TDeviceData* i2cHandlePtr, I2C_MODULE i2cModule) {
+		if (i2cHandlePtr == NULL)
+			while (1)
+				;  //do something here. i2C has not been not initialized
+		m_altitude = 0;
+		m_oss = BMP180_OSS_NORMAL;
 		mTemperature = UNSET_BMP180_TEMPERATURE_VALUE;
 		mPressure = UNSET_BMP180_PRESSURE_VALUE;
-		return false;
+		bmp180SetConfiguration(0.F, BMP180_OSS_NORMAL);
 	}
 
-	mTemperature = bmp180TrueTemperature(t);
-	mPressure = bmp180TruePressure(p);
-	return true;
-}
 
-int bmp180ReadRawTemperature(long* pUt) {
-	int errors = 0;
-	char data[2];
+	bool bmp180ReadData(void) {
+		long t, p;
 
-	// request temperature measurement
-	data[0] = 0xF4;
-	data[1] = 0x2E;
-	errors = bmp180Write(m_addr, data, 2); // write 0XF2 into reg 0XF4
+		if (!bmp180ReadRawTemperature(&t) || !bmp180ReadRawPressure(&p)) {
+			mTemperature = UNSET_BMP180_TEMPERATURE_VALUE;
+			mPressure = UNSET_BMP180_PRESSURE_VALUE;
+			return false;
+		}
 
-	// wait_ms(4.5F);
+		mTemperature = bmp180TrueTemperature(t);
+		mPressure = bmp180TruePressure(p);
+		return true;
+	}
+
+
+	int bmp180ReadRawTemperature(long* pUt) {
+		int errors = 0;
+		char data[2];
+
+		// request temperature measurement
+		data[0] = 0xF4;
+		data[1] = 0x2E;
+		errors = bmp180Write(data[0], &data[1], 1); // write 0XF2 into reg 0XF4
+
+		// wait_ms(4.5F);
 //	WAIT1_Waitms(5);
-	timeoutSetTimeout(5);
-    while (!timeoutIsTimeoutOccured());
+		timeoutSetTimeout(5);
+		while (!timeoutIsTimeoutOccured())
+			;
 
-	// read raw temperature data
-	data[0] = 0xF6;
-	//errors += m_i2c.write(m_addr, data, 2); // set eeprom pointer position to 0XF6
-	errors += bmp180Read(data[0], data, 2);  // get 16 bits at this position
+		// read raw temperature data
+		data[0] = 0xF6;
+		//errors += bmp180Write(data[0], data, 2); // set eeprom pointer position to 0XF6  //////////////////////////////////////////
+		errors += bmp180Read(data[0], data, 2);  // get 16 bits at this position
 
 #ifdef BMP180_TEST_FORMULA
-	errors = 0;
-#endif // #ifdef BMP180_TEST_FORMULA	if (errors)
-		return 0;
-	else
+		errors = 0;
+#endif // #ifdef BMP180_TEST_FORMULA	if (errors<2)	return 0;		else
 		*pUt = ((data[0] << 8) | data[1]);
 
 #ifdef BMP180_TEST_FORMULA
-	*pUt = 27898;
-#endif // #ifdef BMP180_TEST_FORMULA	return 1;
-}
+		*pUt = 27898;
+#endif // #ifdef BMP180_TEST_FORMULA	return 1;}
+		int bmp180ReadRawPressure(long* pUp) {
+			int errors = 0;
+			char data[2];
 
-int bmp180ReadRawPressure(long* pUp) {
-	int errors = 0;
-	char data[2];
+// request pressure measurement
+			data[0] = 0xF4;
+			data[1] = 0x34 + (m_oss << 6);
+			errors = bmp180Write(data[0], &data[1], 1); // write 0x34 + (m_oss << 6) into reg 0XF4
 
-	// request pressure measurement
-	data[0] = 0xF4;
-	data[1] = 0x34 + (m_oss << 6);
-	errors = bmp180Write(m_addr, data, 2); // write 0x34 + (m_oss << 6) into reg 0XF4
+			switch (m_oss) {
+			case BMP180_OSS_ULTRA_LOW_POWER: /*wait_ms(4.5);*/
+				timeoutSetTimeout(5);
+				while (!timeoutIsTimeoutOccured())
+					;
 
-	switch (m_oss) {
-	case BMP180_OSS_ULTRA_LOW_POWER: /*wait_ms(4.5);*/
-		break;
-	case BMP180_OSS_NORMAL: /*wait_ms(7.5);*/
-		break;
-	case BMP180_OSS_HIGH_RESOLUTION: /*wait_ms(13.5);*/
-		break;
-	case BMP180_OSS_ULTRA_HIGH_RESOLUTION: /*wait_ms(25.5);*/
-		break;
-	}
+				break;
+			case BMP180_OSS_NORMAL: /*wait_ms(7.5);*/
+				timeoutSetTimeout(8);
+				while (!timeoutIsTimeoutOccured())
+					;
+				break;
+			case BMP180_OSS_HIGH_RESOLUTION: /*wait_ms(13.5);*/
+				timeoutSetTimeout(14);
+				while (!timeoutIsTimeoutOccured())
+					;
+				break;
+			case BMP180_OSS_ULTRA_HIGH_RESOLUTION: /*wait_ms(25.5);*/
+				timeoutSetTimeout(26);
+				while (!timeoutIsTimeoutOccured())
+					;
+				break;
+			}
 
-	// read raw pressure data
-	data[0] = 0xF6;
-	//  errors += m_i2c.write(m_addr, data, 1); // set eeprom pointer position to 0XF6
-	errors += bmp180Read(data[0], data, 2);  // get 16 bits at this position
+// read raw pressure data
+			data[0] = 0xF6;
+//  errors += m_i2c.write(m_addr, data, 1); // set eeprom pointer position to 0XF6
+			errors += bmp180Read(data[0], data, 2); // get 16 bits at this position
 
 #ifdef BMP180_TEST_FORMULA
-	errors = 0;
-#endif // #ifdef BMP180_TEST_FORMULA	if (errors)
-		return 0;
-	else
-		*pUp = (data[0] << 16 | data[1] << 8) >> (8 - m_oss);
+			errors = 0;
+#endif // #ifdef BMP180_TEST_FORMULA	if (errors<2)return 0;			else
+			*pUp = (data[0] << 16 | data[1] << 8) >> (8 - m_oss);
 #ifdef BMP180_TEST_FORMULA
-	*pUp = 23843;
-#endif // #ifdef BMP180_TEST_FORMULA	return 1;
-}
+			*pUp = 23843;
+#endif // #ifdef BMP180_TEST_FORMULA	return 1;}
+			float bmp180TrueTemperature(long ut) {
+				long t;
 
-float bmp180TrueTemperature(long ut) {
-	long t;
+				// straight out from the documentation
+				x1 = ((ut - ac6) * ac5) >> 15;
+				x2 = ((long) mc << 11) / (x1 + md);
+				b5 = x1 + x2;
+				t = (b5 + 8) >> 4;
 
-	// straight out from the documentation
-	x1 = ((ut - ac6) * ac5) >> 15;
-	x2 = ((long) mc << 11) / (x1 + md);
-	b5 = x1 + x2;
-	t = (b5 + 8) >> 4;
+				// convert to celcius
+				return t / 10.F;
+			}
 
-	// convert to celcius
-	return t / 10.F;
-}
+			float bmp180TruePressure(long up) {
+				long p;
 
-float bmp180TruePressure(long up) {
-	long p;
+				// straight out from the documentation
+				b6 = b5 - 4000;
+				x1 = (b2 * (b6 * b6 >> 12)) >> 11;
+				x2 = ac2 * b6 >> 11;
+				x3 = x1 + x2;
+				b3 = (((ac1 * 4 + x3) << m_oss) + 2) >> 2;
+				x1 = (ac3 * b6) >> 13;
+				x2 = (b1 * ((b6 * b6) >> 12)) >> 16;
+				x3 = ((x1 + x2) + 2) >> 2;
+				b4 = ac4 * (unsigned long) (x3 + 32768) >> 15;
+				b7 = ((unsigned long) up - b3) * (50000 >> m_oss);
+				if (b7 < 0x80000000)
+					p = (b7 << 1) / b4;
+				else
+					p = (b7 / b4) << 1;
+				x1 = (p >> 8) * (p >> 8);
+				x1 = (x1 * 3038) >> 16;
+				x2 = (-7357 * p) >> 16;
+				p = p + ((x1 + x2 + 3791) >> 4);
 
-	// straight out from the documentation
-	b6 = b5 - 4000;
-	x1 = (b2 * (b6 * b6 >> 12)) >> 11;
-	x2 = ac2 * b6 >> 11;
-	x3 = x1 + x2;
-	b3 = (((ac1 * 4 + x3) << m_oss) + 2) >> 2;
-	x1 = (ac3 * b6) >> 13;
-	x2 = (b1 * ((b6 * b6) >> 12)) >> 16;
-	x3 = ((x1 + x2) + 2) >> 2;
-	b4 = ac4 * (unsigned long) (x3 + 32768) >> 15;
-	b7 = ((unsigned long) up - b3) * (50000 >> m_oss);
-	if (b7 < 0x80000000)
-		p = (b7 << 1) / b4;
-	else
-		p = (b7 / b4) << 1;
-	x1 = (p >> 8) * (p >> 8);
-	x1 = (x1 * 3038) >> 16;
-	x2 = (-7357 * p) >> 16;
-	p = p + ((x1 + x2 + 3791) >> 4);
+				// convert to hPa and, if altitude has been initialized, to sea level pressure
+				if (m_altitude == 0.F)
+					return p / 100.F;
+				else
+					return p
+							/ (100.F
+									* pow((1.F - m_altitude / 44330.0L), 5.255L));
+			}
 
-	// convert to hPa and, if altitude has been initialized, to sea level pressure
-	if (m_altitude == 0.F)
-		return p / 100.F;
-	else
-		return p / (100.F * pow((1.F - m_altitude / 44330.0L), 5.255L));
-}
+			/** Get temperature from a previous measurement
+			 *
+			 * @returns
+			 *   temperature (C)
+			 */
+			float bmp180GetTemperature() {
+				return mTemperature;
+			}
 
-/** Get temperature from a previous measurement
- *
- * @returns
- *   temperature (C)
- */
-float bmp180GetTemperature() {
-	return mTemperature;
-}
-
-/** Get pressure from a previous measurement
- *
- * @returns
- *   pressure (hPa)
- */
-float bmp180GetPressure() {
-	return mPressure;
-}
+			/** Get pressure from a previous measurement
+			 *
+			 * @returns
+			 *   pressure (hPa)
+			 */
+			float bmp180GetPressure() {
+				return mPressure;
+			}

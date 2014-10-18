@@ -208,9 +208,9 @@
       <GenExtraFileSrcDir9>lib\mqxlite\V1.1.1\source\psp\cortex_m\core\M0\</GenExtraFileSrcDir9>
       <GenExtraFileSrcDir8>lib\mqxlite\V1.1.1\source\psp\cortex_m\compiler\cwgcc\</GenExtraFileSrcDir8>
       <GenExtraFileSrcDir7>lib\mqxlite\V1.1.1\source\psp\cortex_m\compiler\cwgcc\</GenExtraFileSrcDir7>
-      <XtraAge4>1162891769</XtraAge4>
-      <XtraAge5>1162871611</XtraAge5>
-      <XtraAge6>1162874560</XtraAge6>
+      <XtraAge4>1163026193</XtraAge4>
+      <XtraAge5>1162970338</XtraAge5>
+      <XtraAge6>1162978912</XtraAge6>
       <XtraAge7>1162263616</XtraAge7>
       <XtraAge8>1162263616</XtraAge8>
       <XtraAge10>1162263616</XtraAge10>
@@ -426,8 +426,8 @@
       </GenMethodsInEvents>
       <GenMethodsInmqx_tasks lines_count="3">
         <Line>Lcd_task</Line>
-        <Line>UsartDebug_task</Line>
-        <Line>Task3_task</Line>
+        <Line>InitHw_task</Line>
+        <Line>Sensors_task</Line>
       </GenMethodsInmqx_tasks>
       <GenAllModules lines_count="15">
         <Line>Cpu</Line>
@@ -460,7 +460,7 @@
     </GenFiles>
     <SignalListFile>Documentation\WeatherStation_SIGNALS.txt</SignalListFile>
     <DestinationCompiler>GNUC</DestinationCompiler>
-    <ProjectModificationStamp>51</ProjectModificationStamp>
+    <ProjectModificationStamp>63</ProjectModificationStamp>
   </Options>
   <CpuID_2>
     <Generated>true</Generated>
@@ -780,8 +780,8 @@
     <GenComponentVersion>01.016</GenComponentVersion>
     <GenDriverVersion>01.07</GenDriverVersion>
     <GenEventModule>Events</GenEventModule>
-    <HeaderAge>1162374018</HeaderAge>
-    <CodeAge>1162374018</CodeAge>
+    <HeaderAge>1163030319</HeaderAge>
+    <CodeAge>1163030320</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>33</GenNumMethods>
     <Init>true</Init>
@@ -1011,8 +1011,8 @@
     <GenComponentVersion>01.107</GenComponentVersion>
     <GenDriverVersion>01.00</GenDriverVersion>
     <GenEventModule />
-    <HeaderAge>1162852561</HeaderAge>
-    <CodeAge>1162283338</CodeAge>
+    <HeaderAge>1162967396</HeaderAge>
+    <CodeAge>1162967396</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>184</GenNumMethods>
     <_int_default_isr>true</_int_default_isr>
@@ -1320,8 +1320,8 @@
       <GenComponentVersion>01.164</GenComponentVersion>
       <GenDriverVersion>01.11</GenDriverVersion>
       <GenEventModule>Events</GenEventModule>
-      <HeaderAge>1162264176</HeaderAge>
-      <CodeAge>1162264176</CodeAge>
+      <HeaderAge>1162965769</HeaderAge>
+      <CodeAge>1162965769</CodeAge>
       <AsemblAge>-1</AsemblAge>
       <GenNumMethods>22</GenNumMethods>
       <Init>true</Init>
@@ -1541,7 +1541,7 @@
       <GenNumMethods>0</GenNumMethods>
       <GenNumEvents>1</GenNumEvents>
       <OnTask_Selected>3</OnTask_Selected>
-      <OnTask_Name>UsartDebug_task</OnTask_Name>
+      <OnTask_Name>InitHw_task</OnTask_Name>
       <OnTask_Priority>interrupts disabled</OnTask_Priority>
       <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
       <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
@@ -1561,7 +1561,7 @@
       <GenNumMethods>0</GenNumMethods>
       <GenNumEvents>1</GenNumEvents>
       <OnTask_Selected>3</OnTask_Selected>
-      <OnTask_Name>Task3_task</OnTask_Name>
+      <OnTask_Name>Sensors_task</OnTask_Name>
       <OnTask_Priority>interrupts disabled</OnTask_Priority>
       <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
       <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>

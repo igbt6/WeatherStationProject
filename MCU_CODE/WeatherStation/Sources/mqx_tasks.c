@@ -11,7 +11,7 @@
  **         Put your event handler code here.
  **     Settings    :
  **     Contents    :
- **         UsartDebug_task - void UsartDebug_task(uint32_t task_init_data);
+ **         InitHw_task - void InitHw_task(uint32_t task_init_data);
  **
  ** ###################################################################*/
 /*!
@@ -30,6 +30,7 @@
 #include "Cpu.h"
 #include "Events.h"
 #include "mqx_tasks.h"
+#include "mqxlite.h"
 #include "lcd/LCD.h"
 #include "SegLCD1.h"
 #include "sensors/adt7410.h"
@@ -43,9 +44,19 @@ extern "C" {
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
 
+static bool initHardware(void) {
+
+	if (!uartInit(UART0_mod))
+		return false;
+	i2cInit(I2C1_mod, 0x00); /*0x00 fake address, init of the bus , selecting devices is made further methods*/
+	adt7410Init(i2cGetI2CHandle(I2C1_mod), I2C1_mod);
+	bmp180Init(i2cGetI2CHandle(I2C1_mod), I2C1_mod);
+	return true;
+}
+
 /*
  ** ===================================================================
- **     Event       :  UsartDebug_task (module mqx_tasks)
+ **     Event       :  InitHw_task (module mqx_tasks)
  **
  **     Component   :  Task1 [MQXLite_task]
  **     Description :
@@ -57,25 +68,26 @@ extern "C" {
  **     Returns     : Nothing
  ** ===================================================================
  */
-void UsartDebug_task(uint32_t task_init_data) {
-	int counter = 0;
-	typedef struct {
-		LDD_TDeviceData *handle; /* LDD device handle */
-		volatile uint8_t isSent; /* this will be set to 1 once the block has been sent */
-		uint8_t rxChar; /* single character buffer for receiving chars */
-		uint8_t (*rxPutFct)(uint8_t); /* callback to put received character into buffer */
-	} UART_Debug_Desc;
+void InitHw_task(uint32_t task_init_data) {
 
-	static UART_Debug_Desc debugData;
-	//static const char* string = "TEST_EXAMPLE_FRDM46_KLZ_DEVELOPmentBoard\n";
-	debugData.handle = USART0_DEBUG_Init(&debugData);
-	while (1) {
-		counter++;
-		_time_delay_ticks(100000);
-		//USART0_DEBUG_SendBlock(debugData.handle, string, strlen(string));
-		/* Write your code here ... */
+	//)
+	//_task_block();  //init Hardware failed
 
+	_task_id created_task;
+	created_task = _task_create(0, LCDTASK_TASK, 0);
+	if (created_task == MQX_NULL_TASK_ID) {
+
+		// printf("Error: Cannot create task\n");
+		//	_task_block();
 	}
+	/*
+	 created_task = _task_create(0, SENSORSTASK_TASK, 0);
+	 if (created_task == MQX_NULL_TASK_ID) {
+	 // printf("Error: Cannot create task\n");
+	 _task_block();
+	 }
+	 */
+	//_task_destroy(MQX_NULL_TASK_ID);
 }
 
 /*
@@ -97,9 +109,8 @@ void Lcd_task(uint32_t task_init_data) {
 
 	while (1) {
 
-		_time_delay_ticks(500);
+		_time_delay_ticks(100);
 		counter++;
-
 
 		if (counter % 2) {
 			vfnLCD_Write_Char('H');
@@ -113,13 +124,13 @@ void Lcd_task(uint32_t task_init_data) {
 		else {
 			vfnLCD_Write_Msg("  ");  // TURN ON all characters
 			vfnLCD_Home();
-		}//
+		}  //
 	}
 }
 
 /*
  ** ===================================================================
- **     Event       :  Task3_task (module mqx_tasks)
+ **     Event       :  Sensors_task (module mqx_tasks)
  **
  **     Component   :  Task3 [MQXLite_task]
  **     Description :
@@ -142,45 +153,48 @@ static void sprintfDouble(double v, int decimalDigits, uint8_t* buf,
 	snprintf(buf, bufSize, "%2i.%2i", intPart, fractPart);
 }
 
-void Task3_task(uint32_t task_init_data) {
+void Sensors_task(uint32_t task_init_data) {
 	static const char* string[] = { "\n\rADT7410: ", "readFailed", "readOk",
 			"\n\rBMP180: " };
-	//LDD_TDeviceData *handle = USART0_DEBUG_Init(NULL);
 	uint8_t tempBuf[10];
-	if (!uartInit(UART0_mod))
-		while (1)
-			; //TODO add calback
-	i2cInit(I2C1_mod, 0x00); /*0x00 fake address, init of the bus , selecting devices is made further methods*/
-	adt7410Init(i2cGetI2CHandle(I2C1_mod), I2C1_mod);
-	bmp180Init(i2cGetI2CHandle(I2C1_mod), I2C1_mod);
+	initHardware();
 	while (1) {
-		_time_delay_ticks(100);
+		_time_delay_ticks(199);
 		/*
+
 		 int iInt = adt7410GetIdNumber();
 		 snprintf(tempBuf, 4, "%d", iInt);
 		 vfnLCD_Write_Msg("  ");  // TURN ON all characters
 		 vfnLCD_Home();
 		 vfnLCD_Write_MsgPlace(tempBuf, 4);
 		 vfnLCD_Write_Msg(tempBuf);
+
 		 */
 
-		uartSendData(string[0], strlen(string[0]));
-		if (adt7410ReadTemp()==0)
+		 uartSendData(string[0], strlen(string[0]));
+		 if (adt7410ReadTemp() == 0)
+		 uartSendData(string[1], strlen(string[1]));
+		 else {
+		 sprintfDouble(adt7410GetTemperature(), 2, tempBuf, 6);
+		 //snprintf(tempBuf, 9, "%5.2f", temp);
+		 uartSendData(tempBuf, 5);
+		 }
+
+		uartSendData(string[3], strlen(string[3]));
+
+		if (bmp180ReadData() == 0)
 			uartSendData(string[1], strlen(string[1]));
 		else {
-			sprintfDouble(adt7410GetTemperature(), 2, tempBuf, 6);
-		 	//snprintf(tempBuf, 9, "%5.2f", temp);
-			uartSendData(tempBuf, 5);
-		}
-		uartSendData(string[3], strlen(string[3]));
-		if (bmp180ReadData()==0)
-			uartSendData(string[3], strlen(string[3]));
-		else {
-			sprintfDouble(bmp180GetPressure(), 3, tempBuf, 6);
+			sprintfDouble(bmp180GetPressure(), 2, tempBuf, 6);
 			//snprintf(tempBuf, 9, "%5.2f", temp);
-			uartSendData(tempBuf, 5);
+			tempBuf[6] = '\r';
+			tempBuf[7] = '\n';
+			uartSendData(tempBuf, 8);
+			sprintfDouble(bmp180GetTemperature(), 2, tempBuf, 6);
+			tempBuf[6] = '\r';
+						tempBuf[7] = '\n';
+			uartSendData(tempBuf, 8);
 		}
-
 
 	}
 }

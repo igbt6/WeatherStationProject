@@ -7,6 +7,7 @@
 
 #include "i2c.h"
 #include "timeout/timeout.h"
+#include <string.h>
 
 #define IS_I2C_MODULE(x) if(x==I2C0_mod||x==I2C1_mod)
 #define TIMEOUT 500
@@ -84,6 +85,12 @@ bool i2cRead(uint8_t slaveAddr, uint8_t regAddress, uint8_t *data,
 
 bool i2cWrite(uint8_t slaveAddr, uint8_t regAddress, uint8_t *data,
 		int dataLength, I2C_MODULE module) {
+
+	uint8_t temp[dataLength + 1];
+	temp[0] = regAddress;
+	memcpy(&temp[1], data, dataLength);
+
+
 	if (module == I2C0_mod) {
 
 	} else {
@@ -94,7 +101,7 @@ bool i2cWrite(uint8_t slaveAddr, uint8_t regAddress, uint8_t *data,
 		if (res != ERR_OK) {
 			return false;
 		}
-
+/*
 		res = I2C1_MasterSendBlock(mI2c1Handle.mI2c, &regAddress, 1,
 				LDD_I2C_NO_SEND_STOP);
 		if (res != ERR_OK) {
@@ -106,8 +113,8 @@ bool i2cWrite(uint8_t slaveAddr, uint8_t regAddress, uint8_t *data,
 				return false;
 		} while (!mI2c1Handle.mI2c_UsrData.dataTransmitFlag);
 		mI2c1Handle.mI2c_UsrData.dataTransmitFlag = false;
-
-		res = I2C1_MasterSendBlock(mI2c1Handle.mI2c, data, dataLength,
+*/
+		res = I2C1_MasterSendBlock(mI2c1Handle.mI2c, /*data*/ temp, dataLength+1,
 				LDD_I2C_SEND_STOP);
 		if (res != ERR_OK) {
 			return false;

@@ -733,7 +733,7 @@ PE_DEBUGHALT();
           </enumgroup>
           <enumgroup name="Counter restart" v="On-match">
             <Period_device v="SYST_RVR" />
-            <Period v="1 ms" />
+            <Period v="5 ms" />
             <boolgroup name="Interrupt" v="Enabled">
               <Interrupt v="INT_SysTick" />
               <Interrupt_priority v="medium priority" />
@@ -823,7 +823,7 @@ PE_DEBUGHALT();
               <Priority v="10" />
               <Creation_parameter v="0" />
               <group name="Attributes">
-                <MQX_AUTO_START_TASK v="Disabled" />
+                <MQX_AUTO_START_TASK v="Enabled" />
                 <MQX_FLOATING_POINT_TASK v="Disabled" />
               </group>
             </Properties>
@@ -843,10 +843,10 @@ PE_DEBUGHALT();
             <Enabled v="Y" />
             <Template v="Task" />
             <Properties>
-              <Name v="UsartDebugTask" />
-              <Entry_point_function v="UsartDebug_task" />
+              <Name v="InitHwTask" />
+              <Entry_point_function v="InitHw_task" />
               <Stack_size v="512" />
-              <Priority v="7" />
+              <Priority v="10" />
               <Creation_parameter v="0" />
               <group name="Attributes">
                 <MQX_AUTO_START_TASK v="Disabled" />
@@ -859,7 +859,7 @@ PE_DEBUGHALT();
             <Events>
               <Event_module_name v="mqx_tasks" />
               <event name="OnTask" v="generate code">
-                <Event_procedure_name v="UsartDebug_task" />
+                <Event_procedure_name v="InitHw_task" />
               </event>
             </Events>
           </inhrbean>
@@ -869,8 +869,8 @@ PE_DEBUGHALT();
             <Enabled v="Y" />
             <Template v="Task" />
             <Properties>
-              <Name v="Task3" />
-              <Entry_point_function v="Task3_task" />
+              <Name v="SensorsTask" />
+              <Entry_point_function v="Sensors_task" />
               <Stack_size v="512" />
               <Priority v="8" />
               <Creation_parameter v="0" />
@@ -885,7 +885,7 @@ PE_DEBUGHALT();
             <Events>
               <Event_module_name v="mqx_tasks" />
               <event name="OnTask" v="generate code">
-                <Event_procedure_name v="Task3_task" />
+                <Event_procedure_name v="Sensors_task" />
               </event>
             </Events>
           </inhrbean>
@@ -907,7 +907,7 @@ PE_DEBUGHALT();
         </group>
         <group name="Idle Task">
           <Use_Idle_Task v="yes" />
-          <Enable_sleep_in_idle v="no" />
+          <Enable_sleep_in_idle v="yes" />
           <Enable_idle_counters v="no" />
         </group>
         <group name="User settings">

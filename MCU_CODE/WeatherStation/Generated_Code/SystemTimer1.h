@@ -6,7 +6,7 @@
 **     Component   : TimerUnit_LDD
 **     Version     : Component 01.164, Driver 01.11, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-10-06, 23:51, # CodeGen: 13
+**     Date/Time   : 2014-10-17, 14:23, # CodeGen: 58
 **     Abstract    :
 **          This TimerUnit component provides a low level API for unified hardware access across
 **          various timer devices using the Prescaler-Counter-Compare-Capture timer structure.
@@ -21,7 +21,7 @@
 **            Counter frequency                            : Auto select
 **          Counter restart                                : On-match
 **            Period device                                : SYST_RVR
-**            Period                                       : 1 ms
+**            Period                                       : 5 ms
 **            Interrupt                                    : Enabled
 **              Interrupt                                  : INT_SysTick
 **              Interrupt priority                         : medium priority
@@ -128,7 +128,7 @@ extern "C" {
 #define SystemTimer1_CNT_INP_FREQ_U_0 0x01400000UL /* Counter input frequency in Hz */
 #define SystemTimer1_CNT_INP_FREQ_R_0 20971395.017196544F /* Counter input frequency in Hz */
 #define SystemTimer1_CNT_INP_FREQ_COUNT 0U /* Count of predefined counter input frequencies */
-#define SystemTimer1_PERIOD_TICKS 0x51ECUL /* Initialization value of period in 'counter ticks' */
+#define SystemTimer1_PERIOD_TICKS 0x0001999AUL /* Initialization value of period in 'counter ticks' */
 #define SystemTimer1_NUMBER_OF_CHANNELS 0x00U /* Count of predefined channels */
 #define SystemTimer1_COUNTER_WIDTH 0x18U /* Counter width in bits  */
 #define SystemTimer1_COUNTER_DIR DIR_DOWN /* Direction of counting */
