@@ -8871,7 +8871,7 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <part name="R3" library="pot" deviceset="TRIM_EU-" device="RJ9W"/>
 <part name="GND5" library="supply1" deviceset="GND" device=""/>
 <part name="P+6" library="supply1" deviceset="VCC" device=""/>
-<part name="PAD1" library="wirepad" deviceset="1,6/0,8" device=""/>
+<part name="ANL" library="wirepad" deviceset="1,6/0,8" device=""/>
 <part name="J4" library="con-amp" deviceset="MTA02-100" device=""/>
 <part name="P+7" library="supply1" deviceset="VCC" device=""/>
 <part name="GND6" library="supply1" deviceset="GND" device=""/>
@@ -8904,7 +8904,7 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <instance part="R3" gate="1" x="68.58" y="45.72"/>
 <instance part="GND5" gate="1" x="68.58" y="38.1"/>
 <instance part="P+6" gate="VCC" x="68.58" y="53.34"/>
-<instance part="PAD1" gate="P" x="83.82" y="68.58"/>
+<instance part="ANL" gate="P" x="83.82" y="68.58"/>
 <instance part="J4" gate="G$1" x="86.36" y="91.44"/>
 <instance part="P+7" gate="VCC" x="86.36" y="86.36" rot="R180"/>
 <instance part="GND6" gate="1" x="88.9" y="86.36"/>
@@ -9029,7 +9029,7 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <net name="N$5" class="0">
 <segment>
 <pinref part="U$1" gate="G$1" pin="OUT"/>
-<pinref part="PAD1" gate="P" pin="P"/>
+<pinref part="ANL" gate="P" pin="P"/>
 </segment>
 </net>
 <net name="N$7" class="0">
