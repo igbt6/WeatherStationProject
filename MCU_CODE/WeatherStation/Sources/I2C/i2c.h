@@ -9,6 +9,7 @@
 #define I2C_H_
 
 #include "I2C1.h"
+#include "I2C0.h"
 #include <stdbool.h>
 typedef enum{
 

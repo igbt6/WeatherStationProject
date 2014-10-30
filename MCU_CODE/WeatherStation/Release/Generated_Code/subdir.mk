@@ -7,6 +7,7 @@ C_SRCS += \
 ../Generated_Code/Cpu.c \
 ../Generated_Code/DHT22_DataPin.c \
 ../Generated_Code/FC1.c \
+../Generated_Code/I2C0.c \
 ../Generated_Code/I2C1.c \
 ../Generated_Code/MQX1.c \
 ../Generated_Code/PE_LDD.c \
@@ -20,6 +21,7 @@ OBJS += \
 ./Generated_Code/Cpu.o \
 ./Generated_Code/DHT22_DataPin.o \
 ./Generated_Code/FC1.o \
+./Generated_Code/I2C0.o \
 ./Generated_Code/I2C1.o \
 ./Generated_Code/MQX1.o \
 ./Generated_Code/PE_LDD.o \
@@ -33,6 +35,7 @@ C_DEPS += \
 ./Generated_Code/Cpu.d \
 ./Generated_Code/DHT22_DataPin.d \
 ./Generated_Code/FC1.d \
+./Generated_Code/I2C0.d \
 ./Generated_Code/I2C1.d \
 ./Generated_Code/MQX1.d \
 ./Generated_Code/PE_LDD.d \

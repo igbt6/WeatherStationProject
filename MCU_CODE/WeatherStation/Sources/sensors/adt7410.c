@@ -82,7 +82,8 @@ void adt7410Init(LDD_TDeviceData* i2cHandlePtr,I2C_MODULE i2cModule) {
 // read 13 bit temperature
 int adt7410ReadTemp() {
 
-	char rData[2] = { 0, 0 };
+	//char rData[2] = { 0, 0 };
+	uint8_t rData[2] = { 0, 0 };
 	float tempFin = 0;
 	int tempRaw = 0;
 	if (!adt7410Read(0x00, rData, 2))

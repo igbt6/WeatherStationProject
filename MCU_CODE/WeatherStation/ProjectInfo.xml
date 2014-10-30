@@ -68,6 +68,7 @@
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\Cpu.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\DHT22_DataPin.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\FC1.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\I2C0.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\I2C1.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\MQX1.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\PE_LDD.c</PathName>
@@ -129,6 +130,7 @@
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\Cpu.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\DHT22_DataPin.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\FC1.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\I2C0.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\I2C1.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\IO_Map.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Generated_Code\MQX1.h</PathName>

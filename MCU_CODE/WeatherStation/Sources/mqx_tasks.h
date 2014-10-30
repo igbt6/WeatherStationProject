@@ -41,6 +41,7 @@
 #include "SystemTimer1.h"
 #include "TU1.h"
 #include "FC1.h"
+#include "I2C0.h"
 #include "DHT22_DataPin.h"
 
 #ifdef __cplusplus

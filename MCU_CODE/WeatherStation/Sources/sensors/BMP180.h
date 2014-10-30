@@ -15,7 +15,7 @@ extern "C" {
 
 #include "i2c/i2c.h"
 
-///  default address is 0xEF 
+///  default address is 0xEF  0x77
 #define BMP180_I2C_ADDRESS 0x77
 
 // Oversampling settings

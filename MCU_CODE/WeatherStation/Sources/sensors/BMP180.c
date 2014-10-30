@@ -24,13 +24,11 @@
 //#define BMP180_TEST_FORMULA
 
 /*************private variables:*************/
-int m_oss;
+int mOss;
 float mTemperature;
 float mPressure;
-float m_altitude;
-
-int m_addr;
-char m_data[4];
+float mAltitude;
+static I2C_MODULE mI2cModule;
 
 short ac1, ac2, ac3;
 unsigned short ac4, ac5, ac6;
@@ -48,20 +46,20 @@ static bool bmp180Write(uint8_t regAddress, uint8_t *data, int dataLength) {
 	//temp[0] = regAddress;
 	//memcpy(&temp[1], data, dataLength);
 	return i2cWrite(BMP180_I2C_ADDRESS, regAddress, data, dataLength,
-			I2C1_mod);
+			mI2cModule);
 }
 
 //read data from the sensor
 static bool bmp180Read(uint8_t regAddress, uint8_t *data, int dataLength) {
-	return i2cRead(BMP180_I2C_ADDRESS, regAddress, data, dataLength, I2C1_mod);
+	return i2cRead(BMP180_I2C_ADDRESS, regAddress, data, dataLength, mI2cModule);
 }
 
 static int bmp180SetConfiguration(float altitude, int overSamplingSetting) {
-	char data[22];
+	uint8_t data[22];
 	int errors = 0;
 
-	m_altitude = altitude;
-	m_oss = overSamplingSetting;
+	mAltitude = altitude;
+	mOss = overSamplingSetting;
 	mTemperature = UNSET_BMP180_TEMPERATURE_VALUE;
 	mPressure = UNSET_BMP180_PRESSURE_VALUE;
 
@@ -100,7 +98,7 @@ static int bmp180SetConfiguration(float altitude, int overSamplingSetting) {
 	mb = -32768;
 	mc = -8711;
 	md = 2868;
-	m_oss = 0;
+	mOss = 0;
 	errors = 0;
 #endif // #ifdef BMP180_TEST_FORMULA	return errors ? 1 : 0;}
 	/*************public methods:*************/
@@ -110,8 +108,9 @@ static int bmp180SetConfiguration(float altitude, int overSamplingSetting) {
 		if (i2cHandlePtr == NULL)
 			while (1)
 				;  //do something here. i2C has not been not initialized
-		m_altitude = 0;
-		m_oss = BMP180_OSS_NORMAL;
+		mAltitude = 0;
+		mOss = BMP180_OSS_NORMAL;
+		mI2cModule =i2cModule;
 		mTemperature = UNSET_BMP180_TEMPERATURE_VALUE;
 		mPressure = UNSET_BMP180_PRESSURE_VALUE;
 		bmp180SetConfiguration(0.F, BMP180_OSS_NORMAL);
@@ -135,7 +134,7 @@ static int bmp180SetConfiguration(float altitude, int overSamplingSetting) {
 
 	int bmp180ReadRawTemperature(long* pUt) {
 		int errors = 0;
-		char data[2];
+		uint8_t data[2];
 
 		// request temperature measurement
 		data[0] = 0xF4;
@@ -167,10 +166,10 @@ static int bmp180SetConfiguration(float altitude, int overSamplingSetting) {
 
 // request pressure measurement
 			data[0] = 0xF4;
-			data[1] = 0x34 + (m_oss << 6);
+			data[1] = 0x34 + (mOss << 6);
 			errors = bmp180Write(data[0], &data[1], 1); // write 0x34 + (m_oss << 6) into reg 0XF4
 
-			switch (m_oss) {
+			switch (mOss) {
 			case BMP180_OSS_ULTRA_LOW_POWER: /*wait_ms(4.5);*/
 				timeoutSetTimeout(5);
 				while (!timeoutIsTimeoutOccured())
@@ -202,7 +201,7 @@ static int bmp180SetConfiguration(float altitude, int overSamplingSetting) {
 #ifdef BMP180_TEST_FORMULA
 			errors = 0;
 #endif // #ifdef BMP180_TEST_FORMULA	if (errors<2)return 0;			else
-			*pUp = (data[0] << 16 | data[1] << 8) >> (8 - m_oss);
+			*pUp = (data[0] << 16 | data[1] << 8) >> (8 - mOss);
 #ifdef BMP180_TEST_FORMULA
 			*pUp = 23843;
 #endif // #ifdef BMP180_TEST_FORMULA	return 1;}
@@ -222,17 +221,17 @@ static int bmp180SetConfiguration(float altitude, int overSamplingSetting) {
 			float bmp180TruePressure(long up) {
 				long p;
 
-				// straight out from the documentation
+
 				b6 = b5 - 4000;
 				x1 = (b2 * (b6 * b6 >> 12)) >> 11;
 				x2 = ac2 * b6 >> 11;
 				x3 = x1 + x2;
-				b3 = (((ac1 * 4 + x3) << m_oss) + 2) >> 2;
+				b3 = (((ac1 * 4 + x3) << mOss) + 2) >> 2;
 				x1 = (ac3 * b6) >> 13;
-				x2 = (b1 * ((b6 * b6) >> 12)) >> 16;
+				x2 = (b1 * ((b6 * b6) >> 12)) >> 16; // where is my GOD now : D !!!!!!
 				x3 = ((x1 + x2) + 2) >> 2;
 				b4 = ac4 * (unsigned long) (x3 + 32768) >> 15;
-				b7 = ((unsigned long) up - b3) * (50000 >> m_oss);
+				b7 = ((unsigned long) up - b3) * (50000 >> mOss);
 				if (b7 < 0x80000000)
 					p = (b7 << 1) / b4;
 				else
@@ -242,13 +241,14 @@ static int bmp180SetConfiguration(float altitude, int overSamplingSetting) {
 				x2 = (-7357 * p) >> 16;
 				p = p + ((x1 + x2 + 3791) >> 4);
 
+
 				// convert to hPa and, if altitude has been initialized, to sea level pressure
-				if (m_altitude == 0.F)
+				if (mAltitude == 0.F)
 					return p / 100.F;
 				else
 					return p
 							/ (100.F
-									* pow((1.F - m_altitude / 44330.0L), 5.255L));
+									* pow((1.F - mAltitude / 44330.0L), 5.255L));
 			}
 
 			/** Get temperature from a previous measurement

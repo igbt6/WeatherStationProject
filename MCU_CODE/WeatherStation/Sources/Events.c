@@ -166,6 +166,54 @@ void USART0_DEBUG_OnBlockSent(LDD_TUserData *UserDataPtr) {
 	 ptr->uartDataSentFlag = TRUE;
 }
 
+/*
+** ===================================================================
+**     Event       :  I2C0_OnMasterBlockSent (module Events)
+**
+**     Component   :  I2C0 [I2C_LDD]
+*/
+/*!
+**     @brief
+**         This event is called when I2C in master mode finishes the
+**         transmission of the data successfully. This event is not
+**         available for the SLAVE mode and if MasterSendBlock is
+**         disabled. 
+**     @param
+**         UserDataPtr     - Pointer to the user or
+**                           RTOS specific data. This pointer is passed
+**                           as the parameter of Init method.
+*/
+/* ===================================================================*/
+void I2C0_OnMasterBlockSent(LDD_TUserData *UserDataPtr)
+{
+	I2C_UsrData* ptr = (I2C_UsrData*) UserDataPtr;
+		ptr->dataTransmitFlag = TRUE;
+}
+
+/*
+** ===================================================================
+**     Event       :  I2C0_OnMasterBlockReceived (module Events)
+**
+**     Component   :  I2C0 [I2C_LDD]
+*/
+/*!
+**     @brief
+**         This event is called when I2C is in master mode and finishes
+**         the reception of the data successfully. This event is not
+**         available for the SLAVE mode and if MasterReceiveBlock is
+**         disabled.
+**     @param
+**         UserDataPtr     - Pointer to the user or
+**                           RTOS specific data. This pointer is passed
+**                           as the parameter of Init method.
+*/
+/* ===================================================================*/
+void I2C0_OnMasterBlockReceived(LDD_TUserData *UserDataPtr)
+{
+	I2C_UsrData* ptr = (I2C_UsrData*) UserDataPtr;
+		ptr->dataReceivedFlag = TRUE;
+}
+
 /* END Events */
 
 #ifdef __cplusplus

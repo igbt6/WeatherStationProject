@@ -30,12 +30,13 @@
 
 - \subpage SegLCD1
 - \subpage SegLCD1
-- \subpage USART0_DEBUG
 - \subpage I2C1
 - \subpage SystemTimer1
 - \subpage DHT22_DataPin
 - \subpage TU1
 - \subpage FC1
+- \subpage I2C0
+- \subpage USART0_DEBUG
 
 
 */

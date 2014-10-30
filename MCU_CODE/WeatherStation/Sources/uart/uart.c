@@ -21,6 +21,7 @@ bool uartInit(UART_MODULE uartMod) {
 			return false;
 	} else
 		return false; //not supported yet
+	return true;
 }
 
 bool uartSendData(uint8_t* buf, uint16_t sizeOfBuf) {

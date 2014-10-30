@@ -5,7 +5,7 @@
 **     Processor   : MKL46Z256VMC4
 **     Version     : Component 01.002, Driver 01.04, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-10-16, 01:48, # CodeGen: 54
+**     Date/Time   : 2014-10-29, 16:03, # CodeGen: 82
 **     Abstract    :
 **
 **     Settings    :
@@ -55,13 +55,14 @@
 
   #include "Cpu.h"
   #include "SegLCD1.h"
-  #include "USART0_DEBUG.h"
   #include "I2C1.h"
   #include "MQX1.h"
   #include "SystemTimer1.h"
   #include "DHT22_DataPin.h"
   #include "TU1.h"
   #include "FC1.h"
+  #include "I2C0.h"
+  #include "USART0_DEBUG.h"
   #include "Events.h"
   #include "mqx_tasks.h"
 
@@ -106,7 +107,7 @@
     (tIsrFunc)&_int_kernel_isr,        /* 0x15  0x00000054   -   ivINT_FTFA                    used by PE */
     (tIsrFunc)&_int_kernel_isr,        /* 0x16  0x00000058   -   ivINT_LVD_LVW                 used by PE */
     (tIsrFunc)&_int_kernel_isr,        /* 0x17  0x0000005C   -   ivINT_LLW                     used by PE */
-    (tIsrFunc)&_int_kernel_isr,        /* 0x18  0x00000060   -   ivINT_I2C0                    used by PE */
+    (tIsrFunc)&_int_kernel_isr,        /* 0x18  0x00000060   2   ivINT_I2C0                    used by PE */
     (tIsrFunc)&_int_kernel_isr,        /* 0x19  0x00000064   2   ivINT_I2C1                    used by PE */
     (tIsrFunc)&_int_kernel_isr,        /* 0x1A  0x00000068   -   ivINT_SPI0                    used by PE */
     (tIsrFunc)&_int_kernel_isr,        /* 0x1B  0x0000006C   -   ivINT_SPI1                    used by PE */

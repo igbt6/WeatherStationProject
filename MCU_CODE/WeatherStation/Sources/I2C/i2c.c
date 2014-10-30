@@ -9,7 +9,7 @@
 #include "timeout/timeout.h"
 #include <string.h>
 
-#define IS_I2C_MODULE(x) if(x==I2C0_mod||x==I2C1_mod)
+#define IS_I2C_MODULE(x) (x==I2C0_mod||x==I2C1_mod)
 #define TIMEOUT 500
 /*
  static LDD_TDeviceData* mI2C1 =NULL;
@@ -30,6 +30,15 @@ void i2cInit(I2C_MODULE module, uint8_t slaveAddr) {
 
 	if (module == I2C0_mod) {
 
+		mI2c0Handle.mI2c_UsrData.dataReceivedFlag = false;
+		mI2c0Handle.mI2c_UsrData.dataTransmitFlag = false;
+		mI2c0Handle.mI2c = I2C0_Init(&mI2c0Handle.mI2c_UsrData);
+		if (mI2c0Handle.mI2c == NULL)
+			while (1)
+				; //init failed
+		I2C0_SelectSlaveDevice(mI2c0Handle.mI2c, LDD_I2C_ADDRTYPE_7BITS,
+				slaveAddr);
+
 	} else {
 		mI2c1Handle.mI2c_UsrData.dataReceivedFlag = false;
 		mI2c1Handle.mI2c_UsrData.dataTransmitFlag = false;
@@ -48,6 +57,36 @@ bool i2cRead(uint8_t slaveAddr, uint8_t regAddress, uint8_t *data,
 		int dataLength, I2C_MODULE module) {
 
 	if (module == I2C0_mod) {
+		LDD_TError res;
+
+		res = I2C0_SelectSlaveDevice(mI2c0Handle.mI2c, LDD_I2C_ADDRTYPE_7BITS,
+				slaveAddr);
+		if (res != ERR_OK) {
+			return false;
+		}
+		res = I2C0_MasterSendBlock(mI2c0Handle.mI2c, &regAddress, 1,
+				LDD_I2C_NO_SEND_STOP);
+		if (res != ERR_OK) {
+			return false;
+		}
+		timeoutSetTimeout(TIMEOUT);
+		do {
+			if (timeoutIsTimeoutOccured())
+				return false;
+		} while (!mI2c0Handle.mI2c_UsrData.dataTransmitFlag);
+		mI2c0Handle.mI2c_UsrData.dataTransmitFlag = false;
+		res = I2C0_MasterReceiveBlock(mI2c0Handle.mI2c, data, dataLength,
+				LDD_I2C_SEND_STOP);
+		if (res != ERR_OK) {
+			return false;
+		}
+		timeoutSetTimeout(TIMEOUT);
+		do {
+			if (timeoutIsTimeoutOccured())
+				return false;
+		} while (!mI2c0Handle.mI2c_UsrData.dataReceivedFlag);
+		mI2c0Handle.mI2c_UsrData.dataReceivedFlag = false;
+		return true;
 
 	} else {
 		LDD_TError res;
@@ -90,9 +129,40 @@ bool i2cWrite(uint8_t slaveAddr, uint8_t regAddress, uint8_t *data,
 	temp[0] = regAddress;
 	memcpy(&temp[1], data, dataLength);
 
-
 	if (module == I2C0_mod) {
+		LDD_TError res;
 
+		res = I2C0_SelectSlaveDevice(mI2c0Handle.mI2c, LDD_I2C_ADDRTYPE_7BITS,
+				slaveAddr);
+		if (res != ERR_OK) {
+			return false;
+		}
+		/*
+		 res = I2C1_MasterSendBlock(mI2c1Handle.mI2c, &regAddress, 1,
+		 LDD_I2C_NO_SEND_STOP);
+		 if (res != ERR_OK) {
+		 return false;
+		 }
+		 timeoutSetTimeout(TIMEOUT);
+		 do {
+		 if (timeoutIsTimeoutOccured())
+		 return false;
+		 } while (!mI2c1Handle.mI2c_UsrData.dataTransmitFlag);
+		 mI2c1Handle.mI2c_UsrData.dataTransmitFlag = false;
+		 */
+		res = I2C0_MasterSendBlock(mI2c0Handle.mI2c, /*data*/temp,
+				dataLength + 1, LDD_I2C_SEND_STOP);
+		if (res != ERR_OK) {
+			return false;
+		}
+		timeoutSetTimeout(TIMEOUT);
+		do {
+			if (timeoutIsTimeoutOccured())
+				return false;
+		} while (!mI2c0Handle.mI2c_UsrData.dataTransmitFlag);
+		mI2c0Handle.mI2c_UsrData.dataTransmitFlag = false;
+
+		return true;
 	} else {
 		LDD_TError res;
 
@@ -101,21 +171,21 @@ bool i2cWrite(uint8_t slaveAddr, uint8_t regAddress, uint8_t *data,
 		if (res != ERR_OK) {
 			return false;
 		}
-/*
-		res = I2C1_MasterSendBlock(mI2c1Handle.mI2c, &regAddress, 1,
-				LDD_I2C_NO_SEND_STOP);
-		if (res != ERR_OK) {
-			return false;
-		}
-		timeoutSetTimeout(TIMEOUT);
-		do {
-			if (timeoutIsTimeoutOccured())
-				return false;
-		} while (!mI2c1Handle.mI2c_UsrData.dataTransmitFlag);
-		mI2c1Handle.mI2c_UsrData.dataTransmitFlag = false;
-*/
-		res = I2C1_MasterSendBlock(mI2c1Handle.mI2c, /*data*/ temp, dataLength+1,
-				LDD_I2C_SEND_STOP);
+		/*
+		 res = I2C1_MasterSendBlock(mI2c1Handle.mI2c, &regAddress, 1,
+		 LDD_I2C_NO_SEND_STOP);
+		 if (res != ERR_OK) {
+		 return false;
+		 }
+		 timeoutSetTimeout(TIMEOUT);
+		 do {
+		 if (timeoutIsTimeoutOccured())
+		 return false;
+		 } while (!mI2c1Handle.mI2c_UsrData.dataTransmitFlag);
+		 mI2c1Handle.mI2c_UsrData.dataTransmitFlag = false;
+		 */
+		res = I2C1_MasterSendBlock(mI2c1Handle.mI2c, /*data*/temp,
+				dataLength + 1, LDD_I2C_SEND_STOP);
 		if (res != ERR_OK) {
 			return false;
 		}

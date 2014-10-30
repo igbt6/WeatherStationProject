@@ -5,7 +5,7 @@
 **     Processor   : MKL46Z256VMC4
 **     Version     : Component 01.107, Driver 01.00, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-10-17, 20:48, # CodeGen: 68
+**     Date/Time   : 2014-10-20, 21:08, # CodeGen: 73
 **
 **     Copyright : 1997 - 2014 Freescale Semiconductor, Inc. 
 **     All Rights Reserved.
@@ -67,7 +67,7 @@
 
 /* Idle task settings */
 #define MQX_USE_IDLE_TASK              1
-#define MQX_ENABLE_LOW_POWER           1
+#define MQX_ENABLE_LOW_POWER           0
 #define MQX_ENABLE_IDLE_LOOP           0
 
 

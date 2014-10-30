@@ -18,7 +18,7 @@
         <Line>PE_Const</Line>
         <Line>IO_Map</Line>
       </GenSharedModules>
-      <ShrdHeaderAge0>1162874382</ShrdHeaderAge0>
+      <ShrdHeaderAge0>1163755636</ShrdHeaderAge0>
       <ShrdCodeAge0>-1</ShrdCodeAge0>
       <ShrdAsemblAge0>-1</ShrdAsemblAge0>
       <ShrdHeaderAge1>1158526727</ShrdHeaderAge1>
@@ -30,9 +30,8 @@
       <ShrdHeaderAge3>1158526727</ShrdHeaderAge3>
       <ShrdCodeAge3>-1</ShrdCodeAge3>
       <ShrdAsemblAge3>-1</ShrdAsemblAge3>
-      <GenExtraFiles lines_count="97">
+      <GenExtraFiles lines_count="98">
         <Line>Documentation\doxygen\SegLCD1.txt</Line>
-        <Line>Documentation\doxygen\USART0_DEBUG.txt</Line>
         <Line>Documentation\doxygen\I2C1.txt</Line>
         <Line>Documentation\doxygen\SystemTimer1.txt</Line>
         <Line>MQXLITE\config\task_template_list.c</Line>
@@ -119,6 +118,8 @@
         <Line>Documentation\doxygen\DHT22_DataPin.txt</Line>
         <Line>Documentation\doxygen\TU1.txt</Line>
         <Line>Documentation\doxygen\FC1.txt</Line>
+        <Line>Documentation\doxygen\I2C0.txt</Line>
+        <Line>Documentation\doxygen\USART0_DEBUG.txt</Line>
         <Line>Documentation\doxygen\WeatherStation.txt</Line>
         <Line>Documentation\doxygen\RoutingReport.txt</Line>
         <Line>Documentation\doxygen\pex.doxyfile</Line>
@@ -129,9 +130,8 @@
         <Line>Project_Settings\Startup_Code\startup.c</Line>
         <Line>Generated_Code\Vectors.c</Line>
       </GenExtraFiles>
-      <GenExtraFileSrcDir95>lib\Kinetis\startup\</GenExtraFileSrcDir95>
-      <GenExtraFileSrcDir91>lib\doxygen\</GenExtraFileSrcDir91>
-      <GenExtraFileSrcDir83>lib\mqxlite\V1.1.1\source\include\</GenExtraFileSrcDir83>
+      <GenExtraFileSrcDir96>lib\Kinetis\startup\</GenExtraFileSrcDir96>
+      <GenExtraFileSrcDir92>lib\doxygen\</GenExtraFileSrcDir92>
       <GenExtraFileSrcDir82>lib\mqxlite\V1.1.1\source\include\</GenExtraFileSrcDir82>
       <GenExtraFileSrcDir81>lib\mqxlite\V1.1.1\source\include\</GenExtraFileSrcDir81>
       <GenExtraFileSrcDir80>lib\mqxlite\V1.1.1\source\include\</GenExtraFileSrcDir80>
@@ -156,8 +156,8 @@
       <GenExtraFileSrcDir61>lib\mqxlite\V1.1.1\source\include\</GenExtraFileSrcDir61>
       <GenExtraFileSrcDir60>lib\mqxlite\V1.1.1\source\include\</GenExtraFileSrcDir60>
       <GenExtraFileSrcDir59>lib\mqxlite\V1.1.1\source\include\</GenExtraFileSrcDir59>
-      <GenExtraFileSrcDir58>lib\mqxlite\V1.1.1\tools\tad\</GenExtraFileSrcDir58>
-      <GenExtraFileSrcDir57>lib\mqxlite\V1.1.1\source\kernel\</GenExtraFileSrcDir57>
+      <GenExtraFileSrcDir58>lib\mqxlite\V1.1.1\source\include\</GenExtraFileSrcDir58>
+      <GenExtraFileSrcDir57>lib\mqxlite\V1.1.1\tools\tad\</GenExtraFileSrcDir57>
       <GenExtraFileSrcDir56>lib\mqxlite\V1.1.1\source\kernel\</GenExtraFileSrcDir56>
       <GenExtraFileSrcDir55>lib\mqxlite\V1.1.1\source\kernel\</GenExtraFileSrcDir55>
       <GenExtraFileSrcDir54>lib\mqxlite\V1.1.1\source\kernel\</GenExtraFileSrcDir54>
@@ -173,7 +173,7 @@
       <GenExtraFileSrcDir44>lib\mqxlite\V1.1.1\source\kernel\</GenExtraFileSrcDir44>
       <GenExtraFileSrcDir43>lib\mqxlite\V1.1.1\source\kernel\</GenExtraFileSrcDir43>
       <GenExtraFileSrcDir42>lib\mqxlite\V1.1.1\source\kernel\</GenExtraFileSrcDir42>
-      <GenExtraFileSrcDir41>lib\mqxlite\V1.1.1\source\psp\cortex_m\</GenExtraFileSrcDir41>
+      <GenExtraFileSrcDir41>lib\mqxlite\V1.1.1\source\kernel\</GenExtraFileSrcDir41>
       <GenExtraFileSrcDir40>lib\mqxlite\V1.1.1\source\psp\cortex_m\</GenExtraFileSrcDir40>
       <GenExtraFileSrcDir39>lib\mqxlite\V1.1.1\source\psp\cortex_m\</GenExtraFileSrcDir39>
       <GenExtraFileSrcDir38>lib\mqxlite\V1.1.1\source\psp\cortex_m\</GenExtraFileSrcDir38>
@@ -203,18 +203,20 @@
       <GenExtraFileSrcDir14>lib\mqxlite\V1.1.1\source\psp\cortex_m\</GenExtraFileSrcDir14>
       <GenExtraFileSrcDir13>lib\mqxlite\V1.1.1\source\psp\cortex_m\</GenExtraFileSrcDir13>
       <GenExtraFileSrcDir12>lib\mqxlite\V1.1.1\source\psp\cortex_m\</GenExtraFileSrcDir12>
-      <GenExtraFileSrcDir11>lib\mqxlite\V1.1.1\source\psp\cortex_m\core\M0\</GenExtraFileSrcDir11>
+      <GenExtraFileSrcDir11>lib\mqxlite\V1.1.1\source\psp\cortex_m\</GenExtraFileSrcDir11>
       <GenExtraFileSrcDir10>lib\mqxlite\V1.1.1\source\psp\cortex_m\core\M0\</GenExtraFileSrcDir10>
       <GenExtraFileSrcDir9>lib\mqxlite\V1.1.1\source\psp\cortex_m\core\M0\</GenExtraFileSrcDir9>
-      <GenExtraFileSrcDir8>lib\mqxlite\V1.1.1\source\psp\cortex_m\compiler\cwgcc\</GenExtraFileSrcDir8>
+      <GenExtraFileSrcDir8>lib\mqxlite\V1.1.1\source\psp\cortex_m\core\M0\</GenExtraFileSrcDir8>
       <GenExtraFileSrcDir7>lib\mqxlite\V1.1.1\source\psp\cortex_m\compiler\cwgcc\</GenExtraFileSrcDir7>
-      <XtraAge4>1163026193</XtraAge4>
-      <XtraAge5>1162970338</XtraAge5>
-      <XtraAge6>1162978912</XtraAge6>
+      <GenExtraFileSrcDir6>lib\mqxlite\V1.1.1\source\psp\cortex_m\compiler\cwgcc\</GenExtraFileSrcDir6>
+      <XtraAge3>1163792934</XtraAge3>
+      <XtraAge4>1163178680</XtraAge4>
+      <XtraAge5>1163176230</XtraAge5>
+      <XtraAge6>1162263616</XtraAge6>
       <XtraAge7>1162263616</XtraAge7>
-      <XtraAge8>1162263616</XtraAge8>
+      <XtraAge9>1162263616</XtraAge9>
       <XtraAge10>1162263616</XtraAge10>
-      <XtraAge11>1162263616</XtraAge11>
+      <XtraAge12>1162263616</XtraAge12>
       <XtraAge13>1162263616</XtraAge13>
       <XtraAge14>1162263616</XtraAge14>
       <XtraAge15>1162263616</XtraAge15>
@@ -244,7 +246,7 @@
       <XtraAge39>1162263616</XtraAge39>
       <XtraAge40>1162263616</XtraAge40>
       <XtraAge41>1162263616</XtraAge41>
-      <XtraAge42>1162263616</XtraAge42>
+      <XtraAge42>1162263613</XtraAge42>
       <XtraAge43>1162263613</XtraAge43>
       <XtraAge44>1162263613</XtraAge44>
       <XtraAge45>1162263613</XtraAge45>
@@ -259,7 +261,7 @@
       <XtraAge54>1162263613</XtraAge54>
       <XtraAge55>1162263613</XtraAge55>
       <XtraAge56>1162263613</XtraAge56>
-      <XtraAge57>1162263613</XtraAge57>
+      <XtraAge58>1162263613</XtraAge58>
       <XtraAge59>1162263613</XtraAge59>
       <XtraAge60>1162263613</XtraAge60>
       <XtraAge61>1162263613</XtraAge61>
@@ -284,17 +286,17 @@
       <XtraAge80>1162263613</XtraAge80>
       <XtraAge81>1162263613</XtraAge81>
       <XtraAge82>1162263613</XtraAge82>
-      <XtraAge83>1162263613</XtraAge83>
-      <XtraAge92>1162874382</XtraAge92>
-      <XtraAge93>1162874382</XtraAge93>
-      <XtraAge95>1158526727</XtraAge95>
-      <XtraAge96>1162874382</XtraAge96>
-      <GenExtraFileType96>4</GenExtraFileType96>
-      <GenExtraFileType95>5</GenExtraFileType95>
+      <XtraAge93>1163748427</XtraAge93>
+      <XtraAge94>1163755636</XtraAge94>
+      <XtraAge96>1158526727</XtraAge96>
+      <XtraAge97>1163755636</XtraAge97>
+      <GenExtraFileType97>4</GenExtraFileType97>
+      <GenExtraFileType96>5</GenExtraFileType96>
+      <GenExtraFileType95>4</GenExtraFileType95>
       <GenExtraFileType94>4</GenExtraFileType94>
       <GenExtraFileType93>4</GenExtraFileType93>
-      <GenExtraFileType92>4</GenExtraFileType92>
-      <GenExtraFileType91>5</GenExtraFileType91>
+      <GenExtraFileType92>5</GenExtraFileType92>
+      <GenExtraFileType91>4</GenExtraFileType91>
       <GenExtraFileType90>4</GenExtraFileType90>
       <GenExtraFileType89>4</GenExtraFileType89>
       <GenExtraFileType88>4</GenExtraFileType88>
@@ -302,7 +304,7 @@
       <GenExtraFileType86>4</GenExtraFileType86>
       <GenExtraFileType85>4</GenExtraFileType85>
       <GenExtraFileType84>4</GenExtraFileType84>
-      <GenExtraFileType83>5</GenExtraFileType83>
+      <GenExtraFileType83>4</GenExtraFileType83>
       <GenExtraFileType82>5</GenExtraFileType82>
       <GenExtraFileType81>5</GenExtraFileType81>
       <GenExtraFileType80>5</GenExtraFileType80>
@@ -379,7 +381,7 @@
       <GenExtraFileType9>5</GenExtraFileType9>
       <GenExtraFileType8>5</GenExtraFileType8>
       <GenExtraFileType7>5</GenExtraFileType7>
-      <GenExtraFileType6>4</GenExtraFileType6>
+      <GenExtraFileType6>5</GenExtraFileType6>
       <GenExtraFileType5>4</GenExtraFileType5>
       <GenExtraFileType4>4</GenExtraFileType4>
       <GenExtraFileType3>4</GenExtraFileType3>
@@ -416,12 +418,14 @@
         <Line>Events</Line>
         <Line>mqx_tasks</Line>
       </GenEventModules>
-      <GenMethodsInEvents lines_count="6">
+      <GenMethodsInEvents lines_count="8">
+        <Line>USART0_DEBUG_OnBlockReceived</Line>
+        <Line>USART0_DEBUG_OnBlockSent</Line>
+        <Line>I2C0_OnMasterBlockSent</Line>
+        <Line>I2C0_OnMasterBlockReceived</Line>
         <Line>I2C1_OnMasterBlockSent</Line>
         <Line>I2C1_OnMasterBlockReceived</Line>
         <Line>I2C1_OnMasterByteReceived</Line>
-        <Line>USART0_DEBUG_OnBlockReceived</Line>
-        <Line>USART0_DEBUG_OnBlockSent</Line>
         <Line>Cpu_OnNMIINT</Line>
       </GenMethodsInEvents>
       <GenMethodsInmqx_tasks lines_count="3">
@@ -429,11 +433,12 @@
         <Line>InitHw_task</Line>
         <Line>Sensors_task</Line>
       </GenMethodsInmqx_tasks>
-      <GenAllModules lines_count="15">
+      <GenAllModules lines_count="16">
         <Line>Cpu</Line>
         <Line>DHT22_DataPin</Line>
         <Line>Events</Line>
         <Line>FC1</Line>
+        <Line>I2C0</Line>
         <Line>I2C1</Line>
         <Line>IO_Map</Line>
         <Line>mqx_tasks</Line>
@@ -447,20 +452,21 @@
         <Line>USART0_DEBUG</Line>
       </GenAllModules>
       <GenExternModules lines_count="0" />
-      <GenBeanModules lines_count="8">
+      <GenBeanModules lines_count="9">
         <Line>SegLCD1</Line>
-        <Line>USART0_DEBUG</Line>
         <Line>I2C1</Line>
         <Line>MQX1</Line>
         <Line>SystemTimer1</Line>
         <Line>DHT22_DataPin</Line>
         <Line>TU1</Line>
         <Line>FC1</Line>
+        <Line>I2C0</Line>
+        <Line>USART0_DEBUG</Line>
       </GenBeanModules>
     </GenFiles>
     <SignalListFile>Documentation\WeatherStation_SIGNALS.txt</SignalListFile>
     <DestinationCompiler>GNUC</DestinationCompiler>
-    <ProjectModificationStamp>63</ProjectModificationStamp>
+    <ProjectModificationStamp>76</ProjectModificationStamp>
   </Options>
   <CpuID_2>
     <Generated>true</Generated>
@@ -469,7 +475,7 @@
     <GenDriverVersion>01.04</GenDriverVersion>
     <GenEventModule>Events</GenEventModule>
     <HeaderAge>1162263622</HeaderAge>
-    <CodeAge>1162874382</CodeAge>
+    <CodeAge>1163755636</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>11</GenNumMethods>
     <SetClockConfiguration>false</SetClockConfiguration>
@@ -631,149 +637,6 @@
     <GenExtraFilesCount>1</GenExtraFilesCount>
     <ExtraFile0>Documentation\doxygen\SegLCD1.txt</ExtraFile0>
   </ComponentID_11>
-  <ComponentID_38>
-    <Generated>true</Generated>
-    <GenCompName>USART0_DEBUG</GenCompName>
-    <GenComponentVersion>01.188</GenComponentVersion>
-    <GenDriverVersion>01.12</GenDriverVersion>
-    <GenEventModule>Events</GenEventModule>
-    <HeaderAge>1162263622</HeaderAge>
-    <CodeAge>1162263622</CodeAge>
-    <AsemblAge>-1</AsemblAge>
-    <GenNumMethods>36</GenNumMethods>
-    <Init>true</Init>
-    <Deinit>false</Deinit>
-    <Enable>false</Enable>
-    <Disable>false</Disable>
-    <SendBlock>true</SendBlock>
-    <ReceiveBlock>true</ReceiveBlock>
-    <CancelBlockTransmission>false</CancelBlockTransmission>
-    <CancelBlockReception>false</CancelBlockReception>
-    <GetError>false</GetError>
-    <GetSentDataNum>false</GetSentDataNum>
-    <GetReceivedDataNum>false</GetReceivedDataNum>
-    <GetTxCompleteStatus>false</GetTxCompleteStatus>
-    <SetEventMask>false</SetEventMask>
-    <GetEventMask>false</GetEventMask>
-    <SelectBaudRate>false</SelectBaudRate>
-    <GetSelectedBaudRate>false</GetSelectedBaudRate>
-    <SetParity>false</SetParity>
-    <GetParity>false</GetParity>
-    <SetDataWidth>false</SetDataWidth>
-    <GetDataWidth>false</GetDataWidth>
-    <SetStopBitLength>false</SetStopBitLength>
-    <GetStopBitLength>false</GetStopBitLength>
-    <SetLoopMode>false</SetLoopMode>
-    <GetLoopMode>false</GetLoopMode>
-    <GetStats>false</GetStats>
-    <ClearStats>false</ClearStats>
-    <SendBreak>false</SendBreak>
-    <GetBreak>false</GetBreak>
-    <TurnTxOn>false</TurnTxOn>
-    <TurnTxOff>false</TurnTxOff>
-    <TurnRxOn>false</TurnRxOn>
-    <TurnRxOff>false</TurnRxOff>
-    <ConnectPin>false</ConnectPin>
-    <Main>false</Main>
-    <SetOperationMode>false</SetOperationMode>
-    <GetDriverState>false</GetDriverState>
-    <GenNumEvents>5</GenNumEvents>
-    <OnBlockReceived_Selected>3</OnBlockReceived_Selected>
-    <OnBlockReceived_Name>USART0_DEBUG_OnBlockReceived</OnBlockReceived_Name>
-    <OnBlockReceived_Priority>interrupts disabled</OnBlockReceived_Priority>
-    <OnBlockSent_Selected>3</OnBlockSent_Selected>
-    <OnBlockSent_Name>USART0_DEBUG_OnBlockSent</OnBlockSent_Name>
-    <OnBlockSent_Priority>interrupts disabled</OnBlockSent_Priority>
-    <OnBreak_Selected>1</OnBreak_Selected>
-    <OnBreak_Name>USART0_DEBUG_OnBreak</OnBreak_Name>
-    <OnBreak_Priority>interrupts disabled</OnBreak_Priority>
-    <OnError_Selected>1</OnError_Selected>
-    <OnError_Name>USART0_DEBUG_OnError</OnError_Name>
-    <OnError_Priority>interrupts disabled</OnError_Priority>
-    <OnTxComplete_Selected>1</OnTxComplete_Selected>
-    <OnTxComplete_Name>USART0_DEBUG_OnTxComplete</OnTxComplete_Name>
-    <OnTxComplete_Priority>interrupts disabled</OnTxComplete_Priority>
-    <ISR_InpIntISRHandle />
-    <ISR_OutIntISRHandle />
-    <ISR_ErrIntISRHandle />
-    <ISR_IdleIntISRHandle />
-    <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
-    <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
-    <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
-    <GenMethodPos>10</GenMethodPos>
-    <MethodPos>
-      <MethodPos0>Init</MethodPos0>
-      <MethodType>method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>160</LineBeg>
-      <LineEnd>182</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos1>ReceiveBlock</MethodPos1>
-      <MethodType>method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>183</LineBeg>
-      <LineEnd>227</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos2>SendBlock</MethodPos2>
-      <MethodType>method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>228</LineBeg>
-      <LineEnd>268</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos3>Interrupt</MethodPos3>
-      <MethodType>internal_method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>269</LineBeg>
-      <LineEnd>281</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos4>Init</MethodPos4>
-      <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>134</LineBeg>
-      <LineEnd>224</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos5>ReceiveBlock</MethodPos5>
-      <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>225</LineBeg>
-      <LineEnd>287</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos6>SendBlock</MethodPos6>
-      <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>288</LineBeg>
-      <LineEnd>348</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos7>InterruptRx</MethodPos7>
-      <MethodType>internal_method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>349</LineBeg>
-      <LineEnd>373</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos8>InterruptTx</MethodPos8>
-      <MethodType>internal_method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>374</LineBeg>
-      <LineEnd>399</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos9>Interrupt</MethodPos9>
-      <MethodType>internal_method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>400</LineBeg>
-      <LineEnd>430</LineEnd>
-    </MethodPos>
-    <GenExtraFilesCount>1</GenExtraFilesCount>
-    <ExtraFile0>Documentation\doxygen\USART0_DEBUG.txt</ExtraFile0>
-  </ComponentID_38>
   <ComponentID_39>
     <Generated>true</Generated>
     <GenCompName>I2C1</GenCompName>
@@ -1956,6 +1819,310 @@
     <GenExtraFilesCount>1</GenExtraFilesCount>
     <ExtraFile0>Documentation\doxygen\FC1.txt</ExtraFile0>
   </ComponentID_91>
+  <ComponentID_98>
+    <Generated>true</Generated>
+    <GenCompName>I2C0</GenCompName>
+    <GenComponentVersion>01.016</GenComponentVersion>
+    <GenDriverVersion>01.07</GenDriverVersion>
+    <GenEventModule>Events</GenEventModule>
+    <HeaderAge>1163791709</HeaderAge>
+    <CodeAge>1163791709</CodeAge>
+    <AsemblAge>-1</AsemblAge>
+    <GenNumMethods>33</GenNumMethods>
+    <Init>true</Init>
+    <Deinit>false</Deinit>
+    <Enable>false</Enable>
+    <Disable>false</Disable>
+    <SetEventMask>false</SetEventMask>
+    <GetEventMask>false</GetEventMask>
+    <MasterSendBlock>true</MasterSendBlock>
+    <MasterGetBlockSentStatus>false</MasterGetBlockSentStatus>
+    <MasterGetSentDataNum>false</MasterGetSentDataNum>
+    <MasterReceiveBlock>true</MasterReceiveBlock>
+    <MasterGetBlockReceivedStatus>false</MasterGetBlockReceivedStatus>
+    <MasterGetReceivedDataNum>false</MasterGetReceivedDataNum>
+    <MasterUpdateReceiveBlockSize>false</MasterUpdateReceiveBlockSize>
+    <SlaveSendBlock>false</SlaveSendBlock>
+    <SlaveGetBlockSentStatus>false</SlaveGetBlockSentStatus>
+    <SlaveGetSentDataNum>false</SlaveGetSentDataNum>
+    <SlaveCancelTransmissionBlock>false</SlaveCancelTransmissionBlock>
+    <SlaveReceiveBlock>false</SlaveReceiveBlock>
+    <SlaveGetBlockReceivedStatus>false</SlaveGetBlockReceivedStatus>
+    <SlaveGetReceivedDataNum>false</SlaveGetReceivedDataNum>
+    <SlaveUpdateReceiveBlockSize>false</SlaveUpdateReceiveBlockSize>
+    <SlaveCancelReceptionBlock>false</SlaveCancelReceptionBlock>
+    <SelectSlaveDevice>true</SelectSlaveDevice>
+    <SetAcknowledgeMode>false</SetAcknowledgeMode>
+    <SendAcknowledge>false</SendAcknowledge>
+    <GetError>false</GetError>
+    <CheckBus>false</CheckBus>
+    <GetStats>false</GetStats>
+    <ClearStats>false</ClearStats>
+    <Main>false</Main>
+    <ConnectPin>false</ConnectPin>
+    <SetOperationMode>false</SetOperationMode>
+    <GetDriverState>false</GetDriverState>
+    <GenNumEvents>13</GenNumEvents>
+    <OnMasterBlockSent_Selected>3</OnMasterBlockSent_Selected>
+    <OnMasterBlockSent_Name>I2C0_OnMasterBlockSent</OnMasterBlockSent_Name>
+    <OnMasterBlockSent_Priority>interrupts disabled</OnMasterBlockSent_Priority>
+    <OnMasterBlockReceived_Selected>3</OnMasterBlockReceived_Selected>
+    <OnMasterBlockReceived_Name>I2C0_OnMasterBlockReceived</OnMasterBlockReceived_Name>
+    <OnMasterBlockReceived_Priority>interrupts disabled</OnMasterBlockReceived_Priority>
+    <OnMasterByteReceived_Selected>1</OnMasterByteReceived_Selected>
+    <OnMasterByteReceived_Name>I2C0_OnMasterByteReceived</OnMasterByteReceived_Name>
+    <OnMasterByteReceived_Priority>interrupts disabled</OnMasterByteReceived_Priority>
+    <OnSlaveBlockSent_Selected>0</OnSlaveBlockSent_Selected>
+    <OnSlaveBlockSent_Name>I2C0_OnSlaveBlockSent</OnSlaveBlockSent_Name>
+    <OnSlaveBlockSent_Priority>interrupts disabled</OnSlaveBlockSent_Priority>
+    <OnSlaveBlockReceived_Selected>0</OnSlaveBlockReceived_Selected>
+    <OnSlaveBlockReceived_Name>I2C0_OnSlaveBlockReceived</OnSlaveBlockReceived_Name>
+    <OnSlaveBlockReceived_Priority>interrupts disabled</OnSlaveBlockReceived_Priority>
+    <OnSlaveByteReceived_Selected>0</OnSlaveByteReceived_Selected>
+    <OnSlaveByteReceived_Name>I2C0_OnSlaveByteReceived</OnSlaveByteReceived_Name>
+    <OnSlaveByteReceived_Priority>interrupts disabled</OnSlaveByteReceived_Priority>
+    <OnSlaveRxRequest_Selected>0</OnSlaveRxRequest_Selected>
+    <OnSlaveRxRequest_Name>I2C0_OnSlaveRxRequest</OnSlaveRxRequest_Name>
+    <OnSlaveRxRequest_Priority>interrupts disabled</OnSlaveRxRequest_Priority>
+    <OnSlaveTxRequest_Selected>0</OnSlaveTxRequest_Selected>
+    <OnSlaveTxRequest_Name>I2C0_OnSlaveTxRequest</OnSlaveTxRequest_Name>
+    <OnSlaveTxRequest_Priority>interrupts disabled</OnSlaveTxRequest_Priority>
+    <OnSlaveGeneralCallAddr_Selected>0</OnSlaveGeneralCallAddr_Selected>
+    <OnSlaveGeneralCallAddr_Name>I2C0_OnSlaveGeneralCallAddr</OnSlaveGeneralCallAddr_Name>
+    <OnSlaveGeneralCallAddr_Priority>interrupts disabled</OnSlaveGeneralCallAddr_Priority>
+    <OnSlaveSmBusCallAddr_Selected>0</OnSlaveSmBusCallAddr_Selected>
+    <OnSlaveSmBusCallAddr_Name>I2C0_OnSlaveSmBusCallAddr</OnSlaveSmBusCallAddr_Name>
+    <OnSlaveSmBusCallAddr_Priority>interrupts disabled</OnSlaveSmBusCallAddr_Priority>
+    <OnSlaveSmBusAlertResponse_Selected>0</OnSlaveSmBusAlertResponse_Selected>
+    <OnSlaveSmBusAlertResponse_Name>I2C0_OnSlaveSmBusAlertResponse</OnSlaveSmBusAlertResponse_Name>
+    <OnSlaveSmBusAlertResponse_Priority>interrupts disabled</OnSlaveSmBusAlertResponse_Priority>
+    <OnError_Selected>1</OnError_Selected>
+    <OnError_Name>I2C0_OnError</OnError_Name>
+    <OnError_Priority>interrupts disabled</OnError_Priority>
+    <OnBusStopDetected_Selected>1</OnBusStopDetected_Selected>
+    <OnBusStopDetected_Name>I2C0_OnBusStopDetected</OnBusStopDetected_Name>
+    <OnBusStopDetected_Priority>interrupts disabled</OnBusStopDetected_Priority>
+    <ISR_IntISRHandle />
+    <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
+    <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
+    <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
+    <GenMethodPos>10</GenMethodPos>
+    <MethodPos>
+      <MethodPos0>Init</MethodPos0>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>183</LineBeg>
+      <LineEnd>207</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos1>MasterSendBlock</MethodPos1>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>208</LineBeg>
+      <LineEnd>254</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos2>MasterReceiveBlock</MethodPos2>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>255</LineBeg>
+      <LineEnd>305</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos3>SelectSlaveDevice</MethodPos3>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>306</LineBeg>
+      <LineEnd>340</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos4>Interrupt</MethodPos4>
+      <MethodType>internal_method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>341</LineBeg>
+      <LineEnd>353</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos5>Interrupt</MethodPos5>
+      <MethodType>internal_method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>197</LineBeg>
+      <LineEnd>300</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos6>Init</MethodPos6>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>301</LineBeg>
+      <LineEnd>393</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos7>MasterSendBlock</MethodPos7>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>394</LineBeg>
+      <LineEnd>488</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos8>MasterReceiveBlock</MethodPos8>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>489</LineBeg>
+      <LineEnd>588</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos9>SelectSlaveDevice</MethodPos9>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>589</LineBeg>
+      <LineEnd>658</LineEnd>
+    </MethodPos>
+    <GenExtraFilesCount>1</GenExtraFilesCount>
+    <ExtraFile0>Documentation\doxygen\I2C0.txt</ExtraFile0>
+  </ComponentID_98>
+  <ComponentID_106>
+    <Generated>true</Generated>
+    <GenCompName>USART0_DEBUG</GenCompName>
+    <GenComponentVersion>01.188</GenComponentVersion>
+    <GenDriverVersion>01.12</GenDriverVersion>
+    <GenEventModule>Events</GenEventModule>
+    <HeaderAge>1163755636</HeaderAge>
+    <CodeAge>1163755636</CodeAge>
+    <AsemblAge>-1</AsemblAge>
+    <GenNumMethods>36</GenNumMethods>
+    <Init>true</Init>
+    <Deinit>false</Deinit>
+    <Enable>false</Enable>
+    <Disable>false</Disable>
+    <SendBlock>true</SendBlock>
+    <ReceiveBlock>true</ReceiveBlock>
+    <CancelBlockTransmission>false</CancelBlockTransmission>
+    <CancelBlockReception>false</CancelBlockReception>
+    <GetError>false</GetError>
+    <GetSentDataNum>false</GetSentDataNum>
+    <GetReceivedDataNum>false</GetReceivedDataNum>
+    <GetTxCompleteStatus>false</GetTxCompleteStatus>
+    <SetEventMask>false</SetEventMask>
+    <GetEventMask>false</GetEventMask>
+    <SelectBaudRate>false</SelectBaudRate>
+    <GetSelectedBaudRate>false</GetSelectedBaudRate>
+    <SetParity>false</SetParity>
+    <GetParity>false</GetParity>
+    <SetDataWidth>false</SetDataWidth>
+    <GetDataWidth>false</GetDataWidth>
+    <SetStopBitLength>false</SetStopBitLength>
+    <GetStopBitLength>false</GetStopBitLength>
+    <SetLoopMode>false</SetLoopMode>
+    <GetLoopMode>false</GetLoopMode>
+    <GetStats>false</GetStats>
+    <ClearStats>false</ClearStats>
+    <SendBreak>false</SendBreak>
+    <GetBreak>false</GetBreak>
+    <TurnTxOn>false</TurnTxOn>
+    <TurnTxOff>false</TurnTxOff>
+    <TurnRxOn>false</TurnRxOn>
+    <TurnRxOff>false</TurnRxOff>
+    <ConnectPin>false</ConnectPin>
+    <Main>false</Main>
+    <SetOperationMode>false</SetOperationMode>
+    <GetDriverState>false</GetDriverState>
+    <GenNumEvents>5</GenNumEvents>
+    <OnBlockReceived_Selected>3</OnBlockReceived_Selected>
+    <OnBlockReceived_Name>USART0_DEBUG_OnBlockReceived</OnBlockReceived_Name>
+    <OnBlockReceived_Priority>interrupts disabled</OnBlockReceived_Priority>
+    <OnBlockSent_Selected>3</OnBlockSent_Selected>
+    <OnBlockSent_Name>USART0_DEBUG_OnBlockSent</OnBlockSent_Name>
+    <OnBlockSent_Priority>interrupts disabled</OnBlockSent_Priority>
+    <OnBreak_Selected>1</OnBreak_Selected>
+    <OnBreak_Name>USART0_DEBUG_OnBreak</OnBreak_Name>
+    <OnBreak_Priority>interrupts disabled</OnBreak_Priority>
+    <OnError_Selected>1</OnError_Selected>
+    <OnError_Name>USART0_DEBUG_OnError</OnError_Name>
+    <OnError_Priority>interrupts disabled</OnError_Priority>
+    <OnTxComplete_Selected>1</OnTxComplete_Selected>
+    <OnTxComplete_Name>USART0_DEBUG_OnTxComplete</OnTxComplete_Name>
+    <OnTxComplete_Priority>interrupts disabled</OnTxComplete_Priority>
+    <ISR_InpIntISRHandle />
+    <ISR_OutIntISRHandle />
+    <ISR_ErrIntISRHandle />
+    <ISR_IdleIntISRHandle />
+    <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
+    <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
+    <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
+    <GenMethodPos>10</GenMethodPos>
+    <MethodPos>
+      <MethodPos0>Init</MethodPos0>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>160</LineBeg>
+      <LineEnd>182</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos1>ReceiveBlock</MethodPos1>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>183</LineBeg>
+      <LineEnd>227</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos2>SendBlock</MethodPos2>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>228</LineBeg>
+      <LineEnd>268</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos3>Interrupt</MethodPos3>
+      <MethodType>internal_method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>269</LineBeg>
+      <LineEnd>281</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos4>Init</MethodPos4>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>134</LineBeg>
+      <LineEnd>224</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos5>ReceiveBlock</MethodPos5>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>225</LineBeg>
+      <LineEnd>287</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos6>SendBlock</MethodPos6>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>288</LineBeg>
+      <LineEnd>348</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos7>InterruptRx</MethodPos7>
+      <MethodType>internal_method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>349</LineBeg>
+      <LineEnd>373</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos8>InterruptTx</MethodPos8>
+      <MethodType>internal_method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>374</LineBeg>
+      <LineEnd>399</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos9>Interrupt</MethodPos9>
+      <MethodType>internal_method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>400</LineBeg>
+      <LineEnd>430</LineEnd>
+    </MethodPos>
+    <GenExtraFilesCount>1</GenExtraFilesCount>
+    <ExtraFile0>Documentation\doxygen\USART0_DEBUG.txt</ExtraFile0>
+  </ComponentID_106>
   <UsedSrcFiles>
     <SrcFile0>Drivers\Kinetis\Kinetis_TAD.prg=1128760268</SrcFile0>
     <SrcFile1>Drivers\Common\CheckRegBits8_Rst.prg=1127710348</SrcFile1>
@@ -2089,8 +2256,8 @@
     <SrcFile129>Drivers\Common\InitReg_GetValue.prg=1127710348</SrcFile129>
     <SrcFile130>Drivers\Kinetis\IsSupported_DMA_PDD.prg=1146906860</SrcFile130>
     <SrcFile131>Drivers\Common\BitIO_LDDSetDir.inc=1127710348</SrcFile131>
-    <SrcFile132>Drivers\Common\I2C_LDDAbstract.inc=1127710348</SrcFile132>
-    <SrcFile133>Drivers\Common\DoxyGenComponentDoc.prg=1127710348</SrcFile133>
+    <SrcFile132>Drivers\Common\DoxyGenComponentDoc.prg=1127710348</SrcFile132>
+    <SrcFile133>Drivers\Common\I2C_LDDAbstract.inc=1127710348</SrcFile133>
     <SrcFile134>Drivers\Kinetis\IsSupported_GPIO_PDD.prg=1146906860</SrcFile134>
     <SrcFile135>Drivers\Common\TimerUnit_LDDResetCounter.inc=1127710348</SrcFile135>
     <SrcFile136>Drivers\Kinetis\IsSupported_UART_PDD.prg=1146906860</SrcFile136>
@@ -2104,8 +2271,8 @@
     <SrcFile144>Drivers\Common\I2C_LDDSelectSlaveDevice.inc=1127710348</SrcFile144>
     <SrcFile145>Drivers\Common\GeneralParameters.inc=1127710348</SrcFile145>
     <SrcFile146>Drivers\Common\Serial_LDDInit.inc=1127710348</SrcFile146>
-    <SrcFile147>Drivers\Kinetis\Serial_LDD.drv=1153264290</SrcFile147>
-    <SrcFile148>Drivers\Common\MQXLiteAbstract.inc=1127710347</SrcFile148>
+    <SrcFile147>Drivers\Common\MQXLiteAbstract.inc=1127710347</SrcFile147>
+    <SrcFile148>Drivers\Kinetis\Serial_LDD.drv=1153264290</SrcFile148>
     <SrcFile149>Drivers\Common\Serial_LDDSendBlock.inc=1146906860</SrcFile149>
     <SrcFile150>Drivers\Common\BitIO_LDDPutVal.inc=1127710348</SrcFile150>
     <SrcFile151>Drivers\Common\GeneralPublicGlobal.inc=1127710348</SrcFile151>
@@ -2205,8 +2372,8 @@
     <SrcFile245>Drivers\MQXLite.src=1146906860</SrcFile245>
     <SrcFile246>Drivers\Kinetis\IsSupported_OSC_PDD.prg=1133281142</SrcFile246>
     <SrcFile247>Drivers\Common\DeclareISR.prg=1133281142</SrcFile247>
-    <SrcFile248>Drivers\Common\Serial_LDDOnBlockReceived.inc=1127710348</SrcFile248>
-    <SrcFile249>Drivers\FreeCntr_LDD.src=1127710348</SrcFile249>
+    <SrcFile248>Drivers\FreeCntr_LDD.src=1127710348</SrcFile248>
+    <SrcFile249>Drivers\Common\Serial_LDDOnBlockReceived.inc=1127710348</SrcFile249>
     <SrcFile250>Drivers\Kinetis\IsSupported_FTMRE_PDD.prg=1133281142</SrcFile250>
     <SrcFile251>Drivers\Common\IO_MapSettings.inc=1127710348</SrcFile251>
     <SrcFile252>Drivers\Common\I2C_LDDDisable.inc=1127710348</SrcFile252>
