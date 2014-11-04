@@ -50,7 +50,7 @@ static bool initHardware(void) {
 		return false;
 	//i2cInit(I2C1_mod, 0x00); /*0x00 fake address, init of the bus , selecting devices is made further methods*/
 	i2cInit(I2C0_mod, 0x00); /*0x00 fake address, init of the bus , selecting devices is made further methods*/
-	//adt7410Init(i2cGetI2CHandle(I2C0_mod), I2C0_mod);
+	adt7410Init(i2cGetI2CHandle(I2C0_mod), I2C0_mod);
 	bmp180Init(i2cGetI2CHandle(I2C0_mod), I2C0_mod);
 	return true;
 }
@@ -157,7 +157,7 @@ static void sprintfDouble(double v, int decimalDigits, uint8_t* buf,
 void Sensors_task(uint32_t task_init_data) {
 	static const char* string[] = { "\n\rADT7410: ", "readFailed", "readOk",
 			"\n\rBMP180: " };
-	uint8_t tempBuf[10];
+	uint8_t tempBuf[15];
 	initHardware();
 	while (1) {
 		_time_delay_ticks(99);
@@ -171,36 +171,36 @@ void Sensors_task(uint32_t task_init_data) {
 		 vfnLCD_Write_Msg(tempBuf);
 
 		 */
-/*
-		 uartSendData(string[0], strlen(string[0]));
-		 if (adt7410ReadTemp() == 0)
-		 uartSendData(string[1], strlen(string[1]));
-		 else {
-		 sprintfDouble(adt7410GetTemperature(), 2, tempBuf, 6);
-		 //snprintf(tempBuf, 9, "%5.2f", temp);
-		 uartSendData(tempBuf, 5);
-		 }
-*/
+
+		uartSendData(string[0], strlen(string[0]));
+		if (adt7410ReadTemp() == 0)
+			uartSendData(string[1], strlen(string[1]));
+		else {
+			sprintfDouble(adt7410GetTemperature(), 2, tempBuf, 6);
+			//snprintf(tempBuf, 9, "%5.2f", temp);
+			uartSendData(tempBuf, 5);
+		}
+
 		uartSendData(string[3], strlen(string[3]));
 
 		if (bmp180ReadData() == 0)
 			uartSendData(string[1], strlen(string[1]));
 		else {
-			//sprintfDouble(bmp180GetPressure(), 2, tempBuf, 6);
-			float adc_read =bmp180GetPressure();
-
-			  				int d1 = adc_read;            // Get the integer part
-			  				float f2 = adc_read - d1;     // Get fractional part
-			  				int d2 = (int)(f2 * 10000);
-			  			 sprintf(tempBuf,"%d.%02d\r\n", d1, d2);
-
-			uartSendData(tempBuf, 8);
-			sprintfDouble(bmp180GetTemperature(), 2, tempBuf, 6);
+			sprintfDouble(bmp180GetPressure(), 2, tempBuf, 6);
+			/*float adc_read = bmp180GetPressure();
+			int d1 = adc_read;            // Get the integer part
+			float f2 = adc_read - d1;     // Get fractional part
+			int d2 = (int) (f2 * 10000);
+			sprintf(tempBuf, "%d.%02d\r\n", d1, d2);
+*/
 			tempBuf[6] = '\r';
 						tempBuf[7] = '\n';
 			uartSendData(tempBuf, 8);
+			sprintfDouble(bmp180GetTemperature(), 2, tempBuf, 6);
+			tempBuf[6] = '\r';
+			tempBuf[7] = '\n';
+			uartSendData(tempBuf, 8);
 		}
-
 
 	}
 }
