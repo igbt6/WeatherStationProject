@@ -5842,7 +5842,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <instance part="GND3" gate="1" x="101.6" y="33.02"/>
 <instance part="P+1" gate="VCC" x="33.02" y="48.26"/>
 <instance part="P+2" gate="VCC" x="101.6" y="48.26"/>
-<instance part="P+3" gate="VCC" x="78.74" y="45.72" rot="R270"/>
+<instance part="P+3" gate="VCC" x="91.44" y="50.8" rot="R270"/>
 <instance part="P+4" gate="VCC" x="40.64" y="73.66"/>
 <instance part="PAD1" gate="1" x="40.64" y="68.58" rot="R90"/>
 <instance part="PAD2" gate="1" x="38.1" y="55.88" rot="R270"/>
@@ -5890,6 +5890,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <segment>
 <pinref part="U$1" gate="G$1" pin="V+"/>
 <pinref part="P+3" gate="VCC" pin="VCC"/>
+<wire x1="88.9" y1="50.8" x2="76.2" y2="45.72" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="P+4" gate="VCC" pin="VCC"/>
