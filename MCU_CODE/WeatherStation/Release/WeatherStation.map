@@ -1749,11 +1749,12 @@ LOAD c:/freescale/kds_1.1.1/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.0/crtn.o
                 0x00000974       0x64 ./Sources/sensors/BMP180.o
                 0x00000974                bmp180ReadRawTemperature
  .text.bmp180ReadRawPressure
-                0x000009d8       0xbc ./Sources/sensors/BMP180.o
+                0x000009d8       0xb8 ./Sources/sensors/BMP180.o
                 0x000009d8                bmp180ReadRawPressure
  .text.bmp180TrueTemperature
-                0x00000a94       0x64 ./Sources/sensors/BMP180.o
-                0x00000a94                bmp180TrueTemperature
+                0x00000a90       0x64 ./Sources/sensors/BMP180.o
+                0x00000a90                bmp180TrueTemperature
+ *fill*         0x00000af4        0x4 
  .text.bmp180TruePressure
                 0x00000af8      0x198 ./Sources/sensors/BMP180.o
                 0x00000af8                bmp180TruePressure
@@ -2824,48 +2825,48 @@ OUTPUT(WeatherStation.elf elf32-littlearm)
  .comment       0x00000000       0x2b c:/freescale/kds_1.1.1/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.0/../../../../arm-none-eabi/lib\libg_s.a(lib_a-reent.o)
  .comment       0x00000000       0x2b c:/freescale/kds_1.1.1/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.0/crtend.o
 
-.debug_info     0x00000000    0x15696
+.debug_info     0x00000000    0x15686
  .debug_info    0x00000000      0x29b ./Sources/uart/uart.o
  .debug_info    0x0000029b      0x216 ./Sources/timeout/timeout.o
- .debug_info    0x000004b1      0x83e ./Sources/sensors/BMP180.o
- .debug_info    0x00000cef      0x412 ./Sources/sensors/adt7410.o
- .debug_info    0x00001101      0xa78 ./Sources/lcd/LCD.o
- .debug_info    0x00001b79       0x78 ./Sources/lcd/s401.o
- .debug_info    0x00001bf1      0x736 ./Sources/i2c/i2c.o
- .debug_info    0x00002327      0x260 ./Sources/Events.o
- .debug_info    0x00002587       0xdd ./Sources/main.o
- .debug_info    0x00002664      0x67c ./Sources/mqx_tasks.o
- .debug_info    0x00002ce0      0x3b4 ./Project_Settings/Startup_Code/startup.o
- .debug_info    0x00003094       0x84 ./MQXLITE/psp/cortex_m/core/M0/boot.o
- .debug_info    0x00003118       0x88 ./MQXLITE/psp/cortex_m/core/M0/dispatch.o
- .debug_info    0x000031a0      0x9da ./MQXLITE/psp/cortex_m/int_inst.o
- .debug_info    0x00003b7a      0x339 ./MQXLITE/psp/cortex_m/int_vtab.o
- .debug_info    0x00003eb3      0x14a ./MQXLITE/psp/cortex_m/mem_zero.o
- .debug_info    0x00003ffd      0x12d ./MQXLITE/psp/cortex_m/psp_iinit.o
- .debug_info    0x0000412a      0xa59 ./MQXLITE/psp/cortex_m/psp_tinm.o
- .debug_info    0x00004b83      0xb86 ./MQXLITE/psp/cortex_m/sc_irdyq.o
- .debug_info    0x00005709      0x634 ./MQXLITE/psp/cortex_m/stack_bu.o
- .debug_info    0x00005d3d      0x3f7 ./MQXLITE/psp/cortex_m/stack_de.o
- .debug_info    0x00006134      0x9d4 ./MQXLITE/kernel/idletask.o
- .debug_info    0x00006b08      0xeaf ./MQXLITE/kernel/int.o
- .debug_info    0x000079b7     0x1d52 ./MQXLITE/kernel/lwmem.o
- .debug_info    0x00009709     0x12d9 ./MQXLITE/kernel/lwsem.o
- .debug_info    0x0000a9e2      0xbc4 ./MQXLITE/kernel/mqx_utils.o
- .debug_info    0x0000b5a6     0x1060 ./MQXLITE/kernel/mqxlite.o
- .debug_info    0x0000c606     0x2629 ./MQXLITE/kernel/task.o
- .debug_info    0x0000ec2f     0x123f ./MQXLITE/kernel/time_ticks.o
- .debug_info    0x0000fe6e      0x292 ./MQXLITE/config/task_template_list.o
- .debug_info    0x00010100      0xb2d ./Generated_Code/Cpu.o
- .debug_info    0x00010c2d      0x2ab ./Generated_Code/FC1.o
- .debug_info    0x00010ed8      0xa7b ./Generated_Code/I2C0.o
- .debug_info    0x00011953      0xc00 ./Generated_Code/I2C1.o
- .debug_info    0x00012553     0x10e3 ./Generated_Code/MQX1.o
- .debug_info    0x00013636      0x384 ./Generated_Code/PE_LDD.o
- .debug_info    0x000139ba      0x51c ./Generated_Code/SegLCD1.o
- .debug_info    0x00013ed6      0x6ec ./Generated_Code/SystemTimer1.o
- .debug_info    0x000145c2      0x4ca ./Generated_Code/TU1.o
- .debug_info    0x00014a8c      0x9db ./Generated_Code/USART0_DEBUG.o
- .debug_info    0x00015467      0x22f ./Generated_Code/Vectors.o
+ .debug_info    0x000004b1      0x82e ./Sources/sensors/BMP180.o
+ .debug_info    0x00000cdf      0x412 ./Sources/sensors/adt7410.o
+ .debug_info    0x000010f1      0xa78 ./Sources/lcd/LCD.o
+ .debug_info    0x00001b69       0x78 ./Sources/lcd/s401.o
+ .debug_info    0x00001be1      0x736 ./Sources/i2c/i2c.o
+ .debug_info    0x00002317      0x260 ./Sources/Events.o
+ .debug_info    0x00002577       0xdd ./Sources/main.o
+ .debug_info    0x00002654      0x67c ./Sources/mqx_tasks.o
+ .debug_info    0x00002cd0      0x3b4 ./Project_Settings/Startup_Code/startup.o
+ .debug_info    0x00003084       0x84 ./MQXLITE/psp/cortex_m/core/M0/boot.o
+ .debug_info    0x00003108       0x88 ./MQXLITE/psp/cortex_m/core/M0/dispatch.o
+ .debug_info    0x00003190      0x9da ./MQXLITE/psp/cortex_m/int_inst.o
+ .debug_info    0x00003b6a      0x339 ./MQXLITE/psp/cortex_m/int_vtab.o
+ .debug_info    0x00003ea3      0x14a ./MQXLITE/psp/cortex_m/mem_zero.o
+ .debug_info    0x00003fed      0x12d ./MQXLITE/psp/cortex_m/psp_iinit.o
+ .debug_info    0x0000411a      0xa59 ./MQXLITE/psp/cortex_m/psp_tinm.o
+ .debug_info    0x00004b73      0xb86 ./MQXLITE/psp/cortex_m/sc_irdyq.o
+ .debug_info    0x000056f9      0x634 ./MQXLITE/psp/cortex_m/stack_bu.o
+ .debug_info    0x00005d2d      0x3f7 ./MQXLITE/psp/cortex_m/stack_de.o
+ .debug_info    0x00006124      0x9d4 ./MQXLITE/kernel/idletask.o
+ .debug_info    0x00006af8      0xeaf ./MQXLITE/kernel/int.o
+ .debug_info    0x000079a7     0x1d52 ./MQXLITE/kernel/lwmem.o
+ .debug_info    0x000096f9     0x12d9 ./MQXLITE/kernel/lwsem.o
+ .debug_info    0x0000a9d2      0xbc4 ./MQXLITE/kernel/mqx_utils.o
+ .debug_info    0x0000b596     0x1060 ./MQXLITE/kernel/mqxlite.o
+ .debug_info    0x0000c5f6     0x2629 ./MQXLITE/kernel/task.o
+ .debug_info    0x0000ec1f     0x123f ./MQXLITE/kernel/time_ticks.o
+ .debug_info    0x0000fe5e      0x292 ./MQXLITE/config/task_template_list.o
+ .debug_info    0x000100f0      0xb2d ./Generated_Code/Cpu.o
+ .debug_info    0x00010c1d      0x2ab ./Generated_Code/FC1.o
+ .debug_info    0x00010ec8      0xa7b ./Generated_Code/I2C0.o
+ .debug_info    0x00011943      0xc00 ./Generated_Code/I2C1.o
+ .debug_info    0x00012543     0x10e3 ./Generated_Code/MQX1.o
+ .debug_info    0x00013626      0x384 ./Generated_Code/PE_LDD.o
+ .debug_info    0x000139aa      0x51c ./Generated_Code/SegLCD1.o
+ .debug_info    0x00013ec6      0x6ec ./Generated_Code/SystemTimer1.o
+ .debug_info    0x000145b2      0x4ca ./Generated_Code/TU1.o
+ .debug_info    0x00014a7c      0x9db ./Generated_Code/USART0_DEBUG.o
+ .debug_info    0x00015457      0x22f ./Generated_Code/Vectors.o
 
 .debug_abbrev   0x00000000     0x44cf
  .debug_abbrev  0x00000000      0x137 ./Sources/uart/uart.o

@@ -3,7 +3,7 @@
 
  @brief Barometric Pressure and Temperature Sensor BMP180 Breakout I2C Library
 
- @Author spiridion luszko based on mBed library
+ @Author  luszko based on mBed library
 
  */
 
@@ -142,7 +142,7 @@ int bmp180ReadRawTemperature(long* pUt) {
 // request pressure measurement
 int bmp180ReadRawPressure(long* pUp) {
 	int errors = 0;
-	char data[2];
+	uint8_t data[2];
 
 // request pressure measurement
 	data[0] = 0xF4;
