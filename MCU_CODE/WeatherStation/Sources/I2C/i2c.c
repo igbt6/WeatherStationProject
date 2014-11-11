@@ -10,13 +10,7 @@
 #include <string.h>
 
 #define IS_I2C_MODULE(x) (x==I2C0_mod||x==I2C1_mod)
-#define TIMEOUT 500
-/*
- static LDD_TDeviceData* mI2C1 =NULL;
- static LDD_TDeviceData* mI2C0 =NULL;
- static I2C_DeviceData mI2C1_DeviceData;
- static I2C_DeviceData mI2C0_DeviceData;
- */
+#define TIMEOUT 100
 
 typedef struct {
 	LDD_TDeviceData* mI2c;
@@ -48,7 +42,6 @@ void i2cInit(I2C_MODULE module, uint8_t slaveAddr) {
 				; //init failed
 		I2C1_SelectSlaveDevice(mI2c1Handle.mI2c, LDD_I2C_ADDRTYPE_7BITS,
 				slaveAddr);
-
 	}
 	timeoutInit(); //timeout for I2C
 }
@@ -58,32 +51,41 @@ bool i2cRead(uint8_t slaveAddr, uint8_t regAddress, uint8_t *data,
 
 	if (module == I2C0_mod) {
 		LDD_TError res;
-
+		if (mI2c0Handle.mI2c == NULL) {
+		//	mI2c0Handle.mI2c = I2C0_Init(&mI2c0Handle.mI2c_UsrData); ///////////////////
+		}
 		res = I2C0_SelectSlaveDevice(mI2c0Handle.mI2c, LDD_I2C_ADDRTYPE_7BITS,
 				slaveAddr);
 		if (res != ERR_OK) {
+		//	I2C0_Deinit(mI2c0Handle.mI2c); ///////////////////
 			return false;
 		}
 		res = I2C0_MasterSendBlock(mI2c0Handle.mI2c, &regAddress, 1,
 				LDD_I2C_NO_SEND_STOP);
 		if (res != ERR_OK) {
+		//	I2C0_Deinit(mI2c0Handle.mI2c); ///////////////////
 			return false;
 		}
 		timeoutSetTimeout(TIMEOUT);
 		do {
-			if (timeoutIsTimeoutOccured())
+			if (timeoutIsTimeoutOccured()) {
+		//		I2C0_Deinit(mI2c0Handle.mI2c); ///////////////////
 				return false;
+			}
 		} while (!mI2c0Handle.mI2c_UsrData.dataTransmitFlag);
 		mI2c0Handle.mI2c_UsrData.dataTransmitFlag = false;
 		res = I2C0_MasterReceiveBlock(mI2c0Handle.mI2c, data, dataLength,
 				LDD_I2C_SEND_STOP);
 		if (res != ERR_OK) {
+		//	I2C0_Deinit(mI2c0Handle.mI2c); ///////////////////
 			return false;
 		}
 		timeoutSetTimeout(TIMEOUT);
 		do {
-			if (timeoutIsTimeoutOccured())
+			if (timeoutIsTimeoutOccured()) {
+		//		I2C0_Deinit(mI2c0Handle.mI2c); ///////////////////
 				return false;
+			}
 		} while (!mI2c0Handle.mI2c_UsrData.dataReceivedFlag);
 		mI2c0Handle.mI2c_UsrData.dataReceivedFlag = false;
 		return true;
@@ -131,34 +133,27 @@ bool i2cWrite(uint8_t slaveAddr, uint8_t regAddress, uint8_t *data,
 
 	if (module == I2C0_mod) {
 		LDD_TError res;
-
+		if (mI2c0Handle.mI2c == NULL) {
+		//			mI2c0Handle.mI2c = I2C0_Init(&mI2c0Handle.mI2c_UsrData); ///////////////////
+				}
 		res = I2C0_SelectSlaveDevice(mI2c0Handle.mI2c, LDD_I2C_ADDRTYPE_7BITS,
 				slaveAddr);
 		if (res != ERR_OK) {
+		//	I2C0_Deinit(mI2c0Handle.mI2c); ///////////////////
 			return false;
 		}
-		/*
-		 res = I2C1_MasterSendBlock(mI2c1Handle.mI2c, &regAddress, 1,
-		 LDD_I2C_NO_SEND_STOP);
-		 if (res != ERR_OK) {
-		 return false;
-		 }
-		 timeoutSetTimeout(TIMEOUT);
-		 do {
-		 if (timeoutIsTimeoutOccured())
-		 return false;
-		 } while (!mI2c1Handle.mI2c_UsrData.dataTransmitFlag);
-		 mI2c1Handle.mI2c_UsrData.dataTransmitFlag = false;
-		 */
 		res = I2C0_MasterSendBlock(mI2c0Handle.mI2c, /*data*/temp,
 				dataLength + 1, LDD_I2C_SEND_STOP);
 		if (res != ERR_OK) {
+		//	I2C0_Deinit(mI2c0Handle.mI2c); ///////////////////
 			return false;
 		}
 		timeoutSetTimeout(TIMEOUT);
 		do {
-			if (timeoutIsTimeoutOccured())
+			if (timeoutIsTimeoutOccured()) {
+			//	I2C0_Deinit(mI2c0Handle.mI2c); ///////////////////
 				return false;
+			}
 		} while (!mI2c0Handle.mI2c_UsrData.dataTransmitFlag);
 		mI2c0Handle.mI2c_UsrData.dataTransmitFlag = false;
 
@@ -171,19 +166,6 @@ bool i2cWrite(uint8_t slaveAddr, uint8_t regAddress, uint8_t *data,
 		if (res != ERR_OK) {
 			return false;
 		}
-		/*
-		 res = I2C1_MasterSendBlock(mI2c1Handle.mI2c, &regAddress, 1,
-		 LDD_I2C_NO_SEND_STOP);
-		 if (res != ERR_OK) {
-		 return false;
-		 }
-		 timeoutSetTimeout(TIMEOUT);
-		 do {
-		 if (timeoutIsTimeoutOccured())
-		 return false;
-		 } while (!mI2c1Handle.mI2c_UsrData.dataTransmitFlag);
-		 mI2c1Handle.mI2c_UsrData.dataTransmitFlag = false;
-		 */
 		res = I2C1_MasterSendBlock(mI2c1Handle.mI2c, /*data*/temp,
 				dataLength + 1, LDD_I2C_SEND_STOP);
 		if (res != ERR_OK) {
@@ -207,4 +189,15 @@ LDD_TDeviceData* i2cGetI2CHandle(I2C_MODULE i2cModule) {
 		return mI2c0Handle.mI2c;
 	} else
 		return mI2c1Handle.mI2c;
+}
+
+//test method to find address of i2c slave device on the bus
+uint8_t getI2cSlaveAddres(I2C_MODULE i2cModule) {
+	uint8_t addr;
+	uint8_t data[1];
+	for (addr = 0; addr < 256; addr++) {
+		if (i2cRead(addr, 0x00, data, 1, i2cModule))
+			break;
+	}
+	return addr;
 }

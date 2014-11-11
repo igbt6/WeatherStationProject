@@ -392,6 +392,10 @@ Module "I2C0"      (component I2C_LDD)
                 then the device is also enabled(see the description of the Enable() method). In this case the Enable() method 
                 is not necessary and needn't to be generated.    This method can be called only once. Before the second call of 
                 Init() the Deinit() must be called first.
+   - I2C0_Deinit -Deinitializes the device. Switches off the device, frees the device data structure memory, interrupts vectors,
+                etc.
+   - I2C0_Enable -Enables I2C component. Events may be generated ("DisableEvent"/"EnableEvent").
+   - I2C0_Disable -Disables I2C component. No events will be generated.
    - I2C0_MasterSendBlock -This method writes one (7-bit addressing) or two (10-bit addressing) slave address bytes inclusive 
                 of R/W bit = 0 to the I2C bus and then writes the block of characters to the bus. The slave address must be 
                 specified before, by the "SelectSlaveDevice" method or in component initialization section, "Target slave 

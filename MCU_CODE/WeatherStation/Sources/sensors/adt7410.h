@@ -35,7 +35,7 @@ void adt7410Init(LDD_TDeviceData* i2cHandlePtr,I2C_MODULE i2cModule);
  *   1 on success,
  *   0 on error
  */
-int adt7410ReadTemp();
+bool adt7410ReadTemp();
 
 int adt7410GetIdNumber(void);
 

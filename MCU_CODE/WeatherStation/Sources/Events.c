@@ -214,6 +214,27 @@ void I2C0_OnMasterBlockReceived(LDD_TUserData *UserDataPtr)
 		ptr->dataReceivedFlag = TRUE;
 }
 
+/*
+** ===================================================================
+**     Event       :  I2C0_OnError (module Events)
+**
+**     Component   :  I2C0 [I2C_LDD]
+*/
+/*!
+**     @brief
+**         This event is called when an error (e.g. Arbitration lost)
+**         occurs. The errors can be read with GetError method.
+**     @param
+**         UserDataPtr     - Pointer to the user or
+**                           RTOS specific data. This pointer is passed
+**                           as the parameter of Init method.
+*/
+/* ===================================================================*/
+void I2C0_OnError(LDD_TUserData *UserDataPtr)
+{
+  /* Write your code here ... */
+}
+
 /* END Events */
 
 #ifdef __cplusplus

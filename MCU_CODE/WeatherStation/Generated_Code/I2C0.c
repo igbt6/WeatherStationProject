@@ -6,7 +6,7 @@
 **     Component   : I2C_LDD
 **     Version     : Component 01.016, Driver 01.07, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-10-30, 01:42, # CodeGen: 84
+**     Date/Time   : 2014-11-10, 20:17, # CodeGen: 89
 **     Abstract    :
 **          This component encapsulates the internal I2C communication
 **          interface. The implementation of the interface is based
@@ -73,7 +73,7 @@
 **              OnSlaveGeneralCallAddr                     : Disabled
 **              OnSlaveSmBusCallAddr                       : Disabled
 **              OnSlaveSmBusAlertResponse                  : Disabled
-**              OnError                                    : Disabled
+**              OnError                                    : Enabled
 **              OnBusStopDetected                          : Disabled
 **          CPU clock/configuration selection              : 
 **            Clock configuration 0                        : This component enabled
@@ -86,6 +86,9 @@
 **            Clock configuration 7                        : This component disabled
 **     Contents    :
 **         Init               - LDD_TDeviceData* I2C0_Init(LDD_TUserData *UserDataPtr);
+**         Deinit             - void I2C0_Deinit(LDD_TDeviceData *DeviceDataPtr);
+**         Enable             - LDD_TError I2C0_Enable(LDD_TDeviceData *DeviceDataPtr);
+**         Disable            - LDD_TError I2C0_Disable(LDD_TDeviceData *DeviceDataPtr);
 **         MasterSendBlock    - LDD_TError I2C0_MasterSendBlock(LDD_TDeviceData *DeviceDataPtr, LDD_TData...
 **         MasterReceiveBlock - LDD_TError I2C0_MasterReceiveBlock(LDD_TDeviceData *DeviceDataPtr, LDD_TData...
 **         SelectSlaveDevice  - LDD_TError I2C0_SelectSlaveDevice(LDD_TDeviceData *DeviceDataPtr,...
@@ -180,6 +183,7 @@ typedef struct {
                                        /*       4 - 10-bit addr flag */
                                        /*       5 - 7-bit addr flag */
   LDD_I2C_TSendStop SendStop;          /* Enable/Disable generate send stop condition after transmission */
+  bool EnUser;                         /* Enable/Disable device */
   uint8_t SlaveAddr;                   /* Variable for Slave address */
   uint8_t SlaveAddrHigh;               /* Variable for High byte of the Slave address (10-bit address) */
   LDD_I2C_TSize InpLenM;               /* The counter of input bufer's content */
@@ -195,7 +199,10 @@ typedef I2C0_TDeviceData *I2C0_TDeviceDataPtr; /* Pointer to the device data str
 /* {MQXLite RTOS Adapter} Static object used for simulation of dynamic driver memory allocation */
 static I2C0_TDeviceData DeviceDataPrv__DEFAULT_RTOS_ALLOC;
 
-#define AVAILABLE_EVENTS_MASK (LDD_I2C_ON_MASTER_BLOCK_SENT | LDD_I2C_ON_MASTER_BLOCK_RECEIVED)
+#define AVAILABLE_EVENTS_MASK (LDD_I2C_ON_MASTER_BLOCK_SENT | LDD_I2C_ON_MASTER_BLOCK_RECEIVED | LDD_I2C_ON_ERROR)
+
+/* Internal method prototypes */
+static void HWEnDi(LDD_TDeviceData *DeviceDataPtr);
 
 /*
 ** ===================================================================
@@ -212,6 +219,7 @@ void I2C0_Interrupt(LDD_RTOS_TISRParameter _isrParameter)
 {
   /* {MQXLite RTOS Adapter} ISR parameter is passed as parameter from RTOS interrupt dispatcher */
   I2C0_TDeviceDataPtr DeviceDataPrv = (I2C0_TDeviceDataPtr)_isrParameter;
+  LDD_I2C_TErrorMask ErrorMask = 0x00U; /* Temporary variable for error mask */
   register uint8_t Status;             /* Temporary variable for status register */
 
   Status = I2C_PDD_GetSCLTimeoutInterruptFlags(I2C0_BASE_PTR);
@@ -227,6 +235,7 @@ void I2C0_Interrupt(LDD_RTOS_TISRParameter _isrParameter)
     DeviceDataPrv->InpLenM = 0x00U;    /* No character for reception */
     DeviceDataPrv->SerFlag &= (uint8_t)~(MASTER_IN_PROGRES); /* No character for sending or reception*/
     DeviceDataPrv->SerFlag |= (ADDR_COMPLETE | REP_ADDR_COMPLETE); /* Set the flag */
+    I2C0_OnError(DeviceDataPrv->UserData); /* If yes then invoke user event */
     return;
   }
   Status = I2C_PDD_ReadStatusReg(I2C0_BASE_PTR); /* Safe status register */
@@ -240,6 +249,7 @@ void I2C0_Interrupt(LDD_RTOS_TISRParameter _isrParameter)
         DeviceDataPrv->InpLenM = 0x00U; /* No character for reception */
         DeviceDataPrv->SerFlag &= (uint8_t)~(MASTER_IN_PROGRES); /* No character for sending or reception */
         DeviceDataPrv->SerFlag |= (ADDR_COMPLETE | REP_ADDR_COMPLETE); /* Set the flag */
+        ErrorMask |= LDD_I2C_MASTER_NACK; /* Set the Master Nack error mask */
       } else {
         if ((DeviceDataPrv->SerFlag & ADDR_COMPLETE) != 0x00U) { /* If 10-bit addr has been completed */
           if (DeviceDataPrv->OutLenM != 0x00U) { /* Is any char. for transmitting? */
@@ -297,7 +307,11 @@ void I2C0_Interrupt(LDD_RTOS_TISRParameter _isrParameter)
       DeviceDataPrv->SendStop = LDD_I2C_SEND_STOP; /* Set variable for sending stop condition (for master mode) */
       DeviceDataPrv->SerFlag &= (uint8_t)~(MASTER_IN_PROGRES); /* Any character is not for sent or reception*/
       I2C_PDD_SetTransmitMode(I2C0_BASE_PTR, I2C_PDD_RX_DIRECTION); /* Switch to Rx mode */
+      ErrorMask |= LDD_I2C_ARBIT_LOST; /* Set the ArbitLost error mask */
     }
+  }
+  if (ErrorMask != 0x00U) {            /* Is any error mask set? */
+    I2C0_OnError(DeviceDataPrv->UserData); /* If yes then invoke user event */
   }
 }
 
@@ -339,6 +353,7 @@ LDD_TDeviceData* I2C0_Init(LDD_TUserData *UserDataPtr)
   DeviceDataPrv->SavedISRSettings.isrData = _int_get_isr_data(LDD_ivIndex_INT_I2C0);
   DeviceDataPrv->SavedISRSettings.isrFunction = _int_install_isr(LDD_ivIndex_INT_I2C0, I2C0_Interrupt, DeviceDataPrv);
   DeviceDataPrv->SerFlag = ADDR_7;     /* Reset all flags start with 7-bit address mode */
+  DeviceDataPrv->EnUser = TRUE;        /* Enable device */
   DeviceDataPrv->SlaveAddr = 0x00U;    /* Set variable for slave address */
   DeviceDataPrv->SendStop = LDD_I2C_SEND_STOP; /* Set variable for sending stop condition (for master mode) */
   DeviceDataPrv->InpLenM = 0x00U;      /* Set zero counter of data of reception */
@@ -385,11 +400,99 @@ LDD_TDeviceData* I2C0_Init(LDD_TUserData *UserDataPtr)
   I2C0_SLTL = I2C_SLTL_SSLT(0xFF);     /* Set SCL low timeout register low */
   /* I2C0_SLTH: SSLT=0xFF */
   I2C0_SLTH = I2C_SLTH_SSLT(0xFF);     /* Set SCL low timeout register high */
-  I2C_PDD_EnableDevice(I2C0_BASE_PTR, PDD_ENABLE); /* Enable device */
-  I2C_PDD_EnableInterrupt(I2C0_BASE_PTR); /* Enable interrupt */
+  HWEnDi(DeviceDataPrv);               /* Enable/disable device according to status flags */
   /* Registration of the device structure */
   PE_LDD_RegisterDeviceStructure(PE_LDD_COMPONENT_I2C0_ID,DeviceDataPrv);
   return ((LDD_TDeviceData *)DeviceDataPrv); /* Return pointer to the data data structure */
+}
+
+/*
+** ===================================================================
+**     Method      :  I2C0_Deinit (component I2C_LDD)
+*/
+/*!
+**     @brief
+**         Deinitializes the device. Switches off the device, frees the
+**         device data structure memory, interrupts vectors, etc.
+**     @param
+**         DeviceDataPtr   - Device data structure
+**                           pointer returned by <Init> method.
+*/
+/* ===================================================================*/
+void I2C0_Deinit(LDD_TDeviceData *DeviceDataPtr)
+{
+  (void)DeviceDataPtr;                 /* Parameter is not used, suppress unused argument warning */
+
+  /* I2C0_C1: IICEN=0,IICIE=0,MST=0,TX=0,TXAK=0,RSTA=0,WUEN=0,DMAEN=0 */
+  I2C0_C1 = 0x00U;                     /* Reset I2C Control register */
+  /* Restoring the interrupt vector */
+  /* {MQXLite RTOS Adapter} Restore interrupt vector (function handler and ISR parameter) */
+  /* Note: Exception handler for interrupt is not restored, because it was not modified */
+  (void)_int_install_isr(LDD_ivIndex_INT_I2C0, ((I2C0_TDeviceDataPtr)DeviceDataPtr)->SavedISRSettings.isrFunction, ((I2C0_TDeviceDataPtr)DeviceDataPtr)->SavedISRSettings.isrData);
+  /* Unregistration of the device structure */
+  PE_LDD_UnregisterDeviceStructure(PE_LDD_COMPONENT_I2C0_ID);
+  /* Deallocation of the device structure */
+  /* {MQXLite RTOS Adapter} Driver memory deallocation: Dynamic allocation is simulated, no deallocation code is generated */
+  /* SIM_SCGC4: I2C0=0 */
+  SIM_SCGC4 &= (uint32_t)~(uint32_t)(SIM_SCGC4_I2C0_MASK);
+}
+
+/*
+** ===================================================================
+**     Method      :  I2C0_Enable (component I2C_LDD)
+*/
+/*!
+**     @brief
+**         Enables I2C component. Events may be generated
+**         ("DisableEvent"/"EnableEvent").
+**     @param
+**         DeviceDataPtr   - Device data structure
+**                           pointer returned by <Init> method.
+**     @return
+**                         - Error code, possible codes:
+**                           ERR_OK - OK
+**                           ERR_SPEED - This device does not work in
+**                           the active clock configuration
+*/
+/* ===================================================================*/
+LDD_TError I2C0_Enable(LDD_TDeviceData *DeviceDataPtr)
+{
+  I2C0_TDeviceData *DeviceDataPrv = (I2C0_TDeviceData *)DeviceDataPtr;
+
+  if (!DeviceDataPrv->EnUser) {        /* Is the device disabled by user? */
+    DeviceDataPrv->EnUser = TRUE;      /* If yes then set the flag "device enabled" */
+    DeviceDataPrv->SerFlag &= (uint8_t)~(MASTER_IN_PROGRES); /* Clear the status variable */
+    HWEnDi(DeviceDataPrv);             /* Enable the device */
+  }
+  return ERR_OK;
+}
+
+/*
+** ===================================================================
+**     Method      :  I2C0_Disable (component I2C_LDD)
+*/
+/*!
+**     @brief
+**         Disables I2C component. No events will be generated.
+**     @param
+**         DeviceDataPtr   - Device data structure
+**                           pointer returned by <Init> method.
+**     @return
+**                         - Error code, possible codes:
+**                           ERR_OK - OK
+**                           ERR_SPEED - This device does not work in
+**                           the active clock configuration
+*/
+/* ===================================================================*/
+LDD_TError I2C0_Disable(LDD_TDeviceData *DeviceDataPtr)
+{
+  I2C0_TDeviceData *DeviceDataPrv = (I2C0_TDeviceData *)DeviceDataPtr;
+
+  if (DeviceDataPrv->EnUser) {         /* Is the device enabled by user? */
+    DeviceDataPrv->EnUser = FALSE;     /* If yes then set the flag "device disabled" */
+    HWEnDi(DeviceDataPrv);             /* Disable the device */
+  }
+  return ERR_OK;                       /* OK */
 }
 
 /*
@@ -441,6 +544,11 @@ LDD_TError I2C0_MasterSendBlock(LDD_TDeviceData *DeviceDataPtr, LDD_TData *Buffe
 {
   I2C0_TDeviceData *DeviceDataPrv = (I2C0_TDeviceData *)DeviceDataPtr;
 
+  /* Device state test - this test can be disabled by setting the "Ignore enable test"
+     property to the "yes" value in the "Configuration inspector" */
+  if(!DeviceDataPrv->EnUser) {         /* Is the device disabled by user? */
+    return ERR_DISABLED;               /* If yes then error */
+  }
   if (Size == 0x00U) {                 /* Test variable Size on zero */
     return ERR_OK;                     /* If zero then OK */
   }
@@ -540,6 +648,11 @@ LDD_TError I2C0_MasterReceiveBlock(LDD_TDeviceData *DeviceDataPtr, LDD_TData *Bu
 {
   I2C0_TDeviceData *DeviceDataPrv = (I2C0_TDeviceData *)DeviceDataPtr;
 
+  /* Device state test - this test can be disabled by setting the "Ignore enable test"
+     property to the "yes" value in the "Configuration inspector" */
+  if(!DeviceDataPrv->EnUser) {         /* Is the device disabled by user? */
+    return ERR_DISABLED;               /* If yes then error */
+  }
   if (Size == 0x00U) {                 /* Test variable Size on zero */
     return ERR_OK;                     /* If zero then OK */
   }
@@ -624,6 +737,11 @@ LDD_TError I2C0_SelectSlaveDevice(LDD_TDeviceData *DeviceDataPtr, LDD_I2C_TAddrT
 {
   I2C0_TDeviceData *DeviceDataPrv = (I2C0_TDeviceData *)DeviceDataPtr;
 
+  /* Device state test - this test can be disabled by setting the "Ignore enable test"
+     property to the "yes" value in the "Configuration inspector" */
+  if(!DeviceDataPrv->EnUser) {         /* Is the device disabled by user? */
+    return ERR_DISABLED;               /* If yes then error */
+  }
   if ((DeviceDataPrv->SerFlag & MASTER_IN_PROGRES) != 0x00U) { /* Is the device in the active state? */
     return ERR_BUSY;                   /* If yes then error */
   }
@@ -655,6 +773,31 @@ LDD_TError I2C0_SelectSlaveDevice(LDD_TDeviceData *DeviceDataPtr, LDD_I2C_TAddrT
       return ERR_PARAM_ADDRESS_TYPE;   /* If value of address type is invalid, return error */
   }
   return ERR_OK;                       /* OK */
+}
+
+/*
+** ===================================================================
+**     Method      :  HWEnDi (component I2C_LDD)
+**
+**     Description :
+**         Enables or disables the peripheral(s) associated with the 
+**         component. The method is called automatically as a part of the 
+**         Enable and Disable methods and several internal methods.
+**         This method is internal. It is used by Processor Expert only.
+** ===================================================================
+*/
+static void HWEnDi(LDD_TDeviceData *DeviceDataPtr)
+{
+  I2C0_TDeviceData *DeviceDataPrv = (I2C0_TDeviceData *)DeviceDataPtr;
+
+  if (DeviceDataPrv->EnUser) {         /* Enable device? */
+    I2C_PDD_EnableDevice(I2C0_BASE_PTR, PDD_ENABLE); /* Enable device */
+    I2C_PDD_EnableInterrupt(I2C0_BASE_PTR); /* Enable interrupt */
+  } else {
+    I2C_PDD_DisableInterrupt(I2C0_BASE_PTR); /* Disable interrupt */
+    I2C_PDD_EnableDevice(I2C0_BASE_PTR, PDD_DISABLE); /* Disable device */
+    I2C_PDD_ClearBusStatusInterruptFlags(I2C0_BASE_PTR, (I2C_PDD_BUS_STOP_FLAG)); /* Clear bus status detect flags */
+  }
 }
 
 /* END I2C0. */

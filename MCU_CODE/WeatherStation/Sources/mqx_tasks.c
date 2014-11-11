@@ -31,12 +31,15 @@
 #include "Events.h"
 #include "mqx_tasks.h"
 #include "mqxlite.h"
+#include "lwtimer.h"
 #include "lcd/LCD.h"
 #include "SegLCD1.h"
 #include "sensors/adt7410.h"
 #include "sensors/BMP180.h"
+#include "sensors/max9611.h"
 #include "uart/uart.h"
 #include <stdio.h>
+#include <string.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -44,14 +47,22 @@ extern "C" {
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
 
+#define ADT7410_READ_EVENT 0x00000001
+#define BMP180_READ_EVENT 0x00000002
+#define MAX9611_READ_EVENT 0x00000004
+
+LWEVENT_STRUCT read_sensors_event;
+
 static bool initHardware(void) {
 
 	if (!uartInit(UART0_mod))
 		return false;
-	//i2cInit(I2C1_mod, 0x00); /*0x00 fake address, init of the bus , selecting devices is made further methods*/
 	i2cInit(I2C0_mod, 0x00); /*0x00 fake address, init of the bus , selecting devices is made further methods*/
+	//uint8_t addr=getI2cSlaveAddres(I2C0_mod);
+	//uartSendData(&addr,1);
 	adt7410Init(i2cGetI2CHandle(I2C0_mod), I2C0_mod);
 	bmp180Init(i2cGetI2CHandle(I2C0_mod), I2C0_mod);
+	max9611Init(i2cGetI2CHandle(I2C0_mod), I2C0_mod);
 	return true;
 }
 
@@ -151,56 +162,112 @@ static void sprintfDouble(double v, int decimalDigits, uint8_t* buf,
 		;
 	intPart = (int) v;
 	fractPart = (int) ((v - (double) (int) v) * i);
-	snprintf(buf, bufSize, "%2d.%2d", intPart, fractPart);
+	snprintf(buf, bufSize, "%2d.%02d", intPart, fractPart);
+}
+//callbacks for timer
+static void readADT7410TempCallback(void) {
+
+	_lwevent_set(&read_sensors_event, ADT7410_READ_EVENT);
+
+}
+
+static void readBMP180PressureCallback(void) {
+
+	_lwevent_set(&read_sensors_event, BMP180_READ_EVENT);
+}
+
+static void readMAX9611CurrentValCallback(void) {
+
+	_lwevent_set(&read_sensors_event, MAX9611_READ_EVENT);
 }
 
 void Sensors_task(uint32_t task_init_data) {
-	static const char* string[] = { "\n\rADT7410: ", "readFailed", "readOk",
-			"\n\rBMP180: " };
+	LWTIMER_PERIOD_STRUCT period;
+	LWTIMER_STRUCT timerADC, timerBmp,timerMax9611;
+	uint32_t event_bits;
+
+	char* string[] = { "\n\rADT7410: ", "readFailed", "readOk", "\n\rBMP180: ",
+			"\n\rMAX9611: " };
 	uint8_t tempBuf[15];
-	initHardware();
+	 initHardware();
+	_lwevent_create(&read_sensors_event, LWEVENT_AUTO_CLEAR);
+	_lwtimer_create_periodic_queue(&period, 200, 0);
+	_lwtimer_add_timer_to_queue(&period, &timerADC, 0,
+			(LWTIMER_ISR_FPTR*) readADT7410TempCallback, NULL);
+	_lwtimer_add_timer_to_queue(&period, &timerBmp, 50,
+				(LWTIMER_ISR_FPTR*) readBMP180PressureCallback, NULL);
+	_lwtimer_add_timer_to_queue(&period, &timerMax9611, 100,
+				(LWTIMER_ISR_FPTR*) readMAX9611CurrentValCallback, NULL);
 	while (1) {
-		_time_delay_ticks(99);
+		_lwevent_wait_ticks(&read_sensors_event, ADT7410_READ_EVENT|BMP180_READ_EVENT|MAX9611_READ_EVENT, FALSE, 0);
+		event_bits = _lwevent_get_signalled();
+
+		if (event_bits & ADT7410_READ_EVENT) {
+			uartSendData(string[0], strlen(string[0]));
+			if (!adt7410ReadTemp())
+				uartSendData(string[1], strlen(string[1]));
+			else {
+				sprintfDouble(adt7410GetTemperature(), 2, tempBuf, 6);
+				//snprintf(tempBuf, 9, "%5.2f", temp);
+				uartSendData(tempBuf, 5);
+			}
+
+		} else if (event_bits & BMP180_READ_EVENT) {
+			uartSendData(string[3], strlen(string[3]));
+			if (!bmp180ReadData())
+				uartSendData(string[1], strlen(string[1]));
+			else {
+				sprintfDouble(bmp180GetPressure(), 2, tempBuf, 6);
+				uartSendData(tempBuf, 5);
+			}
+
+		} else if (event_bits & MAX9611_READ_EVENT) {
+			uartSendData(string[4], strlen(string[4]));
+			if (!max9611ReadTemp())
+				uartSendData(string[1], strlen(string[1]));
+			else {
+				sprintfDouble(max9611GetTemp(), 2, tempBuf, 6);
+				//snprintf(tempBuf, 9, "%5.2f", temp);
+				uartSendData(tempBuf, 5);
+			}
+
+		} else {
+			uartSendData(string[1], strlen(string[1]));
+		}
+
+		//_time_delay_ticks(100);
+
 		/*
+		 uartSendData(string[0], strlen(string[0]));
+		 if (!adt7410ReadTemp())
+		 uartSendData(string[1], strlen(string[1]));
+		 else {
+		 sprintfDouble(adt7410GetTemperature(), 2, tempBuf, 6);
+		 uartSendData(tempBuf, 5);
+		 }
 
-		 int iInt = adt7410GetIdNumber();
-		 snprintf(tempBuf, 4, "%d", iInt);
-		 vfnLCD_Write_Msg("  ");  // TURN ON all characters
-		 vfnLCD_Home();
-		 vfnLCD_Write_MsgPlace(tempBuf, 4);
-		 vfnLCD_Write_Msg(tempBuf);
-
+		 uartSendData(string[3], strlen(string[3]));
+		 if (!bmp180ReadData())
+		 uartSendData(string[1], strlen(string[1]));
+		 else {
+		 sprintfDouble(bmp180GetPressure(), 2, tempBuf, 6);
+		 tempBuf[6] = '\r';
+		 tempBuf[7] = '\n';
+		 uartSendData(tempBuf, 8);
+		 sprintfDouble(bmp180GetTemperature(), 2, tempBuf, 6);
+		 tempBuf[6] = '\r';
+		 tempBuf[7] = '\n';
+		 uartSendData(tempBuf, 8);
+		 }
 		 */
-
-		uartSendData(string[0], strlen(string[0]));
-		if (adt7410ReadTemp() == 0)
-			uartSendData(string[1], strlen(string[1]));
-		else {
-			sprintfDouble(adt7410GetTemperature(), 2, tempBuf, 6);
-			//snprintf(tempBuf, 9, "%5.2f", temp);
-			uartSendData(tempBuf, 5);
-		}
-
-		uartSendData(string[3], strlen(string[3]));
-
-		if (bmp180ReadData() == 0)
-			uartSendData(string[1], strlen(string[1]));
-		else {
-			sprintfDouble(bmp180GetPressure(), 2, tempBuf, 6);
-			/*float adc_read = bmp180GetPressure();
-			int d1 = adc_read;            // Get the integer part
-			float f2 = adc_read - d1;     // Get fractional part
-			int d2 = (int) (f2 * 10000);
-			sprintf(tempBuf, "%d.%02d\r\n", d1, d2);
-*/
-			tempBuf[6] = '\r';
-						tempBuf[7] = '\n';
-			uartSendData(tempBuf, 8);
-			sprintfDouble(bmp180GetTemperature(), 2, tempBuf, 6);
-			tempBuf[6] = '\r';
-			tempBuf[7] = '\n';
-			uartSendData(tempBuf, 8);
-		}
+		/*uartSendData(string[4], strlen(string[4]));
+		 if (max9611ReadTemp() == 0)
+		 uartSendData(string[1], strlen(string[1]));
+		 else {
+		 sprintfDouble(max9611GetTemp(), 2, tempBuf, 6);
+		 uartSendData(tempBuf, 5);
+		 }
+		 */
 
 	}
 }

@@ -32,10 +32,6 @@ static I2C_MODULE mI2cModule;
 
 //transmit data to the sensor
 static bool adt7410Write(uint8_t regAddress, uint8_t *data, int dataLength) {
-	//LDD_TError retValue;
-	//uint8_t temp[dataLength + 1];
-	//temp[0] = regAddress;
-	//memcpy(&temp[1], data, dataLength);
 	return i2cWrite(ADT7410_I2C_ADDRESS, regAddress, data, dataLength,
 			mI2cModule);
 }
@@ -80,14 +76,14 @@ void adt7410Init(LDD_TDeviceData* i2cHandlePtr,I2C_MODULE i2cModule) {
 }
 
 // read 13 bit temperature
-int adt7410ReadTemp() {
+bool adt7410ReadTemp() {
 
 	//char rData[2] = { 0, 0 };
 	uint8_t rData[2] = { 0, 0 };
 	float tempFin = 0;
 	int tempRaw = 0;
 	if (!adt7410Read(0x00, rData, 2))
-		return 0;
+		return false;
 
 	// temperature returned is only 13 bits
 	// discard alarm flags in lower bits
@@ -108,7 +104,7 @@ int adt7410ReadTemp() {
 	}
 
 	mAdt7410CurrentTemperature = tempFin;
-	return 1;
+	return true;
 }
 
 int adt7410SetResolution(CONF_RESOLUTION res) {

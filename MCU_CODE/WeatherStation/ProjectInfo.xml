@@ -123,6 +123,7 @@
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\sensors\BMP180.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\sensors\DHT22.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\sensors\adt7410.c</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\sensors\max9611.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\timeout\timeout.c</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\uart\uart.c</PathName>
     </GeneratedCs>
@@ -191,6 +192,7 @@
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\sensors\BMP180.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\sensors\DHT22.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\sensors\adt7410.h</PathName>
+      <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\sensors\max9611.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\timeout\timeout.h</PathName>
       <PathName>C:\Users\lukasz\workspace.kds\WeatherStation\Sources\uart\uart.h</PathName>
       <PathName>C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert\lib\Kinetis\iofiles\MKL46Z4.h</PathName>

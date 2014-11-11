@@ -6,17 +6,20 @@
 C_SRCS += \
 ../Sources/sensors/BMP180.c \
 ../Sources/sensors/DHT22.c \
-../Sources/sensors/adt7410.c 
+../Sources/sensors/adt7410.c \
+../Sources/sensors/max9611.c 
 
 OBJS += \
 ./Sources/sensors/BMP180.o \
 ./Sources/sensors/DHT22.o \
-./Sources/sensors/adt7410.o 
+./Sources/sensors/adt7410.o \
+./Sources/sensors/max9611.o 
 
 C_DEPS += \
 ./Sources/sensors/BMP180.d \
 ./Sources/sensors/DHT22.d \
-./Sources/sensors/adt7410.d 
+./Sources/sensors/adt7410.d \
+./Sources/sensors/max9611.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

@@ -711,7 +711,7 @@ PE_DEBUGHALT();
               <Priority v="10" />
               <Creation_parameter v="0" />
               <group name="Attributes">
-                <MQX_AUTO_START_TASK v="Disabled" />
+                <MQX_AUTO_START_TASK v="Enabled" />
                 <MQX_FLOATING_POINT_TASK v="Disabled" />
               </group>
             </Properties>
@@ -1238,7 +1238,7 @@ PE_DEBUGHALT();
           <OnSlaveGeneralCallAddr v="Disabled" />
           <OnSlaveSmBusCallAddr v="Disabled" />
           <OnSlaveSmBusAlertResponse v="Disabled" />
-          <OnError v="Disabled" />
+          <OnError v="Enabled" />
           <OnBusStopDetected v="Disabled" />
         </group>
       </group>
@@ -1257,9 +1257,9 @@ PE_DEBUGHALT();
     </Properties>
     <Methods>
       <Init v="generate code" />
-      <Deinit v="don&amp;apos;t generate code" />
-      <Enable v="don&amp;apos;t generate code" />
-      <Disable v="don&amp;apos;t generate code" />
+      <Deinit v="generate code" />
+      <Enable v="generate code" />
+      <Disable v="generate code" />
       <SetEventMask v="don&amp;apos;t generate code" />
       <GetEventMask v="don&amp;apos;t generate code" />
       <MasterSendBlock v="generate code" />
@@ -1306,7 +1306,9 @@ PE_DEBUGHALT();
       <event name="OnSlaveGeneralCallAddr" v="don&amp;apos;t generate code" />
       <event name="OnSlaveSmBusCallAddr" v="don&amp;apos;t generate code" />
       <event name="OnSlaveSmBusAlertResponse" v="don&amp;apos;t generate code" />
-      <event name="OnError" v="don&amp;apos;t generate code" />
+      <event name="OnError" v="generate code">
+        <Event_procedure_name v="I2C0_OnError" />
+      </event>
       <event name="OnBusStopDetected" v="don&amp;apos;t generate code" />
     </Events>
   </Bean>

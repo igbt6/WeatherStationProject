@@ -33,7 +33,8 @@ bool i2cRead(uint8_t slaveAddr,uint8_t regAddress, uint8_t *data,int length,I2C_
 
 bool i2cWrite(uint8_t slaveAddr,uint8_t regAddress, uint8_t *data, int dataLength,I2C_MODULE module);
 
-
+//test method to find address of i2c slave device on the bus
+uint8_t getI2cSlaveAddres(I2C_MODULE i2cModule);
 
 /* this method returns a pointer to initialized I2C protocol earlier */
 

@@ -6,7 +6,7 @@
 **     Component   : I2C_LDD
 **     Version     : Component 01.016, Driver 01.07, CPU db: 3.00.000
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2014-10-30, 01:42, # CodeGen: 84
+**     Date/Time   : 2014-11-10, 20:17, # CodeGen: 89
 **     Abstract    :
 **          This component encapsulates the internal I2C communication
 **          interface. The implementation of the interface is based
@@ -73,7 +73,7 @@
 **              OnSlaveGeneralCallAddr                     : Disabled
 **              OnSlaveSmBusCallAddr                       : Disabled
 **              OnSlaveSmBusAlertResponse                  : Disabled
-**              OnError                                    : Disabled
+**              OnError                                    : Enabled
 **              OnBusStopDetected                          : Disabled
 **          CPU clock/configuration selection              : 
 **            Clock configuration 0                        : This component enabled
@@ -86,6 +86,9 @@
 **            Clock configuration 7                        : This component disabled
 **     Contents    :
 **         Init               - LDD_TDeviceData* I2C0_Init(LDD_TUserData *UserDataPtr);
+**         Deinit             - void I2C0_Deinit(LDD_TDeviceData *DeviceDataPtr);
+**         Enable             - LDD_TError I2C0_Enable(LDD_TDeviceData *DeviceDataPtr);
+**         Disable            - LDD_TError I2C0_Disable(LDD_TDeviceData *DeviceDataPtr);
 **         MasterSendBlock    - LDD_TError I2C0_MasterSendBlock(LDD_TDeviceData *DeviceDataPtr, LDD_TData...
 **         MasterReceiveBlock - LDD_TError I2C0_MasterReceiveBlock(LDD_TDeviceData *DeviceDataPtr, LDD_TData...
 **         SelectSlaveDevice  - LDD_TError I2C0_SelectSlaveDevice(LDD_TDeviceData *DeviceDataPtr,...
@@ -171,6 +174,9 @@ extern "C" {
   
 /* Methods configuration constants - generated for all enabled component's methods */
 #define I2C0_Init_METHOD_ENABLED       /*!< Init method of the component I2C0 is enabled (generated) */
+#define I2C0_Deinit_METHOD_ENABLED     /*!< Deinit method of the component I2C0 is enabled (generated) */
+#define I2C0_Enable_METHOD_ENABLED     /*!< Enable method of the component I2C0 is enabled (generated) */
+#define I2C0_Disable_METHOD_ENABLED    /*!< Disable method of the component I2C0 is enabled (generated) */
 #define I2C0_MasterSendBlock_METHOD_ENABLED /*!< MasterSendBlock method of the component I2C0 is enabled (generated) */
 #define I2C0_MasterReceiveBlock_METHOD_ENABLED /*!< MasterReceiveBlock method of the component I2C0 is enabled (generated) */
 #define I2C0_SelectSlaveDevice_METHOD_ENABLED /*!< SelectSlaveDevice method of the component I2C0 is enabled (generated) */
@@ -178,6 +184,7 @@ extern "C" {
 /* Events configuration constants - generated for all enabled component's events */
 #define I2C0_OnMasterBlockSent_EVENT_ENABLED /*!< OnMasterBlockSent event of the component I2C0 is enabled (generated) */
 #define I2C0_OnMasterBlockReceived_EVENT_ENABLED /*!< OnMasterBlockReceived event of the component I2C0 is enabled (generated) */
+#define I2C0_OnError_EVENT_ENABLED     /*!< OnError event of the component I2C0 is enabled (generated) */
 
 
 
@@ -205,6 +212,60 @@ extern "C" {
 */
 /* ===================================================================*/
 LDD_TDeviceData* I2C0_Init(LDD_TUserData *UserDataPtr);
+
+/*
+** ===================================================================
+**     Method      :  I2C0_Deinit (component I2C_LDD)
+*/
+/*!
+**     @brief
+**         Deinitializes the device. Switches off the device, frees the
+**         device data structure memory, interrupts vectors, etc.
+**     @param
+**         DeviceDataPtr   - Device data structure
+**                           pointer returned by <Init> method.
+*/
+/* ===================================================================*/
+void I2C0_Deinit(LDD_TDeviceData *DeviceDataPtr);
+
+/*
+** ===================================================================
+**     Method      :  I2C0_Enable (component I2C_LDD)
+*/
+/*!
+**     @brief
+**         Enables I2C component. Events may be generated
+**         ("DisableEvent"/"EnableEvent").
+**     @param
+**         DeviceDataPtr   - Device data structure
+**                           pointer returned by <Init> method.
+**     @return
+**                         - Error code, possible codes:
+**                           ERR_OK - OK
+**                           ERR_SPEED - This device does not work in
+**                           the active clock configuration
+*/
+/* ===================================================================*/
+LDD_TError I2C0_Enable(LDD_TDeviceData *DeviceDataPtr);
+
+/*
+** ===================================================================
+**     Method      :  I2C0_Disable (component I2C_LDD)
+*/
+/*!
+**     @brief
+**         Disables I2C component. No events will be generated.
+**     @param
+**         DeviceDataPtr   - Device data structure
+**                           pointer returned by <Init> method.
+**     @return
+**                         - Error code, possible codes:
+**                           ERR_OK - OK
+**                           ERR_SPEED - This device does not work in
+**                           the active clock configuration
+*/
+/* ===================================================================*/
+LDD_TError I2C0_Disable(LDD_TDeviceData *DeviceDataPtr);
 
 /*
 ** ===================================================================
