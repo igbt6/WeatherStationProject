@@ -1,1 +1,1 @@
-windmill tests 1st commit
+library for MAX9611/9612 current sense amplifier

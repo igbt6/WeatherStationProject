@@ -6,10 +6,14 @@
 #include "LCD40x2.h"
 #include "BMP180.h"
 #include "max9611.h"
+#include "si7020.h"
 
 #define USB_DEBUG
 
-#define MAX9611_ENABLED
+
+#define SI7020_ENABLED
+
+#define MAX9611_ENABLEDx
 
 #define BMP180_ENABLEDx
 
@@ -28,6 +32,9 @@
 
 #define MAX9611_PIN_SDA PTB1    // I2C0
 #define MAX9611_PIN_SCL PTB0
+
+#define SI7020_PIN_SDA PTB1    // I2C0
+#define SI7020_PIN_SCL PTB0
 
 
 class SENSORS {
@@ -50,7 +57,7 @@ private:
  MAX4070* max4070;
  MAX4070* max4070Voltage;
  BMP180*  bmp180;
- 
+ SI7020*  si7020;
  MAX9611* max9611;
 
  FILE* fileCurrent;

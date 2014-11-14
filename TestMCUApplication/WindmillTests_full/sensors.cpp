@@ -20,6 +20,10 @@ SENSORS::SENSORS():usbDebug(USBTX, USBRX),lcd(PTD7,PTE31,PTD6, PTC17,PTC16,PTC13
     max9611= new MAX9611( MAX9611_PIN_SDA, MAX9611_PIN_SCL);
     #endif
     
+    #ifdef SI7020_ENABLED
+    si7020= new SI7020( SI7020_PIN_SDA, SI7020_PIN_SCL);
+    #endif
+    
 
     msd = new  USBHostMSD("usb");
 #ifdef USB_DEBUG
@@ -73,6 +77,8 @@ SENSORS::~SENSORS()
     delete max4070;
     delete max4070Voltage;
     delete bmp180;
+    delete max9611;
+    delete si7020;
 
 }
 
@@ -103,13 +109,28 @@ void SENSORS:: measurement (void const* args)
         if(!max9611->readTemp())  usbDebug.printf("MAX9611_TempReading Fuck UP \n");    
         else usbDebug.printf("MAX9611_TempReading Fucking OK!\r\n");  
     */
-        if(!max9611->readCSAOutputValue())  usbDebug.printf("MAX9611_CSA_Reading Fuck UP \n");    
+        if(!max9611->readCSAOutputValue())  usbDebug.printf("MAX9611_CSA_Reading Fuck UP\r\n");    
         else usbDebug.printf("MAX9611_CSA_Reading Fucking OK!\r\n");   
  #endif
+ 
+ #ifdef SI7020_ENABLED       
+  
+        //if(!si7020->readTemp())  usbDebug.printf("SI7020_TEMP_READ Fuck UP \n");    
+        //else usbDebug.printf("SI7020_TEMP_READ  Fucking OK!\r\n");   
+        if(!si7020->readHumidity())  usbDebug.printf("SI7020_HUMIDITY_READ Fuck UP\r\n"); 
+ #endif
+ 
+ 
  counter++; 
     lcd.cls();
      //lcd.printf("%d[A]",counter);
+#ifdef MAX9611_ENABLED      
     lcd.printf("%3.2f[mA]", max9611->getCSAOutput());
+#endif   
+#ifdef SI7020_ENABLED 
+    lcd.printf("%3.2f[C]", si7020->getTemp());
+    lcd.printf("%3.2f[%]", si7020->getHumidity());
+#endif
 //measPrintMutex.unlock();
         Thread::wait(777);
    
@@ -143,6 +164,11 @@ void SENSORS::getResults (void const* args)
     usbDebug.printf("MAX9611_CSA_RAW:   0x%04x\r\n", max9611->mRawInt);
 #endif
 
+#ifdef SI7020_ENABLED 
+    usbDebug.printf("SI7020_TEMP= %3.2f [C]\r\n", si7020->getTemp());
+    usbDebug.printf("SI7020_HUMIDITY= %3.2f [%]\r\n", si7020->getHumidity());
+#endif
+
 #endif
         
         Thread::wait(2000);
@@ -168,7 +194,7 @@ int SENSORS::saveDataToUSB(void const* args)
         } else {
             
             #ifdef USB_DEBUG
-            usbDebug.printf("PENDRIVE IS CONNECTED\r\n");
+            //usbDebug.printf("PENDRIVE IS CONNECTED\r\n");
             #endif
            
             if(!fileCurrent) {
