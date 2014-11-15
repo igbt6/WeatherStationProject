@@ -114,10 +114,13 @@ void SENSORS:: measurement (void const* args)
  #endif
  
  #ifdef SI7020_ENABLED       
-  
-        //if(!si7020->readTemp())  usbDebug.printf("SI7020_TEMP_READ Fuck UP \n");    
+ 
+        //if(!si7020->readTemp())  usbDebug.printf("SI7020_TEMP_READ Fuck UP \r\n");    
         //else usbDebug.printf("SI7020_TEMP_READ  Fucking OK!\r\n");   
+      
         if(!si7020->readHumidity())  usbDebug.printf("SI7020_HUMIDITY_READ Fuck UP\r\n"); 
+        for(int i= 0;i<0xFFFFFF;i++);
+      if(!si7020->resetSensor()) usbDebug.printf("SI7020_RESET Fuck UP\r\n"); 
  #endif
  
  
@@ -132,7 +135,7 @@ void SENSORS:: measurement (void const* args)
     lcd.printf("%3.2f[%]", si7020->getHumidity());
 #endif
 //measPrintMutex.unlock();
-        Thread::wait(777);
+        Thread::wait(1000);
    
     }
 }

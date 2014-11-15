@@ -132,7 +132,7 @@ typedef enum {
      *    true on success,
      *    false on error
      */
-    bool initSi7020(eMeasurementResolution= RH12_TEMP14 ,eHeater=HEATER_DISABLE);
+    bool initSi7020(eMeasurementResolution= RH8_TEMP12 ,eHeater=HEATER_DISABLE);
 
 
     /** Read temperature from the sensor.
@@ -167,6 +167,17 @@ typedef enum {
      *   Humidity Value [%]
      */    
    inline float getHumidity(void) {return mHumidity;}
+   
+   
+    /** inoke reset command.
+     * @param none 
+     * @returns
+     *   1 on success,
+     *   0 on error
+     */    
+    bool resetSensor(void);
+   
+   
 
    //DEBUG
    uint16_t mRawInt;
