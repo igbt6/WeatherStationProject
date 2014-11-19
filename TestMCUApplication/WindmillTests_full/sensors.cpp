@@ -24,6 +24,11 @@ SENSORS::SENSORS():usbDebug(USBTX, USBRX),lcd(PTD7,PTE31,PTD6, PTC17,PTC16,PTC13
     si7020= new SI7020( SI7020_PIN_SDA, SI7020_PIN_SCL);
     #endif
     
+    #ifdef AS3935_ENABLED
+    as3935= new AS3935( AS3935_PIN_SDA, AS3935_PIN_SCL,AS3935_PIN_INTERRUPT);
+    #endif
+    
+    
 
     msd = new  USBHostMSD("usb");
 #ifdef USB_DEBUG
@@ -79,6 +84,7 @@ SENSORS::~SENSORS()
     delete bmp180;
     delete max9611;
     delete si7020;
+    delete as3935;
 
 }
 
@@ -115,14 +121,18 @@ void SENSORS:: measurement (void const* args)
  
  #ifdef SI7020_ENABLED       
  
-        //if(!si7020->readTemp())  usbDebug.printf("SI7020_TEMP_READ Fuck UP \r\n");    
+        if(!si7020->readTemp())  usbDebug.printf("SI7020_TEMP_READ Fuck UP \r\n");    
         //else usbDebug.printf("SI7020_TEMP_READ  Fucking OK!\r\n");   
       
-        if(!si7020->readHumidity())  usbDebug.printf("SI7020_HUMIDITY_READ Fuck UP\r\n"); 
-        for(int i= 0;i<0xFFFFFF;i++);
-      if(!si7020->resetSensor()) usbDebug.printf("SI7020_RESET Fuck UP\r\n"); 
+        //if(!si7020->readHumidity())  usbDebug.printf("SI7020_HUMIDITY_READ Fuck UP\r\n"); 
+        //for(int i= 0;i<0xFFFFFF;i++);
+     // if(!si7020->resetSensor()) usbDebug.printf("SI7020_RESET Fuck UP\r\n"); 
  #endif
  
+ #ifdef AS3935_ENABLED 
+ 
+ 
+ #endif
  
  counter++; 
     lcd.cls();
@@ -170,6 +180,10 @@ void SENSORS::getResults (void const* args)
 #ifdef SI7020_ENABLED 
     usbDebug.printf("SI7020_TEMP= %3.2f [C]\r\n", si7020->getTemp());
     usbDebug.printf("SI7020_HUMIDITY= %3.2f [%]\r\n", si7020->getHumidity());
+#endif
+
+#ifdef AS3935_ENABLED 
+    usbDebug.printf("AS3935_TEMP= %d \r\n", as3935->lightningDistanceKm());
 #endif
 
 #endif

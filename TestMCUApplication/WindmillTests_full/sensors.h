@@ -7,11 +7,14 @@
 #include "BMP180.h"
 #include "max9611.h"
 #include "si7020.h"
+#include "AS3935.h"
 
 #define USB_DEBUG
 
 
 #define SI7020_ENABLED
+
+#define AS3935_ENABLED
 
 #define MAX9611_ENABLEDx
 
@@ -36,6 +39,10 @@
 #define SI7020_PIN_SDA PTB1    // I2C0
 #define SI7020_PIN_SCL PTB0
 
+#define AS3935_PIN_SDA PTB1    // I2C0
+#define AS3935_PIN_SCL PTB0
+#define AS3935_PIN_INTERRUPT PTD5  //Only the pins of port A and D can be used as interrupt in pins. (PTA[0-31] and PTD[0-31])
+
 
 class SENSORS {
 
@@ -58,6 +65,7 @@ private:
  MAX4070* max4070Voltage;
  BMP180*  bmp180;
  SI7020*  si7020;
+ AS3935*  as3935;
  MAX9611* max9611;
 
  FILE* fileCurrent;

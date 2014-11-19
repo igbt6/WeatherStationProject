@@ -52,8 +52,8 @@ class AS3935 {
     
     
     
-    /**********public methods********************************/
-    public:
+  /**********public methods********************************/
+  public:
 
     /** Create an AS3935 instance
      * @param sda pin 
@@ -62,14 +62,108 @@ class AS3935 {
      * @param i2c bus frequency [Hz]
      * @param address: I2C slave address  
      */
-     AS3935(PinName sda, PinName scl, PinName irqPin,int i2cFrequencyHz,uint8_t address); 
+     AS3935(PinName sda, PinName scl, PinName irqPin,int i2cFrequencyHz=100000,uint8_t address=AS3935_I2C_ADDRESS); 
      
      
-     bool initAS3935(void);   
+    bool initAS3935(void);   
+    
+    void handleIrqInterrupt(void);
+       
+    bool reset();
+    
+    bool calibrate();
+    
+    bool powerDown();
+    
+    bool powerUp();
+    
+    int interruptSource();
+    
+    bool disableDisturbers();
+    
+    bool enableDisturbers();
+    
+    int getMinimumLightnings();
+    
+    int setMinimumLightnings(int minlightning);
+    
+    int lightningDistanceKm();
+    
+    void setIndoors();
+    
+    void setOutdoors();
+    
+    int getNoiseFloor();
+    
+    int setNoiseFloor(int noisefloor);
+    
+    int getSpikeRejection();
+    
+    int setSpikeRejection(int srej);
+    
+    int getWatchdogThreshold();
+    
+    int getTuneCap();
+    
+    int setTuneCap(int cap);
+    
+    int setWatchdogThreshold(int wdth);
+    
+    void clearStats(); 
+       
+       
+       
         
         
-        /**********private members and methods********************************/       
-    private: 
+  /**********private members and methods********************************/       
+  private: 
+  
+   typedef enum {
+        NOISE_FLOOR_REG_ADDR=  0x01,
+        NOISE_FLOOR_BIT_MASK=  0x70,
+        NOISE_FLOOR_390out_28in_uVrms= 0x00,
+        NOISE_FLOOR_630out_45in_uVrms,
+        NOISE_FLOOR_860out_62in_uVrms,
+        NOISE_FLOOR_1100out_78in_uVrms,
+        NOISE_FLOOR_1140out_95in_uVrms,
+        NOISE_FLOOR_1570out_112in_uVrms,
+        NOISE_FLOOR_1800out_130in_uVrms,
+        NOISE_FLOOR_2000out_146in_uVrms=0x07
+   }NoiseFloorReg;
+   
+   typedef enum {
+        DISTANCE_REG_ADDR=  0x07, 
+        DISTANCE_BIT_MASK=  0x3F,
+        DISTANCE_OUT_OF_RANGE=  0x3F,
+        DISTANCE_STORM_IS_OVERHEAD=  0x01,
+    }DistanceEstimationReg;
+     
+    typedef enum {
+        INTERRUPTS_REG_ADDR=  0x03, 
+        INTERRUPTS_BIT_MASK=  0x0F,
+        INTERRUPTS_INT_NH=  0x01,    /* Noise level too high  */
+        INTERRUPTS_INT_D=  0x04,     /* Disturber detected  */
+        INTERRUPTS_INT_L= 0x08    /* Lightning interrupt  */
+    }InterruptsReg;
+    
+    typedef enum {
+        MIN_NUM_OF_LIGH_REG_ADDR=  0x02, 
+        MIN_NUM_OF_LIGH_BIT_MASK=  0x30,
+        MIN_NUM_OF_LIGH_1=  0x00,
+        MIN_NUM_OF_LIGH_5=  0x01,
+        MIN_NUM_OF_LIGH_9=  0x02,
+        MIN_NUM_OF_LIGH_16=  0x03
+    }NumOfLightningsReg; 
+     
+     typedef enum {
+        LC_OSC_DIV_RATIO_REG_ADDR=  0x03, 
+        LC_OSC_DIV_RATIO_BIT_MASK=  0xC0,
+        LC_OSC_DIV_RATIO_16=  0x00,
+        LC_OSC_DIV_RATIO_32=  0x01,
+        LC_OSC_DIV_RATIO_64=  0x02,
+        LC_OSC_DIV_RATIO_128=  0x03
+    }AntennaTuningFreqDivisionRatio; 
+     
      
      /** Write data to the given register
      *  
@@ -120,7 +214,7 @@ class AS3935 {
     
     I2C mI2c;   
     uint8_t mI2cAddr;
-    
+    InterruptIn irqPinInterrupt;
         
         
         
