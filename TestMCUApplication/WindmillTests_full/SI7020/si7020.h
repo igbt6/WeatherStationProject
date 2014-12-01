@@ -87,23 +87,16 @@ typedef enum {
     bool read(uint8_t regAddress, uint8_t* data,int length);
     
     
-    /** Make 12 bit data from 2 bytes received from thr device data read from Data regiters of Max9611/9612 are laid in the following way : 
-     *  Byte 1:  bit7-MSB12........bit0-MSB05 ;  Byte 2: bit7-LSB04.... bit4-LSB00 
-     * @param MSB byte
-     * @param 4 bits of LSB bytes
-     * @returns 1 2bit data
-     *   
-     */  
-    inline uint16_t get12BitData(uint8_t msbByte,uint8_t lsbByte){
-        uint16_t data12Bit= (msbByte<<4)|((lsbByte>>4)&0x0F);
-        return data12Bit; 
-    }
-    
-    
+   /** merge two bytes in one word
+    * @param 1st byte
+    * @param 2nd byte
+    * @returns 16 bit word
+    */
     inline uint16_t get16BitData(uint8_t msbByte,uint8_t lsbByte){
         uint16_t data16Bit= (msbByte<<8)|(lsbByte);
         return data16Bit; 
     }
+       
         
     I2C mI2c;   
     uint8_t mI2cAddr;

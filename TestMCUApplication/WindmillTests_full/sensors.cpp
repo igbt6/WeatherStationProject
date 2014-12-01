@@ -28,6 +28,10 @@ SENSORS::SENSORS():usbDebug(USBTX, USBRX),lcd(PTD7,PTE31,PTD6, PTC17,PTC16,PTC13
     as3935= new AS3935( AS3935_PIN_SDA, AS3935_PIN_SCL,AS3935_PIN_INTERRUPT);
     #endif
     
+    #ifdef DS2782_ENABLED
+    ds2782= new DS2782( DS2782_PIN_SDA, DS2782_PIN_SCL);
+    #endif
+    
     
 
     msd = new  USBHostMSD("usb");
@@ -85,6 +89,7 @@ SENSORS::~SENSORS()
     delete max9611;
     delete si7020;
     delete as3935;
+    delete ds2782;
 
 }
 
@@ -95,6 +100,9 @@ SENSORS::~SENSORS()
 void SENSORS:: measurement (void const* args)
 {
      static int counter=0;
+#ifdef DS2782_ENABLED        
+     if(!ds2782->setACRRegister(0x6666))  usbDebug.printf("DS2782_WRITE_ACR Fuck UP \r\n"); 
+#endif
    while(1) {
  //      measPrintMutex.lock();
  #ifdef MAX4070_ENABLED
@@ -119,21 +127,30 @@ void SENSORS:: measurement (void const* args)
         else usbDebug.printf("MAX9611_CSA_Reading Fucking OK!\r\n");   
  #endif
  
- #ifdef SI7020_ENABLED       
+#ifdef SI7020_ENABLED       
  
         if(!si7020->readTemp())  usbDebug.printf("SI7020_TEMP_READ Fuck UP \r\n");    
-        //else usbDebug.printf("SI7020_TEMP_READ  Fucking OK!\r\n");   
+        else usbDebug.printf("SI7020_TEMP_READ  Fucking OK!\r\n");   
       
         //if(!si7020->readHumidity())  usbDebug.printf("SI7020_HUMIDITY_READ Fuck UP\r\n"); 
         //for(int i= 0;i<0xFFFFFF;i++);
      // if(!si7020->resetSensor()) usbDebug.printf("SI7020_RESET Fuck UP\r\n"); 
- #endif
+#endif
  
- #ifdef AS3935_ENABLED 
+#ifdef AS3935_ENABLED 
  
  
- #endif
+#endif
  
+#ifdef DS2782_ENABLED       
+        if(!ds2782->readTemperature())  usbDebug.printf("DS2782_TEMP_READ Fuck UP \r\n");    
+        //else usbDebug.printf("DS2782_TEMP_READ  Fucking OK!\r\n");   
+        if(!ds2782->readCurrent())  usbDebug.printf("DS2782_CURRENT_READ Fuck UP \r\n"); 
+        if(!ds2782->readVoltage())  usbDebug.printf("DS2782_VOLTAGE_READ Fuck UP \r\n"); 
+#endif
+ 
+ 
+
  counter++; 
     lcd.cls();
      //lcd.printf("%d[A]",counter);
@@ -143,6 +160,11 @@ void SENSORS:: measurement (void const* args)
 #ifdef SI7020_ENABLED 
     lcd.printf("%3.2f[C]", si7020->getTemp());
     lcd.printf("%3.2f[%]", si7020->getHumidity());
+#endif
+#ifdef DS2782_ENABLED       
+    lcd.printf("%3.2f[C] ",  ds2782->getTemperature());
+    lcd.printf("%3.2f[mA] ", ds2782->getCurrent());
+    lcd.printf("%3.2f[mV]", ds2782->getVoltage());
 #endif
 //measPrintMutex.unlock();
         Thread::wait(1000);
@@ -185,6 +207,14 @@ void SENSORS::getResults (void const* args)
 #ifdef AS3935_ENABLED 
     usbDebug.printf("AS3935_TEMP= %d \r\n", as3935->lightningDistanceKm());
 #endif
+
+#ifdef DS2782_ENABLED       
+    usbDebug.printf("DS2782_TEMP= %3.2f [C]\r\n", ds2782->getTemperature()); 
+    usbDebug.printf("DS2782_CURRENT= %3.2f [mA]\r\n", ds2782->getCurrent()); 
+    usbDebug.printf("DS2782_VOLTAGE= %3.2f [mV]\r\n", ds2782->getVoltage()); 
+    usbDebug.printf("DS2782_TEST= %3.2f [TST]\r\n", ds2782->readTest());
+#endif
+
 
 #endif
         

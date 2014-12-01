@@ -8,13 +8,16 @@
 #include "max9611.h"
 #include "si7020.h"
 #include "AS3935.h"
+#include "ds2782.h"
 
 #define USB_DEBUG
 
 
-#define SI7020_ENABLED
+#define SI7020_ENABLEDx
 
-#define AS3935_ENABLED
+#define AS3935_ENABLEDx
+
+#define DS2782_ENABLED
 
 #define MAX9611_ENABLEDx
 
@@ -35,6 +38,9 @@
 
 #define MAX9611_PIN_SDA PTB1    // I2C0
 #define MAX9611_PIN_SCL PTB0
+
+#define DS2782_PIN_SDA PTB1    // I2C0
+#define DS2782_PIN_SCL PTB0
 
 #define SI7020_PIN_SDA PTB1    // I2C0
 #define SI7020_PIN_SCL PTB0
@@ -67,6 +73,7 @@ private:
  SI7020*  si7020;
  AS3935*  as3935;
  MAX9611* max9611;
+ DS2782* ds2782;
 
  FILE* fileCurrent;
  FILE* fileVoltage;
