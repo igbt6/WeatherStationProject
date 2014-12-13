@@ -5,10 +5,44 @@ DS2782::DS2782(PinName sda, PinName scl,int i2cFrequencyHz,uint8_t address):mI2c
     
     mI2c.frequency(i2cFrequencyHz);
     mTemperature=0;
+    initDS2782();
 }   
     
     
 bool DS2782::initDS2782(void){
+     
+     uint16_t full40Reg = 0x3200;
+     uint8_t buf[2];
+     fillBuf(full40Reg, buf);
+     setEepromBlockRegister(FULL_40_MSB,buf, 2);
+    
+     buf[0]= 0xD5;
+     setEepromBlockRegister(VCHG,buf, 1);
+     
+     buf[0]=0x14;
+     setEepromBlockRegister(IMIN,buf,1);
+     
+     buf[0]=0xB3;
+     setEepromBlockRegister(VAE,buf,1);
+     
+     buf[0]=0x0a;
+     setEepromBlockRegister(IAE,buf,1);
+     
+     buf[0]=0x06;
+     setEepromBlockRegister(ACTIVE_EMPTY_40,buf,1);
+     
+     //fillBuf(full40Reg, buf);
+     //setEepromBlockRegister(RSGAIN_MSB,buf,2);
+     
+     buf[0]=0;
+     setEepromBlockRegister(RSTC,buf,1);
+     
+     buf[0]=0x32;
+     setEepromBlockRegister(RSNSP,buf,1);
+     
+     buf[0]=0;
+     setEepromBlockRegister(AB,buf,1);
+     
      
      return true;
 }
@@ -95,19 +129,39 @@ bool DS2782::setACRRegister(uint16_t reg)
 }
 
 
-float DS2782::readTest(void){
+float DS2782::readAcrReg(void){
 
    uint8_t rawData[2];
    uint16_t rawRes=0;
-   /*if(!read(ACR_MSB_REG, rawData,2)) return false;
+   if(!read(ACR_MSB_REG, rawData,2)) return false;
       rawRes= get16BitData(rawData[0],rawData[1]);
-      */
-    /*if(rawRes &0x8000){
-      return ((float)(rawRes-65536)*0.07813);
+      
+    if(rawRes &0x8000){
+      return ((float)(rawRes-65536)*1.5625);
     }
     else 
-    */
-    if(!read(RARC_REG, rawData,1)) return false;
-      rawRes= get16BitData(rawData[0],rawData[1]);
-    return ((float)(rawData[0]*0.3906));
+      return ((float)(rawRes)*1.5625);
+}
+
+
+bool DS2782::setEepromBlockRegister(ParamEepromReg reg, uint8_t * value, uint8_t length){
+    uint8_t buf[length];
+    memcpy(buf,value,length);
+    if(!(write(reg, buf,length))) return false;
+    return true; 
+    
+}
+
+uint8_t DS2782::readRarcReg(void){
+    uint8_t rarcRegVal;  //unit [%]
+    if(!read(RARC_REG, &rarcRegVal,1)) return 255;    
+    return rarcRegVal;
+}
+
+
+uint8_t DS2782::readStatusReg(void){
+    uint8_t statusRegVal;
+    if(!read(STATUS, &statusRegVal,1)) return 255;    
+    return statusRegVal;
+    
 }

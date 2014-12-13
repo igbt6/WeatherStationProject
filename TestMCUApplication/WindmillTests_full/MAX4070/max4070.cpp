@@ -30,5 +30,6 @@ int MAX4070Voltage::readValueFromInput(void){
      //for 3.3 Vref - resolution is 0.00005[V] 
      float realMeasuredVoltage=( (float)((resValue *(3.3/0xFFFF))));
      result=realMeasuredVoltage;
+     result= result/(982/(982+1191));
      return 1; //TODO handling error 
 }

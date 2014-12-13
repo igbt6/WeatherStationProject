@@ -8,7 +8,7 @@ SENSORS::SENSORS():usbDebug(USBTX, USBRX),lcd(PTD7,PTE31,PTD6, PTC17,PTC16,PTC13
 
     lcd.printf("HELLO\n");
     #ifdef  MAX4070_ENABLED
-    max4070= new MAX4070(MAX4070_PIN_ANALOG_IN ,1 /*4mv ->1mA*/);
+    //max4070= new MAX4070(MAX4070_PIN_ANALOG_IN ,1 /*4mv ->1mA*/);
     max4070Voltage= new MAX4070Voltage(MAX4070_PIN_ANALOG_IN_VOLTAGE ,1 );
     #endif
     #ifdef BMP180_ENABLED
@@ -44,22 +44,22 @@ SENSORS::SENSORS():usbDebug(USBTX, USBRX),lcd(PTD7,PTE31,PTD6, PTC17,PTC16,PTC13
         #endif
     } else {
        
-        fileCurrent= fopen("/usb/VOLTAGE_1.txt", "w"); //rewrite, or create
+        fileCurrent= fopen("/usb/Current.txt", "w"); //rewrite, or create
         if (fileCurrent) {
             #ifdef USB_DEBUG 
-            usbDebug.printf("(/usb/pCurrent.txt)... sucess file-open!\r\n\r\n");
+            usbDebug.printf("(/usb/Current.txt)... sucess file-open!\r\n\r\n");
              #endif
-            fprintf(fileCurrent, " LOG VOLTAGE [V] - VOLTAGE_1:\r\n INFO: Dane zapisywane sa co 0.5 sek.\r\n\r\n");
+            fprintf(fileCurrent, " LOG Current[A] - VOLTAG_1:\r\n INFO: Dane zapisywane sa co 0.5 sek.\r\n\r\n");
             fclose(fileCurrent);
             fileCurrent=NULL;
         } 
         #ifdef USB_DEBUG  
-         else usbDebug.printf(" ... failed file-open (/usb/pCurrent.txt)!\r\n\r\n");
+         else usbDebug.printf(" ... failed file-open (/usb/Voltage.txt)!\r\n\r\n");
          #endif
-        fileVoltage=fopen("/usb/VOLTAGE_2.txt", "w");
+        fileVoltage=fopen("/usb/VOLTAGE.txt", "w");
         if (fileVoltage) {
             #ifdef USB_DEBUG 
-            usbDebug.printf("(/usb/pVoltage.txt)... sucess file-open!\r\n\r\n");
+            usbDebug.printf("(/usb/Voltage.txt)... sucess file-open!\r\n\r\n");
              #endif
             fprintf(fileVoltage, " LOG VOLTAGE [V]- VOLTAGE_2:\r\n INFO: Dane zapisywane sa co 0.5 sek.\r\n\r\n");
             fclose(fileVoltage);
@@ -106,8 +106,8 @@ void SENSORS:: measurement (void const* args)
    while(1) {
  //      measPrintMutex.lock();
  #ifdef MAX4070_ENABLED
-        max4070->readValueFromInput();
-        results.MAX4070chargerCurrent=max4070->getResult();
+        //max4070->readValueFromInput();
+        //results.MAX4070chargerCurrent=max4070->getResult();
 
         max4070Voltage->readValueFromInput();
         results.MAX4070chargerVoltage=max4070Voltage->getResult();
@@ -124,7 +124,7 @@ void SENSORS:: measurement (void const* args)
         else usbDebug.printf("MAX9611_TempReading Fucking OK!\r\n");  
     */
         if(!max9611->readCSAOutputValue())  usbDebug.printf("MAX9611_CSA_Reading Fuck UP\r\n");    
-        else usbDebug.printf("MAX9611_CSA_Reading Fucking OK!\r\n");   
+        //else usbDebug.printf("MAX9611_CSA_Reading Fucking OK!\r\n");   
  #endif
  
 #ifdef SI7020_ENABLED       
@@ -147,6 +147,7 @@ void SENSORS:: measurement (void const* args)
         //else usbDebug.printf("DS2782_TEMP_READ  Fucking OK!\r\n");   
         if(!ds2782->readCurrent())  usbDebug.printf("DS2782_CURRENT_READ Fuck UP \r\n"); 
         if(!ds2782->readVoltage())  usbDebug.printf("DS2782_VOLTAGE_READ Fuck UP \r\n"); 
+        
 #endif
  
  
@@ -162,9 +163,11 @@ void SENSORS:: measurement (void const* args)
     lcd.printf("%3.2f[%]", si7020->getHumidity());
 #endif
 #ifdef DS2782_ENABLED       
-    lcd.printf("%3.2f[C] ",  ds2782->getTemperature());
+    //lcd.printf("%3.2f[C] ",  ds2782->getTemperature());
     lcd.printf("%3.2f[mA] ", ds2782->getCurrent());
     lcd.printf("%3.2f[mV]", ds2782->getVoltage());
+
+    
 #endif
 //measPrintMutex.unlock();
         Thread::wait(1000);
@@ -183,8 +186,8 @@ void SENSORS::getResults (void const* args)
         
 #ifdef USB_DEBUG
         #ifdef MAX4070_ENABLED
-        usbDebug.printf("MAX4070_CurrentValue: %5.2f\r\n",results.MAX4070chargerCurrent);
-        usbDebug.printf("MAX4070_VoltageValue: %5.2f\r\n",results.MAX4070chargerVoltage);
+        //usbDebug.printf("MAX4070_CurrentValue: %5.2f\r\n",results.MAX4070chargerCurrent);
+        usbDebug.printf("MAX4070_VoltageValue: %5.2f\r\n",max4070Voltage->getResult());
         #endif
 #ifdef BMP180_ENABLED
         if(results.BMP180pressure!=-999&&results.BMP180temperature!=-999)
@@ -195,8 +198,8 @@ void SENSORS::getResults (void const* args)
 
 #ifdef MAX9611_ENABLED 
     //usbDebug.printf("MAX9611_Temperature[C]:   %5.2f\r\n", max9611->getTemp());
-    usbDebug.printf("MAX9611_CSA [mA]:   %5.2f\r\n", max9611->getCSAOutput());
-    usbDebug.printf("MAX9611_CSA_RAW:   0x%04x\r\n", max9611->mRawInt);
+    usbDebug.printf("MAX9611_CSA  %5.2f [mA]\r\n", max9611->getCSAOutput());
+    //usbDebug.printf("MAX9611_CSA_RAW:   0x%04x\r\n", max9611->mRawInt);
 #endif
 
 #ifdef SI7020_ENABLED 
@@ -212,7 +215,28 @@ void SENSORS::getResults (void const* args)
     usbDebug.printf("DS2782_TEMP= %3.2f [C]\r\n", ds2782->getTemperature()); 
     usbDebug.printf("DS2782_CURRENT= %3.2f [mA]\r\n", ds2782->getCurrent()); 
     usbDebug.printf("DS2782_VOLTAGE= %3.2f [mV]\r\n", ds2782->getVoltage()); 
-    usbDebug.printf("DS2782_TEST= %3.2f [TST]\r\n", ds2782->readTest());
+    usbDebug.printf("DS2782_ARC= %3.2f [uV]\r\n", ds2782->readAcrReg());
+    usbDebug.printf("DS2782_RARC= %3d [./']\r\n", ds2782->readRarcReg());
+    //usbDebug.printf("DS2782_STATUS= 0x%02d \r\n", ds2782->readStatusReg());
+    uint8_t statusReg = ds2782->readStatusReg();
+    usbDebug.printf("DS2782_STATUS= 0x%02x \r\n", statusReg);
+    if(statusReg & DS2782::LEARNF)
+        usbDebug.printf("LEARNF flag is SET\r\n");
+    else 
+        usbDebug.printf("LEARNF flag is NOT SET\r\n");
+    if(statusReg & DS2782::SEF)
+        usbDebug.printf("SEF flag is SET\r\n");
+    else 
+        usbDebug.printf("SEF flag is NOT SET\r\n");
+    if(statusReg & DS2782::AEF)
+        usbDebug.printf("AEF flag is SET\r\n");
+    else 
+        usbDebug.printf("AEF flag is NOT SET\r\n");
+    if(statusReg & DS2782::CHGTF)
+        usbDebug.printf("CHGTF flag is SET\r\n");
+    else 
+        usbDebug.printf("CHGTF flag is NOT SET\r\n");
+
 #endif
 
 
@@ -245,25 +269,19 @@ int SENSORS::saveDataToUSB(void const* args)
             #endif
            
             if(!fileCurrent) {
-                fileCurrent=fopen("/usb/VOLTAGE_1.txt", "a");
+                fileCurrent=fopen("/usb/Current.txt", "a");
             } else {
-                #ifdef MAX4070_ENABLED
-                fprintf(fileCurrent,"%5.2f\r\n", results.MAX4070chargerCurrent);
-                #endif
                 #ifdef MAX9611_ENABLED 
-              //  fprintf(fileCurrent,"%5.2f\r\n", max9611->getCSAOutput());
+                fprintf(fileCurrent,"%5.2f\r\n", max9611->getCSAOutput());
                 #endif
                 fclose(fileCurrent);
                 fileCurrent=NULL;
             }
             if(!fileVoltage) {
-                fileVoltage=fopen("/usb/VOLTAGE_2.txt", "a");
+                fileVoltage=fopen("/usb/Voltage.txt", "a");
             } else {
                 #ifdef MAX4070_ENABLED
-                fprintf(fileVoltage,"%5.2f\r\n", results.MAX4070chargerVoltage);
-                #endif
-                #ifdef MAX9611_ENABLED 
-                fprintf(fileVoltage,"TEST\r\n");
+                fprintf(fileVoltage,"%5.2f\r\n", max4070Voltage->getResult());
                 #endif
                 fclose(fileVoltage);
                 fileVoltage=NULL;

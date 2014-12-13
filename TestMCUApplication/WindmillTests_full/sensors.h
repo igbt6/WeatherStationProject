@@ -23,18 +23,15 @@
 
 #define BMP180_ENABLEDx
 
-#ifdef BMP180_ENABLEDx 
-#define MAX4070_ENABLEDx
-#else 
-#define MAX4070_ENABLEDx
-#endif
+
+#define MAX4070_ENABLED
 
 
 #define BMP180_PIN_SDA PTB1    // I2C0
 #define BMP180_PIN_SCL PTB0
 
-#define MAX4070_PIN_ANALOG_IN PTB0 //AIN 0 charging current sensor
-#define MAX4070_PIN_ANALOG_IN_VOLTAGE PTB1 //AIN 1 charging  sensor
+#define MAX4070_PIN_ANALOG_IN PTB2 //AIN 2 charging voltage sensor dla kwicinskiego na testy
+#define MAX4070_PIN_ANALOG_IN_VOLTAGE PTB3 //AIN 1 charging  sensor
 
 #define MAX9611_PIN_SDA PTB1    // I2C0
 #define MAX9611_PIN_SCL PTB0

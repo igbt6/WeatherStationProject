@@ -21,7 +21,7 @@ protected:
    
 };
 
-
+//divider: Vbat -> 1191[ohm] -> AIN -> 982[ohm] -> GND
 class MAX4070Voltage: public MAX4070{
    public: 
     MAX4070Voltage(AnalogIn sensorInput, int resolution);
