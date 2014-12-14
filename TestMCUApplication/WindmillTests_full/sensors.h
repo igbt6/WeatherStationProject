@@ -24,7 +24,7 @@
 #define BMP180_ENABLEDx
 
 
-#define MAX4070_ENABLED
+#define MAX4070_ENABLEDx
 
 
 #define BMP180_PIN_SDA PTB1    // I2C0

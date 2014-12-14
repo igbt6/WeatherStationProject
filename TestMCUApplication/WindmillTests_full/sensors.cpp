@@ -2,6 +2,72 @@
 #include "sensors.h"
 
 /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// ///////////////////////////////////////////////
+#define PANEL
+
+#ifdef PANEL
+    ///KWIECINSKIEGO PANEL NADAZNY:
+    AnalogIn sensorInputLeft(PTB3);
+    AnalogIn sensorInputRight(PTB2);
+    //PTC7, PTC3   digital out
+    DigitalOut leftMotor(PTC7);
+    DigitalOut rightMotor(PTC11);
+    
+    typedef enum{
+       
+       LEFT_MOTOR,
+       RIGHT_MOTOR,
+       OFF 
+    }Motor;
+    
+static void setMotorDirection(Motor motor){  
+    switch(motor){
+        case LEFT_MOTOR:
+             rightMotor =0;
+             //wait_ms(1000);
+             leftMotor= 1;
+        break;
+        
+        case RIGHT_MOTOR:
+             leftMotor= 0;
+             //wait_ms(1000);
+             rightMotor =1;
+        break;
+        
+        case OFF:
+             leftMotor=0;
+             rightMotor =0;
+        break;
+        
+        default:
+        break;
+      }
+    }
+    
+static int panelState=0;    
+static void checkLightSensorStatus(void){  
+
+     uint16_t resLeft = sensorInputLeft.read_u16();
+     uint16_t resRight = sensorInputRight.read_u16();
+     float realLeftSensorVal=( (float)((resLeft *(3.3/0xFFFF))));
+     float realRightSensorVal=( (float)((resRight *(3.3/0xFFFF))));
+     
+     if(realLeftSensorVal>2.20||realRightSensorVal>2.20){
+        setMotorDirection(RIGHT_MOTOR);
+        }
+     else if((realLeftSensorVal+0.06
+     )<realRightSensorVal){
+         
+         setMotorDirection(LEFT_MOTOR);
+     }
+     else{
+         setMotorDirection(OFF);
+     }
+
+
+
+}    
+    
+#endif
 
 SENSORS::SENSORS():usbDebug(USBTX, USBRX),lcd(PTD7,PTE31,PTD6, PTC17,PTC16,PTC13,PTC12)// rs,rw,e,d4-d7
 {
@@ -31,7 +97,6 @@ SENSORS::SENSORS():usbDebug(USBTX, USBRX),lcd(PTD7,PTE31,PTD6, PTC17,PTC16,PTC13
     #ifdef DS2782_ENABLED
     ds2782= new DS2782( DS2782_PIN_SDA, DS2782_PIN_SCL);
     #endif
-    
     
 
     msd = new  USBHostMSD("usb");
@@ -239,6 +304,35 @@ void SENSORS::getResults (void const* args)
 
 #endif
 
+
+
+#ifdef PANEL
+// SENSORS Phototransistors
+/*
+     uint16_t resLeft = sensorInputLeft.read_u16();
+     uint16_t resRight = sensorInputRight.read_u16();
+     float realLeftSensorVal=( (float)((resLeft *(3.3/0xFFFF))));
+     float realRightSensorVal=( (float)((resRight *(3.3/0xFFFF))));
+     usbDebug.printf("LEFT_SENSOR= %3.2f [V]\r\n",realLeftSensorVal);
+     usbDebug.printf("RIGHT_SENSOR= %3.2f [V]\r\n", realRightSensorVal);
+     static int counter =0;
+     counter++;
+     if(counter==1){
+        //setMotorDirection(LEFT_MOTOR);
+     }
+     else if(counter==10){
+        
+        //setMotorDirection(RIGHT_MOTOR);  
+        
+     }  
+     if(counter==20)
+       counter=0;
+*/
+     usbDebug.printf("LEFT_SENSOR= %3.2f [V]\r\n",((float)(sensorInputLeft.read_u16())*(3.3/0xFFFF)));
+     usbDebug.printf("RIGHT_SENSOR= %3.2f [V]\r\n", ((float)(sensorInputRight.read_u16())*(3.3/0xFFFF)));
+     checkLightSensorStatus();
+
+#endif
 
 #endif
         
