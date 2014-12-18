@@ -2,3 +2,12 @@
 *.o
 *.d
 *.i
+cache
+*
+*.txt
+*.phaseroots
+*.bookmarks
+*.branch
+*.desc
+*.dirstate
+*.hgignore
