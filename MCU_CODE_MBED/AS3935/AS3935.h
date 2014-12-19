@@ -20,7 +20,7 @@
 #define _AS3935_H
 
 #include "mbed.h"
-
+#include "rtos.h"
 
 #define AS3935_I2C_ADDRESS 0x03<<1
 
@@ -77,7 +77,7 @@ class AS3935 {
     
     bool powerUp();
     
-    int interruptSource();
+    int readInterruptSource();
     
     bool disableDisturbers();
     
@@ -110,6 +110,8 @@ class AS3935 {
     int setWatchdogThreshold(int wdth);
     
     void clearStats(); 
+    
+    osEvent checkQueueState(void);
        
        
        
@@ -214,11 +216,8 @@ class AS3935 {
     
     I2C mI2c;   
     uint8_t mI2cAddr;
-    InterruptIn irqPinInterrupt;
-        
-        
-        
-        
+    InterruptIn mIrqPinInterrupt;  
+    Queue<uint8_t, 10> queue;           
         
 };
 

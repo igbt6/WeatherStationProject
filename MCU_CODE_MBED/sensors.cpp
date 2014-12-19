@@ -6,17 +6,20 @@
 
 SENSORS::SENSORS():usbDebug(USBTX, USBRX)// rs,rw,e,d4-d7
 {
-    
-    
+
+
 #ifdef ADT7410_ENABLED
     adt7410_1= new  ADT7410( ADT7410_PIN_SDA,ADT7410_PIN_SCL,100000);
     adt7410_2 =new ADT7410( ADT7410_PIN_SDA,ADT7410_PIN_SCL,100000,ADT7410_2_I2C_ADDRESS);
 #endif
-    
+
+#ifdef MAX44009_ENABLED
+    max44009= new MAX44009( MAX44009_PIN_SDA, MAX44009_PIN_SCL ,100000);
+#endif
 
 #ifdef BMP180_ENABLED
     bmp180= new BMP180( BMP180_PIN_SDA, BMP180_PIN_SCL);
-    bmp180->Initialize(64, BMP180_OSS_ULTRA_LOW_POWER); // 64m altitude compensation and low power oversampling
+
 #endif
 
 #ifdef MAX9611_ENABLED
@@ -40,13 +43,12 @@ SENSORS::SENSORS():usbDebug(USBTX, USBRX)// rs,rw,e,d4-d7
 SENSORS::~SENSORS()
 {
 
-
     delete bmp180;
     delete max9611;
     delete si7020;
     delete as3935;
     delete ds2782;
-
+    delete adt7410_2;
 }
 
 
@@ -60,9 +62,8 @@ void SENSORS:: measurement (void const* args)
     while(1) {
 //      measPrintMutex.lock();
 #ifdef BMP180_ENABLED
-        if (bmp180->ReadData( &results.BMP180temperature,&results.BMP180pressure)) {
-        } else
-            results.BMP180temperature=-999;
+        if (!bmp180->readData()) usbDebug.printf("BMP180_DATA_Reading Fuck UP\r\n");
+
 #endif
 
 #ifdef MAX9611_ENABLED
@@ -77,7 +78,30 @@ void SENSORS:: measurement (void const* args)
 #endif
 
 #ifdef AS3935_ENABLED
+        osEvent as3935Event = as3935->checkQueueState();
+        if(as3935Event.status==osEventMessage) {
 
+            uint8_t *distance = (uint8_t*)as3935Event.value.p;
+            usbDebug.printf("AS3935_DISTANCE: %3d\r\n",distance);
+        }
+
+#endif
+
+
+
+#ifdef ADT7410_ENABLED
+
+        if(adt7410_2->readTemp()!=-1) {
+            results.ADT7410_2temperature=adt7410_2->getTemperature();
+        } else {
+            results.ADT7410_2temperature=-999;
+        }
+#endif
+
+
+
+#ifdef MAX44009_ENABLED
+        if(!max44009->readLuxIntensity())usbDebug.printf("MAX44009_LUX_READ Fuck UP \r\n");
 
 #endif
 
@@ -105,13 +129,11 @@ void SENSORS::getResults (void const* args)
     while(1) {
 
 #ifdef USB_DEBUG
-#ifdef MAX4070_ENABLED
-        //usbDebug.printf("MAX4070_CurrentValue: %5.2f\r\n",results.MAX4070chargerCurrent);
-        usbDebug.printf("MAX4070_VoltageValue: %5.2f\r\n",max4070Voltage->getResult());
-#endif
+
+
 #ifdef BMP180_ENABLED
-        if(results.BMP180pressure!=-999&&results.BMP180temperature!=-999)
-            usbDebug.printf("Pressure(hPa):   %5.2f\r\nTemperatureBMP180(C):   %5.2f\r\n", results.BMP180pressure, results.BMP180temperature);
+        if(bmp180->getPressure()!=-999&&bmp180->getTemperature()!=-999)
+            usbDebug.printf("Pressure(hPa):   %5.2f\r\nTemperatureBMP180(C):   %5.2f\r\n", bmp180->getPressure(), bmp180->getTemperature());
         else
             usbDebug.printf("BMP180_ERROR\r\n");
 #endif
@@ -159,9 +181,34 @@ void SENSORS::getResults (void const* args)
 
 #endif
 
+
+
+#ifdef ADT7410_ENABLED   //TODO
+
+        if(results.ADT7410_1temperature!=-999)
+            usbDebug.printf("TemperatureADT7410_1(C):  %5.2f\r\n",  results.ADT7410_1temperature);
+        else
+            usbDebug.printf("ADT7410_1ERROR\r\n");
+        if(results.ADT7410_2temperature!=-999)
+            usbDebug.printf("TemperatureADT7410_2(C):  %5.2f\r\n",  results.ADT7410_2temperature);
+        else
+            usbDebug.printf("ADT7410_2ERROR\r\n");
+
+#endif
+
+
+
+#ifdef MAX44009_ENABLED
+
+        if(max44009->getLuxIntensity()!=-999)
+            usbDebug.printf("MAX44009_LUX_INTESITY: %5.2f\r\n",max44009->getLuxIntensity());
+        else
+            usbDebug.printf("MAX44009_ERROR\r\n");
+#endif
+
 #endif
         Thread::wait(2000);
-   } 
+    }
 }
 
 

@@ -1,6 +1,5 @@
 #include "mbed.h"
 
-#include "max4070.h"
 #include "rtos.h"
 #include "USBHostMSD.h"
 #include "BMP180.h"
@@ -14,16 +13,29 @@
 #define USB_DEBUG
 
 
-#define SI7020_ENABLEDx
+#define SI7020_ENABLED
 
-#define AS3935_ENABLEDx
+#define AS3935_ENABLED
 
 #define DS2782_ENABLED
 
 #define MAX9611_ENABLED
 
-#define BMP180_ENABLEDx
+#define BMP180_ENABLED
 
+#define ADT7410_ENABLEDx
+
+#define MAX44009_ENABLED
+
+#define BTM222_ENABLED
+
+
+
+#define ADT7410_PIN_SDA PTE0    //I2C1
+#define ADT7410_PIN_SCL PTE1
+
+#define MAX44009_PIN_SDA PTE0    //I2C1
+#define MAX44009_PIN_SCL PTE1
 
 #define BMP180_PIN_SDA PTB1    // I2C0
 #define BMP180_PIN_SCL PTB0

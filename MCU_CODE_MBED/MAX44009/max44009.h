@@ -1,3 +1,25 @@
+/*
+  @file max44009.h
+  
+  @brief MAX44009 ambient light sensor with an I²C digital output Breakout I2C Library      
+
+  @Author lukasz uszko(luszko@op.pl)
+
+  Tested on FRDM-KL46Z and FRDM-KL25Z
+  
+  Copyright (c) 2014 lukasz uszko
+  Released under the MIT License (see http://mbed.org/license/mit)
+
+  Documentation regarding the MAX9611 might be found here: 
+  http://www.maximintegrated.com/en/products/analog/sensors-and-sensor-interface/MAX44009.html
+*/
+
+
+
+
+
+
+
 
 #ifndef MAX44009_H
 #define MAX44009_H
@@ -7,7 +29,7 @@
 
 
 #define MAX44009_I2C_ADDRESS 0x97  //1001 1011 -- A0 PIN is conected to VDD
-
+#define UNSET_MAX44009_LUX_INTENSITY_VALUE -999 
 
 
 
@@ -32,18 +54,18 @@ class MAX44009{
    
     int getStatus(void);
     
-    int readLuxIntensity(void);
+    bool readLuxIntensity(void);
     
     
     inline float getLuxIntensity(void){
-        return this->luxIntensity;
+        return this->mLuxIntensity;
         }
     
  private:
     
-    I2C i2c;   
-    int i2cAddr;
-    float luxIntensity;
+    I2C mI2c;   
+    int mI2cAddr;
+    float mLuxIntensity;
  
     /** Write data to the given register
      *  
@@ -52,7 +74,7 @@ class MAX44009{
      *   0 on error
      */  
 
-    int write(uint8_t regAddress, uint8_t data);
+    bool write(uint8_t regAddress, uint8_t* data,int dataLength);
     
     
     /** Write data to the given register
@@ -62,10 +84,10 @@ class MAX44009{
      * @returns
      *   1 on success,
      *   0 on error
-     */  
-   int read(uint8_t regAddress, uint8_t* data,int length); 
-    
-    
+     */
+    bool read(uint8_t regAddress, uint8_t *data,int dataLength);  
+
+
     
     
 
