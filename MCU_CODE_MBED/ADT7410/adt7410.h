@@ -25,7 +25,18 @@
 #define ADT7410_I2C_ADDRESS 0x97   //A0 and A1 PIN are conected to VDD
 #define ADT7410_2_I2C_ADDRESS 0x90   //A0 and A1 PIN are conected to GND
 
-typedef enum {
+
+#define UNSET_ADT7410_TEMPERATURE -999
+
+
+
+
+class ADT7410{
+    
+   public:
+     //typedefs:
+     
+     typedef enum {
     _13_BIT=0,
     _16_BIT=1
  }CONF_RESOLUTION;
@@ -58,19 +69,13 @@ typedef enum {
     _3_FAULTS,
     _4_FAULTS
  }CONF_FAULT_QUEUE;
- 
-
-
-class ADT7410{
-    
-   public:
-
+     
     /** Create an ADT7410 instance
      * @param sda pin 
      * @param scl pin 
      * @param address: I2C slave address 
      */
-    ADT7410(PinName sda, PinName scl,int i2cFrequency=100000,int address = ADT7410_I2C_ADDRESS,CONF_RESOLUTION res=_13_BIT); 
+    ADT7410(PinName sda, PinName scl,int i2cFrequency=100000,int address = ADT7410_I2C_ADDRESS); 
 
     /** Create a ADT7410 instance
      * @param i2c object
@@ -83,7 +88,7 @@ class ADT7410{
      *    1 on success,
      *    0 on error
      */
-    int initADT7410(CONF_FAULT_QUEUE faultQueue=_1_FAULT, 
+    bool setConfiguration(CONF_FAULT_QUEUE faultQueue=_1_FAULT, 
                     CONF_CT_PIN_POLARITY ctPinPolarity=CT_ACTIVE_LOW, 
                     CONF_INT_PIN_POLARITY intPinPolarity=INT_ACTIVE_LOW, 
                     CONF_INT_CT_MODE intCtMode=INTERRUPT_MODE, 
@@ -96,56 +101,56 @@ class ADT7410{
      *   1 on success,
      *   0 on error
      */    
-    int readTemp();
+    bool readTemp();
 
-    int getIdNumber(void);
+
+    /** Read ID  number of the chip.
+     * @param temperature (C) 
+     * @returns ID number (8 bit Value)
+     */  
+    int readIdNumber(void);
     
     
     /** Set resolution of read data
-     *
-     *
+     * @returns
+     *   1 on success,
+     *   0 on error
      */
-   int setResolution(CONF_RESOLUTION res);
+   bool setResolution(CONF_RESOLUTION res);
     
     /** Get temperature from a previous measurement 
      *  
      * @returns
      *   temperature (C)
      */    
-   inline float getTemperature(void) {return currentTemperature;}
+   inline float getTemperature(void) {return mTemperature;}
 
 protected:
     
-    float currentTemperature;     
-    I2C i2c;   
-    int i2cAddr;
-    char data[4];
-    uint8_t resolution;
+    float mTemperature;     
+    I2C mI2c;   
+    int mI2cAddr;
+    uint8_t mResolution;
         
 private: 
      
-    /** Write data to the given register
-     *  
-     * @returns
-     *   1 on success,
-     *   0 on error
-     */  
+    /** Write data to the given register (using I2C bus)
+    *
+    * @returns
+    *   1 on success,
+    *   0 on error
+    */
+    bool write(uint8_t regAddress, uint8_t* data,int dataLength);
 
-    bool write(uint8_t regAddress, uint8_t data);
-    
-    int read(uint8_t regAddress);
-    
-    
     /** Write data to the given register
      * @param register Address
      * @param data to read
-     * @param length of data to read 
+     * @param length of data to read
      * @returns
      *   1 on success,
      *   0 on error
-     */  
-    int read(uint8_t regAddress, uint8_t* data,int length);
-    
+     */
+    bool read(uint8_t regAddress, uint8_t* data,int length);
     
         
 

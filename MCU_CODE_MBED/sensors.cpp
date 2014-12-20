@@ -4,13 +4,13 @@
 /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// ///////////////////////////////////////////////
 
 
-SENSORS::SENSORS():usbDebug(USBTX, USBRX)// rs,rw,e,d4-d7
-{
+SENSORS::SENSORS():usbDebug(USBTX, USBRX)
+{ 
+    //usbDebug.baud(9600);
 
 
 #ifdef ADT7410_ENABLED
-    adt7410_1= new  ADT7410( ADT7410_PIN_SDA,ADT7410_PIN_SCL,100000);
-    adt7410_2 =new ADT7410( ADT7410_PIN_SDA,ADT7410_PIN_SCL,100000,ADT7410_2_I2C_ADDRESS);
+    adt7410 =new ADT7410( ADT7410_PIN_SDA,ADT7410_PIN_SCL,100000,ADT7410_2_I2C_ADDRESS);
 #endif
 
 #ifdef MAX44009_ENABLED
@@ -48,7 +48,7 @@ SENSORS::~SENSORS()
     delete si7020;
     delete as3935;
     delete ds2782;
-    delete adt7410_2;
+    delete adt7410;
 }
 
 
@@ -60,7 +60,7 @@ void SENSORS:: measurement (void const* args)
 
 
     while(1) {
-//      measPrintMutex.lock();
+
 #ifdef BMP180_ENABLED
         if (!bmp180->readData()) usbDebug.printf("BMP180_DATA_Reading Fuck UP\r\n");
 
@@ -73,7 +73,6 @@ void SENSORS:: measurement (void const* args)
 #ifdef SI7020_ENABLED
 
         if(!si7020->readTemp())  usbDebug.printf("SI7020_TEMP_READ Fuck UP \r\n");
-        else usbDebug.printf("SI7020_TEMP_READ  Fucking OK!\r\n");
 
 #endif
 
@@ -91,10 +90,8 @@ void SENSORS:: measurement (void const* args)
 
 #ifdef ADT7410_ENABLED
 
-        if(adt7410_2->readTemp()!=-1) {
-            results.ADT7410_2temperature=adt7410_2->getTemperature();
-        } else {
-            results.ADT7410_2temperature=-999;
+        if(!adt7410->readTemp()) {
+            usbDebug.printf("ADT7410_TEMP_READ Fuck UP \r\n");
         }
 #endif
 
@@ -114,7 +111,7 @@ void SENSORS:: measurement (void const* args)
 #endif
 
 
-        Thread::wait(1000);
+        Thread::wait(777);
 
     }
 }
@@ -183,16 +180,12 @@ void SENSORS::getResults (void const* args)
 
 
 
-#ifdef ADT7410_ENABLED   //TODO
+#ifdef ADT7410_ENABLED   
 
-        if(results.ADT7410_1temperature!=-999)
-            usbDebug.printf("TemperatureADT7410_1(C):  %5.2f\r\n",  results.ADT7410_1temperature);
+        if(adt7410->getTemperature()!=-999)
+            usbDebug.printf("TemperatureADT7410_1(C):  %5.2f\r\n", adt7410->getTemperature());
         else
             usbDebug.printf("ADT7410_1ERROR\r\n");
-        if(results.ADT7410_2temperature!=-999)
-            usbDebug.printf("TemperatureADT7410_2(C):  %5.2f\r\n",  results.ADT7410_2temperature);
-        else
-            usbDebug.printf("ADT7410_2ERROR\r\n");
 
 #endif
 
@@ -207,7 +200,8 @@ void SENSORS::getResults (void const* args)
 #endif
 
 #endif
-        Thread::wait(2000);
+   // usbDebug.printf("TEST_STRING_1_2_3_4_5_6_7_8_9_10_A_B_C_D_E_F_G_H_I_J_K_L_M_N_O_P_Q_R_S_T_U_V_X_Y_Z\r\n");
+        Thread::wait(1500);
     }
 }
 

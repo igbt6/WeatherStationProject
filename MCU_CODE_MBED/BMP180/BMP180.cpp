@@ -1,18 +1,4 @@
-/*
-  @file BMP180.cpp
 
-  @brief Barometric Pressure and Temperature Sensor BMP180 Breakout I2C Library
-
-  @Author spiridion (http://mailme.spiridion.net)
-
-  Tested on LPC1768 and FRDM-KL25Z
-
-  Copyright (c) 2014 spiridion
-  Released under the MIT License (see http://mbed.org/license/mit)
-
-  Documentation regarding the BMP180 can be found here:
-  http://mbed.org/media/uploads/spiridion/bst-bmp180-ds000-09.pdf
-*/
 
 #include "BMP180.h"
 #include "mbed.h"
@@ -38,6 +24,7 @@ BMP180::BMP180(I2C& i2c, int address)
     mOss = BMP180_OSS_NORMAL;
     mTemperature = UNSET_BMP180_TEMPERATURE_VALUE;
     mPressure = UNSET_BMP180_PRESSURE_VALUE;
+    setConfiguration(64, BMP180_OSS_ULTRA_LOW_POWER); // 64m altitude compensation and low power oversampling
 }
 
 
@@ -59,7 +46,7 @@ bool BMP180::read(uint8_t regAddress, uint8_t *data,int dataLength)
 
 
 
-int  BMP180::setConfiguration(float altitude, int overSamplingSetting)
+bool BMP180::setConfiguration(float altitude, int overSamplingSetting)
 {
     uint8_t data[22];
     int errors = 0;
@@ -70,6 +57,7 @@ int  BMP180::setConfiguration(float altitude, int overSamplingSetting)
     mPressure = UNSET_BMP180_PRESSURE_VALUE;
 
     // read calibration data
+    data[0]=0xAA;
     errors += read(data[0], data, 22); // read 11 x 16 bits at this position
     wait_ms(10);
 
@@ -102,7 +90,7 @@ int  BMP180::setConfiguration(float altitude, int overSamplingSetting)
     errors = 0;
 #endif // #ifdef BMP180_TEST_FORMULA
 
-    return errors? 0 : 1;
+    return errors? 1 : 0;
 }
 
 bool BMP180::readData(void)
@@ -118,7 +106,7 @@ bool BMP180::readData(void)
     mTemperature = trueTemperature(t);
     mPressure = truePressure(p);
 
-    return 1;
+    return true;
 }
 
 int BMP180::readRawTemperature(long* pUt)

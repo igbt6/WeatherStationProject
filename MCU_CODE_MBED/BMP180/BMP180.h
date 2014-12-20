@@ -81,8 +81,9 @@ public:
     /** Initialization: set member values and read BMP180 calibration parameters
      * @param altitude (in meter)
      * @param overSamplingSetting
+     * @returns 1 on success, 0 on error
      */
-    int setConfiguration(float altitude = 0.F, int overSamplingSetting = BMP180_OSS_NORMAL);
+    bool setConfiguration(float altitude = 0.F, int overSamplingSetting = BMP180_OSS_NORMAL);
 
     /** Read pressure and temperature from the BMP180.
      * @param pressure (hPa)
@@ -107,10 +108,10 @@ public:
      */
     float getPressure();
 
-protected:
+private:
 
 
-    /** Write data to the given register
+    /** Write data to the given register (using I2C bus)
     *
     * @returns
     *   1 on success,
