@@ -15,7 +15,7 @@
 
 
 #define SI7020_ENABLED
-#define AS3935_ENABLEDx
+#define AS3935_ENABLED
 #define DS2782_ENABLEDx
 #define MAX9611_ENABLEDx
 #define BMP180_ENABLED

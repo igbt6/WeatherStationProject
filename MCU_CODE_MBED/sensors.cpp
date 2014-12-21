@@ -6,7 +6,7 @@
 
 SENSORS::SENSORS():usbDebug(USBTX, USBRX)
 { 
-    //usbDebug.baud(9600);
+    usbDebug.baud(115200);
 
 
 #ifdef ADT7410_ENABLED
@@ -42,13 +42,14 @@ SENSORS::SENSORS():usbDebug(USBTX, USBRX)
 
 SENSORS::~SENSORS()
 {
-
+    delete adt7410;
+    delete max44009;
     delete bmp180;
     delete max9611;
     delete si7020;
     delete as3935;
     delete ds2782;
-    delete adt7410;
+    
 }
 
 
@@ -73,6 +74,7 @@ void SENSORS:: measurement (void const* args)
 #ifdef SI7020_ENABLED
 
         if(!si7020->readTemp())  usbDebug.printf("SI7020_TEMP_READ Fuck UP \r\n");
+        if(!si7020->readHumidity())  usbDebug.printf("SI7020_HUMIDREAD Fuck UP \r\n");
 
 #endif
 
@@ -83,6 +85,10 @@ void SENSORS:: measurement (void const* args)
             uint8_t *distance = (uint8_t*)as3935Event.value.p;
             usbDebug.printf("AS3935_DISTANCE: %3d\r\n",distance);
         }
+        else{
+            usbDebug.printf("AS3935 NO phenomenon occured");
+        }
+       
 
 #endif
 
@@ -91,7 +97,7 @@ void SENSORS:: measurement (void const* args)
 #ifdef ADT7410_ENABLED
 
         if(!adt7410->readTemp()) {
-            usbDebug.printf("ADT7410_TEMP_READ Fuck UP \r\n");
+           usbDebug.printf("ADT7410_TEMP_READ Fuck UP \r\n");
         }
 #endif
 
@@ -130,7 +136,7 @@ void SENSORS::getResults (void const* args)
 
 #ifdef BMP180_ENABLED
         if(bmp180->getPressure()!=-999&&bmp180->getTemperature()!=-999)
-            usbDebug.printf("Pressure(hPa):   %5.2f\r\nTemperatureBMP180(C):   %5.2f\r\n", bmp180->getPressure(), bmp180->getTemperature());
+            usbDebug.printf("BMP180_PRESSURE: %5.2f [hPa]\r\nBMP180_TEMPERATURE: %5.2f [C]\r\n", bmp180->getPressure(), bmp180->getTemperature());
         else
             usbDebug.printf("BMP180_ERROR\r\n");
 #endif
@@ -142,23 +148,23 @@ void SENSORS::getResults (void const* args)
 #endif
 
 #ifdef SI7020_ENABLED
-        usbDebug.printf("SI7020_TEMP= %3.2f [C]\r\n", si7020->getTemp());
-        usbDebug.printf("SI7020_HUMIDITY= %3.2f [%]\r\n", si7020->getHumidity());
+        usbDebug.printf("SI7020_TEMPERATURE: %3.2f [C]\r\n", si7020->getTemp());
+        usbDebug.printf("SI7020_HUMIDITY: %3.2f ['/.]\r\n", si7020->getHumidity());
 #endif
 
 #ifdef AS3935_ENABLED
-        usbDebug.printf("AS3935_TEMP= %d \r\n", as3935->lightningDistanceKm());
+       // usbDebug.printf("AS3935_DISTANCE: %d \r\n", as3935->getLightningDistanceKm());
 #endif
 
 #ifdef DS2782_ENABLED
-        usbDebug.printf("DS2782_TEMP= %3.2f [C]\r\n", ds2782->getTemperature());
-        usbDebug.printf("DS2782_CURRENT= %3.2f [mA]\r\n", ds2782->getCurrent());
-        usbDebug.printf("DS2782_VOLTAGE= %3.2f [mV]\r\n", ds2782->getVoltage());
-        usbDebug.printf("DS2782_ACR= %3.2f [uV]\r\n", ds2782->readAcrReg());
-        usbDebug.printf("DS2782_RARC= %3d [./']\r\n", ds2782->readRarcReg());
+        usbDebug.printf("DS2782_TEMP: %3.2f [C]\r\n", ds2782->getTemperature());
+        usbDebug.printf("DS2782_CURRENT: %3.2f [mA]\r\n", ds2782->getCurrent());
+        usbDebug.printf("DS2782_VOLTAGE=: %3.2f [mV]\r\n", ds2782->getVoltage());
+        usbDebug.printf("DS2782_ACR: %3.2f [uV]\r\n", ds2782->readAcrReg());
+        usbDebug.printf("DS2782_RARC: %3d [./']\r\n", ds2782->readRarcReg());
         //usbDebug.printf("DS2782_STATUS= 0x%02d \r\n", ds2782->readStatusReg());
         uint8_t statusReg = ds2782->readStatusReg();
-        usbDebug.printf("DS2782_STATUS= 0x%02x \r\n", statusReg);
+        usbDebug.printf("DS2782_STATUS: 0x%02x \r\n", statusReg);
         if(statusReg & DS2782::LEARNF)
             usbDebug.printf("LEARNF flag is SET\r\n");
         else
@@ -183,9 +189,9 @@ void SENSORS::getResults (void const* args)
 #ifdef ADT7410_ENABLED   
 
         if(adt7410->getTemperature()!=-999)
-            usbDebug.printf("TemperatureADT7410_1(C):  %5.2f\r\n", adt7410->getTemperature());
+            usbDebug.printf("TemperatureADT7410: %5.2f [C]\r\n", adt7410->getTemperature());
         else
-            usbDebug.printf("ADT7410_1ERROR\r\n");
+            usbDebug.printf("ADT7410_ERROR\r\n");
 
 #endif
 
@@ -194,9 +200,9 @@ void SENSORS::getResults (void const* args)
 #ifdef MAX44009_ENABLED
 
         if(max44009->getLuxIntensity()!=-999)
-            usbDebug.printf("MAX44009_LUX_INTESITY: %5.2f\r\n",max44009->getLuxIntensity());
+            usbDebug.printf("MAX44009_LUX_INTESITY: %5.2f [lx]\r\n\n",max44009->getLuxIntensity());
         else
-            usbDebug.printf("MAX44009_ERROR\r\n");
+            usbDebug.printf("MAX44009_ERROR\r\n\n");
 #endif
 
 #endif

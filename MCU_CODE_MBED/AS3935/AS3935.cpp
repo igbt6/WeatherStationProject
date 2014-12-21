@@ -3,15 +3,15 @@
 
 AS3935::AS3935(PinName sda, PinName scl, PinName irqPin,int i2cFrequencyHz,uint8_t address):mI2c(sda,scl),mI2cAddr(address),mIrqPinInterrupt(irqPin)
 {
-
+    queue =new Queue<uint8_t, 10>();
     mI2c.frequency(i2cFrequencyHz);
     mIrqPinInterrupt.rise(this,&AS3935::handleIrqInterrupt);
-    if(!initAS3935()); //while(1); //TODO handle error
+    //if(!setConfiguration()); //while(1); //TODO handle error
     wait_ms(11);
 }
 
 
-bool AS3935::initAS3935(void)
+bool AS3935::setConfiguration(void)
 {
 
     if(!powerUp())return false;
@@ -32,9 +32,9 @@ void AS3935::handleIrqInterrupt(void)
     break;
     
     case INTERRUPTS_INT_L:  //Lightning interrupt
-        int distance = lightningDistanceKm();
+        int distance = getLightningDistanceKm();
         if(distance!=-1)
-            queue.put((uint8_t*)&distance);
+            queue->put((uint8_t*)&distance);
     break;
     }
 }
@@ -42,7 +42,7 @@ void AS3935::handleIrqInterrupt(void)
 
 
 osEvent AS3935::checkQueueState(void){
-    return queue.get();
+    return queue->get();
 }
 
 
@@ -110,7 +110,7 @@ int AS3935::setMinimumLightnings(int minlightning)
     return getMinimumLightnings();
 }
 
-int AS3935::lightningDistanceKm()
+int AS3935::getLightningDistanceKm()
 {
     uint8_t data;
     if(!readReg(AS3935_DISTANCE,&data)) return -1;

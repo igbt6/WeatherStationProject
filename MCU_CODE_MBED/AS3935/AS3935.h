@@ -11,7 +11,7 @@
   Copyright (c) 2014 lukasz uszko
   Released under the MIT License (see http://mbed.org/license/mit)
 
-  Documentation regarding the MAX9611 might be found here: 
+  Documentation regarding the AS3935 might be found here: 
   http://www.ams.com/eng/Products/Lightning-Sensor
 */
 
@@ -65,7 +65,7 @@ class AS3935 {
      AS3935(PinName sda, PinName scl, PinName irqPin,int i2cFrequencyHz=100000,uint8_t address=AS3935_I2C_ADDRESS); 
      
      
-    bool initAS3935(void);   
+    bool setConfiguration(void);   
     
     void handleIrqInterrupt(void);
        
@@ -87,7 +87,7 @@ class AS3935 {
     
     int setMinimumLightnings(int minlightning);
     
-    int lightningDistanceKm();
+    int getLightningDistanceKm();
     
     void setIndoors();
     
@@ -217,7 +217,7 @@ class AS3935 {
     I2C mI2c;   
     uint8_t mI2cAddr;
     InterruptIn mIrqPinInterrupt;  
-    Queue<uint8_t, 10> queue;           
+    Queue<uint8_t, 10> *queue;           
         
 };
 
