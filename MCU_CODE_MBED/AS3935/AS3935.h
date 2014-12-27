@@ -43,6 +43,8 @@
 #define AS3935_DISP_TRCO    0x08, 0x20
 #define AS3935_TUN_CAP      0x08, 0x0F
 
+#define AS3935_TUN_CAP_VALUE 3 // set by the maker of the board -> Take a look at hardware antenna desing for more details
+
 // other constants
 #define AS3935_AFE_INDOOR   0x12
 #define AS3935_AFE_OUTDOOR  0x0E
@@ -62,7 +64,7 @@ class AS3935 {
      * @param i2c bus frequency [Hz]
      * @param address: I2C slave address  
      */
-     AS3935(PinName sda, PinName scl, PinName irqPin,int i2cFrequencyHz=100000,uint8_t address=AS3935_I2C_ADDRESS); 
+    AS3935(PinName sda, PinName scl, PinName irqPin,int i2cFrequencyHz=100000,uint8_t address=AS3935_I2C_ADDRESS); 
      
      
     bool setConfiguration(void);   
@@ -85,29 +87,29 @@ class AS3935 {
     
     int getMinimumLightnings();
     
-    int setMinimumLightnings(int minlightning);
+    bool setMinimumLightnings(int minlightning);
     
     int getLightningDistanceKm();
     
-    void setIndoors();
+    bool setIndoors();
     
-    void setOutdoors();
+    bool setOutdoors();
     
     int getNoiseFloor();
     
-    int setNoiseFloor(int noisefloor);
+    bool setNoiseFloor(int noisefloor);
     
     int getSpikeRejection();
     
-    int setSpikeRejection(int srej);
+    bool setSpikeRejection(int srej);
     
     int getWatchdogThreshold();
     
     int getTuneCap();
     
-    int setTuneCap(int cap);
+    bool setTuneCap(int cap);
     
-    int setWatchdogThreshold(int wdth);
+    bool setWatchdogThreshold(int wdth);
     
     void clearStats(); 
     

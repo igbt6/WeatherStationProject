@@ -5,16 +5,21 @@ AS3935::AS3935(PinName sda, PinName scl, PinName irqPin,int i2cFrequencyHz,uint8
 {
     queue =new Queue<uint8_t, 10>();
     mI2c.frequency(i2cFrequencyHz);
+    setConfiguration();
     mIrqPinInterrupt.rise(this,&AS3935::handleIrqInterrupt);
-    //if(!setConfiguration()); //while(1); //TODO handle error
-    wait_ms(11);
 }
 
 
 bool AS3935::setConfiguration(void)
 {
-
-    if(!powerUp())return false;
+    reset();
+    wait_ms(5);
+    setTuneCap( AS3935_TUN_CAP_VALUE);
+    wait_ms(5);
+    powerUp();
+    wait_ms(11);
+    setMinimumLightnings(2);
+    setNoiseFloor(2);
     return true;
 }
 
@@ -22,26 +27,30 @@ void AS3935::handleIrqInterrupt(void)
 {
     uint8_t typeOfInterrupt=readInterruptSource();
     switch(typeOfInterrupt) {
-    
-    case INTERRUPTS_INT_NH:  //Noise level too high
-         //do nothing
-    break;
-    
-    case INTERRUPTS_INT_D:   //diturber detected
-         // do nothing
-    break;
-    
-    case INTERRUPTS_INT_L:  //Lightning interrupt
-        int distance = getLightningDistanceKm();
-        if(distance!=-1)
-            queue->put((uint8_t*)&distance);
-    break;
+
+        case INTERRUPTS_INT_NH:  //Noise level too high
+            //do nothing
+            break;
+
+        case INTERRUPTS_INT_D:   //diturber detected
+            // do nothing
+            break;
+
+        case INTERRUPTS_INT_L:  //Lightning interrupt
+            int distance = getLightningDistanceKm();
+            if(distance!=-1)
+                queue->put((uint8_t*)&distance);
+            break;
+
+        default:
+            break;
     }
 }
 
 
 
-osEvent AS3935::checkQueueState(void){
+osEvent AS3935::checkQueueState(void)
+{
     return queue->get();
 }
 
@@ -61,7 +70,7 @@ bool AS3935::reset()
 
 bool AS3935::powerDown()
 {
-    return writeReg(AS3935_PWD,1);
+    return writeReg(AS3935_PWD,0);
 }
 
 bool AS3935::powerUp()
@@ -70,7 +79,8 @@ bool AS3935::powerUp()
     uint8_t cmd[2];
     cmd[0]=0x3D;
     cmd[1]=0x96;
-    readReg(AS3935_PWD,0);
+    wait_ms(3);
+    writeReg(AS3935_PWD,1);
     retVal+=write(cmd[0] ,&cmd[1], 1);
     wait_ms(3);
     retVal+=writeReg(AS3935_DISP_TRCO,1);
@@ -104,10 +114,9 @@ int AS3935::getMinimumLightnings()
     return data;
 }
 
-int AS3935::setMinimumLightnings(int minlightning)
+bool AS3935::setMinimumLightnings(int minlightning)
 {
-    writeReg(AS3935_MIN_NUM_LIGH,minlightning);
-    return getMinimumLightnings();
+    return writeReg(AS3935_MIN_NUM_LIGH,minlightning);
 }
 
 int AS3935::getLightningDistanceKm()
@@ -117,14 +126,14 @@ int AS3935::getLightningDistanceKm()
     return data;
 }
 
-void AS3935::setIndoors()
+bool AS3935::setIndoors()
 {
-    writeReg(AS3935_AFE_GB,AS3935_AFE_INDOOR);
+    return writeReg(AS3935_AFE_GB,AS3935_AFE_INDOOR);
 }
 
-void AS3935::setOutdoors()
+bool AS3935::setOutdoors()
 {
-    writeReg(AS3935_AFE_GB,AS3935_AFE_OUTDOOR);
+    return writeReg(AS3935_AFE_GB,AS3935_AFE_OUTDOOR);
 }
 
 int AS3935::getNoiseFloor()
@@ -134,10 +143,9 @@ int AS3935::getNoiseFloor()
     return data;
 }
 
-int AS3935::setNoiseFloor(int noisefloor)
+bool AS3935::setNoiseFloor(int noisefloor)
 {
-    writeReg(AS3935_NF_LEV,noisefloor);
-    return getNoiseFloor();
+    return writeReg(AS3935_NF_LEV,noisefloor);
 }
 
 int AS3935::getSpikeRejection()
@@ -147,10 +155,10 @@ int AS3935::getSpikeRejection()
     return data;
 }
 
-int AS3935::setSpikeRejection(int srej)
+bool AS3935::setSpikeRejection(int srej)
 {
-    writeReg(AS3935_SREJ, srej);
-    return getSpikeRejection();
+    return writeReg(AS3935_SREJ, srej);
+
 }
 
 int AS3935::getWatchdogThreshold()
@@ -160,10 +168,10 @@ int AS3935::getWatchdogThreshold()
     return data;
 }
 
-int AS3935::setWatchdogThreshold(int wdth)
+bool AS3935::setWatchdogThreshold(int wdth)
 {
-    writeReg(AS3935_WDTH,wdth);
-    return getWatchdogThreshold();
+    return writeReg(AS3935_WDTH,wdth);
+
 }
 
 int AS3935::getTuneCap()
@@ -173,10 +181,9 @@ int AS3935::getTuneCap()
     return data;
 }
 
-int AS3935::setTuneCap(int cap)
+bool AS3935::setTuneCap(int cap)
 {
-    writeReg(AS3935_TUN_CAP,cap);
-    return getTuneCap();
+    return writeReg(AS3935_TUN_CAP,cap);
 }
 
 void AS3935::clearStats()

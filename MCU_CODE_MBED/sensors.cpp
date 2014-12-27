@@ -5,7 +5,7 @@
 
 
 SENSORS::SENSORS():usbDebug(USBTX, USBRX)
-{ 
+{
     usbDebug.baud(115200);
 
 
@@ -49,7 +49,7 @@ SENSORS::~SENSORS()
     delete si7020;
     delete as3935;
     delete ds2782;
-    
+
 }
 
 
@@ -78,26 +78,10 @@ void SENSORS:: measurement (void const* args)
 
 #endif
 
-#ifdef AS3935_ENABLED
-        osEvent as3935Event = as3935->checkQueueState();
-        if(as3935Event.status==osEventMessage) {
-
-            uint8_t *distance = (uint8_t*)as3935Event.value.p;
-            usbDebug.printf("AS3935_DISTANCE: %3d\r\n",distance);
-        }
-        else{
-            usbDebug.printf("AS3935 NO phenomenon occured");
-        }
-       
-
-#endif
-
-
-
 #ifdef ADT7410_ENABLED
 
         if(!adt7410->readTemp()) {
-           usbDebug.printf("ADT7410_TEMP_READ Fuck UP \r\n");
+            usbDebug.printf("ADT7410_TEMP_READ Fuck UP \r\n");
         }
 #endif
 
@@ -117,6 +101,7 @@ void SENSORS:: measurement (void const* args)
 #endif
 
 
+        
         Thread::wait(777);
 
     }
@@ -152,9 +137,6 @@ void SENSORS::getResults (void const* args)
         usbDebug.printf("SI7020_HUMIDITY: %3.2f ['/.]\r\n", si7020->getHumidity());
 #endif
 
-#ifdef AS3935_ENABLED
-       // usbDebug.printf("AS3935_DISTANCE: %d \r\n", as3935->getLightningDistanceKm());
-#endif
 
 #ifdef DS2782_ENABLED
         usbDebug.printf("DS2782_TEMP: %3.2f [C]\r\n", ds2782->getTemperature());
@@ -186,10 +168,10 @@ void SENSORS::getResults (void const* args)
 
 
 
-#ifdef ADT7410_ENABLED   
+#ifdef ADT7410_ENABLED
 
         if(adt7410->getTemperature()!=-999)
-            usbDebug.printf("TemperatureADT7410: %5.2f [C]\r\n", adt7410->getTemperature());
+            usbDebug.printf("ADT7410_TEMPERATURE: %5.2f [C]\r\n", adt7410->getTemperature());
         else
             usbDebug.printf("ADT7410_ERROR\r\n");
 
@@ -206,8 +188,26 @@ void SENSORS::getResults (void const* args)
 #endif
 
 #endif
-   // usbDebug.printf("TEST_STRING_1_2_3_4_5_6_7_8_9_10_A_B_C_D_E_F_G_H_I_J_K_L_M_N_O_P_Q_R_S_T_U_V_X_Y_Z\r\n");
+        // usbDebug.printf("TEST_STRING_1_2_3_4_5_6_7_8_9_10_A_B_C_D_E_F_G_H_I_J_K_L_M_N_O_P_Q_R_S_T_U_V_X_Y_Z\r\n");
         Thread::wait(1500);
+    }
+}
+
+
+void SENSORS::waitForEvents(void const*args)
+{
+    while(1) {
+#ifdef AS3935_ENABLED
+        osEvent as3935Event = as3935->checkQueueState();
+        if(as3935Event.status==osEventMessage) {
+
+            uint8_t *distance = (uint8_t*)as3935Event.value.p;
+            usbDebug.printf("AS3935_DISTANCE: %3d\r\n",distance);
+        } else {
+            usbDebug.printf("AS3935 NO phenomenon occured");
+        }
+        // usbDebug.printf("AS3935_DISTANCE: %d \r\n", as3935->getLightningDistanceKm());
+#endif
     }
 }
 

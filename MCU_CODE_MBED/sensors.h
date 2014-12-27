@@ -11,6 +11,7 @@
 #include "adt7410.h"
 #include "max44009.h"
 
+#define NR_OF_THREADS 3
 #define USB_DEBUG
 
 
@@ -57,20 +58,21 @@ SENSORS();
 ~SENSORS();
     
 //public methods to handle in other threads    
-void measurement (void const* args);  
-void getResults (void const* args);  // get or print all results from the sensors 
+ void measurement (void const* args);  
+ void getResults (void const* args);  // get or print all results from the sensors 
+ void waitForEvents(void const*args); // handle here all asynch events that come from irqs mainly
 
     
-private:     
- BMP180*  bmp180;
- SI7020*  si7020;
- AS3935*  as3935;
+private:
+ BMP180* bmp180;
+ SI7020* si7020;
+ AS3935* as3935;
  MAX9611* max9611;
  DS2782* ds2782;
  ADT7410* adt7410;
  MAX44009* max44009;
-
  Mutex measPrintMutex;
+
 
 //USBSerial usbDebug;
 Serial usbDebug;
