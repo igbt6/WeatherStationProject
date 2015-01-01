@@ -10,7 +10,7 @@
 #include "ds2782.h"
 #include "adt7410.h"
 #include "max44009.h"
-
+#include "gts4E60.h"  //gps module
 #define NR_OF_THREADS 3
 #define USB_DEBUG
 
@@ -23,7 +23,7 @@
 #define ADT7410_ENABLED
 #define MAX44009_ENABLED
 #define BTM222_ENABLEDx
-
+#define GPS_ENABLED
 
 
 #define ADT7410_PIN_SDA PTE0    //I2C1
@@ -48,6 +48,8 @@
 #define AS3935_PIN_SCL PTC8
 #define AS3935_PIN_INTERRUPT PTA7  //Only the pins of port A and D can be used as interrupt in pins. (PTA[0-31] and PTD[0-31])
 
+#define GPS_PIN_RX  PTE17    //UART2
+#define GPS_PIN_TX  PTE16
 
 class SENSORS {
 
@@ -71,6 +73,7 @@ private:
  DS2782* ds2782;
  ADT7410* adt7410;
  MAX44009* max44009;
+ GTS4E60 * gps;
  Mutex measPrintMutex;
 
 

@@ -8,6 +8,9 @@ SENSORS::SENSORS():usbDebug(USBTX, USBRX)
 {
     usbDebug.baud(115200);
 
+#ifdef GPS_ENABLED
+  gps = new GTS4E60(GPS_PIN_TX,GPS_PIN_RX);
+#endif
 
 #ifdef ADT7410_ENABLED
     adt7410 =new ADT7410( ADT7410_PIN_SDA,ADT7410_PIN_SCL,100000,ADT7410_2_I2C_ADDRESS);
@@ -49,6 +52,7 @@ SENSORS::~SENSORS()
     delete si7020;
     delete as3935;
     delete ds2782;
+    delete gps;
 
 }
 
@@ -61,6 +65,12 @@ void SENSORS:: measurement (void const* args)
 
 
     while(1) {
+        
+    #ifdef GPS_ENABLED
+        gps->parseData();
+        usbDebug.printf("GPS_DATA: %2d%2d%f\r\n",gps->hours, gps->minutes, gps->seconds);
+    #endif      
+        
 
 #ifdef BMP180_ENABLED
         if (!bmp180->readData()) usbDebug.printf("BMP180_DATA_Reading Fuck UP\r\n");

@@ -7,7 +7,7 @@
 
 
 
-SENSORS sensors;
+/*SENSORS sensors;
 void SensorsMeasurementFuncWrapper(void const* args)
 {
     sensors.measurement(args);
@@ -21,7 +21,7 @@ void SensorsWaitAsyncEventsWrapper(void const* args)
 {
     sensors.waitForEvents(args);
 }
-
+*/
 //DEBUG
 static void timerCounter(void const *arg)
 {
@@ -35,11 +35,18 @@ static void timerCounter(void const *arg)
 int main()
 {
     RtosTimer debugTimer(timerCounter, osTimerPeriodic, (void *)0);
-    
-    Thread measThread(SensorsMeasurementFuncWrapper,NULL,osPriorityAboveNormal);
-    Thread printResultsThread(SensorsPrintfDataFuncWrapper,NULL,osPriorityHigh);
-    Thread waitForEventsThread(SensorsWaitAsyncEventsWrapper,NULL,osPriorityHigh);
+    //TESTS:
+    GTS4E60 gps(GPS_PIN_TX,GPS_PIN_RX);
+    Serial debug(USBTX, USBRX);
+    debug.baud(115200);
+    //Thread measThread(SensorsMeasurementFuncWrapper,NULL,osPriorityAboveNormal);
+    //Thread printResultsThread(SensorsPrintfDataFuncWrapper,NULL,osPriorityHigh);
+    //Thread waitForEventsThread(SensorsWaitAsyncEventsWrapper,NULL,osPriorityHigh);
     debugTimer.start(1000);
-    while(1) {}
+    while(1) {
+        gps.parseData();
+        debug.printf("GPS_DATA: %2d:%2d:%02.3f\r\n",gps.hours, gps.minutes, gps.seconds);
+    
+    }
     return 0;
 }
