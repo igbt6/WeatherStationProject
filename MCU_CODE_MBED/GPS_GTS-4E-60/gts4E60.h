@@ -2,15 +2,20 @@
   @file gts4E60.h
 
   @brief GTS-4E-60 GPS Module (FIBOCOM) module Library
+         Easy to change for other module
 
   @Author lukasz uszko(luszko@op.pl)
 
   Tested on FRDM-KL46Z and FRDM-KL25Z
-
+  
   Copyright (c) 2014 lukasz uszko
   Released under the MIT License (see http://mbed.org/license/mit)
 
+  Nice tutorial about degree formats and ways of computing them:
+  http://home.online.no/~sigurdhu/Deg_formats.htm
+
   Documentation regarding GTS-4E-60 GPS Module might be found here:
+  http://www.fibocom.com/product/2-1-3-2.html
 
 */
 
@@ -27,9 +32,16 @@
 #define GTS4E60_SERIAL_DEFAULT_BAUD       9600
 #define GTS4E60_SERIAL_TIMEOUT            10000
 #define GTS4E60_SERIAL_EOL                "\r\n"
+#define GTS4E60_NMEA_BUF_SIZE             1024
 
-//deafault serial port on FRDM KL46Z:  
-// UART2: 
+//SENTENCES handled by the module: $GPGGA, $GPGSA, $GPRMC, $GPGSV
+#define GGA         1
+#define GSA         2
+#define RMC         3
+#define GSV         4
+
+//deafault serial port on FRDM KL46Z:
+// UART2:
 // RX-PTE17
 // TX-PTE16
 
@@ -43,47 +55,111 @@
 // $GPGGA, time, latitude, N/S, longitude, E/W, fix, satellites, hdop, altitude, M, geoidal sep , M,,*CHECKSUM
 // $GPGGA, %f, %*f, %*c, %*f, %*c, %d, %d, %*f, %*f, %*c, %*f , %*c,,%*c%*c%*c0
 
+//useful data structs
+struct UTC_Time {
+    UTC_Time() {
+        hours =0;
+        minutes =0;
+        seconds=0;
+    }
+    int hours;
+    int minutes;
+    float seconds;
+};
+
+
+struct Date {
+    Date() {
+        day =0;
+        month =0;
+        year =0;
+    }
+    int day;
+    int month;
+    int year;
+};
+
+
+
 class GTS4E60
 {
 public:
     GTS4E60 (PinName tx, PinName rx);
-    int write(const char* data);
-    int isRxDataAvailable();
+    int write(const char* data); //?
+    void init();
+    bool parseData();
+    int isDataAvailable();
     inline int getDataFromRx() {
         return mGpsSerial.getc();
     }
-    
-    void Init();
-    int parseData();
-    float time;         // UTC time
-    int hours;
-    int minutes;
-    float seconds;
-    char validity,ns,ew;// RMC data status A = Data Valid; V = Data Not valid;
-    float latitude;     //
-    float longitude;    //
-    float speed;        // speed in knots
-    float heading;      // heading in degrees derived from previous & current location
-    string date;           //
-    int day;
-    int month;
-    int year;
-    int fixtype;        // 0 = no fix;  1 = fix;  2=differential fix
-    int satellites;     // number of satellites used
-    float altitude;     //
-    string fix; 
-    string cardinal;
-    float kph;
+
+//getters
+    UTC_Time getTime();
+    Date getDate();
+    float getLongitude();
+    float getLatitude();
+    float getAltitude();
+    float getSpeedKn();
+    float getSpeedKm();
+    int   getSatelites();
+    float getCourseT();
+    float getCourseM();
+    int   getFixType();
+    int   getSatellites();
+    int   getStatus();
+    char  getNS();
+    char  getEW();
+    float getHeading();
+
+// navigational functions
+    float calcCourseTo(float, float);
+    double calcDistToMi(float, float);
+    double calcDistToFt(float, float);
+    double calcDistToKm(float, float);
+    double calcDistToM(float, float);
+
 
 private:
 
     float trunc ( float v);
-    void getData();
+    float nmeaToDecimal(float deg_coord, char nsew);
+    void readData();
     Serial mGpsSerial;
-    char NEMA[256];
+    char mNmeaData[GTS4E60_NMEA_BUF_SIZE];
 
-    //BufferedSerial mGpsSerial;
+    // GGA - Global Positioning System Fixed Data
+    struct UTC_Time mUtcTime;         // UTC time
+    int mFixType;        // 0 = no fix;  1 = fix;  2=differential fix
+    int mSatellites;     // number of satellites used
+    float mHdop;
+    float mAltitude;
+    char mUnits;
+
+    // RMC - Recommended Minimmum Specific GNS Data
+    char mDataStatus;// RMC data status A = Data Valid; V = Data Not valid;
+    float mLatitude;
+    float mLongitude;
+    char NS, EW;
+    float mSpeedKn;      // speed in knots/hour
+    float mSpeedKm;      // speed in kilometres/hour
+    float mHeading;      // heading in degrees derived from previous & current location
+    struct Date mDate;
+
+    //useful variables
+    string mFix;
+    string mCardinal;
+
+    // VTG - Course over ground, ground speed
+    float course_t; // ground speed true
+    char course_t_unit;
+    float course_m; // magnetic
+    char course_m_unit;
+    char speed_k_unit;
+    float speed_km; // speek km/hr
+    char speed_km_unit;
 
 };
+
+
 
 #endif // __GTS4E60_H__

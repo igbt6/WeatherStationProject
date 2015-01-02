@@ -68,7 +68,7 @@ void SENSORS:: measurement (void const* args)
         
     #ifdef GPS_ENABLED
         gps->parseData();
-        usbDebug.printf("GPS_DATA: %2d%2d%f\r\n",gps->hours, gps->minutes, gps->seconds);
+       // usbDebug.printf("GPS_DATA: %2d%2d%f\r\n",gps->hours, gps->minutes, gps->seconds);
     #endif      
         
 

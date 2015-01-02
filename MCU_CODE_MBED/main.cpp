@@ -25,11 +25,11 @@ void SensorsWaitAsyncEventsWrapper(void const* args)
 //DEBUG
 static void timerCounter(void const *arg)
 {
- 
+
     SLCD slcd;
-  static int counter =0;
-  counter++;
-  slcd.printf("%d", counter);
+    static int counter =0;
+    counter++;
+    slcd.printf("%d", counter);
 }
 
 int main()
@@ -44,9 +44,18 @@ int main()
     //Thread waitForEventsThread(SensorsWaitAsyncEventsWrapper,NULL,osPriorityHigh);
     debugTimer.start(1000);
     while(1) {
-        gps.parseData();
-        debug.printf("GPS_DATA: %2d:%2d:%02.3f\r\n",gps.hours, gps.minutes, gps.seconds);
-    
+        if(gps.isDataAvailable()) {
+            if(gps.parseData()) {
+                struct UTC_Time utcTime= gps.getTime();
+                struct Date date= gps.getDate();
+                debug.printf("GPS_DATA: %2d:%2d:%02.3f\r\n",utcTime.hours, utcTime.minutes, utcTime.seconds);
+                debug.printf("GPS_DATA: fixtype: %d, satelites: %d, altitude: %f\r\n",gps.getFixType(), gps.getSatellites(), gps.getAltitude());
+                debug.printf("GPS_DATA: validity: %c, latitude: %f, ns :%c, longitude: %f, ew: %c\r\n",gps.getStatus(), gps.getLatitude(), gps.getNS(), gps.getLongitude(), gps.getEW());
+                debug.printf("GPS_DATA: speed: %f, heading: %f, DATE: %02d %02d %02d\r\n", gps.getSpeedKm(), gps.getHeading(), date.day, date.month, date.year);
+            } else {
+              debug.printf("NO GPS FIX FOUND\r\n");
+            }
+        }
     }
     return 0;
 }
