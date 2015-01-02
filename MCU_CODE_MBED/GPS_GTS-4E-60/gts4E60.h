@@ -7,21 +7,79 @@
   @Author lukasz uszko(luszko@op.pl)
 
   Tested on FRDM-KL46Z and FRDM-KL25Z
-  
+
   Copyright (c) 2014 lukasz uszko
   Released under the MIT License (see http://mbed.org/license/mit)
 
   Nice tutorial about degree formats and ways of computing them:
   http://home.online.no/~sigurdhu/Deg_formats.htm
 
+  NMEA protocol reference manual:
+  https://www.sparkfun.com/datasheets/GPS/NMEA%20Reference%20Manual1.pdf
+
   Documentation regarding GTS-4E-60 GPS Module might be found here:
   http://www.fibocom.com/product/2-1-3-2.html
-
 */
 
+//DEMO - HOW TO USE:
+/*
+---------------------------------------- 1 version ----------------------------------------
+#include "mbed.h"
+#include "gt4E60.h"
+int main()
+{
+    GTS4E60 gps(GPS_PIN_TX,GPS_PIN_RX);
+    Serial debug(USBTX, USBRX);
+    debug.baud(115200);
+    while(1) {
+        if(gps->isDataAvailable()) {
+            if(gps->parseData()) {
+                struct UTC_Time utcTime= gps->getTime();
+                struct Date date= gps->getDate();
+                debug.printf("GPS_UTC_TIME: %02d:%02d:%02.3f\r\n",utcTime.hours, utcTime.minutes, utcTime.seconds);
+                debug.printf("GPS_DATE: %02d.%02d.%02d\r\n", date.day, date.month, date.year);
+                debug.printf("GPS_DATA: fixtype: %d, satelites: %d, altitude: %f, speed: %f, heading: %f\r\n",gps->getFixType(), gps->getSatellites(), gps->getAltitude(), gps->getSpeedKm(), gps->getHeading());
+                debug.printf("GPS_DATA: status: %c, latitude: %f, ns :%c, longitude: %f, ew: %c\r\n",gps->getStatus(), gps->getLatitude(), gps->getNS(), gps->getLongitude(), gps->getEW());
+            } else {
+                debug.printf("NO GPS FIX FOUND\r\n");
+            }
+        }
+    }
+    return 0;
+}
 
-
-
+---------------------------------------- 2 version  error handling----------------------------------------
+#include "mbed.h"
+#include "gt4E60.h"
+int main()
+{
+    GTS4E60 gps(GPS_PIN_TX,GPS_PIN_RX);
+    Serial debug(USBTX, USBRX);
+    usbDebug.baud(115200);
+    while(1) {
+        if(gps->isDataAvailable()) {
+            uint8_t ret= gps->parseData();
+            if(ret==ERROR) {
+                usbDebug.printf("ERROR INCORRECT DATA\r\n");
+            } else if(ret==NO_FIX_FOUND) {
+                usbDebug.printf("NO GPS FIX FOUND\r\n");
+            } else if(ret==NO_SATELLITES) {
+                usbDebug.printf("NO SATELLITES FOUND\r\n");
+            } else if(ret==INVALID_STATUS) {
+                usbDebug.printf("STATUS INVALID\r\n");
+            } else {
+                struct UTC_Time utcTime= gps->getTime();
+                struct Date date= gps->getDate();
+                usbDebug.printf("GPS_UTC_TIME: %02d:%02d:%02.3f\r\n",utcTime.hours, utcTime.minutes, utcTime.seconds);
+                usbDebug.printf("GPS_DATE: %02d.%02d.%02d\r\n", date.day, date.month, date.year);
+                usbDebug.printf("GPS_DATA: fixtype: %d, satelites: %d, altitude: %f, speed: %f, heading: %f\r\n",gps->getFixType(), gps->getSatellites(), gps->getAltitude(), gps->getSpeedKm(), gps->getHeading());
+                usbDebug.printf("GPS_DATA: status: %c, latitude: %f, ns :%c, longitude: %f, ew: %c\r\n",gps->getStatus(), gps->getLatitude(), gps->getNS(), gps->getLongitude(), gps->getEW());
+            }
+        }
+    }
+    return 0;
+}
+*/
 #ifndef __GTS4E60_H__
 #define __GTS4E60_H__
 
@@ -32,28 +90,29 @@
 #define GTS4E60_SERIAL_DEFAULT_BAUD       9600
 #define GTS4E60_SERIAL_TIMEOUT            10000
 #define GTS4E60_SERIAL_EOL                "\r\n"
-#define GTS4E60_NMEA_BUF_SIZE             1024
+#define GTS4E60_NMEA_BUF_SIZE             512
 
-//SENTENCES handled by the module: $GPGGA, $GPGSA, $GPRMC, $GPGSV
-#define GGA         1
-#define GSA         2
-#define RMC         3
-#define GSV         4
+
+typedef enum {
+    //NMEA SENTENCES handled by the module: $GPGGA, $GPGSA, $GPRMC, $GPGSV
+    GGA = 0,
+    GSA = 1,
+    RMC = 2,
+    GSV = 3,
+    NR_OF_SUPPORTED_NMEA_SENTENCES,
+    //parseData() return paramteters
+    ERROR =5,
+    NO_FIX_FOUND= 6,
+    NO_SATELLITES= 7,
+    INVALID_STATUS= 8
+} GTS4E60_Utility;
+static const char* nmeaSentencesString[NR_OF_SUPPORTED_NMEA_SENTENCES]= {"GPGGA","GPGSA","GPRMC","GPGSV"};
+
 
 //deafault serial port on FRDM KL46Z:
 // UART2:
 // RX-PTE17
 // TX-PTE16
-
-
-// EXAMPLE OUTPUTS
-//
-// $GPRMC,064951.000,A,2307.1256,N,12016.4438,E,0.03,165.48,260406,3.05,W,A*2C
-// $GPRMC, time, status, latitude, N/S, longitude, E/W, speed(knots), heading, date, N/A, N/A, MODE*CHECKSUM
-//
-// $GPGGA,064951.000,2307.1256,N,12016.4438,E,1,8,0.95,39.9,M,17.8,M,,*65
-// $GPGGA, time, latitude, N/S, longitude, E/W, fix, satellites, hdop, altitude, M, geoidal sep , M,,*CHECKSUM
-// $GPGGA, %f, %*f, %*c, %*f, %*c, %d, %d, %*f, %*f, %*c, %*f , %*c,,%*c%*c%*c0
 
 //useful data structs
 struct UTC_Time {
@@ -87,7 +146,7 @@ public:
     GTS4E60 (PinName tx, PinName rx);
     int write(const char* data); //?
     void init();
-    bool parseData();
+    uint8_t parseData(uint8_t param =NULL);
     int isDataAvailable();
     inline int getDataFromRx() {
         return mGpsSerial.getc();
@@ -111,10 +170,8 @@ public:
     char  getEW();
     float getHeading();
 
-// navigational functions
+// navigational functions - maybe in future
     float calcCourseTo(float, float);
-    double calcDistToMi(float, float);
-    double calcDistToFt(float, float);
     double calcDistToKm(float, float);
     double calcDistToM(float, float);
 
@@ -124,6 +181,7 @@ private:
     float trunc ( float v);
     float nmeaToDecimal(float deg_coord, char nsew);
     void readData();
+    void readData(uint8_t nmeaSentence);
     Serial mGpsSerial;
     char mNmeaData[GTS4E60_NMEA_BUF_SIZE];
 
@@ -135,6 +193,9 @@ private:
     float mAltitude;
     char mUnits;
 
+    //GSA
+    //not used here
+
     // RMC - Recommended Minimmum Specific GNS Data
     char mDataStatus;// RMC data status A = Data Valid; V = Data Not valid;
     float mLatitude;
@@ -145,18 +206,14 @@ private:
     float mHeading;      // heading in degrees derived from previous & current location
     struct Date mDate;
 
+    //GSV - GNSS Satellites in View
+    int mNumberOfMsgs;
+    int mMsgNumber;
+    int mSatellitesInView;
+
     //useful variables
     string mFix;
     string mCardinal;
-
-    // VTG - Course over ground, ground speed
-    float course_t; // ground speed true
-    char course_t_unit;
-    float course_m; // magnetic
-    char course_m_unit;
-    char speed_k_unit;
-    float speed_km; // speek km/hr
-    char speed_km_unit;
 
 };
 

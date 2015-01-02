@@ -12,7 +12,6 @@ GTS4E60::GTS4E60(PinName tx, PinName rx) : mGpsSerial(tx,rx)
 
 int GTS4E60::write(const char* data)
 {
-
     return mGpsSerial.printf(data);
 }
 
@@ -63,7 +62,7 @@ float GTS4E60::trunc(float v)
 void GTS4E60::readData()
 {
     while(mGpsSerial.getc() != '$');  //wait for the correct NMEA protocol message
-    for(int i=0; i<GTS4E60_NMEA_BUF_SIZE-2; i++) {
+    for(int i=0; i<GTS4E60_NMEA_BUF_SIZE; i++) {
         mNmeaData[i] = mGpsSerial.getc();
         if(mNmeaData[i] == '\r') {
             mNmeaData[i] = 0;
@@ -73,24 +72,56 @@ void GTS4E60::readData()
     error("overflowed message limit");
 }
 
+void GTS4E60::readData(uint8_t nmeaSentence)
+{
+    if(nmeaSentence>=NR_OF_SUPPORTED_NMEA_SENTENCES)return;
+    int counter =0;
+    while(counter<GTS4E60_NMEA_BUF_SIZE) {
+        while(mGpsSerial.getc() != '$');  //wait for the correct NMEA protocol message
+        counter++;
+        char buf[6];
+        for(int i =0; i<5; i++) {
+            buf[i]=mGpsSerial.getc();
+        }
+        buf[5]='\0';
+        if(strcmp(buf,nmeaSentencesString[nmeaSentence])==0) {
+            strcpy(mNmeaData,buf);
+        } else continue;
+        for(int i=5; i<GTS4E60_NMEA_BUF_SIZE; i++) {
+            mNmeaData[i] = mGpsSerial.getc();
+            if(mNmeaData[i] == '\r') {
+                mNmeaData[i] = 0;
+                return;
+            }
+        }
+    }
+    error("overflowed message limit");
+
+}
+
 //public methods
 
 void GTS4E60::init()
 {
     memset(mNmeaData,0,GTS4E60_NMEA_BUF_SIZE);
     //GPGAA
-    mFixType= 0;        // 0 = no fix;  1 = fix;  2=differential fix
-    mSatellites = 0;     // number of satellites used
+    mFixType= 0;
+    mSatellites = 0;
     mHdop= 0;
     mAltitude= 0.0;
     mUnits= ' ';
 
-    // RMC - Recommended Minimmum Specific GNS Data
+    // RMC
     mLongitude= 0.0;
     mLatitude = 0.0;
     NS=' ';
     EW=' ';
     mDataStatus= 'V';
+
+    //GSV
+    mNumberOfMsgs=0;
+    mMsgNumber=0;
+    mSatellitesInView=0;
     wait(1);
 }
 
@@ -101,22 +132,37 @@ int GTS4E60::isDataAvailable()
     return mGpsSerial.readable();
 }
 
-
-
-bool GTS4E60::parseData()
+uint8_t GTS4E60::parseData(uint8_t param)
 {
-    // while(1) {
-    readData();
-    // Check if it is a GPGGA snetence
-    if(sscanf(mNmeaData, "GPGGA, %2d%2d%f, %*f, %*c, %*f, %*c, %d, %d, %*f, %f", &mUtcTime.hours, &mUtcTime.minutes, &mUtcTime.seconds, &mFixType, &mSatellites, &mAltitude) >=1);
-    //if it is a GPGSA sentence
-    //else if(sscanf(mNmeaData, "GPGSA, %2d%2d%f, %*f, %*c, %*f, %*c, %d, %d, %*f, %f", &hours, &minutes, &seconds, &fixtype, &satellites, &altitude) >=1);
-    //if it is a GPRMC sentence
-    else if(sscanf(mNmeaData, "GPRMC, %2d%2d%f, %c, %f, %c, %f, %c, %f, %f, %2d%2d%2d", &mUtcTime.hours, &mUtcTime.minutes, &mUtcTime.seconds, &mDataStatus, &mLatitude, &NS, &mLongitude, &EW, &mSpeedKn, &mHeading, &mDate.day, &mDate.month, &mDate.year) >=1) {
+    uint8_t retVal=ERROR;
+    if(param==NULL)
+        readData();
+    else
+        readData(param);
+    // Check if there is a GPGGA snetence
+    if(sscanf(mNmeaData, "GPGGA, %2d%2d%f, %*f, %*c, %*f, %*c, %d, %d, %*f, %f", &mUtcTime.hours, &mUtcTime.minutes, &mUtcTime.seconds, &mFixType, &mSatellites, &mAltitude) >=1) {
+        retVal = GGA;
         if(mFixType == 0) {
             mFix = "Invalid or not available";
-            return 0;
+            return NO_FIX_FOUND;
         }
+        if(mSatellites==0) {
+            return NO_SATELLITES;
+        }
+    }
+    //if there is a GPGSA sentence - not used here :)
+    /*
+    else if(sscanf(mNmeaData, "GPGSA, %c, %c, %d ....", &mMode1, &mMode2, &mSatelitesUsed....) >=1){
+    retVal= GSA;
+    }
+    */
+
+    //if there is a GPRMC sentence
+    else if(sscanf(mNmeaData, "GPRMC, %2d%2d%f, %c, %f, %c, %f, %c, %f, %f, %2d%2d%2d", &mUtcTime.hours, &mUtcTime.minutes, &mUtcTime.seconds, &mDataStatus, &mLatitude, &NS, &mLongitude, &EW, &mSpeedKn, &mHeading, &mDate.day, &mDate.month, &mDate.year) >=1) {
+        retVal = RMC;
+        if(mDataStatus=='V')
+            return INVALID_STATUS;
+
         mDate.year += 2000;
         mLatitude= nmeaToDecimal(mLatitude,NS);
         mLongitude= nmeaToDecimal(mLongitude,EW);
@@ -163,9 +209,12 @@ bool GTS4E60::parseData()
         mSpeedKm = mSpeedKn*1.852;
 
     }
+
     //if there is a GPGSV sentence
-    //else if(sscanf(mNmeaData, "GPGSV, %2d%2d%f, %c, %f, %c, %f, %c, %f, %f, %2d%2d%2d", &hours, &minutes, &seconds, &validity, &latitude, &ns, &longitude, &ew, &speed, &heading, &day, &month, &year) >=1) {}
-    return 1;
+    else if(sscanf(mNmeaData, "GPGSV, %d, %d, %d", &mNumberOfMsgs, &mMsgNumber , &mSatellitesInView) >=1) {
+        retVal=GSV;
+    }
+    return retVal;
 }
 
 

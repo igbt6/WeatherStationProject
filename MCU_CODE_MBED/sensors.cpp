@@ -9,7 +9,7 @@ SENSORS::SENSORS():usbDebug(USBTX, USBRX)
     usbDebug.baud(115200);
 
 #ifdef GPS_ENABLED
-  gps = new GTS4E60(GPS_PIN_TX,GPS_PIN_RX);
+    gps = new GTS4E60(GPS_PIN_TX,GPS_PIN_RX);
 #endif
 
 #ifdef ADT7410_ENABLED
@@ -63,14 +63,36 @@ SENSORS::~SENSORS()
 void SENSORS:: measurement (void const* args)
 {
 
-
+    static uint8_t lastReadGpsParam=GGA;
     while(1) {
-        
-    #ifdef GPS_ENABLED
-        gps->parseData();
-       // usbDebug.printf("GPS_DATA: %2d%2d%f\r\n",gps->hours, gps->minutes, gps->seconds);
-    #endif      
-        
+
+#ifdef GPS_ENABLED
+        if(gps->isDataAvailable()) {
+            if(lastReadGpsParam==RMC) { //i'll only read GGA and RMC nmea sentences
+                lastReadGpsParam=GGA;
+            } else {
+                lastReadGpsParam=RMC;
+            }
+            uint8_t ret= gps->parseData(lastReadGpsParam);
+            if(ret==ERROR) {
+                usbDebug.printf("ERROR INCORRECT DATA\r\n");
+            } else if(ret==NO_FIX_FOUND) {
+                usbDebug.printf("NO GPS FIX FOUND\r\n");
+            } else if(ret==NO_SATELLITES) {
+                usbDebug.printf("NO SATELLITES FOUND\r\n");
+            } else if(ret==INVALID_STATUS) {
+                usbDebug.printf("STATUS INVALID\r\n");
+            } else {
+                struct UTC_Time utcTime= gps->getTime();
+                struct Date date= gps->getDate();
+                usbDebug.printf("GPS_UTC_TIME: %02d:%02d:%02.3f\r\n",utcTime.hours, utcTime.minutes, utcTime.seconds);
+                usbDebug.printf("GPS_DATE: %02d.%02d.%02d\r\n", date.day, date.month, date.year);
+                usbDebug.printf("GPS_DATA: fixtype: %d, satelites: %d, altitude: %f, speed: %f, heading: %f\r\n",gps->getFixType(), gps->getSatellites(), gps->getAltitude(), gps->getSpeedKm(), gps->getHeading());
+                usbDebug.printf("GPS_DATA: status: %c, latitude: %f, ns :%c, longitude: %f, ew: %c\r\n",gps->getStatus(), gps->getLatitude(), gps->getNS(), gps->getLongitude(), gps->getEW());
+            }
+        }
+#endif
+
 
 #ifdef BMP180_ENABLED
         if (!bmp180->readData()) usbDebug.printf("BMP180_DATA_Reading Fuck UP\r\n");
@@ -111,7 +133,7 @@ void SENSORS:: measurement (void const* args)
 #endif
 
 
-        
+
         Thread::wait(777);
 
     }
