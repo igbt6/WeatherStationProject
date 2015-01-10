@@ -1,9 +1,5 @@
-*.o
 *.d
-*.i
-*.hgignore
-*.dirstate
-*.bookmarks
-store
-*.branch
+*.o
+*.desc
 .hg
+*.hgignore
