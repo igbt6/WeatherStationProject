@@ -1,4 +1,6 @@
 /*
+
+
 var http = require('http');
 http.createServer(function(req, res) {
 	res.writeHead(200, {
@@ -9,6 +11,8 @@ http.createServer(function(req, res) {
 console.log('Server running at http://127.0.0.1:1337/');
 
  */
+
+/* 
 var http = require('http');
 function process_request(req, res) {
 	var body = 'Thanks for calling!\n';
@@ -52,7 +56,7 @@ fs.open('info.txt', 'r', function(err, handle) {
 		fs.read(handle, buf, 0, bufLength, null, function(err, length) {
 			if (!err) {
 				console.log(buf.toString('utf8', 0, length));
-				fs.close(handle, function() {/* don't care ;} */
+				fs.close(handle, function() {
 				});
 			} else {
 				console.log("ERROR while reading file: " + err.code + " "
@@ -95,3 +99,11 @@ fo.file_exists(function(err, results) {
 	}
 	console.log("file exists!!!");
 });
+*/
+
+
+
+var startServer= require("./jsonServerVer2.js");
+startServer.startServer(8095);
+
+
