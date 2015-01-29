@@ -1,6 +1,6 @@
 
 
-# WebAppCode
+# webAppCode !
 
 
 
@@ -9,7 +9,7 @@
 
 
 ## Developing
-
+ Lukasz Uszko
 
 
 ### Tools
