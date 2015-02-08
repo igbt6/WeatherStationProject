@@ -22,7 +22,7 @@ app.get('/pages/:page_name', page_hdlr.generate);
 app.get('/pages/:page_name/:sub_page', page_hdlr.generate);
 
 
-app.get("/", function (req, res) {
+app.get("", function (req, res) {
     res.redirect("/pages/home");
     res.end();
 });
@@ -43,6 +43,6 @@ db.init(function (err, results) {
         process.exit(-1);
     }
 
-    app.listen(8080);
+    app.listen(8081);
 });
 

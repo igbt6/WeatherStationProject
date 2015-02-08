@@ -1,7 +1,7 @@
 var helpers = require('./helpers.js'),
     user_data = require("../data/user.js"),
     async = require('async'),
-    bcrypt = require('bcrypt'),
+    bcrypt = require('bcrypt-nodejs'),
     fs = require('fs');
 
 exports.version = "0.1.0";
@@ -19,6 +19,7 @@ function User (user_data) {
 
 User.prototype.uuid = null;
 User.prototype.email_address = null;
+
 User.prototype.display_name = null;
 User.prototype.password = null;
 User.prototype.first_seen_date = null;

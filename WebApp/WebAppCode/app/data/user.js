@@ -1,6 +1,6 @@
 
 var async = require('async'),
-    bcrypt = require('bcrypt'),
+    bcrypt = require('bcrypt-nodejs'),
     db = require("./db.js"),
     uuid = require('node-uuid'),
     backhelp = require("./backend_helpers.js");
