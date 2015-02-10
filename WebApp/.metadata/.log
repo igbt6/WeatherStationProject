@@ -355,3 +355,66 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.eclipse.debug.ui 4 120 2015-02-05 22:43:17.620
 !MESSAGE org.eclipse.debug.ui.toggleBreakpointsTargetFactory extension failed to load breakpoint toggle target because the specified id is already registered.  Specified ID is: org.chromium.debug.ui.ChromiumToggleBreakpointTargetFactory
+
+!ENTRY com.eclipsesource.jshint.ui 4 0 2015-02-10 23:56:01.021
+!MESSAGE Failed to read jshint configuration for project databasesTraining
+!STACK 1
+org.eclipse.core.runtime.CoreException: File not found: C:\Users\lukasz\Desktop\CurrentProjects\MeteoStation\WeatherStationGit\WebApp\databasesTraining\.jshintrc.
+	at org.eclipse.core.internal.filesystem.Policy.error(Policy.java:55)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.openInputStream(LocalFile.java:377)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:797)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:289)
+	at com.eclipsesource.jshint.ui.internal.util.IOUtil.readFileUtf8(IOUtil.java:35)
+	at com.eclipsesource.jshint.ui.internal.builder.ConfigLoader.readConfig(ConfigLoader.java:61)
+	at com.eclipsesource.jshint.ui.internal.builder.ConfigLoader.getProjectConfig(ConfigLoader.java:52)
+	at com.eclipsesource.jshint.ui.internal.builder.ConfigLoader.getConfiguration(ConfigLoader.java:36)
+	at com.eclipsesource.jshint.ui.internal.builder.JSHintBuilderVisitor.createJSHint(JSHintBuilderVisitor.java:93)
+	at com.eclipsesource.jshint.ui.internal.builder.JSHintBuilderVisitor.<init>(JSHintBuilderVisitor.java:55)
+	at com.eclipsesource.jshint.ui.internal.builder.JSHintBuilder.incrementalBuild(JSHintBuilder.java:60)
+	at com.eclipsesource.jshint.ui.internal.builder.JSHintBuilder.build(JSHintBuilder.java:40)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:206)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:246)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:299)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:302)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:358)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:381)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:143)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:241)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+Caused by: java.io.FileNotFoundException: C:\Users\lukasz\Desktop\CurrentProjects\MeteoStation\WeatherStationGit\WebApp\databasesTraining\.jshintrc (System nie może odnaleźć określonej ścieżki)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.openInputStream(LocalFile.java:368)
+	... 22 more
+!SUBENTRY 1 org.eclipse.core.filesystem 4 271 2015-02-10 23:56:01.371
+!MESSAGE File not found: C:\Users\lukasz\Desktop\CurrentProjects\MeteoStation\WeatherStationGit\WebApp\databasesTraining\.jshintrc.
+!STACK 0
+java.io.FileNotFoundException: C:\Users\lukasz\Desktop\CurrentProjects\MeteoStation\WeatherStationGit\WebApp\databasesTraining\.jshintrc (System nie może odnaleźć określonej ścieżki)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.openInputStream(LocalFile.java:368)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:797)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:289)
+	at com.eclipsesource.jshint.ui.internal.util.IOUtil.readFileUtf8(IOUtil.java:35)
+	at com.eclipsesource.jshint.ui.internal.builder.ConfigLoader.readConfig(ConfigLoader.java:61)
+	at com.eclipsesource.jshint.ui.internal.builder.ConfigLoader.getProjectConfig(ConfigLoader.java:52)
+	at com.eclipsesource.jshint.ui.internal.builder.ConfigLoader.getConfiguration(ConfigLoader.java:36)
+	at com.eclipsesource.jshint.ui.internal.builder.JSHintBuilderVisitor.createJSHint(JSHintBuilderVisitor.java:93)
+	at com.eclipsesource.jshint.ui.internal.builder.JSHintBuilderVisitor.<init>(JSHintBuilderVisitor.java:55)
+	at com.eclipsesource.jshint.ui.internal.builder.JSHintBuilder.incrementalBuild(JSHintBuilder.java:60)
+	at com.eclipsesource.jshint.ui.internal.builder.JSHintBuilder.build(JSHintBuilder.java:40)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:206)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:246)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:299)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:302)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:358)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:381)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:143)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:241)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
