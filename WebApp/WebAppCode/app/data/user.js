@@ -53,7 +53,7 @@ exports.register = function (email, display_name, password, callback) {
         // generate a password hash
         function (dbclient, cb) {
             dbc = dbclient;
-            bcrypt.hash(password, 10, cb);
+            bcrypt.hash(password, null,null, cb);
         },
 
         // register the account.

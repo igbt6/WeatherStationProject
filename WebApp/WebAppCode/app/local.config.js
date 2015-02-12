@@ -5,7 +5,7 @@ exports.config = {
         host: "localhost",
         user: "root",
         password: "",
-        database: "PhotoAlbums",
+        database: "photoalbums",
 
         pooled_connections: 125,
         idle_timeout_millis: 30000

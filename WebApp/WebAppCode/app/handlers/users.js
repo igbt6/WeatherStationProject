@@ -41,6 +41,7 @@ User.prototype.response_obj = function () {
 
 
 exports.register = function (req, res) {
+	console.log("afsfasfasfEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE!!!");
     async.waterfall([
         function (cb) {
             var em = req.body.email_address;
@@ -52,6 +53,7 @@ exports.register = function (req, res) {
                 cb(helpers.missing_data("password"));
             else
                 cb(null);
+            console.log("111111EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE!!!");
         },
 
         // register da user.
@@ -61,22 +63,28 @@ exports.register = function (req, res) {
                 req.body.display_name,
                 req.body.password,
                 cb);
+            console.log("222222EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE!!!");
         },
-
         // mark user as logged in
         function (user_data, cb) {
+        	console.log("USER_DATA:"+user_data);
             req.session.logged_in = true;
             req.session.logged_in_display_name = req.body.display_name;
             req.session.logged_in_date = new Date();
+            console.log("---------EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE!!!");
             cb(null, user_data);
+            console.log("33333EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE!!!");
         }
     ],
     function (err, user_data) {
         if (err) {
             helpers.send_failure(res, err);
+            console.log("44444EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE!!!");
         } else {
             var u = new User(user_data);
+            console.log("--------------5555EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE!!!");
             helpers.send_success(res, {user: u.response_obj() });
+            console.log("5555EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE!!!");
         }
     });
 };

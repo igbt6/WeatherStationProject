@@ -36,7 +36,8 @@ $("form#login").submit(function (e) {
           },
           error: function () {
               var ext = window.location.href.match(/(fail)/) ? "" : "?fail";
-              window.location = window.location + ext;
+              
+       		  window.location = window.location + ext;
               return false;
           }
       });

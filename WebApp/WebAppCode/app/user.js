@@ -35,8 +35,10 @@ exports.user_by_email_address = function (email, callback) {
 exports.register = function (email, display_name, password, callback) {
     var dbc;
     var userid;
+    console.log("userREGISTERs_EEEEEEEE!!!");
     async.waterfall([
         // validate ze params
+        console.log("9asdsadasdasdasdasdasdEEEEEEEE!!!");
         function (cb) {
             if (!email || email.indexOf("@") == -1)
                 cb(backhelp.missing_data("email"));
@@ -46,17 +48,22 @@ exports.register = function (email, display_name, password, callback) {
                 cb(backhelp.missing_data("password"));
             else
                 cb(null);
+            console.log("IIIIIIIIEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE!!!");
         },
 
         // get a connection
         function (cb) {
+        	console.log("99999EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE!!!");
             db.db(cb);
+            console.log("99999EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE!!!");
         },
 
         // generate a password hash
         function (dbclient, cb) {
             dbc = dbclient;
+            console.log("777777EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE!!!");
             bcrypt.hash(password, 10, cb);
+            console.log("88888EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE!!!");
         },
 
         // register the account.
@@ -74,6 +81,7 @@ exports.register = function (email, display_name, password, callback) {
             exports.user_by_uuid(userid, cb);
         }
     ],
+
     function (err, user_data) {
         if (dbc) dbc.end();
         if (err) {
