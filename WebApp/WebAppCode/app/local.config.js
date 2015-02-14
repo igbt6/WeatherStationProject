@@ -1,14 +1,14 @@
 
 
 exports.config = {
-    db_config: {
+    dbConfig: {
         host: "localhost",
         user: "root",
         password: "",
-        database: "photoalbums",
+        database: "meteostationd",
 
-        pooled_connections: 125,
-        idle_timeout_millis: 30000
+        pooledConnections: 125,
+        idleTimeoutMillis: 30000
     },
 
     static_content: "../static/"

@@ -3,12 +3,12 @@ var mysql = require('mysql'),
 
 exports.db = function (callback) {
 
-    conn_props = local.config.db_config;
+    connSettings = local.config.dbConfig;
     var c = mysql.createConnection({
-        host:     conn_props.host,
-        user:     conn_props.user,
-        password: conn_props.password,
-        database: conn_props.database
+        host:     connSettings.host,
+        user:     connSettings.user,
+        password: connSettings.password,
+        database: connSettings.database
     });
     callback(null, c);
 };
