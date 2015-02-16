@@ -567,3 +567,18 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.eclipse.debug.ui 4 120 2015-02-12 18:09:25.897
 !MESSAGE org.eclipse.debug.ui.toggleBreakpointsTargetFactory extension failed to load breakpoint toggle target because the specified id is already registered.  Specified ID is: org.chromium.debug.ui.ChromiumToggleBreakpointTargetFactory
+
+!ENTRY org.nodeclipse.ui 1 0 2015-02-16 23:50:49.739
+!MESSAGE templateRoot: C:\Users\lukasz\Desktop\Enide-Studio\eclipse\configuration\org.eclipse.osgi\283\0\.cp\templates\common-templates
+
+!ENTRY org.nodeclipse.ui 1 0 2015-02-16 23:50:49.958
+!MESSAGE RelativityFileSystemStructureProvider.getContents() called. elemnt=C:\Users\lukasz\Desktop\Enide-Studio\eclipse\configuration\org.eclipse.osgi\283\0\.cp\templates\common-templates\.jshintrc
+
+!ENTRY org.nodeclipse.ui 1 0 2015-02-16 23:50:50.048
+!MESSAGE RelativityFileSystemStructureProvider.getContents() called. elemnt=C:\Users\lukasz\Desktop\Enide-Studio\eclipse\configuration\org.eclipse.osgi\283\0\.cp\templates\common-templates\.settings\com.eclipsesource.jshint.ui.prefs
+
+!ENTRY org.nodeclipse.ui 1 0 2015-02-16 23:50:50.138
+!MESSAGE RelativityFileSystemStructureProvider.getContents() called. elemnt=C:\Users\lukasz\Desktop\Enide-Studio\eclipse\configuration\org.eclipse.osgi\283\0\.cp\templates\common-templates\.settings\org.eclipse.wst.jsdt.core.prefs
+
+!ENTRY org.nodeclipse.ui 1 0 2015-02-16 23:50:50.198
+!MESSAGE RelativityFileSystemStructureProvider.getContents() called. elemnt=C:\Users\lukasz\Desktop\Enide-Studio\eclipse\configuration\org.eclipse.osgi\283\0\.cp\templates\common-templates\README.md

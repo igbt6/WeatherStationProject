@@ -1,22 +1,19 @@
-<div style="float: right">
-
-</div>
-<div id="Station System">
-  <p> hELLO gUYS</p>
-  <li> fucking system </li>
-  <script>
-	var x = document.getElementById("demo");
-	function getLocation() {
-    	if (navigator.geolocation) {
-       	    navigator.geolocation.getCurrentPosition(showPosition);
-    	} else {
-        	x.innerHTML = "Geolocation is not supported by this browser.";
-    	}
-	}
-function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude; 
-}
-</script>
-  
-</div>
+<!DOCTYPE html>
+<head>
+   <link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+   <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+   <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+   <script type="text/javascript">
+      $(function () {
+         $('#dialogMsg').dialog();
+      });
+   </script>
+</head>
+<body>
+   <form id="form1" runat="server">
+      <div id="dialogMsg" title="First JqueryUI Example">
+         Hello this is my first JqueryUI example.
+      </div>
+   </form>
+</body>
+<html>
