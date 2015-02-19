@@ -9,6 +9,8 @@
 	  "generic-pool": "2.x",
 	  "mysql": "2.x",
 	  "bcrypt-nodejs": "0.x",
-	  "node-uuid": "1.x"
+	  "node-uuid": "1.x",
+	  "bootstrap": "3.x"
+		  
   }
 }

@@ -1,14 +1,19 @@
 var express = require('express');
 var app = express();
+var path = require('path');
 
 app.use(express.logger('dev'));
 app.use(express.bodyParser({
 	keepExtensions : true
 }));
 
+//app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, 'public')));
+console.log("DIRNAME: " + __dirname);
+
+
 app.get("/", function(req, res) {
-	console.log("Cookies: ", req.cookies)
-	//res.send('/ GET OK');
+	//console.log("Cookies: ", req.cookies)
 	res.redirect("/pages/index.html");
 	res.end();
 });
@@ -26,8 +31,8 @@ app.get("/station", function(req, res) {
 
                 contents = contents.toString('utf8');
                 console.log(contents);
-                res.writeHead(200, { "Content-Type": "text/html" });
-                res.end(contents);
+                //res.writeHead(200, { "Content-Type": "text/html" });
+                res.send(contents);
                 //res.end();
             }
         );
@@ -47,11 +52,12 @@ app.get('/pages/:pageName', function (req, res) {
             }
 
             contents = contents.toString('utf8');
-            console.log(contents);
+            //console.log(contents);
+            console.log("NEW HTML LOADED !!!!!!!");
             // replace page name, and then dump to output.
             //contents = contents.replace('{{PAGE_NAME}}', page);
-            res.writeHead(200, { "Content-Type": "text/html" });
-            res.end(contents);
+            //res.writeHead(200, { "Content-Type": "text/html" });
+            res.send(contents);
         }
     );
 });
