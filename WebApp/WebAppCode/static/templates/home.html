@@ -1,13 +1,22 @@
 <!DOCTYPE html>
-<head>
-   <link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
-   <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-   <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<head>   
+    
+ 
    <script type="text/javascript">
       $(function () {
          $('#dialogMsg').dialog();
       });
-   </script>
+      
+      $(function() {
+    	$("#dlg_hello").dialog({
+			autoOpen : false
+		});
+		$("#btn_hello").button().click(function() {
+			$("#dlg_hello").dialog("open");
+		});
+  	  });  
+   </script>  
+
 </head>
 <body>
    <form id="form1" runat="server">
@@ -15,5 +24,7 @@
          Hello this is my first JqueryUI example.
       </div>
    </form>
+   	<button id="btn_hello">Say Hello</button>
+	<div id="dlg_hello">Hello World!</div>
 </body>
 <html>

@@ -1,0 +1,14 @@
+{
+  "name": "WebAppDevelopmentTests",
+  "version": "0.1.0",
+  "description": "WebAppDevelopmentTests",
+  "private": true,
+  "dependencies": {
+	  "express": "3.x",
+	  "async": "0.1.x",
+	  "generic-pool": "2.x",
+	  "mysql": "2.x",
+	  "bcrypt-nodejs": "0.x",
+	  "node-uuid": "1.x"
+  }
+}

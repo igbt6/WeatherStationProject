@@ -24,15 +24,37 @@ app.use(express.favicon(__dirname + '/favicon.ico'));
 app.post('/', function(req, res) {
 	res.send('/ POST OK');
 });
-
+/*
 app.get("/", function(req, res) {
 	console.log("Cookies: ", req.cookies)
 	//res.send('/ GET OK');
 	res.redirect("/pages/home");
 	res.end();
 });
+*/
 
-app.get('/pages/:pageName', pageHandlers.generate);
+
+app.get("/station", function(req, res) {
+	var fs = require('fs');
+    fs.readFile(
+            '../static/Bootstraptest/index.html',
+            function (err, contents) {
+                if (err) {
+                    sendFailure(res, 500, err);
+                    return;
+                }
+
+                contents = contents.toString('utf8');
+                console.log(contents);
+                //res.writeHead(200, { "Content-Type": "text/html" });
+                res.send(contents);
+                //res.end();
+            }
+        );
+    //res.end();
+});
+
+//app.get('/pages/:pageName', pageHandlers.generate);
 	
 
 
@@ -79,4 +101,6 @@ function fourOhFour(req, res) {
 }
 
 
-app.listen(8081);
+var port = 8081;
+app.listen(port);
+console.log("Application runs on: " +port+ " port ");

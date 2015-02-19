@@ -1,6 +1,6 @@
 {
-  "name": "MySQL-Demo",
-  "description": "Demonstrates Using MySQL Database connectivity",
+  "name": "WebCode",
+  "description": "App for our Meteo Station System",
   "version": "0.0.1",
   "private": true,
   "dependencies": {

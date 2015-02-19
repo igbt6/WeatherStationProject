@@ -28,12 +28,5 @@ $(function() {
 });
 
 
-$(document).ready(function() {
-    $("#dlg_hello").dialog({
-			autoOpen : false
-		});
-		$("#btn_hello").button().click(function() {
-			$("#dlg_hello").dialog("open");
-		});
-  });
+
 
