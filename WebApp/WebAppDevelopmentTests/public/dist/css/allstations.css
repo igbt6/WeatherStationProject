@@ -1,0 +1,26 @@
+body {
+    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    background: url(/images/homepagebackground.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+#wrapper {
+    width: 100%;
+}
+
+#page-wrapper {
+    padding: 0 15px;
+    min-height: 568px;
+    margin-top: 0px;
+    margin-bottom: 100px;
+    margin-right: 100px;
+    margin-left: 100px;
+    background-color: #B1DE9B;
+}
+
+.panel-notif{
+
+ width: 100%;
+
+}
