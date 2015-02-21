@@ -82,22 +82,44 @@ body {
 		font: italic bold 1em Georgia, serif;
 }
 
+/* panels */
+
+
+.panel-blue {
+    border-color: #5983FF;
+}
+
+.panel-blue .panel-heading {
+    border-color: #5983FF;
+    color: #fff;
+    background-color: #5983FF;
+}
+
+.panel-blue a {
+    color: #5983FF;
+}
+
+.panel-blue a:hover {
+    color: #1B274C;
+}
+
+
 .panel-green {
-    border-color: #5cb85c;
+    border-color: #009900;
 }
 
 .panel-green .panel-heading {
-    border-color: #5cb85c;
+    border-color: #009900;
     color: #fff;
-    background-color: #5cb85c;
+    background-color: #009900;
 }
 
 .panel-green a {
-    color: #5cb85c;
+    color: #009900;
 }
 
 .panel-green a:hover {
-    color: #3d8b3d;
+    color: #003D00;
 }
 
 .panel-red {
@@ -118,23 +140,29 @@ body {
     color: #b52b27;
 }
 
+
 .panel-yellow {
-    border-color: #f0ad4e;
+    border-color: #E6A645;
 }
 
 .panel-yellow .panel-heading {
-    border-color: #f0ad4e;
+    border-color: #E6A645;
     color: #fff;
-    background-color: #f0ad4e;
+    background-color: #E6A645;
 }
 
 .panel-yellow a {
-    color: #f0ad4e;
+    color: #E6A645;
 }
 
 .panel-yellow a:hover {
-    color: #df8a13;
+    color: #CF953E;
 }
+
+.fa-5x , .fa-user {
+	color:#99CCFF ;  /*icon color*/
+}
+
 
 footer {
     margin: 50px 0;
