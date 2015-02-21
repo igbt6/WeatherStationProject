@@ -52,34 +52,29 @@ body {
     white-space: normal;
 }
 
-.navbar-nav .dropdown-messages,
-.navbar-nav .dropdown-tasks,
-.navbar-nav .dropdown-alerts {
-    width: 310px;
-    min-width: 0;
-}
-
-.navbar-nav .dropdown-messages {
-    margin-left: 5px;
-}
-
-.navbar-nav .dropdown-tasks {
-    margin-left: -59px;
-}
-
-.navbar-nav .dropdown-alerts {
-    margin-left: -123px;
-}
-
 .navbar-nav .dropdown-user {
     right: 0;
     left: auto;
 }
 
+.navbar-header {
+	font: italic bold 1em Georgia, serif;
+}
 
-.navbar-header{
+.nav-strings{
+	color: #999966;
+}
 
-		font: italic bold 1em Georgia, serif;
+.nav-title{
+	margin-left: 100;
+	font-size: 200%;
+}
+
+.nav-about, .nav-contact{
+    font: italic bold 1em Georgia, serif;
+}
+.nav-about:hover,.nav-contact:hover{
+    color: #ffffff;
 }
 
 /* panels */
