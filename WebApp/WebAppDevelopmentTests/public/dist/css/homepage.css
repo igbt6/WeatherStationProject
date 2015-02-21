@@ -1,0 +1,141 @@
+
+body {
+    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    background: url(/images/homepagebackground.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.page-header{
+ color: rgb(68,24,123);
+ font-style: italic;
+ font-family:Book Antiqua;
+ font-weight: bold;
+}
+
+.navbar-fixed-top {
+    height: 70px; /* size of navbar */
+	background: black;
+}
+
+.navbar-nav {
+    margin-right: 0;
+}
+
+.navbar-nav li {
+    display: inline-block;
+}
+
+.navbar-nav li:last-child {
+    margin-right: 15px;
+}
+
+.navbar-nav li a {
+    padding: 15px;
+    min-height: 50px;
+}
+
+.navbar-nav .dropdown-menu li {
+    display: block;
+}
+
+.navbar-nav .dropdown-menu li:last-child {
+    margin-right: 0;
+}
+
+.navbar-nav .dropdown-menu li a {
+    padding: 3px 20px;
+    min-height: 0;
+}
+
+.navbar-nav .dropdown-menu li a div {
+    white-space: normal;
+}
+
+.navbar-nav .dropdown-messages,
+.navbar-nav .dropdown-tasks,
+.navbar-nav .dropdown-alerts {
+    width: 310px;
+    min-width: 0;
+}
+
+.navbar-nav .dropdown-messages {
+    margin-left: 5px;
+}
+
+.navbar-nav .dropdown-tasks {
+    margin-left: -59px;
+}
+
+.navbar-nav .dropdown-alerts {
+    margin-left: -123px;
+}
+
+.navbar-nav .dropdown-user {
+    right: 0;
+    left: auto;
+}
+
+
+.navbar-header{
+
+		font: italic bold 1em Georgia, serif;
+}
+
+.panel-green {
+    border-color: #5cb85c;
+}
+
+.panel-green .panel-heading {
+    border-color: #5cb85c;
+    color: #fff;
+    background-color: #5cb85c;
+}
+
+.panel-green a {
+    color: #5cb85c;
+}
+
+.panel-green a:hover {
+    color: #3d8b3d;
+}
+
+.panel-red {
+    border-color: #d9534f;
+}
+
+.panel-red .panel-heading {
+    border-color: #d9534f;
+    color: #fff;
+    background-color: #d9534f;
+}
+
+.panel-red a {
+    color: #d9534f;
+}
+
+.panel-red a:hover {
+    color: #b52b27;
+}
+
+.panel-yellow {
+    border-color: #f0ad4e;
+}
+
+.panel-yellow .panel-heading {
+    border-color: #f0ad4e;
+    color: #fff;
+    background-color: #f0ad4e;
+}
+
+.panel-yellow a {
+    color: #f0ad4e;
+}
+
+.panel-yellow a:hover {
+    color: #df8a13;
+}
+
+footer {
+    margin: 50px 0;
+}
