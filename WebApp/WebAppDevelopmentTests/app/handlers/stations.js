@@ -12,7 +12,7 @@ exports.version = "0.1.0";
  */
 function Station (stationData) {
     this.id = stationData.id;
-    this.name = stationData.name;
+    this.name = stationData.station_name;
     this.date = stationData.date;
     this.country = stationData.country;
     this.city = stationData.city;
@@ -24,7 +24,7 @@ Station.prototype.date = null;
 Station.prototype.country = null;
 Station.prototype.city = null;
 
-Station.prototype.responseObj = function () {
+Station.prototype.retResponseJSONObj = function () {
     return { name: this.name,
              date: this.date,
              country: this.country,
@@ -35,17 +35,18 @@ Station.prototype.responseObj = function () {
 
 
 exports.listAllStations = function (req, res) {
-    stationData.allStations("date", true, 0, 25, function (err, results) {
+    stationData.allStations("name", true, 0, 25, function (err, results) {
         if (err) {
             helpers.sendFailure(res, err);
         } else {
             var out = [];
             if (results) {
                 for (var i = 0; i < results.length; i++) {
-                    out.push(new Station(results[i]).responseObj());
+                    out.push( new Station(results[i]).retResponseJSONObj());
                 }
             }
             helpers.sendSuccess(res, { Stations: out });
+            //console.log(out);
         }
     });
 };

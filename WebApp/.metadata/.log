@@ -1065,3 +1065,19 @@ java.lang.IllegalArgumentException
 	at org.eclipse.wst.jsdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo(BestMatchHover.java:99)
 	at org.eclipse.wst.jsdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo(JavaEditorTextHoverProxy.java:67)
 	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:168)
+
+!ENTRY org.eclipse.jface.text 4 0 2015-02-23 00:36:58.482
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.wst.jsdt.core.Signature.getTypeSignatureKind(Signature.java:635)
+	at org.eclipse.wst.jsdt.ui.JavaScriptElementLabels.getTypeSignatureLabel(JavaScriptElementLabels.java:753)
+	at org.eclipse.wst.jsdt.ui.JavaScriptElementLabels.getFieldLabel(JavaScriptElementLabels.java:652)
+	at org.eclipse.wst.jsdt.ui.JavaScriptElementLabels.getElementLabel(JavaScriptElementLabels.java:435)
+	at org.eclipse.wst.jsdt.ui.JavaScriptElementLabels.getElementLabel(JavaScriptElementLabels.java:409)
+	at org.eclipse.wst.jsdt.internal.ui.text.java.hover.JavadocHover.getInfoText(JavadocHover.java:247)
+	at org.eclipse.wst.jsdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo(JavadocHover.java:181)
+	at org.eclipse.wst.jsdt.internal.ui.text.java.hover.AbstractJavaEditorTextHover.getHoverInfo(AbstractJavaEditorTextHover.java:116)
+	at org.eclipse.wst.jsdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo(BestMatchHover.java:99)
+	at org.eclipse.wst.jsdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo(JavaEditorTextHoverProxy.java:67)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:168)

@@ -18,7 +18,7 @@ exports.allStations = function (sort_by, desc, skip, count, callback) {
         function (dbclient, cb) {
             dbc = dbclient;
             dbc.query(
-                "SELECT * FROM stations ORDER BY ? " 
+                "SELECT * FROM station ORDER BY ? " 
                     + (desc ? "DESC" : "ASC")
                     + " LIMIT ?, ?",
                 [ sort_by, skip, count ],

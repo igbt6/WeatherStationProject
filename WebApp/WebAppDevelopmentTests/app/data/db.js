@@ -1,9 +1,9 @@
 var mysql = require('mysql'),
-    local = require("../localConfig.js");
+    localConfig = require("../localConfig.js");
 
 exports.db = function (callback) {
 
-    connSettings = localConfig.dbConfig;
+    connSettings = localConfig.config.dbConfig;
     var c = mysql.createConnection({
         host:     connSettings.host,
         user:     connSettings.user,
