@@ -24,9 +24,9 @@
     <link href="/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="/dist/css/stations.css" rel="stylesheet">
-    <link href="/dist/css/homepage.css" rel="stylesheet">
-    <link href="/dist/css/allstations.css" rel="stylesheet">
+    <link href="/content/css/stations.css" rel="stylesheet">
+    <link href="/content/css/homepage.css" rel="stylesheet">
+    <link href="/content/css/allstations.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -113,11 +113,11 @@
                                                 <th>State</th>
                                                 <th>Country</th>
                                                 <th>City</th>
-                                                <th>Last updated</th>                                            
+                                                <th>Last updated</th>                                       
                                             </tr>
                                         </thead>
-                                        <tbody class="stations-body-tab">
-
+                                       <tbody class="stations-body-tab">
+                                        <!-- 
                                             <tr class="odd gradeX center">
                                                 <td></td>
                                                 <td></td>
@@ -125,7 +125,7 @@
                                                 <td></td>
                                                 <td></td> 
                                             </tr>
-                                     <!--        <tr class="even gradeC">
+                                             <tr class="even gradeC">
                                                 <td>2</td>
                                                 <td>ACTIVE</td>
                                                 <td>UAE</td>
@@ -139,13 +139,16 @@
                                                 <td class="center">Boston</td>
                                                 <td class="center">20-02-2014</td>
                                             </tr>   -->
-                                        </tbody>
+                                        </tbody> 
                                     </table>
                                 </div>
                                 <!-- /.table-responsive -->
                                 <div class="well">
                                     <h4>Stats:</h4>
                                     <ul>
+                                        <li>Number of all stations: 
+                                            <h2 class="nr-of-all-stats">  </h2> 
+                                        </li>
                                         <li>Number of active stations: [ ]</li>
                                         <li>Number of inactive stations: [ ]</li>
                                     </ul>
@@ -209,19 +212,11 @@
         <script src="/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 
         <!-- Custom Theme JavaScript -->
-        <script src="/dist/js/sb-admin-2.js"></script>
+        <script src="/content/js/stations.js"></script>
         <!-- Mustache template -->
-        <script src="/dist/js/mustache.js"></script>
-        <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-         <script src="./allstations.js"></script>
-        <!--<script>
-        $(document).ready(function() {
-            $('#stations-table').DataTable({
-                responsive: true
-            });
-        });
-        </script> -->
-       
+        <script src="/content/js/mustache.js"></script>
+
+         <script src="/content/js/allstations.js"></script>
 
     </body>
 
