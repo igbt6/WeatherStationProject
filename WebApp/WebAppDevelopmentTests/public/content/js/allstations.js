@@ -18,13 +18,18 @@ $(function(){
             //console.log(stationsHTML);
             $(".stations-body-tab").append(stationsHTML );
             $(".nr-of-all-stats").replaceWith(tData.Stations.length);
-            $('#stations-table').DataTable({ 
+           var table=   $('#stations-table').DataTable({ 
 
                 responsive: true
 
             });
+
+       //  clickOnStation(table);
+
+
         });
     });
+
 
 
 /*
@@ -48,11 +53,32 @@ $(function(){$('#stations-table').DataTable({
 
 });
 */
+/*
+$(function(){
+var table = $('#stations-table').DataTable();
+$('.stations-table tbody').on( 'click', 'tr', function () {
+    console.log( table.row( this ).data() );
+} );
 
-$(function(){$('.table.stations-body-tab').on('click','tr',function(){
+});
+*/
+/*
+$(function(){$('stations-body-tab').on('click','tr',function(){
 
-    $(this).toggleClass('selected');
+    $(this).css('background' , '#000');
 });
 
 
+
 });
+*/
+//events
+
+function clickOnStation(table){
+
+$('.stations-body-tab').on( 'click', 'tr', function () {
+    console.log( table.row( this ).data() );
+    $(this).css('background' , '#000');
+
+});
+}

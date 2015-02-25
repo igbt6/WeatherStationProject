@@ -37,3 +37,34 @@ exports.allStations = function (sort_by, desc, skip, count, callback) {
 
 
 
+exports.stationByName = function (id, callback) {
+    var dbc;
+
+    async.waterfall([
+        function (cb) {
+            if (!id)
+                cb(backhelp.missingData("station id"));
+            else
+                db.db(cb);
+        },
+
+        function (dbclient, cb) {
+            dbc = dbclient;
+            dbc.query(
+                "SELECT * FROM stations WHERE id = ?",
+                [ id ],
+                cb);
+        }
+
+    ],
+    function (err, results) {
+        if (dbc) dbc.end();
+        if (err) {
+            callback (err);
+        } else if (!results || results.length == 0) {
+            callback(backhelp.no_such_album());
+        } else {
+            callback(null, results[0]);
+        }
+    });
+};
