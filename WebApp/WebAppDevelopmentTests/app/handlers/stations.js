@@ -18,14 +18,15 @@ function Station (stationData) {
     this.city = stationData.city;
 
 }
-
+Station.prototype.id = null;
 Station.prototype.name = null;
 Station.prototype.date = null;
 Station.prototype.country = null;
 Station.prototype.city = null;
 
 Station.prototype.retResponseJSONObj = function () {
-    return { name: this.name,
+    return { id: this.id,
+             name: this.name,
              date: this.date,
              country: this.country,
              city: this.city };
@@ -35,7 +36,7 @@ Station.prototype.retResponseJSONObj = function () {
 
 
 exports.listAllStations = function (req, res) {
-    stationData.allStations("name", true, 0, 25, function (err, results) {
+    stationData.allStations("date", true, 0, 25, function (err, results) {
         if (err) {
             helpers.sendFailure(res, err);
         } else {

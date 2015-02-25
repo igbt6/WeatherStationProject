@@ -10,7 +10,7 @@ $(function(){
 
         // When AJAX calls are complete parse the template 
         $(document).ajaxStop(function () {
-        	var template ='<tr class="odd gradeX center"> <td>{{name}}</td><td>ACTIVE</td><td>{{country}}</td><td>{{city}}</td><td>{{date}}</td> </tr> ';
+            var template ='<tr class="odd gradeX center"> <td>{{id}}</td><td>{{name}}</td><td>{{country}}</td><td>{{city}}</td><td>{{date}}</td> </tr> ';
             var stationsHTML="";
             for (var i = tData.Stations.length - 1; i >= 0; i--) {
                 stationsHTML += Mustache.to_html(template, tData.Stations[i] );
@@ -49,3 +49,10 @@ $(function(){$('#stations-table').DataTable({
 });
 */
 
+$(function(){$('.table.stations-body-tab').on('click','tr',function(){
+
+    $(this).toggleClass('selected');
+});
+
+
+});
