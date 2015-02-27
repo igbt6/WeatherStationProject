@@ -67,7 +67,7 @@ app.get('/pages/:pageName', function (req, res) {
 // databases requests
 
 app.get('/v1/stations.json', stationHandler.listAllStations);
-app.get('/v1/stations/:station.json', stationHandler.stationById);
+app.get('/v1/stations/:stationName.json', stationHandler.getStationByName);
 
 
 

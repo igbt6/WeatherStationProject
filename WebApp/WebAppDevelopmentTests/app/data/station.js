@@ -1,9 +1,10 @@
 
 var fs = require('fs'),
-    local = require('../localConfig.js'),
-    db = require('./db.js'),
-    path = require("path"),
-    async = require('async');
+local = require('../localConfig.js'),
+db = require('./db.js'),
+path = require("path"),
+async = require('async');
+helper = require('../utility/helpers.js');
 
 exports.version = "0.1.0";
 
@@ -18,32 +19,78 @@ exports.allStations = function (sort_by, desc, skip, count, callback) {
         function (dbclient, cb) {
             dbc = dbclient;
             dbc.query(
-                "SELECT * FROM station ORDER BY ? " 
-                    + (desc ? "DESC" : "ASC")
-                    + " LIMIT ?, ?",
+                "SELECT * FROM stations ORDER BY ? " 
+                + (desc ? "DESC" : "ASC")
+                + " LIMIT ?, ?",
                 [ sort_by, skip, count ],
                 cb);
         }
-    ],
-    function (err, results) {
-        if (dbc) dbc.end();
-        if (err) {
-            callback (err);
-        } else {
-            callback(null, results);
+        ],
+        function (err, results) {
+            if (dbc) dbc.end();
+            if (err) {
+                callback (err);
+            } else {
+                callback(null, results);
+            }
+        });
+};
+
+function isCorrectStationParam(param){
+
+    switch(param){
+        case 'name':
+        case 'id':
+        return true;
+        default:
+        return false;
+    }
+}
+
+exports.stationByParam = function (value, param, callback) {
+    var dbc;
+    if(!isCorrectStationParam(param)){callback (helper.error("incorrect_param",
+        param +" cannot get this parameter"));
+        return;
+    }
+    async.waterfall([
+        function (cb) {
+            if (!value)
+
+                cb(helper.missingData("station_"+param));
+            else
+                db.db(cb);
+        },
+
+        function (dbclient, cb) {
+            dbc = dbclient;
+            dbc.query(
+                "SELECT * FROM stations WHERE "+param+" = ?",
+                [ value ],
+                cb);
+        }
+
+        ],
+        function (err, results) {
+            if (dbc) dbc.end();
+            if (err) {
+                callback (err);
+            } else if (!results || results.length == 0) {
+                callback(helper.noSuchStation());
+            } else {
+                callback(null, results[0]);
         }
     });
 };
 
-
-
-exports.stationByName = function (id, callback) {
+/*
+exports.stationById = function (id, callback) {
     var dbc;
 
     async.waterfall([
         function (cb) {
             if (!id)
-                cb(backhelp.missingData("station id"));
+                cb(helper.missingData("station_id"));
             else
                 db.db(cb);
         },
@@ -62,9 +109,10 @@ exports.stationByName = function (id, callback) {
         if (err) {
             callback (err);
         } else if (!results || results.length == 0) {
-            callback(backhelp.no_such_album());
+            callback(helper.noSuchStation());
         } else {
             callback(null, results[0]);
         }
     });
 };
+*/

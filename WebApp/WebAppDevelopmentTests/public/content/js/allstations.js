@@ -18,13 +18,14 @@ $(function(){
             //console.log(stationsHTML);
             $(".stations-body-tab").append(stationsHTML );
             $(".nr-of-all-stats").replaceWith(tData.Stations.length);
-           var table=   $('#stations-table').DataTable({ 
+            var table=   $('#stations-table').DataTable({ 
 
                 responsive: true
 
             });
 
-       //  clickOnStation(table);
+            clickOnStation(table);
+            hoverOnStation(table)
 
 
         });
@@ -75,10 +76,22 @@ $(function(){$('stations-body-tab').on('click','tr',function(){
 //events
 
 function clickOnStation(table){
+    $('.stations-body-tab').on( 'click', 'tr', function () {
+        console.log( table.row( this ).data() );
+        $(this).css('background' , '#000');
 
-$('.stations-body-tab').on( 'click', 'tr', function () {
-    console.log( table.row( this ).data() );
-    $(this).css('background' , '#000');
-
-});
+    });
 }
+
+
+$('.stations-body-tab ').on('mouseenter','tr',function () {
+       var colour = 
+       $(this).css("background", "#8AB800");
+}
+       );
+
+$('.stations-body-tab ').on('mouseleave','tr',function () {
+       var colour = 
+       $(this).css("background", "white");
+}
+       );

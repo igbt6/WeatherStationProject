@@ -1,5 +1,6 @@
 
 var path = require('path');
+var fs = require('fs');
 
 
 exports.version = '0.1.0';
@@ -56,6 +57,52 @@ exports.isImage = function (filename) {
 };
 
 
+
+
+
+exports.verify = function (data, fieldNames) {
+    for (var i = 0; i < fieldNames.length; i++) {
+        if (!data[fieldNames[i]]) {
+            throw exports.error("missing_data",
+                                fieldNames[i] + " not optional");
+        }
+    }
+
+    return true;
+}
+
+
+
+exports.dbError = function () {
+    return exports.error("server_error",
+        "Something bad has happened with our database!");
+};
+
+exports.stationAlreadyExists = function () {
+    return exports.error("station_already_exists",
+                         "An album with this name already exists.");
+};
+
+
+exports.noSuchUser = function () {
+    return exports.error("no_such_user",
+                         "The specified user does not exist !");
+};
+
+
+exports.noSuchStation = function () {
+    return exports.error("no_such_station",
+                         "The specified station does not exist !");
+}
+
+
+exports.userAlreadyRegistered = function () {
+    return exports.error("user_already_registered",
+                         "This user appears to exist already!");
+};
+
+
+
 exports.invalidResource = function () {
     return exports.error("invalid_resource",
                          "The requested resource does not exist.");
@@ -77,7 +124,7 @@ exports.notImage = function () {
 
 exports.httpCodeForError = function (err) {
     switch (err.message) {
-      case "no_such_album":
+      case "no_such_station":
         return 403;
       case "invalid_resource":
         return 404;
