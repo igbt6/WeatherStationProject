@@ -80,3 +80,31 @@ exports.getStationByName= function(req,res){
         }
         );
 };
+
+
+exports.getStationById= function(req,res){
+    async.waterfall([
+        //get the station
+      
+        function(cb){
+            if(!req.params|| !req.params.stationId){
+                cb(helpers.noSuchStation());
+            }
+            else
+                stationData.stationByParam(req.params.stationId,'id',cb);
+        }],
+
+        function(err,results){
+            if(err){
+                helpers.sendFailure(res,err);
+            }
+            else if(!results){
+                helpers.sendFailure(res,helpers.noSuchStation());
+            }
+            else{
+                var station = new Station(results);
+                helpers.sendSuccess(res, {Station: station.retResponseJSONObj()});
+            }
+        }
+        );
+};

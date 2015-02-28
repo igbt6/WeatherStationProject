@@ -4,6 +4,7 @@ var path = require('path');
 var db = require('./data/db.js');
 var config = require('./localConfig.js');
 var stationHandler = require('./handlers/stations.js');
+var helpers = require('./utility/helpers.js');
 
 app.use(express.logger('dev'));
 /*app.use(express.bodyParser({
@@ -33,12 +34,10 @@ app.get("/home", function(req, res) {
 
                 contents = contents.toString('utf8');
                 console.log(contents);
-                //res.writeHead(200, { "Content-Type": "text/html" });
                 res.send(contents);
-                //res.end();
+
             }
         );
-    //res.end();
 });
 
 app.get('/pages/:pageName', function (req, res) {
@@ -52,23 +51,36 @@ app.get('/pages/:pageName', function (req, res) {
             	 res.end("fuckup");
                 return;
             }
-
             contents = contents.toString('utf8');
-            //console.log(contents);
             console.log("NEW HTML LOADED !!!!!!!");
-            // replace page name, and then dump to output.
-            //contents = contents.replace('{{PAGE_NAME}}', page);
-            //res.writeHead(200, { "Content-Type": "text/html" });
             res.send(contents);
         }
     );
 });
 
+//scripts
+app.get('/script/:scriptName', function (req,res){
+    var fs = require('fs');
+    var script = req.params.scriptName;
+    fs.readFile('../public/content/js/'+script, function(err,data){
+
+        if(err){
+            helpers.sendFailure(res, helpers.error(404,"not_found_such_script"));
+            return;
+        }
+        res.send(data);
+    }
+
+);
+
+});
+
+
 // databases requests
 
 app.get('/v1/stations.json', stationHandler.listAllStations);
 app.get('/v1/stations/:stationName.json', stationHandler.getStationByName);
-
+app.get('/v1/stations/id/:stationId.json', stationHandler.getStationById);
 
 
 var port = 8082;

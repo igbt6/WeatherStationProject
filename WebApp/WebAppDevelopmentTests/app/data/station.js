@@ -82,37 +82,3 @@ exports.stationByParam = function (value, param, callback) {
         }
     });
 };
-
-/*
-exports.stationById = function (id, callback) {
-    var dbc;
-
-    async.waterfall([
-        function (cb) {
-            if (!id)
-                cb(helper.missingData("station_id"));
-            else
-                db.db(cb);
-        },
-
-        function (dbclient, cb) {
-            dbc = dbclient;
-            dbc.query(
-                "SELECT * FROM stations WHERE id = ?",
-                [ id ],
-                cb);
-        }
-
-    ],
-    function (err, results) {
-        if (dbc) dbc.end();
-        if (err) {
-            callback (err);
-        } else if (!results || results.length == 0) {
-            callback(helper.noSuchStation());
-        } else {
-            callback(null, results[0]);
-        }
-    });
-};
-*/
