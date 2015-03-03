@@ -10,6 +10,7 @@
         $.get("../../../pages/station.html", function(data){
             htmlTemplate = data;
         });
+        window.location = '../../../pages/station.html';
         console.log(htmlTemplate);
         // Retrieve the server data and then initialise the page  
         /*$.getJSON("/v1/station.json", function (obj) {

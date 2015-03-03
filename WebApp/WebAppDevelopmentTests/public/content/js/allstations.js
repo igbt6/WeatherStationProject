@@ -10,7 +10,6 @@ $(function(){
 
         // When AJAX calls are complete parse the template 
         $(document).ajaxStop(function () {
-        if(flag ===0){
             console.log("HERERERERE !");
             var template ='<tr class="odd gradeX center"> <td>{{id}}</td><td>{{name}}</td><td>{{country}}</td><td>{{city}}</td><td>{{date}}</td> </tr> ';
             var stationsHTML="";
@@ -27,8 +26,6 @@ $(function(){
             });
 
             clickOnStation(table);
-        }
-flag=0;
     });
     }(); });
 
@@ -66,15 +63,20 @@ function clickOnStation(table){
         console.log( table.row( this ).data() );
         var self = this;
         $(this).css('background' , '#000');
+        /*
         $.getScript( "/script/station.js" )
         .done(function( script, textStatus ) {
             console.log( textStatus );
             flag =1;
           loadStationTemplate( table.row( self ).data());
-        })
+        }) 
         .fail(function( jqxhr, settings, exception ) {
             console.log( exception );
         });
+*/    
+      var addr = '../../../pages/station/{{id}}.html'
+      stationsHTML = Mustache.to_html(template, table.row( this ).data()[0] );
+      window.location.href = '../../../pages/station/{{id}}.html';
        //newStation.loadStationTemplate(table.row( this ).data());
 
    });
