@@ -1,0 +1,5 @@
+C:\Users\lukasz\Desktop\CurrentProjects\MeteoStation\WeatherStationGit\ANDROID_APP\app\build\intermediates\classes\debug
+C:\Users\lukasz\Desktop\CurrentProjects\MeteoStation\WeatherStationGit\ANDROID_APP\app\build\intermediates\pre-dexed\debug\smartconfiglib-5e5e401521a509c4b710d1acdfd6349735cd0986.jar
+C:\Users\lukasz\Desktop\CurrentProjects\MeteoStation\WeatherStationGit\ANDROID_APP\app\build\intermediates\pre-dexed\debug\achartengine-1.1.0-6990798358b6a04c3890d25313be6fec73f320f4.jar
+C:\Users\lukasz\Desktop\CurrentProjects\MeteoStation\WeatherStationGit\ANDROID_APP\app\build\intermediates\pre-dexed\debug\androidplot-core-0.6.0-912ca0dfc8863ed1b81b42f4a52ae3d3b0818bf6.jar
+C:\Users\lukasz\Desktop\CurrentProjects\MeteoStation\WeatherStationGit\ANDROID_APP\app\build\intermediates\pre-dexed\debug\support-v4-19.1.0-d85849eb59f28ab1b340f175e6c57e19d4f9f80a.jar

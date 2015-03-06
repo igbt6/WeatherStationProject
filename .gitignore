@@ -7,10 +7,6 @@
 *MCU_CODE_WIFI_MODULE/.metadata/
 /MCU_CODE_WIFI_MODULE/.metadata/*.lock
 /MCU_CODE_WIFI_MODULE/.metadata/.plugins/com.ti.ccstudio.builddefinitions.generator/6.0.0/*.xml
-*.xml
-*.txt
-*.cpp
-*.ino
 *.pdom
 /MCU_CODE_WIFI_MODULE/.metadata/.plugins/org.eclipse.core.resources/.history/11/*
 70f7d69a5c9800141ab1b728413f764e

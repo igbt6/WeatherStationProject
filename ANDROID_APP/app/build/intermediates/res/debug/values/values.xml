@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- From: file:/C:/Users/lukasz/Desktop/CurrentProjects/MeteoStation/WeatherStationGit/ANDROID_APP/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string-array name="AVAILABLE_DEVICES">
+    <item>FAZA</item>
+    <item>FAZA2</item>  
+    </string-array>
+    <string-array name="COMMANDS_TO_METER">
+    <item>AAAx</item> 
+    <item>BBBx</item>  
+    </string-array>
+    <string-array name="types_of_charts_humidity">
+         <item>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - </item>
+         <item>Miesięczny rozkład wilgotności - wartości max i min</item>
+         <item>Wykres zmian wilgotności - dzisiaj</item>
+         <item>Średnia roczna wilgotność</item>
+     </string-array>
+    <string-array name="types_of_charts_light">
+         <item>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - </item>
+         <item>Miesięczny rozkład natężenia oświetlenia - wartości max i min</item>
+         <item>Wykres zmian natężenia oświetlenia w ciągu dnia - dzisiaj</item>
+         <item>Średnia roczna wartość natężenia oświetlenia na zewnątrz</item>
+     </string-array>
+    <string-array name="types_of_charts_pressure">
+         <item>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - </item>
+         <item>Miesięczny rozkład ciśnienia - wartości max i min</item>
+         <item>Wykres zmian ciśnienia - dzisiaj</item>
+         <item>Średnie roczne ciśnienie</item>
+     </string-array>
+    <string-array name="types_of_charts_temp">
+         <item>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - </item>
+         <item>Miesięczny rozkład temperatury - wartości max i min</item>
+         <item>Wykres zmian temperatury - dzisiaj</item>
+         <item>Średnia roczna temperatura</item>
+     </string-array>
+    <!-- From: file:/C:/Users/lukasz/Desktop/CurrentProjects/MeteoStation/WeatherStationGit/ANDROID_APP/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <color name="black">#000000</color>
+    <color name="blue_text_color">#0000ED</color>
+    <color name="button_normal">#2888C4</color>
+    <!-- From: file:/C:/Users/lukasz/Desktop/CurrentProjects/MeteoStation/WeatherStationGit/ANDROID_APP/app/src/main/res/values/color.xml -->
+    <eat-comment/>
+    <color name="color_black">#000000</color>
+    <color name="color_white">#FFFFFFFF</color>
+    <color name="custom_startup_color">#FFFFFFFF</color>
+    <!-- From: file:/C:/Users/lukasz/Desktop/CurrentProjects/MeteoStation/WeatherStationGit/ANDROID_APP/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <color name="disabled_text_color">#9A9A9A</color>
+    <!-- From: file:/C:/Users/lukasz/Desktop/CurrentProjects/MeteoStation/WeatherStationGit/ANDROID_APP/app/src/main/res/values/color.xml -->
+    <eat-comment/>
+    <color name="green_focus">#70acfe01</color>
+    <!-- From: file:/C:/Users/lukasz/Desktop/CurrentProjects/MeteoStation/WeatherStationGit/ANDROID_APP/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <color name="grey_background">#E1E1E1</color>
+    <color name="grey_text_color">#545454</color>
+    <color name="red">#D20000</color>
+    <!-- From: file:/C:/Users/lukasz/Desktop/CurrentProjects/MeteoStation/WeatherStationGit/ANDROID_APP/app/src/main/res/values/color.xml -->
+    <eat-comment/>
+    <color name="red_focus">#7DF42A41</color>
+    <!-- From: file:/C:/Users/lukasz/Desktop/CurrentProjects/MeteoStation/WeatherStationGit/ANDROID_APP/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <color name="text_color_grey">#575757</color>
+    <!-- From: file:/C:/Users/lukasz/Desktop/CurrentProjects/MeteoStation/WeatherStationGit/ANDROID_APP/app/src/main/res/values/color.xml -->
+    <eat-comment/>
+    <color name="title_Color">#FFFFFFFF</color>
+    <color name="transparent">#00FFFFFF</color>
+    <!-- From: file:/C:/Users/lukasz/Desktop/CurrentProjects/MeteoStation/WeatherStationGit/ANDROID_APP/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <color name="white">#FFFFFF</color>
+    <!-- From: file:/C:/Users/lukasz/Desktop/CurrentProjects/MeteoStation/WeatherStationGit/ANDROID_APP/app/src/main/res/values/dimens.xml -->
+    <eat-comment/>
+    <dimen name="about_title_label_side_margin">30dip</dimen>
+    <dimen name="about_title_label_top_margin">30dip</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="context_draw_padding">15.0dp</dimen>
+    <dimen name="context_font_size">10sp</dimen>
+    <dimen name="context_height">65.0dp</dimen>
+    <dimen name="context_padding">10.0dp</dimen>
+    <dimen name="context_width">260.0dp</dimen>
+    <dimen name="custom_font_size">15.0sp</dimen>
+    <dimen name="data_size">35.0sp</dimen>
+    <dimen name="domain_label_font_size">13dp</dimen>
+    <dimen name="domain_tick_label_font_size">15dp</dimen>
+    <dimen name="extra_large_text_size">22dip</dimen>
+    <dimen name="footer_height">40dip</dimen>
+    <dimen name="footer_text_size">8dip</dimen>
+    <dimen name="header_height">50dip</dimen>
+    <dimen name="header_text_size">20dip</dimen>
+    <dimen name="large_text_size">16dip</dimen>
+    <dimen name="legend_text_font_size">20dp</dimen>
+    <dimen name="margin_space">15.0dip</dimen>
+    <dimen name="max_margin_size">15dip</dimen>
+    <dimen name="min_divider_height">1dip</dimen>
+    <dimen name="min_margin_cutoff">10dip</dimen>
+    <dimen name="pie_segment_label_font_size">10dp</dimen>
+    <dimen name="range_label_font_size">13dp</dimen>
+    <dimen name="range_tick_label_font_size">15dp</dimen>
+    <dimen name="rowitem_text_size">16dip</dimen>
+    <dimen name="small_text_height">10dip</dimen>
+    <dimen name="splashscreen_margin_size">50dip</dimen>
+    <dimen name="temperature_size">40.0sp</dimen>
+    <dimen name="text_large">15.0sp</dimen>
+    <dimen name="text_title">20.0sp</dimen>
+    <dimen name="title_font_size">20dp</dimen>
+    <dimen name="weather_size">25.0sp</dimen>
+    <dimen name="weather_space">150.0dip</dimen>
+    <dimen name="widget_height">110px</dimen>
+    <dimen name="widget_width">210px</dimen>
+    <!-- From: file:/C:/Users/lukasz/Desktop/CurrentProjects/MeteoStation/WeatherStationGit/ANDROID_APP/app/src/main/res/values/integer.xml -->
+    <eat-comment/>
+    <integer name="config_key_max_length">16</integer>
+    <!-- From: file:/C:/Users/lukasz/Desktop/CurrentProjects/MeteoStation/WeatherStationGit/ANDROID_APP/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="about_us_content">Rav</string>
+    <string name="about_us_desc_para_one">[x]cube LABS is a custom interactive mobile design and development studio,providing [x]pertise in UI/UX strategy and cutting edge engineering  solutions.</string>
+    <string name="about_us_desc_para_three">If you are planning on integrating the CC3000 into your products, wed love to help.</string>
+    <string name="about_us_desc_para_two">We continue to shatter traditional paradigms thanks largely to our dedication to and belief in quality ,communicative design.</string>
+    <string name="about_us_label">About Us</string>
+    <string name="about_xcube_address">2211 Commerce St. Suit 200,Dallas TX 75201</string>
+    <string name="action_settings">Action_settings</string>
+    <string name="alert_cc3x_title">CC3x Alert</string>
+    <string name="alert_connection_failed">Failed to configure CC3000 device</string>
+    <string name="alert_connection_timeout">Connection to CC3000 was timed out.Please try again</string>
+    <string name="alert_invalid_gatewayip_msg">Please enter valid Gateway IP address</string>
+    <string name="alert_invalid_input_title">Invalid input</string>
+    <string name="alert_invalid_key_mesg">Please enter valid Key exactly 16 characters</string>
+    <string name="alert_invalid_password_msg">Please enter valid password</string>
+    <string name="alert_invalid_ssid_mesg">Please enter valid SSID</string>
+    <string name="alert_no_network_title">No Network</string>
+    <string name="alert_no_wifi_mesg">WiFi not available.Please check your WiFi connection.</string>
+    <string name="alert_successfully_connected">CC3x App Connected Successfully</string>
+    <string name="alert_successfully_failed">Failed to configure CC3000 device</string>
+    <string name="app_name">MeteoStation_v0.1.1</string>
+    <string name="back_label">Back</string>
+    <string name="bt_enabled">Bluetooth has been enabled ! </string>
+    <string name="bt_not_enabled">Bluetooth has not been enabled correctly !</string>
+    <string name="bt_not_enabled_leaving">Bluetooth was not enabled.</string>
+    <string name="cc3000_version_text">CC3000</string>
+    <string name="cc3x_string_ok">ok</string>
+    <string name="chart_prompt">Wybierz wykres</string>
+    <string name="config_default_device_name">Device Name</string>
+    <string name="config_default_gateway_val">127.0.0.1</string>
+    <string name="config_title">Device Configuration</string>
+    <string name="contact_label">Contact</string>
+    <string name="context_menu_changeLocation">Set weather Location</string>
+    <string name="context_menu_update_time">AutoUpdate</string>
+    <string name="current_title">Aktualny prąd ładowania baterii:</string>
+    <string name="defalt_menu_name">No name</string>
+    <string name="devicename_label">Device Name</string>
+    <string name="discoverable">Make discoverable</string>
+    <string name="error">Błąd !!!</string>
+    <string name="footer_title">DESIGNED AND DEVELOPED BY</string>
+    <string name="gatewayip">Gateway IP Address</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="insecure_connect">Connect a device - Insecure</string>
+    <string name="key_label">Key</string>
+    <string name="menu_settings">Settings</string>
+    <string name="no_bluetooth_device">This device does not have a suitable bluetooth device, unfortunately the application will not work correctly</string>
+    <string name="not_connected">Nie jesteś połączony ze stacją</string>
+    <string name="password_hint">Password </string>
+    <string name="scanning">Trwa wyszukiwanie stacji...</string>
+    <string name="secure_connect">Connect a device - Secure</string>
+    <string name="selectTemperatureUnit">Set your prefer unit</string>
+    <string name="selectTimeUpdate">Set auto-update time</string>
+    <string name="send">Wyślij</string>
+    <string name="ssid_label">SSID</string>
+    <string name="start_label">Start</string>
+    <string name="stop_label">Stop</string>
+    <string name="strFetchFailed">Please check, get failed :(</string>
+    <string name="strFetchingData">Please wait fetching data...</string>
+    <string name="strGetSuccess">Weather updated</string>
+    <string name="strOnSearching">Please wait for searching...</string>
+    <string name="strOnUpdating">Please wait for updating...</string>
+    <string name="strUpdating">Updating weather of location</string>
+    <string name="str_max">MAX</string>
+    <string name="str_max_value">%s mi</string>
+    <string name="str_min">MIN</string>
+    <string name="str_min_value">%s%%</string>
+    <string name="str_no_data">***</string>
+    <string name="str_temperature_value">%s°C</string>
+    <string name="str_temperature_value_f">%s°F</string>
+    <string name="tempUnit">  °C</string>
+    <string name="temperature_unit">Temperature unit</string>
+    <string name="title_activity_cc3_xsplash_screen">CC3XSplashScreen</string>
+    <string name="title_connected_to">Podłączony do stacji: <ns1:g id="device_name">%1$s</ns1:g></string>
+    <string name="title_connecting">łączenie...</string>
+    <string name="title_context_menu_setting">Yahoo Weather Setting</string>
+    <string name="title_not_connected">Nie podłączony</string>
+    <string name="voltage_title">Napięcie wyjściowe generatora:</string>
+    <string name="xcube_contact_email">sales@xcubelabs.com</string>
+    <string name="xcube_url">www.xcubelabs.com</string>
+    <!-- From: file:/C:/Users/lukasz/Desktop/CurrentProjects/MeteoStation/WeatherStationGit/ANDROID_APP/app/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+      </style>
+    <style name="ButtonText">
+    <item name="android:layout_width">fill_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textColor">#ffffff</item>
+    <item name="android:gravity">center</item>
+    <item name="android:layout_margin">3dp</item>
+    <item name="android:textSize">40sp</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:shadowColor">#000000</item>
+    <item name="android:shadowDx">1</item>
+    <item name="android:shadowDy">1</item>
+    <item name="android:shadowRadius">2</item>
+        
+    </style>
+</resources>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\lukasz\AndroidstudioProjects\MeteoStationApp\app\libs\smartconfiglib.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="c0a87bc3509aa15127ace1224dc431f501b9e071">
+        <dex dex="C:\Users\lukasz\AndroidstudioProjects\MeteoStationApp\app\build\intermediates\pre-dexed\debug\smartconfiglib-717013144e9da21ff93bd3564073bd2ecb44d8f4.jar" />
+    </item>
+    <item
+        jar="C:\Users\lukasz\Desktop\CurrentProjects\MeteoStation\WeatherStationGit\ANDROID_APP\app\libs\androidplot-core-0.6.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="f748797c749973ce1364ea8cc640744b64f78709">
+        <dex dex="C:\Users\lukasz\Desktop\CurrentProjects\MeteoStation\WeatherStationGit\ANDROID_APP\app\build\intermediates\pre-dexed\debug\androidplot-core-0.6.0-912ca0dfc8863ed1b81b42f4a52ae3d3b0818bf6.jar" />
+    </item>
+    <item
+        jar="C:\Users\lukasz\AndroidstudioProjects\MeteoStationApp\app\libs\achartengine-1.1.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="9932e3fb9fbe54e80873e77f72a99f79e33b3250">
+        <dex dex="C:\Users\lukasz\AndroidstudioProjects\MeteoStationApp\app\build\intermediates\pre-dexed\debug\achartengine-1.1.0-1be501b903d5a7f687a6064fed320604d4da72d4.jar" />
+    </item>
+    <item
+        jar="C:\Users\lukasz\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
+        <dex dex="C:\Users\lukasz\AndroidstudioProjects\MeteoStationApp\app\build\intermediates\pre-dexed\debug\support-v4-19.1.0-d85849eb59f28ab1b340f175e6c57e19d4f9f80a.jar" />
+    </item>
+    <item
+        jar="C:\Users\lukasz\AndroidstudioProjects\MeteoStationApp\app\libs\androidplot-core-0.6.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="f748797c749973ce1364ea8cc640744b64f78709">
+        <dex dex="C:\Users\lukasz\AndroidstudioProjects\MeteoStationApp\app\build\intermediates\pre-dexed\debug\androidplot-core-0.6.0-7182e418d5955d85dca2d78619d41695e475847a.jar" />
+    </item>
+    <item
+        jar="C:\Users\lukasz\Desktop\CurrentProjects\MeteoStation\WeatherStationGit\ANDROID_APP\app\libs\achartengine-1.1.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="9932e3fb9fbe54e80873e77f72a99f79e33b3250">
+        <dex dex="C:\Users\lukasz\Desktop\CurrentProjects\MeteoStation\WeatherStationGit\ANDROID_APP\app\build\intermediates\pre-dexed\debug\achartengine-1.1.0-6990798358b6a04c3890d25313be6fec73f320f4.jar" />
+    </item>
+    <item
+        jar="C:\Users\lukasz\Desktop\CurrentProjects\MeteoStation\WeatherStationGit\ANDROID_APP\app\libs\smartconfiglib.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="c0a87bc3509aa15127ace1224dc431f501b9e071">
+        <dex dex="C:\Users\lukasz\Desktop\CurrentProjects\MeteoStation\WeatherStationGit\ANDROID_APP\app\build\intermediates\pre-dexed\debug\smartconfiglib-5e5e401521a509c4b710d1acdfd6349735cd0986.jar" />
+    </item>
+
+</items>
