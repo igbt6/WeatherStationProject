@@ -2,7 +2,7 @@
 //$(function(){
 	 function loadStationTemplate(stationData){
 	if (!stationData) return;
-
+window.location = '../../../pages/station.html';
         tData = {};  // JSON data object that feeds the template
 
         var htmlTemplate;
@@ -10,8 +10,9 @@
         $.get("../../../pages/station.html", function(data){
             htmlTemplate = data;
         });
-        window.location = '../../../pages/station.html';
+        
         console.log(htmlTemplate);
+        
         // Retrieve the server data and then initialise the page  
         /*$.getJSON("/v1/station.json", function (obj) {
             $.extend(tData, obj.data);
@@ -31,7 +32,15 @@
 
 
 
+
         });
 }
 
 //});
+
+
+$(function(){
+/*window.location = '../../../pages/station.html';*/
+$(".page-header").html("AAAAAAAAAAAA");
+});
+

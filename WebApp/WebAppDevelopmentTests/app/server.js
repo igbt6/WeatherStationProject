@@ -75,12 +75,18 @@ app.get('/script/:scriptName', function (req,res){
 
 });
 
-
 // databases requests
-
 app.get('/v1/stations.json', stationHandler.listAllStations);
 app.get('/v1/stations/:stationName.json', stationHandler.getStationByName);
 app.get('/v1/stations/id/:stationId.json', stationHandler.getStationById);
+
+app.get('*', fourOhFour);
+
+function fourOhFour(req,res){
+
+    helpers.sendFailure(res, 404, helpers.invalidResource());
+
+}
 
 
 var port = 8082;
