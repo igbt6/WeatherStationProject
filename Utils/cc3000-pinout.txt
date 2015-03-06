@@ -1,0 +1,15 @@
+CC3000  -- LM4f120           ANALYZER     MSP430FR5739
+
+CS -       PE0 (white wire)     Ch5                   P1.3
+MOSI -  PB6 (yellow)           Ch8                   P1.7
+IRQ -     PB2 (blue)               Ch4                   P2.3   (RF3 10 pin)                   
+MISO -  PB7(orange)            Ch7                   P1.6
+CLK -    PB4 (red)                 Ch6                   P2.2
+EN -      PB5(dark green)       Ch3                  P4.1   (RF3 13 pin)  
+
+
+char ssid[] = "FAZA";     // your network name (SSID)
+char pass[] = "FAZA"; // your network password (use for 
+
+
+Wifi module - first commit, HTTP client demo app added
