@@ -57,8 +57,8 @@
 
 };
 
-RF22::RF22(PinName slaveSelectPin, PinName mosi, PinName miso, PinName sclk, PinName interrupt)
-    : _slaveSelectPin(slaveSelectPin),  _spi(mosi, miso, sclk), _interrupt(interrupt) /*, led1(LED1), led2(LED2), led3(LED3), led4(LED4) */
+RF22::RF22(PinName slaveSelectPin, PinName mosi, PinName miso, PinName sclk, PinName interrupt,PinName shutdownPin)
+    : _slaveSelectPin(slaveSelectPin),  _spi(mosi, miso, sclk), _interrupt(interrupt),_shutdownPin(shutdownPin) /*, led1(LED1), led2(LED2), led3(LED3), led4(LED4) */
 {
 
 
@@ -75,6 +75,7 @@ boolean RF22::init()
 {
     // Wait for RF22 POR (up to 16msec)
     //delay(16);
+    _shutdownPin= 0;  //power on
     wait_ms(16);
 
     // Initialise the slave select pin

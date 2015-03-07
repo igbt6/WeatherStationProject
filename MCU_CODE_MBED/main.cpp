@@ -1,3 +1,6 @@
+/*
+
+/////////////////////// MAIN APPLICATION ////////////////////////////////////////////////////////
 #include "mbed.h"
 #include "sensors.h"
 #include "SLCD.h"
@@ -36,6 +39,92 @@ int main()
     Thread waitForEventsThread(SensorsWaitAsyncEventsWrapper,NULL,osPriorityHigh);
     debugTimer.start(1000);
     while(1) {
+    }
+    return 0;
+}
+*/
+
+
+/*
+///////////////////////GPS TESTS////////////////////////////////////////////////////////
+
+
+#include "mbed.h"
+#include "gts4E60.h"
+#define GPS_PIN_RX  PTE17    //UART2 on frdmkl46z
+#define GPS_PIN_TX  PTE16
+int main()
+{
+    GTS4E60 gps(GPS_PIN_TX,GPS_PIN_RX);
+    Serial debug(USBTX, USBRX);
+    debug.baud(115200);
+    while(1) {
+        if(gps.isDataAvailable()) {
+            if(gps.parseData()) {
+                struct UTC_Time utcTime= gps.getTime();
+                struct Date date= gps.getDate();
+                debug.printf("GPS_UTC_TIME: %02d:%02d:%02.3f\r\n",utcTime.hours, utcTime.minutes, utcTime.seconds);
+                debug.printf("GPS_DATE: %02d.%02d.%02d\r\n", date.day, date.month, date.year);
+                debug.printf("GPS_DATA: fixtype: %d, satelites: %d, altitude: %f, speed: %f, heading: %f\r\n",gps.getFixType(), gps.getSatellites(), gps.getAltitude(), gps.getSpeedKm(), gps.getHeading());
+                debug.printf("GPS_DATA: status: %c, latitude: %f, ns :%c, longitude: %f, ew: %c\r\n",gps.getStatus(), gps.getLatitude(), gps.getNS(), gps.getLongitude(), gps.getEW());
+            } else {
+                debug.printf("NO GPS FIX FOUND\r\n");
+            }
+        }
+    }
+    return 0;
+}
+*/
+
+
+
+
+/////////////////////// RFM23 MODULES TESTS////////////////////////////////////////////////////////
+
+
+#include "mbed.h"
+#include "RF22ReliableDatagram.h"
+
+
+
+#define RFM_PIN_SDO  PTA17    //MISO
+#define RFM_PIN_SDI   PTA16    //MOSI
+#define RFM_PIN_SCLK  PTA15    //SCK
+#define RFM_PIN_nSEL  PTA14   
+#define RFM_PIN_nIRQ  PTA6    //(as IRQ)
+#define RFM_PIN_SDN   PTA5
+
+#define CLIENT_ADDRESS 1
+#define SERVER_ADDRESS 2
+
+int main()
+{
+//PinName slaveSelectPin , PinName mosi, PinName miso, PinName sclk, PinName interrupt
+    // Singleton instance of the radio
+    RF22ReliableDatagram rfm23b(SERVER_ADDRESS,RFM_PIN_nSEL, RFM_PIN_SDI ,RFM_PIN_SDO,RFM_PIN_SCLK,RFM_PIN_nIRQ,RFM_PIN_SDN  );
+    Serial debug(USBTX, USBRX);
+    debug.baud(115200);
+    if(!rfm23b.init())
+        debug.printf("rfm23b init failed");
+    // Defaults after init are 434.0MHz, 0.05MHz AFC pull-in, modulation FSK_Rb2_4Fd36
+    else
+        debug.printf("rfm23b init succes");
+
+    uint8_t data[] = "And hello back to you";
+    // Dont put this on the stack:
+    uint8_t buf[20];
+    while(1) {
+    // Wait for a message addressed to us from the client
+        uint8_t len = sizeof(buf);
+        uint8_t from;
+        if (rfm23b.recvfromAck(buf, &len, &from)) {
+            debug.printf("got request from : 0x%x",from);
+            debug.printf(": ");
+            debug.printf((char*)buf);
+            // Send a reply back to the originator client
+            if (!rfm23b.sendtoWait(data, sizeof(data), from))
+                debug.printf("sendtoWait failed");
+        }
     }
     return 0;
 }

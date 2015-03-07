@@ -21,8 +21,8 @@ uint8_t RF22Mesh::_tmpMessage[RF22_ROUTER_MAX_MESSAGE_LEN];
 
 ////////////////////////////////////////////////////////////////////
 // Constructors
-RF22Mesh::RF22Mesh(uint8_t thisAddress ,PinName slaveSelectPin , PinName mosi, PinName miso, PinName sclk, PinName interrupt ) 
-    : RF22Router(thisAddress, slaveSelectPin, mosi,  miso, sclk, interrupt )
+RF22Mesh::RF22Mesh(uint8_t thisAddress ,PinName slaveSelectPin , PinName mosi, PinName miso, PinName sclk, PinName interrupt,PinName  shutdownPin ) 
+    : RF22Router(thisAddress, slaveSelectPin, mosi,  miso, sclk, interrupt,shutdownPin )
 {
 }
 

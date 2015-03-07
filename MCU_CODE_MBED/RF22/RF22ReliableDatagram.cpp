@@ -18,8 +18,8 @@
 
 ////////////////////////////////////////////////////////////////////
 // Constructors
-RF22ReliableDatagram::RF22ReliableDatagram(uint8_t thisAddress ,PinName slaveSelectPin , PinName mosi, PinName miso, PinName sclk, PinName interrupt )
-        : RF22Datagram(thisAddress ,slaveSelectPin , mosi, miso, sclk, interrupt ) {
+RF22ReliableDatagram::RF22ReliableDatagram(uint8_t thisAddress ,PinName slaveSelectPin , PinName mosi, PinName miso, PinName sclk, PinName interrupt,PinName shutdownPin )
+        : RF22Datagram(thisAddress ,slaveSelectPin , mosi, miso, sclk, interrupt, shutdownPin  ) {
     _retransmissions = 0;
     _lastSequenceNumber = 0;
     _timeout = 200;

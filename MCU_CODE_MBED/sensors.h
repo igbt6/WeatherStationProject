@@ -16,12 +16,12 @@
 
 
 #define SI7020_ENABLED
-#define AS3935_ENABLED
+#define AS3935_ENABLEDx
 #define DS2782_ENABLEDx
 #define MAX9611_ENABLEDx
-#define BMP180_ENABLED
-#define ADT7410_ENABLED
-#define MAX44009_ENABLED
+#define BMP180_ENABLEDx
+#define ADT7410_ENABLEDx
+#define MAX44009_ENABLEDx
 #define BTM222_ENABLEDx
 #define GPS_ENABLED
 
@@ -50,6 +50,8 @@
 
 #define GPS_PIN_RX  PTE17    //UART2
 #define GPS_PIN_TX  PTE16
+
+
 
 class SENSORS {
 

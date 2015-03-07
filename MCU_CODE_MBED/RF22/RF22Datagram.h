@@ -28,7 +28,7 @@ public:
     /// \param[in] slaveSelectPin the Arduino pin number of the output to use to select the RF22 before
     /// accessing it. Defaults to the normal SS pin for your Arduino (D10 for Diecimila, Uno etc, D53 for Mega)
     /// \param[in] interrupt The interrupt number to use. Default is interrupt 0 (Arduino input pin 2)
-    RF22Datagram(uint8_t thisAddress , PinName slaveSelectPin , PinName mosi, PinName miso, PinName sclk, PinName interrupt );
+    RF22Datagram(uint8_t thisAddress , PinName slaveSelectPin , PinName mosi, PinName miso, PinName sclk, PinName interrupt,PinName shutdownPin );
     
     /// Initialises this instance and the radio module connected to it.
     /// Overrides the init() function in RF22

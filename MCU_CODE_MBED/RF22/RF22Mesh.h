@@ -137,7 +137,7 @@ public:
     /// \param[in] slaveSelectPin the Arduino pin number of the output to use to select the RF22 before
     /// accessing it. Defaults to the normal SS pin for your Arduino (D10 for Diecimila, Uno etc, D53 for Mega)
     /// \param[in] interrupt The interrupt number to use. Default is interrupt 0 (Arduino input pin 2)
-    RF22Mesh(uint8_t thisAddress , PinName slaveSelectPin , PinName mosi, PinName miso, PinName sclk, PinName interrupt );
+    RF22Mesh(uint8_t thisAddress , PinName slaveSelectPin , PinName mosi, PinName miso, PinName sclk, PinName interrupt,PinName shutdownPin );
 
     /// Sends a message to the destination node. Initialises the RF22Router message header 
     /// (the SOURCE address is set to the address of this node, HOPS to 0) and calls 

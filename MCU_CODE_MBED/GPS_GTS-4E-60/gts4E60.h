@@ -25,21 +25,23 @@
 /*
 ---------------------------------------- DEMO: 1 version ----------------------------------------
 #include "mbed.h"
-#include "gt4E60.h"
+#include "gts4E60.h"
+#define GPS_PIN_RX  PTE17    //UART2 on frdmkl46z
+#define GPS_PIN_TX  PTE16
 int main()
 {
     GTS4E60 gps(GPS_PIN_TX,GPS_PIN_RX);
     Serial debug(USBTX, USBRX);
     debug.baud(115200);
     while(1) {
-        if(gps->isDataAvailable()) {
-            if(gps->parseData()) {
-                struct UTC_Time utcTime= gps->getTime();
-                struct Date date= gps->getDate();
+        if(gps.isDataAvailable()) {
+            if(gps.parseData()) {
+                struct UTC_Time utcTime= gps.getTime();
+                struct Date date= gps.getDate();
                 debug.printf("GPS_UTC_TIME: %02d:%02d:%02.3f\r\n",utcTime.hours, utcTime.minutes, utcTime.seconds);
                 debug.printf("GPS_DATE: %02d.%02d.%02d\r\n", date.day, date.month, date.year);
-                debug.printf("GPS_DATA: fixtype: %d, satelites: %d, altitude: %f, speed: %f, heading: %f\r\n",gps->getFixType(), gps->getSatellites(), gps->getAltitude(), gps->getSpeedKm(), gps->getHeading());
-                debug.printf("GPS_DATA: status: %c, latitude: %f, ns :%c, longitude: %f, ew: %c\r\n",gps->getStatus(), gps->getLatitude(), gps->getNS(), gps->getLongitude(), gps->getEW());
+                debug.printf("GPS_DATA: fixtype: %d, satelites: %d, altitude: %f, speed: %f, heading: %f\r\n",gps.getFixType(), gps.getSatellites(), gps.getAltitude(), gps.getSpeedKm(), gps.getHeading());
+                debug.printf("GPS_DATA: status: %c, latitude: %f, ns :%c, longitude: %f, ew: %c\r\n",gps.getStatus(), gps.getLatitude(), gps.getNS(), gps.getLongitude(), gps.getEW());
             } else {
                 debug.printf("NO GPS FIX FOUND\r\n");
             }
@@ -50,15 +52,17 @@ int main()
 
 ---------------------------------------- DEMO: 2 version  error handling----------------------------------------
 #include "mbed.h"
-#include "gt4E60.h"
+#include "gts4E60.h"
+#define GPS_PIN_RX  PTE17    //UART2 on frdmkl46z
+#define GPS_PIN_TX  PTE16
 int main()
 {
     GTS4E60 gps(GPS_PIN_TX,GPS_PIN_RX);
-    Serial debug(USBTX, USBRX);
+    Serial usbDebug(USBTX, USBRX);
     usbDebug.baud(115200);
     while(1) {
-        if(gps->isDataAvailable()) {
-            uint8_t ret= gps->parseData();
+        if(gps.isDataAvailable()) {
+            uint8_t ret= gps.parseData();
             if(ret==ERROR) {
                 usbDebug.printf("ERROR INCORRECT DATA\r\n");
             } else if(ret==NO_FIX_FOUND) {
@@ -68,12 +72,12 @@ int main()
             } else if(ret==INVALID_STATUS) {
                 usbDebug.printf("STATUS INVALID\r\n");
             } else {
-                struct UTC_Time utcTime= gps->getTime();
-                struct Date date= gps->getDate();
+                struct UTC_Time utcTime= gps.getTime();
+                struct Date date= gps.getDate();
                 usbDebug.printf("GPS_UTC_TIME: %02d:%02d:%02.3f\r\n",utcTime.hours, utcTime.minutes, utcTime.seconds);
                 usbDebug.printf("GPS_DATE: %02d.%02d.%02d\r\n", date.day, date.month, date.year);
-                usbDebug.printf("GPS_DATA: fixtype: %d, satelites: %d, altitude: %f, speed: %f, heading: %f\r\n",gps->getFixType(), gps->getSatellites(), gps->getAltitude(), gps->getSpeedKm(), gps->getHeading());
-                usbDebug.printf("GPS_DATA: status: %c, latitude: %f, ns :%c, longitude: %f, ew: %c\r\n",gps->getStatus(), gps->getLatitude(), gps->getNS(), gps->getLongitude(), gps->getEW());
+                usbDebug.printf("GPS_DATA: fixtype: %d, satelites: %d, altitude: %f, speed: %f, heading: %f\r\n",gps.getFixType(), gps.getSatellites(), gps.getAltitude(), gps.getSpeedKm(), gps.getHeading());
+                usbDebug.printf("GPS_DATA: status: %c, latitude: %f, ns :%c, longitude: %f, ew: %c\r\n",gps.getStatus(), gps.getLatitude(), gps.getNS(), gps.getLongitude(), gps.getEW());
             }
         }
     }

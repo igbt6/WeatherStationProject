@@ -175,7 +175,7 @@ public:
     /// accessing it. Defaults to the normal SS pin for your Arduino (D10 for Diecimila, Uno etc, D53 for Mega)
     /// \param[in] interrupt The interrupt number to use. Default is interrupt 0 (Arduino input pin 2)
     //RF22Router(uint8_t thisAddress = 0, uint8_t slaveSelectPin = 10, uint8_t interrupt = 0);
-    RF22Router(uint8_t thisAddress ,PinName slaveSelectPin , PinName mosi, PinName miso, PinName sclk, PinName interrupt );
+    RF22Router(uint8_t thisAddress ,PinName slaveSelectPin , PinName mosi, PinName miso, PinName sclk, PinName interrupt ,PinName shutdownPin);
     /// Initialises this instance and the radio module connected to it.
     /// Overrides the init() function in RF22.
     /// Sets max_hops to the default of RF22_DEFAULT_MAX_HOPS (30)

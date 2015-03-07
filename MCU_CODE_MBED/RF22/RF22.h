@@ -4,6 +4,8 @@
 // $Id: RF22.h,v 1.23 2013/02/06 21:33:56 mikem Exp mikem $
 //
 // ported to mbed by Karl Zweimueller
+// modified by Lukasz Uszko (lukasz.uszko@gmail.com)
+
 /// \mainpage RF22 library for Arduino
 ///
 /// This is the Arduino RF22 library.
@@ -793,7 +795,7 @@ public:
     /// \param[in] slaveSelectPin the Arduino pin number of the output to use to select the RF22 before
     /// accessing it. Defaults to the normal SS pin for your Arduino (D10 for Diecimila, Uno etc, D53 for Mega)
     /// \param[in] interrupt The interrupt number to use. Default is interrupt 0 (Arduino input pin 2)
-    RF22(PinName slaveSelectPin , PinName mosi, PinName miso, PinName sclk, PinName interrupt );
+    RF22(PinName slaveSelectPin , PinName mosi, PinName miso, PinName sclk, PinName interrupt, PinName shutdownPin );
   
     /// Initialises this instance and the radio module connected to it.
     /// The following steps are taken:
@@ -1128,6 +1130,7 @@ private:
 
     uint8_t             _idleMode;
     DigitalOut          _slaveSelectPin;
+    DigitalOut          _shutdownPin; // SDN should be = 0 in all modes except Shutdown mode. When SDN =1 the chip will be completely shutdown and the contents of the registers will be lost
     SPI                 _spi;
     InterruptIn         _interrupt;
     uint8_t             _deviceType;

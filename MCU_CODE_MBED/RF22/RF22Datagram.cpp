@@ -7,8 +7,8 @@
 #include <RF22Datagram.h>
 //#include <SPI.h>
 
-RF22Datagram::RF22Datagram(uint8_t thisAddress, PinName slaveSelectPin , PinName mosi, PinName miso, PinName sclk, PinName interrupt ) 
-    : RF22(slaveSelectPin , mosi, miso, sclk, interrupt )
+RF22Datagram::RF22Datagram(uint8_t thisAddress, PinName slaveSelectPin , PinName mosi, PinName miso, PinName sclk, PinName interrupt,PinName shutdownPin ) 
+    : RF22(slaveSelectPin , mosi, miso, sclk, interrupt,shutdownPin )
 {
     _thisAddress = thisAddress;
 }

@@ -21,8 +21,8 @@ RF22Router::RoutedMessage RF22Router::_tmpMessage;
 
 ////////////////////////////////////////////////////////////////////
 // Constructors
-RF22Router::RF22Router(uint8_t thisAddress ,PinName slaveSelectPin , PinName mosi, PinName miso, PinName sclk, PinName interrupt ) 
-    : RF22ReliableDatagram(thisAddress, slaveSelectPin, mosi,  miso, sclk, interrupt )
+RF22Router::RF22Router(uint8_t thisAddress ,PinName slaveSelectPin , PinName mosi, PinName miso, PinName sclk, PinName interrupt, PinName shutdownPin ) 
+    : RF22ReliableDatagram(thisAddress, slaveSelectPin, mosi,  miso, sclk, interrupt, shutdownPin)
 {
     _max_hops = RF22_DEFAULT_MAX_HOPS;
     clearRoutingTable();
