@@ -45,22 +45,20 @@ $(function(){
             clickOnStation(table);
 
             $('.stations-body-tab ').on('mouseenter','tr',function () {
-             var colour = 
-             $(this).css("background", "#8AB800");
-            }
-                 );
+             
+                var colour = $(this).css("background", "#8AB800");
+             
+            });
 
-                    $('.stations-body-tab ').on('mouseleave','tr',function () {
-                     var colour = 
-                     $(this).css("background", "white");
-                 }
-                 );
+            $('.stations-body-tab ').on('mouseleave','tr',function () {
+                var colour = $(this).css("background", "white");
+            });
 
-                })
-                .fail(function() {
-                    console.log( "error" );
-                    alert("Reading Data FUCK UP !")
-                });
+            })
+            .fail(function() { 
+                console.log( "error" );
+                alert("Reading Data FUCK UP !")
+            });
 
 })
 .fail(function() {
@@ -106,28 +104,20 @@ function clickOnStation(table){
         console.log( table.row( this ).data() );
         var self = this;
         $(this).css('background' , '#000');
-        
+        //window.location = '../../../pages/station?'+(table.row( self ).data()[1]);
+        /*
         $.getJSON("/v1/stations/id/"+table.row( this ).data()[0]+".json" ,
             {format: "json"})
         .done(function(json){
             $.extend(tData,json.data);
-            //console.log("JSON_DATA: "+json.data + "ADDR: "+"/v1/stations/id/"+(table.row( self ).data()[0])+".json" );
-            window.location = '../../../pages/station/'+(table.row( self ).data()[1]);
-            /*    
-            $.getScript( "/script/station.js" )
-            .done(function( script, textStatus ) {
-                console.log( textStatus );
-                loadStationTemplate( table.row( self ).data());
-            }) 
-            .fail(function( jqxhr, settings, exception ) {
-                console.log( exception );
-            });
-        */
-    })
+            //console.log("JSON_DATA: "+json.data + "ADDR: "+"/v1/stations/id/"+(table.row( self ).data()[0])+".json" ); */
+            window.location = '../../../pages/station?'+(table.row( self ).data()[1]);
+       /* });
+   
         .fail(function() {
             console.log( "error" );
             alert("Reading Data FUCK UP !")
-        });
+        });*/
         /*var addr = '../../../pages/station/{{id}}.html'*/
      // var stationsHTML = Mustache.to_html(template, table.row( this ).data()[0] );
       //window.location.href = '../../../pages/station/{{id}}.html';

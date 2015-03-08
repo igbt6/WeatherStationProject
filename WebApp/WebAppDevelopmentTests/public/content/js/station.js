@@ -46,7 +46,7 @@ $.get("/content/templates/station.html")
 
                     //var addr = window.location;
                     var stationName = window.location.search;
-
+                    $("head").append('<link href="/metisMenu/dist/metisMenu.min.css" rel="stylesheet">');
                     $("body").append(htmlTemplate);
                     $("title").html("Weather Stations- station");
                     

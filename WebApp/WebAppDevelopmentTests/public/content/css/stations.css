@@ -239,3 +239,15 @@ table.dataTable thead .sorting:after {
 footer {
     margin: 100px 0;
 }
+
+
+
+/* station css*/
+.row {
+    width: 100%;
+    height: auto;
+    padding: 10px 16px;
+    border-radius: 35px;
+    font-size: 15px;
+    line-height: 1.33;
+}
