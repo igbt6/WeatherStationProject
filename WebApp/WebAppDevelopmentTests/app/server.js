@@ -5,6 +5,7 @@ var db = require('./data/db.js');
 var config = require('./localConfig.js');
 var stationHandler = require('./handlers/stations.js');
 var helpers = require('./utility/helpers.js');
+var pageHandler= require('./handlers/pages.js')
 
 app.use(express.logger('dev'));
 /*app.use(express.bodyParser({
@@ -17,11 +18,11 @@ console.log("DIRNAME: " + __dirname);
 
 app.get("/", function(req, res) {
 	//console.log("Cookies: ", req.cookies)
-	res.redirect("/pages/home.html");
+	res.redirect("/pages/home");
 	res.end();
 });
 
-
+/*
 app.get("/home", function(req, res) {
 	var fs = require('fs');
     fs.readFile(
@@ -39,13 +40,37 @@ app.get("/home", function(req, res) {
             }
         );
 });
+*/
+app.get('/pages/station?:stationName', pageHandler.generatePage);
+app.get('/pages/:pageName', pageHandler.generatePage);
 
-app.get('/pages/:pageName', function (req, res) {
+
+/*
+app.get('/pages/station/:stationName', function (req, res) {
+    var fs = require('fs');
+    var id = req.params.stationName;
+
+    fs.readFile(
+        '../pages/station.html',
+        function (err, contents) {
+            if (err) {
+                 res.end("fuckup");
+                return;
+            }
+            contents = contents.toString('utf8');
+            console.log("NEW HTML LOADED !!!!!!!");
+            res.send(contents);
+        }
+    );
+});
+
+*/
+app.get('/page/:pageName', function (req, res) {
 	var fs = require('fs');
     var page = req.params.pageName;
 
     fs.readFile(
-        '../pages/'+page,
+        '../page/'+page+'.html',
         function (err, contents) {
             if (err) {
             	 res.end("fuckup");
@@ -57,6 +82,7 @@ app.get('/pages/:pageName', function (req, res) {
         }
     );
 });
+
 
 //scripts
 app.get('/script/:scriptName', function (req,res){
@@ -84,7 +110,7 @@ app.get('*', fourOhFour);
 
 function fourOhFour(req,res){
 
-    helpers.sendFailure(res, 404, helpers.invalidResource());
+    helpers.sendFailure(res, helpers.invalidResource());
 
 }
 
