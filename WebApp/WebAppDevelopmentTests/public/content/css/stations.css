@@ -243,7 +243,8 @@ footer {
 
 
 /* station css*/
-.row {
+
+.station-window {
     width: 100%;
     height: auto;
     padding: 10px 16px;

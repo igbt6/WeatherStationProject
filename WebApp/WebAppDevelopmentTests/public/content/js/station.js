@@ -35,7 +35,7 @@ function loadStationTemplate(stationData){
 
 $(function(){
 
-$.get("/content/templates/station.html")
+                $.get("/content/templates/station.html")
                 .done(function(data){
                     htmlTemplate = data;
                     //console.log(htmlTemplate);
@@ -68,6 +68,22 @@ $.get("/content/templates/station.html")
                                 .fail(function() {
                                     console.log( "error" );
                                     alert("Reading Data FUCK UP !")
+                                });
+
+                                $(".menu-choser #charts-btn").click(function(){
+                                    console.log("Charts Opened");
+                                    $.get("/content/templates/charts.html",function(data){
+                                            $("#charts").replaceWith(data);
+                                                                            $("#scripts").append(   '<script src="/flot/excanvas.min.js"></script>'+
+                                                        '<script src="/flot/jquery.flot.js"></script>'+
+                                                        '<script src="/flot/jquery.flot.pie.js"></script>'+
+                                                        '<script src="/flot/jquery.flot.resize.js"></script>'+
+                                                        '<script src="/flot/jquery.flot.time.js"></script>'+
+                                                        '<script src="/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>'+
+                                                        '<script src="/js/flot-data.js"></script>');
+                                    });
+                                 
+
                                 });
 
 
