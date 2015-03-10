@@ -1,0 +1,88 @@
+
+**** Build of configuration Debug for project lplm4f120h5qr_core ****
+
+"c:\\ti\\ccsv6\\utils\\bin\\gmake" -k all 
+gmake: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project lplm4f120h5qr_WiFi ****
+
+"c:\\ti\\ccsv6\\utils\\bin\\gmake" -k all 
+gmake: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project lplm4f120h5qr_SPI ****
+
+"c:\\ti\\ccsv6\\utils\\bin\\gmake" -k all 
+gmake: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project WeatherStationWIFI ****
+
+"c:\\ti\\ccsv6\\utils\\bin\\gmake" -k all 
+'Building file: ../RF22/RF22ReliableDatagram.cpp'
+'Invoking: GNU Compiler'
+"C:/TI/Energia/energia-0101E0014/hardware/tools/lm4f/bin/arm-none-eabi-gcc.exe" -c -mcpu=cortex-m4 -march=armv7e-m -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -fno-rtti -fno-exceptions -DF_CPU=80000000L -DARDUINO=101 -DENERGIA=12 -I"C:/TI/Energia/energia-0101E0014/hardware/lm4f/cores/lm4f" -I"C:/TI/Energia/energia-0101E0014/hardware/lm4f/variants/stellarpad" -I"C:/TI/Energia/energia-0101E0014/hardware/tools/lm4f/arm-none-eabi/include" -I"C:/TI/Energia/energia-0101E0014/hardware/lm4f/libraries/SPI" -I"C:/TI/Energia/energia-0101E0014/hardware/lm4f/libraries/WiFi" -Os -ffunction-sections -fdata-sections -fsingle-precision-constant -g -gstrict-dwarf -Wall -MMD -MP -MF"RF22/RF22ReliableDatagram.d" -MT"RF22/RF22ReliableDatagram.d" -o"RF22/RF22ReliableDatagram.o"  "../RF22/RF22ReliableDatagram.cpp"
+'Finished building: ../RF22/RF22ReliableDatagram.cpp'
+' '
+'Building target: WeatherStationWIFI.out'
+'Invoking: GNU Linker'
+"C:/TI/Energia/energia-0101E0014/hardware/tools/lm4f/bin/arm-none-eabi-gcc.exe" -march=armv7e-m -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -fno-rtti -fno-exceptions -DF_CPU=80000000L -DARDUINO=101 -DENERGIA=12 -Os -ffunction-sections -fdata-sections -fsingle-precision-constant -g -gstrict-dwarf -Wall -Wl,-Map,"WeatherStationWIFI.map" --entry ResetISR -nostartfiles -nostdlib -Wl,--gc-sections -L"C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug" -L"C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug" -L"C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_WiFi/Debug" -o"WeatherStationWIFI.out" "./RF22/HardwareSPI.o" "./RF22/RF22.o" "./RF22/RF22Datagram.o" "./RF22/RF22ReliableDatagram.o" "./WeatherStationWIFI.o"  -Wl,--start-group -Wl,-T"C:/TI/Energia/energia-0101E0014/hardware/lm4f/cores/lm4f/lm4fcpp_blizzard.ld" -l"lplm4f120h5qr_WiFi" -l"lplm4f120h5qr_SPI" -l"lplm4f120h5qr_core" -l"m" -l"c" -l"gcc" -Wl,--end-group 
+'Finished building target: WeatherStationWIFI.out'
+' '
+C:/TI/Energia/energia-0101E0014/hardware/tools/lm4f/bin/arm-none-eabi-objcopy -O binary WeatherStationWIFI.out WeatherStationWIFI.bin
+' '
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project lplm4f120h5qr_SPI ****
+
+"c:\\ti\\ccsv6\\utils\\bin\\gmake" -k all 
+gmake: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project lplm4f120h5qr_WiFi ****
+
+"c:\\ti\\ccsv6\\utils\\bin\\gmake" -k all 
+gmake: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project lplm4f120h5qr_core ****
+
+"c:\\ti\\ccsv6\\utils\\bin\\gmake" -k all 
+gmake: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project lplm4f120h5qr_core ****
+
+"c:\\ti\\ccsv6\\utils\\bin\\gmake" -k all 
+gmake: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project lplm4f120h5qr_WiFi ****
+
+"c:\\ti\\ccsv6\\utils\\bin\\gmake" -k all 
+gmake: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project lplm4f120h5qr_SPI ****
+
+"c:\\ti\\ccsv6\\utils\\bin\\gmake" -k all 
+gmake: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project WeatherStationWIFI ****
+
+"c:\\ti\\ccsv6\\utils\\bin\\gmake" -k all 
+gmake: Nothing to be done for `all'.
+
+**** Build Finished ****

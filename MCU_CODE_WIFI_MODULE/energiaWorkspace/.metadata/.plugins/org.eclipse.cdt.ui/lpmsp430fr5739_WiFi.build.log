@@ -1,0 +1,159 @@
+
+**** Build of configuration Debug for project lpmsp430fr5739_WiFi ****
+
+"c:\\ti\\ccsv6\\utils\\bin\\gmake" -k all 
+'Building file: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPclient.cpp'
+'Invoking: GNU Compiler'
+"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/bin/msp430-gcc.exe" -c -mmcu=msp430fr5739 -DF_CPU=16000000L -DARDUINO=101 -DENERGIA=12 -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/variants/fraunchpad" -I"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/msp430/include" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility" -Os -ffunction-sections -fdata-sections -g -gstrict-dwarf -Wall -MMD -MP -MF"TCPclient.d" -MT"TCPclient.d" -o"TCPclient.o"  "C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPclient.cpp"
+In file included from C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/WiFi.h:4:0,
+                 from C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPclient.cpp:2:
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/IPAddress.h: In member function 'IPAddress::operator uint32_t()':
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/IPAddress.h:51:55: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/IPAddress.h: In member function 'bool IPAddress::operator==(const IPAddress&)':
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/IPAddress.h:52:75: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/IPAddress.h:52:108: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+In file included from C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/WiFi.h:6:0,
+                 from C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPclient.cpp:2:
+'Building file: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPserver.cpp'
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPserver.h: At global scope:
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPserver.h:14:14: error: invalid abstract return type for member function 'WiFiClient WiFiServer::available()'
+'Invoking: GNU Compiler'
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPclient.h:7:7: note:   because the following virtual functions are pure within 'WiFiClient':
+"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/bin/msp430-gcc.exe" -c -mmcu=msp430fr5739 -DF_CPU=16000000L -DARDUINO=101 -DENERGIA=12 -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/variants/fraunchpad" -I"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/msp430/include" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility" -Os -ffunction-sections -fdata-sections -g -gstrict-dwarf -Wall -MMD -MP -MF"TCPserver.d" -MT"TCPserver.d" -o"TCPserver.o"  "C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPserver.cpp"
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/Client.h:31:15: note: 	virtual int Client::sslConnect(const char*, uint16_t)
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/Client.h:32:15: note: 	virtual int Client::sslConnect(IPAddress, uint16_t)
+gmake: *** [TCPclient.o] Error 1
+In file included from C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/WiFi.h:4:0,
+                 from C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPserver.cpp:2:
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/IPAddress.h: In member function 'IPAddress::operator uint32_t()':
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/IPAddress.h:51:55: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/IPAddress.h: In member function 'bool IPAddress::operator==(const IPAddress&)':
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/IPAddress.h:52:75: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/IPAddress.h:52:108: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+In file included from C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/WiFi.h:6:0,
+                 from C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPserver.cpp:2:
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPserver.h: At global scope:
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPserver.h:14:14: error: invalid abstract return type for member function 'WiFiClient WiFiServer::available()'
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPclient.h:7:7: note:   because the following virtual functions are pure within 'WiFiClient':
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/Client.h:31:15: note: 	virtual int Client::sslConnect(const char*, uint16_t)
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/Client.h:32:15: note: 	virtual int Client::sslConnect(IPAddress, uint16_t)
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPserver.cpp: In member function 'WiFiClient WiFiServer::available()':
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPserver.cpp:37:13: error: invalid abstract return type for member function 'WiFiClient WiFiServer::available()'
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPclient.h:7:7: note:   since type 'WiFiClient' has pure virtual functions
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPserver.cpp:48:23: error: cannot allocate an object of abstract type 'WiFiClient'
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPclient.h:7:7: note:   since type 'WiFiClient' has pure virtual functions
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPserver.cpp:50:13: error: cannot declare variable 'client' to be of abstract type 'WiFiClient'
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPclient.h:7:7: note:   since type 'WiFiClient' has pure virtual functions
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPserver.cpp:52:9: error: cannot allocate an object of abstract type 'WiFiClient'
+'Building file: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/WiFi.cpp'
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPclient.h:7:7: note:   since type 'WiFiClient' has pure virtual functions
+gmake: *** [TCPserver.o] Error 1
+'Invoking: GNU Compiler'
+"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/bin/msp430-gcc.exe" -c -mmcu=msp430fr5739 -DF_CPU=16000000L -DARDUINO=101 -DENERGIA=12 -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/variants/fraunchpad" -I"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/msp430/include" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility" -Os -ffunction-sections -fdata-sections -g -gstrict-dwarf -Wall -MMD -MP -MF"WiFi.d" -MT"WiFi.d" -o"WiFi.o"  "C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/WiFi.cpp"
+In file included from C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/WiFi.h:4:0,
+                 from C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/WiFi.cpp:1:
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/IPAddress.h: In member function 'IPAddress::operator uint32_t()':
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/IPAddress.h:51:55: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/IPAddress.h: In member function 'bool IPAddress::operator==(const IPAddress&)':
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/IPAddress.h:52:75: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/IPAddress.h:52:108: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+In file included from C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/WiFi.h:6:0,
+                 from C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/WiFi.cpp:1:
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPserver.h: At global scope:
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPserver.h:14:14: error: invalid abstract return type for member function 'WiFiClient WiFiServer::available()'
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPclient.h:7:7: note:   because the following virtual functions are pure within 'WiFiClient':
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/Client.h:31:15: note: 	virtual int Client::sslConnect(const char*, uint16_t)
+'Building file: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/WiFiUdp.cpp'
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/Client.h:32:15: note: 	virtual int Client::sslConnect(IPAddress, uint16_t)
+'Invoking: GNU Compiler'
+gmake: *** [WiFi.o] Error 1
+"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/bin/msp430-gcc.exe" -c -mmcu=msp430fr5739 -DF_CPU=16000000L -DARDUINO=101 -DENERGIA=12 -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/variants/fraunchpad" -I"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/msp430/include" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility" -Os -ffunction-sections -fdata-sections -g -gstrict-dwarf -Wall -MMD -MP -MF"WiFiUdp.d" -MT"WiFiUdp.d" -o"WiFiUdp.o"  "C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/WiFiUdp.cpp"
+In file included from C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/WiFi.h:4:0,
+                 from C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/WiFiUdp.cpp:2:
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/IPAddress.h: In member function 'IPAddress::operator uint32_t()':
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/IPAddress.h:51:55: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/IPAddress.h: In member function 'bool IPAddress::operator==(const IPAddress&)':
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/IPAddress.h:52:75: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/IPAddress.h:52:108: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+In file included from C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/WiFi.h:6:0,
+                 from C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/WiFiUdp.cpp:2:
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPserver.h: At global scope:
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPserver.h:14:14: error: invalid abstract return type for member function 'WiFiClient WiFiServer::available()'
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/TCPclient.h:7:7: note:   because the following virtual functions are pure within 'WiFiClient':
+'Building file: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/SimplelinkWifi.c'
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/Client.h:31:15: note: 	virtual int Client::sslConnect(const char*, uint16_t)
+'Invoking: GNU Compiler'
+C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430/Client.h:32:15: note: 	virtual int Client::sslConnect(IPAddress, uint16_t)
+"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/bin/msp430-gcc.exe" -c -mmcu=msp430fr5739 -DF_CPU=16000000L -DARDUINO=101 -DENERGIA=12 -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/variants/fraunchpad" -I"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/msp430/include" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility" -Os -ffunction-sections -fdata-sections -g -gstrict-dwarf -Wall -MMD -MP -MF"utility/SimplelinkWifi.d" -MT"utility/SimplelinkWifi.d" -o"utility/SimplelinkWifi.o"  "C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/SimplelinkWifi.c"
+gmake: *** [WiFiUdp.o] Error 1
+'Finished building: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/SimplelinkWifi.c'
+' '
+'Building file: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/board.c'
+'Invoking: GNU Compiler'
+"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/bin/msp430-gcc.exe" -c -mmcu=msp430fr5739 -DF_CPU=16000000L -DARDUINO=101 -DENERGIA=12 -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/variants/fraunchpad" -I"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/msp430/include" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility" -Os -ffunction-sections -fdata-sections -g -gstrict-dwarf -Wall -MMD -MP -MF"utility/board.d" -MT"utility/board.d" -o"utility/board.o"  "C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/board.c"
+'Finished building: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/board.c'
+' '
+'Building file: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/cc3000_common.c'
+'Invoking: GNU Compiler'
+"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/bin/msp430-gcc.exe" -c -mmcu=msp430fr5739 -DF_CPU=16000000L -DARDUINO=101 -DENERGIA=12 -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/variants/fraunchpad" -I"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/msp430/include" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility" -Os -ffunction-sections -fdata-sections -g -gstrict-dwarf -Wall -MMD -MP -MF"utility/cc3000_common.d" -MT"utility/cc3000_common.d" -o"utility/cc3000_common.o"  "C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/cc3000_common.c"
+'Finished building: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/cc3000_common.c'
+' '
+'Building file: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/evnt_handler.c'
+'Invoking: GNU Compiler'
+"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/bin/msp430-gcc.exe" -c -mmcu=msp430fr5739 -DF_CPU=16000000L -DARDUINO=101 -DENERGIA=12 -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/variants/fraunchpad" -I"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/msp430/include" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility" -Os -ffunction-sections -fdata-sections -g -gstrict-dwarf -Wall -MMD -MP -MF"utility/evnt_handler.d" -MT"utility/evnt_handler.d" -o"utility/evnt_handler.o"  "C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/evnt_handler.c"
+'Finished building: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/evnt_handler.c'
+' '
+'Building file: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/hci.c'
+'Invoking: GNU Compiler'
+"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/bin/msp430-gcc.exe" -c -mmcu=msp430fr5739 -DF_CPU=16000000L -DARDUINO=101 -DENERGIA=12 -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/variants/fraunchpad" -I"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/msp430/include" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility" -Os -ffunction-sections -fdata-sections -g -gstrict-dwarf -Wall -MMD -MP -MF"utility/hci.d" -MT"utility/hci.d" -o"utility/hci.o"  "C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/hci.c"
+'Finished building: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/hci.c'
+' '
+'Building file: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/netapp.c'
+'Invoking: GNU Compiler'
+"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/bin/msp430-gcc.exe" -c -mmcu=msp430fr5739 -DF_CPU=16000000L -DARDUINO=101 -DENERGIA=12 -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/variants/fraunchpad" -I"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/msp430/include" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility" -Os -ffunction-sections -fdata-sections -g -gstrict-dwarf -Wall -MMD -MP -MF"utility/netapp.d" -MT"utility/netapp.d" -o"utility/netapp.o"  "C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/netapp.c"
+'Finished building: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/netapp.c'
+' '
+'Building file: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/nvmem.c'
+'Invoking: GNU Compiler'
+"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/bin/msp430-gcc.exe" -c -mmcu=msp430fr5739 -DF_CPU=16000000L -DARDUINO=101 -DENERGIA=12 -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/variants/fraunchpad" -I"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/msp430/include" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility" -Os -ffunction-sections -fdata-sections -g -gstrict-dwarf -Wall -MMD -MP -MF"utility/nvmem.d" -MT"utility/nvmem.d" -o"utility/nvmem.o"  "C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/nvmem.c"
+'Finished building: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/nvmem.c'
+' '
+'Building file: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/patch.c'
+'Invoking: GNU Compiler'
+"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/bin/msp430-gcc.exe" -c -mmcu=msp430fr5739 -DF_CPU=16000000L -DARDUINO=101 -DENERGIA=12 -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/variants/fraunchpad" -I"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/msp430/include" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility" -Os -ffunction-sections -fdata-sections -g -gstrict-dwarf -Wall -MMD -MP -MF"utility/patch.d" -MT"utility/patch.d" -o"utility/patch.o"  "C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/patch.c"
+'Finished building: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/patch.c'
+' '
+'Building file: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/security.c'
+'Invoking: GNU Compiler'
+"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/bin/msp430-gcc.exe" -c -mmcu=msp430fr5739 -DF_CPU=16000000L -DARDUINO=101 -DENERGIA=12 -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/variants/fraunchpad" -I"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/msp430/include" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility" -Os -ffunction-sections -fdata-sections -g -gstrict-dwarf -Wall -MMD -MP -MF"utility/security.d" -MT"utility/security.d" -o"utility/security.o"  "C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/security.c"
+'Finished building: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/security.c'
+' '
+'Building file: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/socket.c'
+'Invoking: GNU Compiler'
+"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/bin/msp430-gcc.exe" -c -mmcu=msp430fr5739 -DF_CPU=16000000L -DARDUINO=101 -DENERGIA=12 -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/variants/fraunchpad" -I"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/msp430/include" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility" -Os -ffunction-sections -fdata-sections -g -gstrict-dwarf -Wall -MMD -MP -MF"utility/socket.d" -MT"utility/socket.d" -o"utility/socket.o"  "C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/socket.c"
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/socket.c: In function 'simple_link_send':
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/socket.c:1038:8: warning: 'addr_offset' may be used uninitialized in this function [-Wuninitialized]
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/socket.c:980:1: warning: 'pDataPtr' may be used uninitialized in this function [-Wuninitialized]
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/socket.c:1032:9: warning: 'uArgSize' may be used uninitialized in this function [-Wuninitialized]
+'Finished building: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/socket.c'
+' '
+'Building file: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/spi.cpp'
+'Invoking: GNU Compiler'
+"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/bin/msp430-gcc.exe" -c -mmcu=msp430fr5739 -DF_CPU=16000000L -DARDUINO=101 -DENERGIA=12 -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/variants/fraunchpad" -I"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/msp430/include" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility" -Os -ffunction-sections -fdata-sections -g -gstrict-dwarf -Wall -MMD -MP -MF"utility/spi.d" -MT"utility/spi.d" -o"utility/spi.o"  "C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/spi.cpp"
+'Finished building: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/spi.cpp'
+' '
+'Building file: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/tcp.c'
+'Invoking: GNU Compiler'
+"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/bin/msp430-gcc.exe" -c -mmcu=msp430fr5739 -DF_CPU=16000000L -DARDUINO=101 -DENERGIA=12 -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/variants/fraunchpad" -I"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/msp430/include" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility" -Os -ffunction-sections -fdata-sections -g -gstrict-dwarf -Wall -MMD -MP -MF"utility/tcp.d" -MT"utility/tcp.d" -o"utility/tcp.o"  "C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/tcp.c"
+'Finished building: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/tcp.c'
+' '
+'Building file: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/wlan.c'
+'Invoking: GNU Compiler'
+"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/bin/msp430-gcc.exe" -c -mmcu=msp430fr5739 -DF_CPU=16000000L -DARDUINO=101 -DENERGIA=12 -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/variants/fraunchpad" -I"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/msp430/include" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility" -Os -ffunction-sections -fdata-sections -g -gstrict-dwarf -Wall -MMD -MP -MF"utility/wlan.d" -MT"utility/wlan.d" -o"utility/wlan.o"  "C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/wlan.c"
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/wlan.c: In function 'wlan_add_profile':
+C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/wlan.c:694:18: warning: 'arg_len' may be used uninitialized in this function [-Wuninitialized]
+'Finished building: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/WiFi/utility/wlan.c'
+' '
+gmake: Target `all' not remade because of errors.
+
+**** Build Finished ****

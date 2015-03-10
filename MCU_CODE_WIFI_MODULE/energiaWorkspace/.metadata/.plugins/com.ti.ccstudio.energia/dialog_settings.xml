@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="C:\TI\Energia\energia-GetWeatherAdded\libraries\SimplelinkWifi\examples\getWeather\GetWeather.ino" key="SketchFileSelectionPage.BROWSE_FILTER"/>
+	<item value="LaunchPad (Stellaris) w/ lm4f120 (80MHz)" key="SketchFileSelectionPage.BOARD"/>
+	<item value="lm4f" key="SketchFileSelectionPage.TARGET"/>
+</section>

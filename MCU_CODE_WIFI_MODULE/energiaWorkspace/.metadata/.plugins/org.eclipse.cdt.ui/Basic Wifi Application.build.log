@@ -1,0 +1,34 @@
+
+**** Build of configuration Debug for project Basic Wifi Application ****
+
+"c:\\ti\\ccsv6\\utils\\bin\\gmake" -k all 
+'Building file: ../basic_wif_ccs.c'
+'Invoking: ARM Compiler'
+"c:/ti/ccsv6/tools/compiler/arm_5.1.6/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 --abi=eabi -me -g --include_path="C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Source/cc3000_spi/inc" --include_path="C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Source/cc3000_host_driver/core_driver/inc" --include_path="C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Source/cc3000_host_driver/include/common" --include_path="c:/ti/ccsv6/tools/compiler/arm_5.1.6/include" --include_path="C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Basic WiFi Application CCS/Basic Wifi Application" --include_path="C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Source/HyperTerminal Driver" --include_path="C:/StellarisWare" --define=__CCS__ --define=PART_LM4F232H5QD=1 --define=TARGET_IS_BLIZZARD_RA1=1 --diag_warning=225 --display_error_number --preproc_with_compile --preproc_dependency="basic_wif_ccs.pp"  "../basic_wif_ccs.c"
+'Finished building: ../basic_wif_ccs.c'
+' '
+'Building file: C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Source/Basic Wifi Application/basic_wifi_application.c'
+'Invoking: ARM Compiler'
+"c:/ti/ccsv6/tools/compiler/arm_5.1.6/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 --abi=eabi -me -g --include_path="C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Source/cc3000_spi/inc" --include_path="C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Source/cc3000_host_driver/core_driver/inc" --include_path="C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Source/cc3000_host_driver/include/common" --include_path="c:/ti/ccsv6/tools/compiler/arm_5.1.6/include" --include_path="C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Basic WiFi Application CCS/Basic Wifi Application" --include_path="C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Source/HyperTerminal Driver" --include_path="C:/StellarisWare" --define=__CCS__ --define=PART_LM4F232H5QD=1 --define=TARGET_IS_BLIZZARD_RA1=1 --diag_warning=225 --display_error_number --preproc_with_compile --preproc_dependency="basic_wifi_application.pp"  "C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Source/Basic Wifi Application/basic_wifi_application.c"
+"C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Source/Basic Wifi Application/basic_wifi_application.c", line 46: fatal error #1965: cannot open source file "inc/hw_types.h"
+1 catastrophic error detected in the compilation of "C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Source/Basic Wifi Application/basic_wifi_application.c".
+Compilation terminated.
+gmake: *** [basic_wifi_application.obj] Error 1
+
+>> Compilation failure
+'Building file: C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Source/Basic Wifi Application/board.c'
+'Invoking: ARM Compiler'
+"c:/ti/ccsv6/tools/compiler/arm_5.1.6/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 --abi=eabi -me -g --include_path="C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Source/cc3000_spi/inc" --include_path="C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Source/cc3000_host_driver/core_driver/inc" --include_path="C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Source/cc3000_host_driver/include/common" --include_path="c:/ti/ccsv6/tools/compiler/arm_5.1.6/include" --include_path="C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Basic WiFi Application CCS/Basic Wifi Application" --include_path="C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Source/HyperTerminal Driver" --include_path="C:/StellarisWare" --define=__CCS__ --define=PART_LM4F232H5QD=1 --define=TARGET_IS_BLIZZARD_RA1=1 --diag_warning=225 --display_error_number --preproc_with_compile --preproc_dependency="board.pp"  "C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Source/Basic Wifi Application/board.c"
+"C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Source/Basic Wifi Application/board.c", line 47: fatal error #1965: cannot open source file "inc/hw_types.h"
+1 catastrophic error detected in the compilation of "C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Source/Basic Wifi Application/board.c".
+Compilation terminated.
+
+>> Compilation failure
+gmake: *** [board.obj] Error 1
+gmake: *** No rule to make target `C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Basic WiFi Application CCS/CC3000 Spi/Debug/CC3000 Spi.lib', needed by `Basic Wifi Application.out'.
+gmake: *** No rule to make target `C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Basic WiFi Application CCS/CC3000HostDriver/Debug/CC3000HostDriver.lib', needed by `Basic Wifi Application.out'.
+gmake: *** No rule to make target `C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Basic WiFi Application CCS/HyperTerminal Driver/Debug/HyperTerminal Driver.lib', needed by `Basic Wifi Application.out'.
+gmake: *** No rule to make target `C:/StellarisWare/driverlib/ccs-cm4f/Debug/driverlib-cm4f.lib', needed by `Basic Wifi Application.out'.
+gmake: Target `all' not remade because of errors.
+
+**** Build Finished ****

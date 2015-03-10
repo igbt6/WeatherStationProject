@@ -1,0 +1,8 @@
+
+**** Build of configuration Debug for project CC3000 Spi ****
+
+"c:\\ti\\ccsv6\\utils\\bin\\gmake" -k all 
+gmake: *** No rule to make target `C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Patch Programmer/Source/cc3000_spi/src/spi.c', needed by `spi.obj'.
+gmake: Target `all' not remade because of errors.
+
+**** Build Finished ****

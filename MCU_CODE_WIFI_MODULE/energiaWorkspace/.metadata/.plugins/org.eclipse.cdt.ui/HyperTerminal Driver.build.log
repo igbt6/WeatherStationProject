@@ -1,0 +1,16 @@
+
+**** Build of configuration Debug for project HyperTerminal Driver ****
+
+"c:\\ti\\ccsv6\\utils\\bin\\gmake" -k all 
+'Building file: C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Source/HyperTerminal Driver/dispatcher.c'
+'Invoking: ARM Compiler'
+"c:/ti/ccsv6/tools/compiler/arm_5.1.6/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 --abi=eabi -me -g --include_path="C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Source/cc3000_host_driver/include/common" --include_path="C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Source/cc3000_host_driver/core_driver/inc" --include_path="C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Source/cc3000_spi/inc" --include_path="c:/ti/ccsv6/tools/compiler/arm_5.1.6/include" --include_path="C:/StellarisWare" --define=__CCS__ --define=TARGET_IS_BLIZZARD_RA1=1 --define=PART_LM4F232H5QD=1 --diag_warning=225 --display_error_number --preproc_with_compile --preproc_dependency="dispatcher.pp"  "C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Source/HyperTerminal Driver/dispatcher.c"
+"C:\TI\CC3000SDK1.11\CC3000 SDK\LM4F120H5QR\Basic WiFi Application\Basic WiFi Source\Source\HyperTerminal Driver\dispatcher.h", line 43: fatal error #1965: cannot open source file "inc/hw_ints.h"
+1 catastrophic error detected in the compilation of "C:/TI/CC3000SDK1.11/CC3000 SDK/LM4F120H5QR/Basic WiFi Application/Basic WiFi Source/Source/HyperTerminal Driver/dispatcher.c".
+Compilation terminated.
+
+>> Compilation failure
+gmake: *** [dispatcher.obj] Error 1
+gmake: Target `all' not remade because of errors.
+
+**** Build Finished ****

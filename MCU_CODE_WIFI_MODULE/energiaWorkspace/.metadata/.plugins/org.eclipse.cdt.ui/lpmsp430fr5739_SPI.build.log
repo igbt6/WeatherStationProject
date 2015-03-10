@@ -1,0 +1,32 @@
+
+**** Build of configuration Debug for project lpmsp430fr5739_SPI ****
+
+"c:\\ti\\ccsv6\\utils\\bin\\gmake" -k all 
+'Building file: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI/SPI.cpp'
+'Invoking: GNU Compiler'
+"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/bin/msp430-gcc.exe" -c -mmcu=msp430fr5739 -DF_CPU=16000000L -DARDUINO=101 -DENERGIA=12 -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/variants/fraunchpad" -I"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/msp430/include" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI/utility" -Os -ffunction-sections -fdata-sections -g -gstrict-dwarf -Wall -MMD -MP -MF"SPI.d" -MT"SPI.d" -o"SPI.o"  "C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI/SPI.cpp"
+'Finished building: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI/SPI.cpp'
+' '
+'Building file: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI/utility/eusci_spi.cpp'
+'Invoking: GNU Compiler'
+"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/bin/msp430-gcc.exe" -c -mmcu=msp430fr5739 -DF_CPU=16000000L -DARDUINO=101 -DENERGIA=12 -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/variants/fraunchpad" -I"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/msp430/include" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI/utility" -Os -ffunction-sections -fdata-sections -g -gstrict-dwarf -Wall -MMD -MP -MF"utility/eusci_spi.d" -MT"utility/eusci_spi.d" -o"utility/eusci_spi.o"  "C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI/utility/eusci_spi.cpp"
+'Finished building: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI/utility/eusci_spi.cpp'
+' '
+'Building file: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI/utility/usci_spi.cpp'
+'Invoking: GNU Compiler'
+"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/bin/msp430-gcc.exe" -c -mmcu=msp430fr5739 -DF_CPU=16000000L -DARDUINO=101 -DENERGIA=12 -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/variants/fraunchpad" -I"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/msp430/include" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI/utility" -Os -ffunction-sections -fdata-sections -g -gstrict-dwarf -Wall -MMD -MP -MF"utility/usci_spi.d" -MT"utility/usci_spi.d" -o"utility/usci_spi.o"  "C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI/utility/usci_spi.cpp"
+'Finished building: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI/utility/usci_spi.cpp'
+' '
+'Building file: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI/utility/usi_spi.cpp'
+'Invoking: GNU Compiler'
+"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/bin/msp430-gcc.exe" -c -mmcu=msp430fr5739 -DF_CPU=16000000L -DARDUINO=101 -DENERGIA=12 -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/cores/msp430" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/variants/fraunchpad" -I"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/msp430/include" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI" -I"C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI/utility" -Os -ffunction-sections -fdata-sections -g -gstrict-dwarf -Wall -MMD -MP -MF"utility/usi_spi.d" -MT"utility/usi_spi.d" -o"utility/usi_spi.o"  "C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI/utility/usi_spi.cpp"
+C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/bin/msp430-ar.exe: creating liblpmsp430fr5739_SPI.a
+'Finished building: C:/TI/Energia/energia-0101E0014/hardware/msp430/libraries/SPI/utility/usi_spi.cpp'
+' '
+'Building target: liblpmsp430fr5739_SPI.a'
+'Invoking: GNU Librarian'
+"C:/TI/Energia/energia-0101E0014/hardware/tools/msp430/bin/msp430-ar.exe" -r "liblpmsp430fr5739_SPI.a" "./SPI.o" "./utility/eusci_spi.o" "./utility/usci_spi.o" "./utility/usi_spi.o"  
+'Finished building target: liblpmsp430fr5739_SPI.a'
+' '
+
+**** Build Finished ****
