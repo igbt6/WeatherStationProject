@@ -26,51 +26,79 @@ void loop();
 // PE_3 = 29;  //InteruptPin
 
 // Singleton instance of the radio
-RF22ReliableDatagram rf22(CLIENT_ADDRESS,RFM23B_SLAVE_SELECT_PIN,RFM23B_SHUTDOWN_PIN,RFM23B_INTERRUPT_PIN);
+
+/* RELIABLE DATAGRAMMMMM
+RF22ReliableDatagram rfm23b(SERVER_ADDRESS,RFM23B_SLAVE_SELECT_PIN,RFM23B_SHUTDOWN_PIN,RFM23B_INTERRUPT_PIN);
 
 void setup()
 {
-  Serial.begin(9600);
-  if (!rf22.init())
+  Serial.begin(115200);
+  if (!rfm23b.init())
     Serial.println("RF22 init failed");
   // Defaults after init are 434.0MHz, 0.05MHz AFC pull-in, modulation FSK_Rb2_4Fd36
 }
 
-uint8_t data[] = "Hello World!";
+uint8_t data[] = "hello back";
 // Dont put this on the stack:
-uint8_t buf[RF22_MAX_MESSAGE_LEN];
+uint8_t buf[30];//RF22_MAX_MESSAGE_LEN
 
 void loop()
 {
   while (1)
   {
-    Serial.println("Sending to rf22_datagram_server");
+	    // Wait for a message addressed to us from the client
+	        uint8_t len = sizeof(buf);
+	        uint8_t from;
+	        if (rfm23b.recvfromAckTimeout(buf, &len,5000, &from)) {
+	        	//Serial.print("got request from : 0x%x",from,HEX);
+	        	Serial.print("got request from : ");
+	        	Serial.print((char*)buf);
+	            // Send a reply back to the originator client
+	            if (!rfm23b.sendtoWait(data, sizeof(data), from))
+	            	Serial.print("sendtoWait failed");
+	        }
+	        else
+	        	Serial.print("did not receive any data\n");
 
-    // Send a message to rf22_server
-    if (!rf22.sendtoWait(data, sizeof(data), SERVER_ADDRESS))
-      Serial.println("sendtoWait failed");
-    else
-    {
-      // Now wait for a reply from the server
- //     Serial.println(rf22.lastRssi(), HEX); // of the ACK
-      uint8_t len = sizeof(buf);
-      uint8_t from;
-      if (rf22.recvfromAckTimeout(buf, &len, 2000, &from))
-      {
-        Serial.print("got reply from : 0x");
-        Serial.print(from, HEX);
-        Serial.print(": ");
-        Serial.println((char*)buf);
-      }
-      else
-      {
-        Serial.println("No reply, is rf22_datagram_server running?");
-      }
-    }
     delay(500);
   }
 }
+*/
+//NORMAL SERVER INSTANCE
+// Singleton instance of the radio
+RF22 rf22(RFM23B_SLAVE_SELECT_PIN,RFM23B_SHUTDOWN_PIN,RFM23B_INTERRUPT_PIN);
+void setup()
+{
+  Serial.begin(115200);
+  if (!rf22.init())
+    Serial.println("RF22 init failed");
+  // Defaults after init are 434.0MHz, 0.05MHz AFC pull-in, modulation FSK_Rb2_4Fd36
+}
+void loop()
+{
+  if (rf22.available())
+  {
+    // Should be a message for us now
+    uint8_t buf[RF22_MAX_MESSAGE_LEN];
+    uint8_t len = sizeof(buf);
+    if (rf22.recv(buf, &len))
+    {
+      Serial.print("got request: ");
+      Serial.println((char*)buf);
 
+      // Send a reply
+      uint8_t data[] = "And hello back to you";
+      rf22.send(data, sizeof(data));
+      rf22.waitPacketSent(3000);
+      Serial.println("Sent a reply");
+    }
+    else
+    {
+      Serial.println("recv failed");
+    }
+ }
+    delay(500);
+}
 
 
 /*

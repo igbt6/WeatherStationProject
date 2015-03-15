@@ -15,7 +15,7 @@ RF22* RF22::_RF22ForInterrupt[RF22_NUM_INTERRUPTS] = {0, 0, 0};
 // Canned modem configurations generated with 
 // http://www.hoperf.com/upload/rf/RF22B%2023B%2031B%2042B%2043B%20Register%20Settings_RevB1-v5.xls
 // Stored in flash (program) memory to save SRAM
-PROGMEM static const RF22::ModemConfig MODEM_CONFIG_TABLE[] =
+static const RF22::ModemConfig MODEM_CONFIG_TABLE[] =
 {
     { 0x2b, 0x03, 0xf4, 0x20, 0x41, 0x89, 0x00, 0x36, 0x40, 0x0a, 0x1d, 0x80, 0x60, 0x10, 0x62, 0x2c, 0x00, 0x08 }, // Unmodulated carrier
     { 0x2b, 0x03, 0xf4, 0x20, 0x41, 0x89, 0x00, 0x36, 0x40, 0x0a, 0x1d, 0x80, 0x60, 0x10, 0x62, 0x2c, 0x33, 0x08 }, // FSK, PN9 random modulation, 2, 5
@@ -76,13 +76,15 @@ boolean RF22::init()
     // Wait for RF22 POR (up to 16msec)
     delay(16);
 
+    // Initialise the shutdown  pin
+    pinMode(_shutdownPin, OUTPUT);
+    digitalWrite(_shutdownPin, LOW); //ENABLED
+
     // Initialise the slave select pin
     pinMode(_slaveSelectPin, OUTPUT);
     digitalWrite(_slaveSelectPin, HIGH);
 
-    // Initialise the shutdown  pin
-    pinMode(_shutdownPin, OUTPUT);
-    digitalWrite(_shutdownPin, LOW); //ENABLED
+
 
     // start the SPI library:
     // Note the RF22 wants mode 0, MSB first and default to 1 Mbps
@@ -98,16 +100,22 @@ boolean RF22::init()
     // Get the device type and check it
     // This also tests whether we are really connected to a device
     _deviceType = spiRead(RF22_REG_00_DEVICE_TYPE);
+    Serial.println("BEFOREINITIIIIIIIIIIIIIIIIIIIIIIIIIII");
     if (   _deviceType != RF22_DEVICE_TYPE_RX_TRX
-        && _deviceType != RF22_DEVICE_TYPE_TX)
-	return false;
+        && _deviceType != RF22_DEVICE_TYPE_TX){
+	Serial.println("Device Type =" );
+	Serial.println( _deviceType );
+    return false;
 
+    }
+   Serial.println("AFTERINITIIIIIIIIIIIIIIIIIIIIIIIIIII");
     // Set up interrupt handler
     // Use FALLING instead of LOW for Uno32 compatibility, where LOW is not implemented
    // if (_interrupt == 0)
   //  {
 	_RF22ForInterrupt[0] = this;
-	attachInterrupt(0, RF22::isr0, FALLING);
+	pinMode(_interrupt, INPUT_PULLUP);
+	attachInterrupt(_interrupt, RF22::isr0, FALLING);
   /*  }
     else if (_interrupt == 1)
     {
@@ -194,6 +202,7 @@ void RF22::handleInterrupt()
     uint8_t _lastInterruptFlags[2];
     // Read the interrupt flags which clears the interrupt
     spiBurstRead(RF22_REG_03_INTERRUPT_STATUS1, _lastInterruptFlags, 2);
+    Serial.print("interrupt----- ");
 
 #if 0
     // Caution: Serial printing in this interrupt routine can cause mysterious crashes
