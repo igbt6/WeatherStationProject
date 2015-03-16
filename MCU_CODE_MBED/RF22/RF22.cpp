@@ -71,7 +71,7 @@ RF22::RF22(PinName slaveSelectPin, PinName mosi, PinName miso, PinName sclk, Pin
 
 }
 
-boolean RF22::init()
+bool RF22::init()
 {
     // Wait for RF22 POR (up to 16msec)
     //delay(16);
@@ -178,14 +178,14 @@ boolean RF22::init()
     setFrequency(434.0, 0.05);
 //    setFrequency(900.0);
     // Some slow, reliable default speed and modulation
-    setModemConfig(FSK_Rb2_4Fd36);
-//    setModemConfig(FSK_Rb125Fd125);
+    //setModemConfig(FSK_Rb2_4Fd36);
+    setModemConfig(FSK_Rb125Fd125);
     // Minimum power
-    setTxPower(RF22_TXPOW_8DBM);
-//    setTxPower(RF22_TXPOW_17DBM);
+   setTxPower(RF22_TXPOW_8DBM);
+   //setTxPower(RF22_TXPOW_17DBM);
 
 
-
+     //return 444;
     return true;
 }
 
@@ -632,6 +632,18 @@ void RF22::waitPacketSent()
 {
     while (_mode == RF22_MODE_TX)
         ; // Wait for any previous transmit to finish
+}
+
+bool RF22::waitPacketSent(uint16_t timeout)
+{   
+    Timer t;
+     t.start();
+    unsigned long endtime = t.read_ms() + timeout;
+    while(t.read_ms() <endtime){
+        if(_mode != RF22_MODE_TX)
+            return true;
+        }
+    return false;
 }
 
 // Diagnostic help

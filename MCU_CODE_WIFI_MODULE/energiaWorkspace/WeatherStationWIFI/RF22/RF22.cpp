@@ -187,8 +187,8 @@ boolean RF22::init()
     setFrequency(434.0, 0.05);
 //    setFrequency(900.0);
     // Some slow, reliable default speed and modulation
-    setModemConfig(FSK_Rb2_4Fd36);
-//    setModemConfig(FSK_Rb125Fd125);
+   // setModemConfig(FSK_Rb2_4Fd36);
+        setModemConfig(FSK_Rb125Fd125);
 
     // Lowish power
     setTxPower(RF22_TXPOW_8DBM);

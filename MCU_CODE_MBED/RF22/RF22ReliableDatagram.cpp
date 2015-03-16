@@ -53,7 +53,7 @@ boolean RF22ReliableDatagram::sendtoWait(uint8_t* buf, uint8_t len, uint8_t addr
         setHeaderId(thisSequenceNumber);
         setHeaderFlags(0);
         sendto(buf, len, address);
-        waitPacketSent();
+        waitPacketSent(3000);
 
         // Never wait for ACKS to broadcasts:
         if (address == RF22_BROADCAST_ADDRESS)

@@ -72,6 +72,9 @@ void setup()
   Serial.begin(115200);
   if (!rf22.init())
     Serial.println("RF22 init failed");
+  else
+	  Serial.println("RF22 init succed!");
+  rf22.setModeRx();
   // Defaults after init are 434.0MHz, 0.05MHz AFC pull-in, modulation FSK_Rb2_4Fd36
 }
 void loop()
@@ -87,6 +90,7 @@ void loop()
       Serial.println((char*)buf);
 
       // Send a reply
+
       uint8_t data[] = "And hello back to you";
       rf22.send(data, sizeof(data));
       rf22.waitPacketSent(3000);

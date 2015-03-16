@@ -807,7 +807,7 @@ public:
     /// - Sets the frequncy to 434.0 MHz
     /// - Sets the modem data rate to FSK_Rb2_4Fd36
     /// \return  true if everything was successful
-    boolean        init();
+    bool       init();
 
     /// Issues a software reset to the 
     /// RF22 module. Blocks for 1ms to ensure the reset is complete.
@@ -979,6 +979,7 @@ public:
     /// This effectively waits until any previous transmit packet is finished being transmitted.
     void           waitPacketSent();
   
+     bool waitPacketSent(uint16_t timeout);
     /// Tells the receiver to accept messages with any TO address, not just messages
     /// addressed to this node or the broadcast address
     /// \param[in] promiscuous true if you wish to receive messages with any TO address
@@ -1130,9 +1131,10 @@ private:
 
     uint8_t             _idleMode;
     DigitalOut          _slaveSelectPin;
-    DigitalOut          _shutdownPin; // SDN should be = 0 in all modes except Shutdown mode. When SDN =1 the chip will be completely shutdown and the contents of the registers will be lost
+
     SPI                 _spi;
     InterruptIn         _interrupt;
+    DigitalOut          _shutdownPin; // SDN should be = 0 in all modes except Shutdown mode. When SDN =1 the chip will be completely shutdown and the contents of the registers will be lost
     uint8_t             _deviceType;
     
     //DigitalOut           led1;

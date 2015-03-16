@@ -1518,7 +1518,7 @@ LOAD ./RF22/RF22ReliableDatagram.o
 LOAD ./WeatherStationWIFI.o
 START GROUP
 
-.text           0x00000000     0x2a28
+.text           0x00000000     0x2a40
                 0x00000000                . = ALIGN (0x4)
                 0x00000000                _text = .
  *(.isr_vector)
@@ -1672,395 +1672,393 @@ START GROUP
  .text._ZN4RF224initEv
                 0x0000080c      0x1d8 ./RF22/RF22.o
                 0x0000080c                RF22::init()
- .text.setup    0x000009e4       0x30 ./WeatherStationWIFI.o
+ .text.setup    0x000009e4       0x3c ./WeatherStationWIFI.o
                 0x000009e4                setup
- .text.loop     0x00000a14       0x98 ./WeatherStationWIFI.o
-                0x00000a14                loop
+ .text.loop     0x00000a20       0x98 ./WeatherStationWIFI.o
+                0x00000a20                loop
  .text.startup._GLOBAL__sub_I_rf22
-                0x00000aac       0x20 ./WeatherStationWIFI.o
+                0x00000ab8       0x20 ./WeatherStationWIFI.o
  .text._ZN8SPIClassC2Eh
-                0x00000acc        0x4 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug\liblplm4f120h5qr_SPI.a(SPI.o)
-                0x00000acc                SPIClass::SPIClass(unsigned char)
-                0x00000acc                SPIClass::SPIClass(unsigned char)
+                0x00000ad8        0x4 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug\liblplm4f120h5qr_SPI.a(SPI.o)
+                0x00000ad8                SPIClass::SPIClass(unsigned char)
+                0x00000ad8                SPIClass::SPIClass(unsigned char)
  .text._ZN8SPIClass5beginEv
-                0x00000ad0      0x104 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug\liblplm4f120h5qr_SPI.a(SPI.o)
-                0x00000ad0                SPIClass::begin()
+                0x00000adc      0x104 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug\liblplm4f120h5qr_SPI.a(SPI.o)
+                0x00000adc                SPIClass::begin()
  .text._ZN8SPIClass3endEv
-                0x00000bd4       0x1c C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug\liblplm4f120h5qr_SPI.a(SPI.o)
-                0x00000bd4                SPIClass::end()
+                0x00000be0       0x1c C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug\liblplm4f120h5qr_SPI.a(SPI.o)
+                0x00000be0                SPIClass::end()
  .text._ZN8SPIClass11setBitOrderEh
-                0x00000bf0        0x2 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug\liblplm4f120h5qr_SPI.a(SPI.o)
-                0x00000bf0                SPIClass::setBitOrder(unsigned char)
- *fill*         0x00000bf2        0x2 
+                0x00000bfc        0x2 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug\liblplm4f120h5qr_SPI.a(SPI.o)
+                0x00000bfc                SPIClass::setBitOrder(unsigned char)
+ *fill*         0x00000bfe        0x2 
  .text._ZN8SPIClass11setDataModeEh
-                0x00000bf4       0x24 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug\liblplm4f120h5qr_SPI.a(SPI.o)
-                0x00000bf4                SPIClass::setDataMode(unsigned char)
+                0x00000c00       0x24 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug\liblplm4f120h5qr_SPI.a(SPI.o)
+                0x00000c00                SPIClass::setDataMode(unsigned char)
  .text._ZN8SPIClass15setClockDividerEh
-                0x00000c18       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug\liblplm4f120h5qr_SPI.a(SPI.o)
-                0x00000c18                SPIClass::setClockDivider(unsigned char)
+                0x00000c24       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug\liblplm4f120h5qr_SPI.a(SPI.o)
+                0x00000c24                SPIClass::setClockDivider(unsigned char)
  .text._ZN8SPIClass8transferEh
-                0x00000c28       0x48 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug\liblplm4f120h5qr_SPI.a(SPI.o)
-                0x00000c28                SPIClass::transfer(unsigned char)
+                0x00000c34       0x48 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug\liblplm4f120h5qr_SPI.a(SPI.o)
+                0x00000c34                SPIClass::transfer(unsigned char)
  .text.ToneIntHandler
-                0x00000c70        0x2 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(startup_gcc.o)
-                0x00000c70                ToneIntHandler
+                0x00000c7c        0x2 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(startup_gcc.o)
+                0x00000c7c                ToneIntHandler
  .text.I2CIntHandler
-                0x00000c72        0x2 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(startup_gcc.o)
-                0x00000c72                I2CIntHandler
- .text.NmiSR    0x00000c74        0x2 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(startup_gcc.o)
+                0x00000c7e        0x2 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(startup_gcc.o)
+                0x00000c7e                I2CIntHandler
+ .text.NmiSR    0x00000c80        0x2 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(startup_gcc.o)
  .text.FaultISR
-                0x00000c76        0x2 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(startup_gcc.o)
+                0x00000c82        0x2 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(startup_gcc.o)
  .text.IntDefaultHandler
-                0x00000c78        0x2 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(startup_gcc.o)
- *fill*         0x00000c7a        0x2 
+                0x00000c84        0x2 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(startup_gcc.o)
+ *fill*         0x00000c86        0x2 
  .text.ResetISR
-                0x00000c7c       0x9c C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(startup_gcc.o)
-                0x00000c7c                ResetISR
- .text._sbrk    0x00000d18       0x2c C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(startup_gcc.o)
-                0x00000d18                _sbrk
+                0x00000c88       0x9c C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(startup_gcc.o)
+                0x00000c88                ResetISR
+ .text._sbrk    0x00000d24       0x2c C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(startup_gcc.o)
+                0x00000d24                _sbrk
  .text.SysCtlPeripheralReset
-                0x00000d44       0x3c C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(sysctl.o)
-                0x00000d44                SysCtlPeripheralReset
+                0x00000d50       0x3c C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(sysctl.o)
+                0x00000d50                SysCtlPeripheralReset
  .text.SysCtlDelay
-                0x00000d80        0x8 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(sysctl.o)
-                0x00000d80                SysCtlDelay
+                0x00000d8c        0x8 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(sysctl.o)
+                0x00000d8c                SysCtlDelay
  .text.SysCtlClockGet
-                0x00000d88       0xd0 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(sysctl.o)
-                0x00000d88                SysCtlClockGet
+                0x00000d94       0xd0 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(sysctl.o)
+                0x00000d94                SysCtlClockGet
  .text.GPIOXIntHandler
-                0x00000e58       0x2e C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
-                0x00000e58                GPIOXIntHandler
- *fill*         0x00000e86        0x2 
+                0x00000e64       0x2e C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
+                0x00000e64                GPIOXIntHandler
+ *fill*         0x00000e92        0x2 
  .text.GPIOAIntHandler
-                0x00000e88       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
-                0x00000e88                GPIOAIntHandler
+                0x00000e94       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
+                0x00000e94                GPIOAIntHandler
  .text.GPIOBIntHandler
-                0x00000e98       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
-                0x00000e98                GPIOBIntHandler
+                0x00000ea4       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
+                0x00000ea4                GPIOBIntHandler
  .text.GPIOCIntHandler
-                0x00000ea8       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
-                0x00000ea8                GPIOCIntHandler
+                0x00000eb4       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
+                0x00000eb4                GPIOCIntHandler
  .text.GPIODIntHandler
-                0x00000eb8       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
-                0x00000eb8                GPIODIntHandler
+                0x00000ec4       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
+                0x00000ec4                GPIODIntHandler
  .text.GPIOEIntHandler
-                0x00000ec8       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
-                0x00000ec8                GPIOEIntHandler
+                0x00000ed4       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
+                0x00000ed4                GPIOEIntHandler
  .text.GPIOFIntHandler
-                0x00000ed8       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
-                0x00000ed8                GPIOFIntHandler
+                0x00000ee4       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
+                0x00000ee4                GPIOFIntHandler
  .text.GPIOGIntHandler
-                0x00000ee8       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
-                0x00000ee8                GPIOGIntHandler
+                0x00000ef4       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
+                0x00000ef4                GPIOGIntHandler
  .text.GPIOHIntHandler
-                0x00000ef8       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
-                0x00000ef8                GPIOHIntHandler
+                0x00000f04       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
+                0x00000f04                GPIOHIntHandler
  .text.GPIOJIntHandler
-                0x00000f08       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
-                0x00000f08                GPIOJIntHandler
+                0x00000f14       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
+                0x00000f14                GPIOJIntHandler
  .text.GPIOKIntHandler
-                0x00000f18       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
-                0x00000f18                GPIOKIntHandler
+                0x00000f24       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
+                0x00000f24                GPIOKIntHandler
  .text.GPIOLIntHandler
-                0x00000f28       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
-                0x00000f28                GPIOLIntHandler
+                0x00000f34       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
+                0x00000f34                GPIOLIntHandler
  .text.GPIOMIntHandler
-                0x00000f38       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
-                0x00000f38                GPIOMIntHandler
+                0x00000f44       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
+                0x00000f44                GPIOMIntHandler
  .text.GPIONIntHandler
-                0x00000f48       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
-                0x00000f48                GPIONIntHandler
+                0x00000f54       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
+                0x00000f54                GPIONIntHandler
  .text.GPIOPIntHandler
-                0x00000f58       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
-                0x00000f58                GPIOPIntHandler
+                0x00000f64       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
+                0x00000f64                GPIOPIntHandler
  .text.GPIOQIntHandler
-                0x00000f68       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
-                0x00000f68                GPIOQIntHandler
+                0x00000f74       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
+                0x00000f74                GPIOQIntHandler
  .text.attachInterrupt
-                0x00000f78      0x294 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
-                0x00000f78                attachInterrupt
+                0x00000f84      0x294 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
+                0x00000f84                attachInterrupt
  .text.timerInit
-                0x0000120c       0x4c C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(wiring.o)
-                0x0000120c                timerInit
- .text.millis   0x00001258        0xc C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(wiring.o)
-                0x00001258                millis
- .text.delay    0x00001264       0x18 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(wiring.o)
-                0x00001264                delay
+                0x00001218       0x4c C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(wiring.o)
+                0x00001218                timerInit
+ .text.millis   0x00001264        0xc C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(wiring.o)
+                0x00001264                millis
+ .text.delay    0x00001270       0x18 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(wiring.o)
+                0x00001270                delay
  .text.delayMicroseconds
-                0x0000127c       0x50 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(wiring.o)
-                0x0000127c                delayMicroseconds
+                0x00001288       0x50 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(wiring.o)
+                0x00001288                delayMicroseconds
  .text.SysTickIntHandler
-                0x000012cc       0x28 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(wiring.o)
-                0x000012cc                SysTickIntHandler
- .text.pinMode  0x000012f4       0xb0 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(wiring_digital.o)
-                0x000012f4                pinMode
+                0x000012d8       0x28 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(wiring.o)
+                0x000012d8                SysTickIntHandler
+ .text.pinMode  0x00001300       0xb0 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(wiring_digital.o)
+                0x00001300                pinMode
  .text.digitalWrite
-                0x000013a4       0x38 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(wiring_digital.o)
-                0x000013a4                digitalWrite
+                0x000013b0       0x38 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(wiring_digital.o)
+                0x000013b0                digitalWrite
  .text._ZN14HardwareSerial9availableEv
-                0x000013dc       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x000013dc                HardwareSerial::available()
+                0x000013e8       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x000013e8                HardwareSerial::available()
  .text._ZN14HardwareSerial4peekEv
-                0x000013ec       0x12 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x000013ec                HardwareSerial::peek()
+                0x000013f8       0x12 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x000013f8                HardwareSerial::peek()
  .text._ZN14HardwareSerial4readEv
-                0x000013fe       0x26 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x000013fe                HardwareSerial::read()
+                0x0000140a       0x26 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x0000140a                HardwareSerial::read()
  .text._ZN14HardwareSerial5flushEv
-                0x00001424        0xc C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x00001424                HardwareSerial::flush()
+                0x00001430        0xc C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x00001430                HardwareSerial::flush()
  .text._ZN14HardwareSerialC2Ev
-                0x00001430       0x30 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x00001430                HardwareSerial::HardwareSerial()
-                0x00001430                HardwareSerial::HardwareSerial()
+                0x0000143c       0x30 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x0000143c                HardwareSerial::HardwareSerial()
+                0x0000143c                HardwareSerial::HardwareSerial()
  .text._ZN14HardwareSerialC2Em
-                0x00001460       0x30 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x00001460                HardwareSerial::HardwareSerial(unsigned long)
-                0x00001460                HardwareSerial::HardwareSerial(unsigned long)
+                0x0000146c       0x30 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x0000146c                HardwareSerial::HardwareSerial(unsigned long)
+                0x0000146c                HardwareSerial::HardwareSerial(unsigned long)
  .text._ZN14HardwareSerial8flushAllEv
-                0x00001490       0x16 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x00001490                HardwareSerial::flushAll()
- *fill*         0x000014a6        0x2 
+                0x0000149c       0x16 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x0000149c                HardwareSerial::flushAll()
+ *fill*         0x000014b2        0x2 
  .text._ZN14HardwareSerial13primeTransmitEm
-                0x000014a8       0x7c C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x000014a8                HardwareSerial::primeTransmit(unsigned long)
+                0x000014b4       0x7c C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x000014b4                HardwareSerial::primeTransmit(unsigned long)
  .text._ZN14HardwareSerial5writeEh
-                0x00001524       0x5c C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x00001524                HardwareSerial::write(unsigned char)
+                0x00001530       0x5c C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x00001530                HardwareSerial::write(unsigned char)
  .text._ZN14HardwareSerial5beginEm
-                0x00001580      0x108 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x00001580                HardwareSerial::begin(unsigned long)
+                0x0000158c      0x108 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x0000158c                HardwareSerial::begin(unsigned long)
  .text._ZN14HardwareSerial14UARTIntHandlerEv
-                0x00001688       0xd0 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x00001688                HardwareSerial::UARTIntHandler()
+                0x00001694       0xd0 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x00001694                HardwareSerial::UARTIntHandler()
  .text.UARTIntHandler
-                0x00001758        0xc C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x00001758                UARTIntHandler
- .text.UARTIntHandler1
                 0x00001764        0xc C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x00001764                UARTIntHandler1
- .text.UARTIntHandler2
+                0x00001764                UARTIntHandler
+ .text.UARTIntHandler1
                 0x00001770        0xc C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x00001770                UARTIntHandler2
- .text.UARTIntHandler3
+                0x00001770                UARTIntHandler1
+ .text.UARTIntHandler2
                 0x0000177c        0xc C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x0000177c                UARTIntHandler3
- .text.UARTIntHandler4
+                0x0000177c                UARTIntHandler2
+ .text.UARTIntHandler3
                 0x00001788        0xc C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x00001788                UARTIntHandler4
- .text.UARTIntHandler5
+                0x00001788                UARTIntHandler3
+ .text.UARTIntHandler4
                 0x00001794        0xc C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x00001794                UARTIntHandler5
- .text.UARTIntHandler6
+                0x00001794                UARTIntHandler4
+ .text.UARTIntHandler5
                 0x000017a0        0xc C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x000017a0                UARTIntHandler6
- .text.UARTIntHandler7
+                0x000017a0                UARTIntHandler5
+ .text.UARTIntHandler6
                 0x000017ac        0xc C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x000017ac                UARTIntHandler7
+                0x000017ac                UARTIntHandler6
+ .text.UARTIntHandler7
+                0x000017b8        0xc C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x000017b8                UARTIntHandler7
  .text._Z11serialEventv
-                0x000017b8        0x2 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x000017b8                serialEvent()
- .text._Z12serialEvent1v
-                0x000017ba        0x2 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x000017ba                serialEvent1()
- .text._Z12serialEvent2v
-                0x000017bc        0x2 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x000017bc                serialEvent2()
- .text._Z12serialEvent3v
-                0x000017be        0x2 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x000017be                serialEvent3()
- .text._Z12serialEvent4v
-                0x000017c0        0x2 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x000017c0                serialEvent4()
- .text._Z12serialEvent5v
-                0x000017c2        0x2 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x000017c2                serialEvent5()
- .text._Z12serialEvent6v
                 0x000017c4        0x2 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x000017c4                serialEvent6()
- .text._Z12serialEvent7v
+                0x000017c4                serialEvent()
+ .text._Z12serialEvent1v
                 0x000017c6        0x2 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x000017c6                serialEvent7()
+                0x000017c6                serialEvent1()
+ .text._Z12serialEvent2v
+                0x000017c8        0x2 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x000017c8                serialEvent2()
+ .text._Z12serialEvent3v
+                0x000017ca        0x2 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x000017ca                serialEvent3()
+ .text._Z12serialEvent4v
+                0x000017cc        0x2 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x000017cc                serialEvent4()
+ .text._Z12serialEvent5v
+                0x000017ce        0x2 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x000017ce                serialEvent5()
+ .text._Z12serialEvent6v
+                0x000017d0        0x2 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x000017d0                serialEvent6()
+ .text._Z12serialEvent7v
+                0x000017d2        0x2 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x000017d2                serialEvent7()
  .text._Z14serialEventRunv
-                0x000017c8       0x84 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x000017c8                serialEventRun()
+                0x000017d4       0x84 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x000017d4                serialEventRun()
  .text.startup._GLOBAL__sub_I__ZN14HardwareSerialC2Ev
-                0x0000184c       0x64 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
- .text._init    0x000018b0      0x118 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(main.o)
-                0x000018b0                _init
+                0x00001858       0x64 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+ .text._init    0x000018bc      0x118 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(main.o)
+                0x000018bc                _init
  .text.startup.main
-                0x000019c8       0x1c C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(main.o)
-                0x000019c8                main
+                0x000019d4       0x1c C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(main.o)
+                0x000019d4                main
  .text._ZN5Print5writeEPKhj
-                0x000019e4       0x22 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(Print.o)
-                0x000019e4                Print::write(unsigned char const*, unsigned int)
+                0x000019f0       0x22 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(Print.o)
+                0x000019f0                Print::write(unsigned char const*, unsigned int)
  .text._ZN5Print5printEmi.part.2
-                0x00001a06        0xc C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(Print.o)
+                0x00001a12        0xc C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(Print.o)
  .text._ZN5Print5writeEPKc
-                0x00001a12       0x1a C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(Print.o)
-                0x00001a12                Print::write(char const*)
+                0x00001a1e       0x1a C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(Print.o)
+                0x00001a1e                Print::write(char const*)
  .text._ZN5Print5printEPKc
-                0x00001a2c        0x8 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(Print.o)
-                0x00001a2c                Print::print(char const*)
+                0x00001a38        0x8 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(Print.o)
+                0x00001a38                Print::print(char const*)
  .text._ZN5Print5printEc
-                0x00001a34        0xa C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(Print.o)
-                0x00001a34                Print::print(char)
+                0x00001a40        0xa C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(Print.o)
+                0x00001a40                Print::print(char)
  .text._ZN5Print7printlnEv
-                0x00001a3e       0x18 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(Print.o)
-                0x00001a3e                Print::println()
+                0x00001a4a       0x18 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(Print.o)
+                0x00001a4a                Print::println()
  .text._ZN5Print7printlnEPKc
-                0x00001a56       0x14 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(Print.o)
-                0x00001a56                Print::println(char const*)
+                0x00001a62       0x14 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(Print.o)
+                0x00001a62                Print::println(char const*)
  .text._ZN5Print11printNumberEmh
-                0x00001a6a       0x3c C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(Print.o)
-                0x00001a6a                Print::printNumber(unsigned long, unsigned char)
+                0x00001a76       0x3c C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(Print.o)
+                0x00001a76                Print::printNumber(unsigned long, unsigned char)
  .text._ZN5Print5printEmi
-                0x00001aa6        0xc C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(Print.o)
-                0x00001aa6                Print::print(unsigned long, int)
+                0x00001ab2        0xc C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(Print.o)
+                0x00001ab2                Print::print(unsigned long, int)
  .text._ZN5Print7printlnEhi
-                0x00001ab2       0x14 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(Print.o)
-                0x00001ab2                Print::println(unsigned char, int)
- *fill*         0x00001ac6        0x2 
+                0x00001abe       0x14 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(Print.o)
+                0x00001abe                Print::println(unsigned char, int)
+ *fill*         0x00001ad2        0x2 
  .text._EEPROMWaitForDone
-                0x00001ac8       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(eeprom.o)
+                0x00001ad4       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(eeprom.o)
  .text._EEPROMSectorMaskClear
-                0x00001ad8       0x34 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(eeprom.o)
+                0x00001ae4       0x34 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(eeprom.o)
  .text.EEPROMMassErase
-                0x00001b0c       0x58 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(eeprom.o)
-                0x00001b0c                EEPROMMassErase
+                0x00001b18       0x58 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(eeprom.o)
+                0x00001b18                EEPROMMassErase
  .text.GPIOIntEnable
-                0x00001b64        0xc C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(gpio.o)
-                0x00001b64                GPIOIntEnable
+                0x00001b70        0xc C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(gpio.o)
+                0x00001b70                GPIOIntEnable
  .text.GPIOIntStatus
-                0x00001b70        0xe C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(gpio.o)
-                0x00001b70                GPIOIntStatus
+                0x00001b7c        0xe C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(gpio.o)
+                0x00001b7c                GPIOIntStatus
  .text.GPIOIntClear
-                0x00001b7e        0x6 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(gpio.o)
-                0x00001b7e                GPIOIntClear
- .text.malloc   0x00001b84       0x10 c:/ti/energia/energia-0101e0014/hardware/tools/lm4f/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-malloc.o)
-                0x00001b84                malloc
- .text.free     0x00001b94       0x10 c:/ti/energia/energia-0101e0014/hardware/tools/lm4f/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-malloc.o)
-                0x00001b94                free
+                0x00001b8a        0x6 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(gpio.o)
+                0x00001b8a                GPIOIntClear
+ .text.malloc   0x00001b90       0x10 c:/ti/energia/energia-0101e0014/hardware/tools/lm4f/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-malloc.o)
+                0x00001b90                malloc
+ .text.free     0x00001ba0       0x10 c:/ti/energia/energia-0101e0014/hardware/tools/lm4f/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-malloc.o)
+                0x00001ba0                free
  .text._malloc_r
-                0x00001ba4      0x538 c:/ti/energia/energia-0101e0014/hardware/tools/lm4f/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-mallocr.o)
-                0x00001ba4                _malloc_r
- .text          0x000020dc      0x134 c:/ti/energia/energia-0101e0014/hardware/tools/lm4f/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-memcpy.o)
-                0x000020dc                memcpy
+                0x00001bb0      0x538 c:/ti/energia/energia-0101e0014/hardware/tools/lm4f/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-mallocr.o)
+                0x00001bb0                _malloc_r
+ .text          0x000020e8      0x134 c:/ti/energia/energia-0101e0014/hardware/tools/lm4f/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-memcpy.o)
+                0x000020e8                memcpy
  .text.__malloc_lock
-                0x00002210        0x4 c:/ti/energia/energia-0101e0014/hardware/tools/lm4f/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-mlock.o)
-                0x00002210                __malloc_lock
+                0x0000221c        0x4 c:/ti/energia/energia-0101e0014/hardware/tools/lm4f/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-mlock.o)
+                0x0000221c                __malloc_lock
  .text.__malloc_unlock
-                0x00002214        0x4 c:/ti/energia/energia-0101e0014/hardware/tools/lm4f/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-mlock.o)
-                0x00002214                __malloc_unlock
- .text._sbrk_r  0x00002218       0x24 c:/ti/energia/energia-0101e0014/hardware/tools/lm4f/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-sbrkr.o)
-                0x00002218                _sbrk_r
- .text.strlen   0x0000223c       0x60 c:/ti/energia/energia-0101e0014/hardware/tools/lm4f/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-strlen.o)
-                0x0000223c                strlen
+                0x00002220        0x4 c:/ti/energia/energia-0101e0014/hardware/tools/lm4f/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-mlock.o)
+                0x00002220                __malloc_unlock
+ .text._sbrk_r  0x00002224       0x24 c:/ti/energia/energia-0101e0014/hardware/tools/lm4f/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-sbrkr.o)
+                0x00002224                _sbrk_r
+ .text.strlen   0x00002248       0x60 c:/ti/energia/energia-0101e0014/hardware/tools/lm4f/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-strlen.o)
+                0x00002248                strlen
  .text._malloc_trim_r
-                0x0000229c       0x9c c:/ti/energia/energia-0101e0014/hardware/tools/lm4f/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-freer.o)
-                0x0000229c                _malloc_trim_r
- .text._free_r  0x00002338      0x19c c:/ti/energia/energia-0101e0014/hardware/tools/lm4f/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-freer.o)
-                0x00002338                _free_r
+                0x000022a8       0x9c c:/ti/energia/energia-0101e0014/hardware/tools/lm4f/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-freer.o)
+                0x000022a8                _malloc_trim_r
+ .text._free_r  0x00002344      0x19c c:/ti/energia/energia-0101e0014/hardware/tools/lm4f/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-freer.o)
+                0x00002344                _free_r
  *(.glue_7t)
  .glue_7t       0x00000000        0x0 linker stubs
  *(.glue_7)
  .glue_7        0x00000000        0x0 linker stubs
  *(.rodata .rodata* .gnu.linkonce.r.*)
- *fill*         0x000024d4        0x4 
  .rodata._ZTV16HardwareSPIClass
-                0x000024d8       0x28 ./RF22/HardwareSPI.o
-                0x000024d8                vtable for HardwareSPIClass
- .rodata        0x00002500        0x2 ./RF22/RF22.o
+                0x000024e0       0x28 ./RF22/HardwareSPI.o
+                0x000024e0                vtable for HardwareSPIClass
+ .rodata        0x00002508        0x2 ./RF22/RF22.o
  .rodata._ZL18MODEM_CONFIG_TABLE
-                0x00002502      0x1e6 ./RF22/RF22.o
+                0x0000250a      0x1e6 ./RF22/RF22.o
  .rodata.str1.1
-                0x000026e8       0x69 ./RF22/RF22.o
- *fill*         0x00002751        0x7 
+                0x000026f0       0x69 ./RF22/RF22.o
+ *fill*         0x00002759        0x7 
  .rodata._ZTV4RF22
-                0x00002758       0x10 ./RF22/RF22.o
-                0x00002758                vtable for RF22
+                0x00002760       0x10 ./RF22/RF22.o
+                0x00002760                vtable for RF22
  .rodata.str1.1
-                0x00002768       0x4e ./WeatherStationWIFI.o
- *fill*         0x000027b6        0x2 
+                0x00002770       0x60 ./WeatherStationWIFI.o
  .rodata._ZL11g_ulSSIBase
-                0x000027b8       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug\liblplm4f120h5qr_SPI.a(SPI.o)
+                0x000027d0       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug\liblplm4f120h5qr_SPI.a(SPI.o)
  .rodata._ZL13g_ulSSIConfig
-                0x000027c8       0x40 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug\liblplm4f120h5qr_SPI.a(SPI.o)
+                0x000027e0       0x40 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug\liblplm4f120h5qr_SPI.a(SPI.o)
  .rodata._ZL11g_ulSSIPort
-                0x00002808       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug\liblplm4f120h5qr_SPI.a(SPI.o)
+                0x00002820       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug\liblplm4f120h5qr_SPI.a(SPI.o)
  .rodata._ZL13g_ulSSIPeriph
-                0x00002818       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug\liblplm4f120h5qr_SPI.a(SPI.o)
+                0x00002830       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug\liblplm4f120h5qr_SPI.a(SPI.o)
  .rodata._ZL11g_ulSSIPins
-                0x00002828       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug\liblplm4f120h5qr_SPI.a(SPI.o)
+                0x00002840       0x10 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug\liblplm4f120h5qr_SPI.a(SPI.o)
  .rodata.g_pui32Xtals
-                0x00002838       0x6c C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(sysctl.o)
+                0x00002850       0x6c C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(sysctl.o)
  .rodata.digital_pin_to_bit_mask
-                0x000028a4       0x29 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(wiring_digital.o)
-                0x000028a4                digital_pin_to_bit_mask
- *fill*         0x000028cd        0x3 
+                0x000028bc       0x29 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(wiring_digital.o)
+                0x000028bc                digital_pin_to_bit_mask
+ *fill*         0x000028e5        0x3 
  .rodata.port_to_base
-                0x000028d0       0x1c C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(wiring_digital.o)
-                0x000028d0                port_to_base
+                0x000028e8       0x1c C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(wiring_digital.o)
+                0x000028e8                port_to_base
  .rodata.digital_pin_to_port
-                0x000028ec       0x29 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(wiring_digital.o)
-                0x000028ec                digital_pin_to_port
- *fill*         0x00002915        0x3 
+                0x00002904       0x29 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(wiring_digital.o)
+                0x00002904                digital_pin_to_port
+ *fill*         0x0000292d        0x3 
  .rodata._ZL14g_ulUARTConfig
-                0x00002918       0x40 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x00002930       0x40 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
  .rodata._ZL14g_ulUARTPeriph
-                0x00002958       0x20 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x00002970       0x20 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
  .rodata._ZL11g_ulUARTInt
-                0x00002978       0x20 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x00002990       0x20 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
  .rodata._ZL12g_ulUARTPins
-                0x00002998       0x20 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x000029b0       0x20 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
  .rodata._ZTV14HardwareSerial
-                0x000029b8       0x20 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x000029b8                vtable for HardwareSerial
+                0x000029d0       0x20 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x000029d0                vtable for HardwareSerial
  .rodata._ZL12g_ulUARTBase
-                0x000029d8       0x20 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x000029f0       0x20 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
  .rodata._ZL12g_ulUARTPort
-                0x000029f8       0x20 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x00002a10       0x20 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
  .rodata.str1.4
-                0x00002a18        0x4 c:/ti/energia/energia-0101e0014/hardware/tools/lm4f/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-impure.o)
+                0x00002a30        0x4 c:/ti/energia/energia-0101e0014/hardware/tools/lm4f/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-impure.o)
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x00002a1c                . = ALIGN (0x4)
+                0x00002a34                . = ALIGN (0x4)
  *(.init)
-                0x00002a1c                . = ALIGN (0x4)
-                0x00002a1c                __preinit_array_start = .
+                0x00002a34                . = ALIGN (0x4)
+                0x00002a34                __preinit_array_start = .
  *(SORT(.preinit_array*))
  *(.preinit_array)
-                0x00002a1c                __preinit_array_end = .
-                0x00002a1c                . = ALIGN (0x4)
-                0x00002a1c                __init_array_start = .
+                0x00002a34                __preinit_array_end = .
+                0x00002a34                . = ALIGN (0x4)
+                0x00002a34                __init_array_start = .
  *(SORT(.init_array.*))
  *(.init_array)
- .init_array    0x00002a1c        0x4 ./RF22/HardwareSPI.o
- .init_array    0x00002a20        0x4 ./WeatherStationWIFI.o
- .init_array    0x00002a24        0x4 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
-                0x00002a28                __init_array_end = .
-                0x00002a28                . = ALIGN (0x4)
+ .init_array    0x00002a34        0x4 ./RF22/HardwareSPI.o
+ .init_array    0x00002a38        0x4 ./WeatherStationWIFI.o
+ .init_array    0x00002a3c        0x4 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+                0x00002a40                __init_array_end = .
+                0x00002a40                . = ALIGN (0x4)
  *(.fini)
-                0x00002a28                . = ALIGN (0x4)
-                0x00002a28                __fini_array_start = .
+                0x00002a40                . = ALIGN (0x4)
+                0x00002a40                __fini_array_start = .
  *(.fini_array)
  *(SORT(.fini_array.*))
-                0x00002a28                __fini_array_end = .
-                0x00002a28                . = ALIGN (0x4)
-                0x00002a28                _etext = .
+                0x00002a40                __fini_array_end = .
+                0x00002a40                . = ALIGN (0x4)
+                0x00002a40                _etext = .
 
-.vfp11_veneer   0x00002a28        0x0
+.vfp11_veneer   0x00002a40        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x00002a28        0x0
+.v4_bx          0x00002a40        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
-.iplt           0x00002a28        0x0
+.iplt           0x00002a40        0x0
  .iplt          0x00000000        0x0 ./RF22/HardwareSPI.o
 
-.rel.dyn        0x00002a28        0x0
+.rel.dyn        0x00002a40        0x0
  .rel.iplt      0x00000000        0x0 ./RF22/HardwareSPI.o
 
-.data           0x20000000      0x83c load address 0x00002a28
+.data           0x20000000      0x83c load address 0x00002a40
                 0x20000000                . = ALIGN (0x4)
                 0x20000000                _data = .
  *(vtable)
@@ -2081,10 +2079,10 @@ START GROUP
                 0x20000838                _impure_ptr
                 0x2000083c                _edata = .
 
-.igot.plt       0x2000083c        0x0 load address 0x00003264
+.igot.plt       0x2000083c        0x0 load address 0x0000327c
  .igot.plt      0x00000000        0x0 ./RF22/HardwareSPI.o
 
-.bss            0x2000083c      0x534 load address 0x00003264
+.bss            0x2000083c      0x534 load address 0x0000327c
                 0x2000083c                . = ALIGN (0x4)
                 0x2000083c                _bss = .
  *(.bss .bss*)
@@ -2262,21 +2260,21 @@ OUTPUT(WeatherStationWIFI.out elf32-littlearm)
  .debug_ranges  0x00000c78       0xb0 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(eeprom.o)
  .debug_ranges  0x00000d28      0x198 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(gpio.o)
 
-.debug_line     0x00000000     0x3883
+.debug_line     0x00000000     0x3885
  .debug_line    0x00000000      0x2cb ./RF22/HardwareSPI.o
  .debug_line    0x000002cb      0x7e6 ./RF22/RF22.o
- .debug_line    0x00000ab1      0x1fb ./WeatherStationWIFI.o
- .debug_line    0x00000cac      0x253 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug\liblplm4f120h5qr_SPI.a(SPI.o)
- .debug_line    0x00000eff      0x3b9 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(startup_gcc.o)
- .debug_line    0x000012b8      0x74a C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(sysctl.o)
- .debug_line    0x00001a02      0x332 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
- .debug_line    0x00001d34      0x2af C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(wiring.o)
- .debug_line    0x00001fe3      0x1d8 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(wiring_digital.o)
- .debug_line    0x000021bb      0x596 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
- .debug_line    0x00002751      0x1b5 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(main.o)
- .debug_line    0x00002906      0x51e C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(Print.o)
- .debug_line    0x00002e24      0x3b3 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(eeprom.o)
- .debug_line    0x000031d7      0x6ac C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(gpio.o)
+ .debug_line    0x00000ab1      0x1fd ./WeatherStationWIFI.o
+ .debug_line    0x00000cae      0x253 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_SPI/Debug\liblplm4f120h5qr_SPI.a(SPI.o)
+ .debug_line    0x00000f01      0x3b9 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(startup_gcc.o)
+ .debug_line    0x000012ba      0x74a C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(sysctl.o)
+ .debug_line    0x00001a04      0x332 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(WInterrupts.o)
+ .debug_line    0x00001d36      0x2af C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(wiring.o)
+ .debug_line    0x00001fe5      0x1d8 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(wiring_digital.o)
+ .debug_line    0x000021bd      0x596 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(HardwareSerial.o)
+ .debug_line    0x00002753      0x1b5 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(main.o)
+ .debug_line    0x00002908      0x51e C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(Print.o)
+ .debug_line    0x00002e26      0x3b3 C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(eeprom.o)
+ .debug_line    0x000031d9      0x6ac C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug\liblplm4f120h5qr_core.a(gpio.o)
 
 .debug_str      0x00000000     0x4007
  .debug_str     0x00000000      0x6dc ./RF22/HardwareSPI.o
