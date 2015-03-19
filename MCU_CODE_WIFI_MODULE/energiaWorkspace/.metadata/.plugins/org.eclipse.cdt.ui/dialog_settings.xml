@@ -23,6 +23,10 @@
 		<item value="384" key="size.width"/>
 		<item value="180" key="size.height"/>
 	</section>
+	<section name="RenameInformationPopup">
+	</section>
+	<section name="CRenameRefactoringInputPage">
+	</section>
 	<section name="org.eclipse.cdt.ui.text.hover.CMacroExpansionExploration">
 	</section>
 </section>

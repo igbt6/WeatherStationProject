@@ -2,14 +2,11 @@
 // Author: Mike McCauley (mikem@airspayce.com)
 // Copyright (C) 2011 Mike McCauley
 // Contributed by Joanna Rutkowska
-// Modified by Lukasz Uszko
-// $Id: HardwareSPI.h,v 1.1 2014/04/01 05:06:44 mikem Exp mikem $
+// Modified and mproved and changed by Lukasz Uszko (luszko@op.pl)
 
 #include "GenericSPI.h"
 
-// These defs cause trouble on some versions of Arduino
-#undef round
-#undef double
+
 
 #include <SPI.h>
 
@@ -69,4 +66,5 @@ private:
     SPIClass spi;
 };
 
-extern HardwareSPIClass Hardware_spi;
+extern HardwareSPIClass HardwareSpiRFM23;
+extern HardwareSPIClass HardwareSpiCC3000;

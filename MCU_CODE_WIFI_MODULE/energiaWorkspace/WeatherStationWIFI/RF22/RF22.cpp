@@ -1,7 +1,7 @@
 // RF22.cpp
 //
 // Copyright (C) 2011 Mike McCauley
-// $Id: RF22.cpp,v 1.19 2014/04/01 05:06:44 mikem Exp mikem $
+// Modified ,changed and some comments revoed by Lukasz Uszko (luszko@op.pl)
 
 #include "RF22.h"
 
@@ -9,7 +9,7 @@
 // Interrupt vectors for the 2 Arduino interrupt pins
 // Each interrupt can be handled by a different instance of RF22, allowing you to have
 // 2 RF22s per Arduino
-RF22* RF22::_RF22ForInterrupt[RF22_NUM_INTERRUPTS] = {0, 0, 0};
+RF22* RF22::_RF22ForInterrupt[] = {0, 0, 0};
 
 // These are indexed by the values of ModemConfigChoice
 // Canned modem configurations generated with 
@@ -202,7 +202,7 @@ void RF22::handleInterrupt()
     uint8_t _lastInterruptFlags[2];
     // Read the interrupt flags which clears the interrupt
     spiBurstRead(RF22_REG_03_INTERRUPT_STATUS1, _lastInterruptFlags, 2);
-    Serial.print("interrupt----- ");
+    //Serial.print("interrupt----- ");
 
 #if 0
     // Caution: Serial printing in this interrupt routine can cause mysterious crashes
@@ -312,26 +312,15 @@ void RF22::handleInterrupt()
     }
 }
 
-// These are low level functions that call the interrupt handler for the correct
+// This is a low level function that call the interrupt handler for the correct
 // instance of RF22.
-// 2 interrupts allows us to have 2 different devices
 void RF22::isr0()
 {
     if (_RF22ForInterrupt[0])
 	_RF22ForInterrupt[0]->handleInterrupt();
 }
-/*
-void RF22::isr1()
-{
-    if (_RF22ForInterrupt[1])
-	_RF22ForInterrupt[1]->handleInterrupt();
-}
-void RF22::isr2()
-{
-    if (_RF22ForInterrupt[2])
-	_RF22ForInterrupt[2]->handleInterrupt();
-}
-*/
+
+
 void RF22::reset()
 {
     spiWrite(RF22_REG_07_OPERATING_MODE1, RF22_SWRES);

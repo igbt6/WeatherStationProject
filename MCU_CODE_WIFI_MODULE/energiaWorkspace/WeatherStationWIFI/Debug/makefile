@@ -7,6 +7,23 @@ SHELL = cmd.exe
 CG_TOOL_ROOT := C:/TI/Energia/energia-0101E0014/hardware/tools/lm4f
 
 ORDERED_OBJS += \
+"./CC3000/utility/board.o" \
+"./CC3000/utility/cc3000_common.o" \
+"./CC3000/utility/evnt_handler.o" \
+"./CC3000/utility/hci.o" \
+"./CC3000/utility/netapp.o" \
+"./CC3000/utility/nvmem.o" \
+"./CC3000/utility/patch.o" \
+"./CC3000/utility/security.o" \
+"./CC3000/utility/SimplelinkWifi.o" \
+"./CC3000/utility/socket.o" \
+"./CC3000/utility/tcp.o" \
+"./CC3000/utility/wlan.o" \
+"./CC3000/TCPclient.o" \
+"./CC3000/TCPserver.o" \
+"./CC3000/utility/spi.o" \
+"./CC3000/WiFi.o" \
+"./CC3000/WiFiUdp.o" \
 "./RF22/HardwareSPI.o" \
 "./RF22/RF22.o" \
 "./RF22/RF22Datagram.o" \
@@ -32,8 +49,12 @@ RMDIR := RMDIR /S/Q
 -include sources.mk
 -include subdir_vars.mk
 -include RF22/subdir_vars.mk
+-include CC3000/utility/subdir_vars.mk
+-include CC3000/subdir_vars.mk
 -include subdir_rules.mk
 -include RF22/subdir_rules.mk
+-include CC3000/utility/subdir_rules.mk
+-include CC3000/subdir_rules.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -159,13 +180,15 @@ WeatherStationWIFI.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)$(BIN_OUTPUTS__QUOTED)
-	-$(RM) "WeatherStationWIFI.d" "RF22\HardwareSPI.d" "RF22\RF22.d" "RF22\RF22Datagram.d" "RF22\RF22ReliableDatagram.d" 
-	-$(RM) "WeatherStationWIFI.o" "RF22\HardwareSPI.o" "RF22\RF22.o" "RF22\RF22Datagram.o" "RF22\RF22ReliableDatagram.o" 
+	-$(RM) "WeatherStationWIFI.d" "RF22\HardwareSPI.d" "RF22\RF22.d" "RF22\RF22Datagram.d" "RF22\RF22ReliableDatagram.d" "CC3000\utility\spi.d" "CC3000\TCPclient.d" "CC3000\TCPserver.d" "CC3000\WiFi.d" "CC3000\WiFiUdp.d" 
+	-$(RM) "CC3000\utility\SimplelinkWifi.d" "CC3000\utility\board.d" "CC3000\utility\cc3000_common.d" "CC3000\utility\evnt_handler.d" "CC3000\utility\hci.d" "CC3000\utility\netapp.d" "CC3000\utility\nvmem.d" "CC3000\utility\patch.d" "CC3000\utility\security.d" "CC3000\utility\socket.d" "CC3000\utility\tcp.d" "CC3000\utility\wlan.d" 
+	-$(RM) "WeatherStationWIFI.o" "RF22\HardwareSPI.o" "RF22\RF22.o" "RF22\RF22Datagram.o" "RF22\RF22ReliableDatagram.o" "CC3000\utility\SimplelinkWifi.o" "CC3000\utility\board.o" "CC3000\utility\cc3000_common.o" "CC3000\utility\evnt_handler.o" "CC3000\utility\hci.o" "CC3000\utility\netapp.o" "CC3000\utility\nvmem.o" "CC3000\utility\patch.o" "CC3000\utility\security.o" "CC3000\utility\socket.o" "CC3000\utility\spi.o" "CC3000\utility\tcp.o" "CC3000\utility\wlan.o" "CC3000\TCPclient.o" "CC3000\TCPserver.o" "CC3000\WiFi.o" "CC3000\WiFiUdp.o" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
 post-build:
 	-C:/TI/Energia/energia-0101E0014/hardware/tools/lm4f/bin/arm-none-eabi-objcopy -O binary WeatherStationWIFI.out WeatherStationWIFI.bin
+	-C:/TI/Energia/energia-0101E0014/hardware/tools/lm4f/bin/arm-none-eabi-siz.exe binary WeatherStationWIFI.out WeatherStationWIFI.bin
 	-@echo ' '
 
 .PHONY: all clean dependents

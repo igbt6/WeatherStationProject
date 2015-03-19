@@ -1,8 +1,7 @@
 // HardwareSPI.h
 // Author: Mike McCauley (mikem@airspayce.com)
 // Copyright (C) 2011 Mike McCauley
-// Contributed by Joanna Rutkowska
-// $Id: HardwareSPI.cpp,v 1.1 2014/04/01 05:06:44 mikem Exp mikem $
+// Improved and changed by Lukasz Uszko (luszko@op.pl)
 
 #include "HardwareSPI.h"
 
@@ -61,5 +60,7 @@
 
 // Declare a single instance of the hardware SPI interface class
 #define DefaultSSIModuleForRFM23BModule 3
+#define DefaultSSIModuleForCC3000Module 2
     //This is SSI3 module , on PortD , pins:  {GPIO_PD0_SSI3CLK, GPIO_PD1_SSI3FSS, GPIO_PD2_SSI3RX, GPIO_PD3_SSI3TX}
-HardwareSPIClass Hardware_spi(DefaultSSIModuleForRFM23BModule);
+HardwareSPIClass HardwareSpiRFM23(DefaultSSIModuleForRFM23BModule);
+HardwareSPIClass HardwareSpiCC3000(DefaultSSIModuleForCC3000Module);
