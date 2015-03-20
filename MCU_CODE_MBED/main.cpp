@@ -18,7 +18,7 @@ static void timerCounter(void const *arg)
 
 
 /////////////////////// MAIN APPLICATION ////////////////////////////////////////////////////////
-/*
+
 SENSORS sensors;
 void SensorsMeasurementFuncWrapper(void const* args)
 {
@@ -40,7 +40,7 @@ int main()
 {
     RtosTimer debugTimer(timerCounter, osTimerPeriodic, (void *)0);
     Thread measThread(SensorsMeasurementFuncWrapper,NULL,osPriorityAboveNormal);
-    Thread printResultsThread(SensorsPrintfDataFuncWrapper,NULL,osPriorityHigh);
+    Thread printResultsThread(SensorsPrintfDataFuncWrapper,NULL,osPriorityNormal);
     Thread waitForEventsThread(SensorsWaitAsyncEventsWrapper,NULL,osPriorityHigh);
     debugTimer.start(1000);
     while(1) {
@@ -48,7 +48,6 @@ int main()
     return 0;
 }
 
-*/
 
 /*
 ///////////////////////GPS TESTS////////////////////////////////////////////////////////
@@ -88,7 +87,7 @@ int main()
 
 
 
-
+/*
 
 #define RFM_PIN_SDO  PTA17    //MISO
 #define RFM_PIN_SDI   PTA16    //MOSI
@@ -100,7 +99,7 @@ int main()
 #define CLIENT_ADDRESS 1
 #define SERVER_ADDRESS 2
 // DATAGRAMM EXAMPLE
-/*
+
 int main()
 {RtosTimer debugTimer(timerCounter, osTimerPeriodic, (void *)0);
 //PinName slaveSelectPin , PinName mosi, PinName miso, PinName sclk, PinName interrupt
@@ -140,8 +139,8 @@ int main()
     }
     return 0;
 }
-
 */
+/*
 // CLIENT NORMAL
 int main()
 {
@@ -184,3 +183,4 @@ int main()
 
     return 0;
 }
+*/

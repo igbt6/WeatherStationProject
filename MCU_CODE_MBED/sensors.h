@@ -11,6 +11,7 @@
 #include "adt7410.h"
 #include "max44009.h"
 #include "gts4E60.h"  //gps module
+#include "RF22ReliableDatagram.h"
 #define NR_OF_THREADS 3
 #define USB_DEBUG
 
@@ -24,6 +25,7 @@
 #define MAX44009_ENABLEDx
 #define BTM222_ENABLEDx
 #define GPS_ENABLED
+#define RFM23_ENABLED
 
 
 #define ADT7410_PIN_SDA PTE0    //I2C1
@@ -52,6 +54,16 @@
 #define GPS_PIN_TX  PTE16
 
 
+#define RFM_PIN_SDO  PTA17    //MISO
+#define RFM_PIN_SDI   PTA16    //MOSI
+#define RFM_PIN_SCLK  PTA15    //SCK
+#define RFM_PIN_nSEL  PTA14
+#define RFM_PIN_nIRQ  PTA6    //(as IRQ)
+#define RFM_PIN_SDN   PTA5
+
+#define CLIENT_ADDRESS 1
+#define SERVER_ADDRESS 2
+
 
 class SENSORS {
 
@@ -76,6 +88,7 @@ private:
  ADT7410* adt7410;
  MAX44009* max44009;
  GTS4E60 * gps;
+ RF22ReliableDatagram *rfm23b;
  Mutex measPrintMutex;
 
 

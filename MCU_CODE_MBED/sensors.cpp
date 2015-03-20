@@ -41,6 +41,15 @@ SENSORS::SENSORS():usbDebug(USBTX, USBRX)
     ds2782= new DS2782( DS2782_PIN_SDA, DS2782_PIN_SCL);
 #endif
 
+#ifdef RFM23_ENABLED
+    rfm23b =new RF22ReliableDatagram(CLIENT_ADDRESS,RFM_PIN_nSEL, RFM_PIN_SDI ,RFM_PIN_SDO,RFM_PIN_SCLK,RFM_PIN_nIRQ,RFM_PIN_SDN  );
+    if(!rfm23b->init()) {
+        usbDebug.printf("rfm23b init failed");
+        while(1);
+    } else
+        usbDebug.printf("rfm23b init succes");
+#endif
+
 }
 
 SENSORS::~SENSORS()
@@ -53,6 +62,7 @@ SENSORS::~SENSORS()
     delete as3935;
     delete ds2782;
     delete gps;
+    delete rfm23b;
 
 }
 
@@ -134,7 +144,7 @@ void SENSORS:: measurement (void const* args)
 
 
 
-        Thread::wait(777);
+        Thread::wait(2000);
 
     }
 }
@@ -226,6 +236,9 @@ void SENSORS::getResults (void const* args)
 }
 
 
+
+
+
 void SENSORS::waitForEvents(void const*args)
 {
     while(1) {
@@ -240,6 +253,29 @@ void SENSORS::waitForEvents(void const*args)
         }
         // usbDebug.printf("AS3935_DISTANCE: %d \r\n", as3935->getLightningDistanceKm());
 #endif
+
+
+#ifdef RFM23_ENABLED
+        uint8_t data[] = "HelloWorld!";
+        uint8_t buf[20];
+        // Send a message to rf23_server
+        usbDebug.printf("Sending to rf23_datagram_server\r\n");
+        if (!rfm23b->sendtoWait(data, sizeof(data), SERVER_ADDRESS))
+            usbDebug.printf("Sending failed....\r\n");
+        else {
+            uint8_t len = sizeof(buf);
+            uint8_t from;
+            if (rfm23b->recvfromAckTimeout(buf, &len,1000, &from)) {
+                usbDebug.printf("got request from : 0x%x",from);
+                usbDebug.printf(": ");
+                usbDebug.printf((char*)buf);
+                // Send a reply back to the originator client
+
+            } else
+                usbDebug.printf("No reply, is rf22_datagram_server running?\n");
+        }
+#endif
+    Thread::wait(200);
     }
 }
 
