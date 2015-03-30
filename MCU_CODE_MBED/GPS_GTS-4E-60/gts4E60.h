@@ -147,7 +147,7 @@ struct Date {
 class GTS4E60
 {
 public:
-    GTS4E60 (PinName tx, PinName rx);
+    GTS4E60 (PinName tx, PinName rx,PinName shutdownPin);
     int write(const char* data); //?
     void init();
     uint8_t parseData(uint8_t param =NULL);
@@ -181,7 +181,8 @@ public:
 
 
 private:
-
+    // shutdown pin
+    DigitalOut mShutdownPin;
     float trunc ( float v);
     float nmeaToDecimal(float deg_coord, char nsew);
     void readData();

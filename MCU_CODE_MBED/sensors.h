@@ -20,8 +20,8 @@
 #define AS3935_ENABLEDx
 #define DS2782_ENABLEDx
 #define MAX9611_ENABLEDx
-#define BMP180_ENABLEDx
-#define ADT7410_ENABLEDx
+#define BMP180_ENABLED
+#define ADT7410_ENABLED
 #define MAX44009_ENABLEDx
 #define BTM222_ENABLEDx
 #define GPS_ENABLED
@@ -52,6 +52,7 @@
 
 #define GPS_PIN_RX  PTE17    //UART2
 #define GPS_PIN_TX  PTE16
+#define GPS_PIN_SHUTDOWN PTE6
 
 
 #define RFM_PIN_SDO  PTA17    //MISO
@@ -59,7 +60,7 @@
 #define RFM_PIN_SCLK  PTA15    //SCK
 #define RFM_PIN_nSEL  PTA14
 #define RFM_PIN_nIRQ  PTA6    //(as IRQ)
-#define RFM_PIN_SDN   PTA5
+#define RFM_PIN_SDN   PTB9
 
 #define CLIENT_ADDRESS 1
 #define SERVER_ADDRESS 2

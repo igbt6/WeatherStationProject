@@ -9,7 +9,7 @@ SENSORS::SENSORS():usbDebug(USBTX, USBRX)
     usbDebug.baud(115200);
 
 #ifdef GPS_ENABLED
-    gps = new GTS4E60(GPS_PIN_TX,GPS_PIN_RX);
+    gps = new GTS4E60(GPS_PIN_TX,GPS_PIN_RX,GPS_PIN_SHUTDOWN);
 #endif
 
 #ifdef ADT7410_ENABLED

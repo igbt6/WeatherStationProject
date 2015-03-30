@@ -4,8 +4,9 @@
 
 
 
-GTS4E60::GTS4E60(PinName tx, PinName rx) : mGpsSerial(tx,rx)
+GTS4E60::GTS4E60(PinName tx, PinName rx, PinName shutdownPin) : mGpsSerial(tx,rx),mShutdownPin(shutdownPin)
 {
+    mShutdownPin =0;
     mGpsSerial.baud(GTS4E60_SERIAL_DEFAULT_BAUD );
     init();
 }
