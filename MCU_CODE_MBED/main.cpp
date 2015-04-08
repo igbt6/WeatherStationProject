@@ -18,8 +18,9 @@ static void timerCounter(void const *arg)
 
 
 /////////////////////// MAIN APPLICATION ////////////////////////////////////////////////////////
-
+/*
 SENSORS sensors;
+
 void SensorsMeasurementFuncWrapper(void const* args)
 {
     sensors.measurement(args);
@@ -47,9 +48,9 @@ int main()
     }
     return 0;
 }
+*/
 
 
-/*
 ///////////////////////GPS TESTS////////////////////////////////////////////////////////
 
 
@@ -59,7 +60,7 @@ int main()
 #define GPS_PIN_TX  PTE16
 int main()
 {
-    GTS4E60 gps(GPS_PIN_TX,GPS_PIN_RX);
+    GTS4E60 gps(GPS_PIN_TX,GPS_PIN_RX,GPS_PIN_SHUTDOWN);
     Serial debug(USBTX, USBRX);
     debug.baud(115200);
     while(1) {
@@ -78,7 +79,7 @@ int main()
     }
     return 0;
 }
-*/
+
 
 
 

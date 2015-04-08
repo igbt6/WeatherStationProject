@@ -2,6 +2,7 @@
 //
 // Copyright (C) 2011 Mike McCauley
 // $Id: RF22.cpp,v 1.17 2013/02/06 21:33:56 mikem Exp mikem $
+// modified by Lukasz Uszko luszko@op.pl
 // ported to mbed by Karl Zweimueller
 
 
