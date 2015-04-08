@@ -9952,7 +9952,7 @@ grid 5.08 mm</description>
 <text x="86.36" y="167.64" size="1.778" layer="92">burza
 </text>
 <text x="-48.26" y="203.2" size="1.778" layer="92">ciśnienie</text>
-<text x="-129.54" y="121.92" size="1.778" layer="92">radio</text>
+<text x="-132.08" y="124.46" size="1.778" layer="92">radio</text>
 <text x="-106.68" y="98.044" size="1.778" layer="91">TX
 GND
 GPIO0
@@ -10207,21 +10207,8 @@ GND</text>
 <wire x1="-10.16" y1="101.6" x2="-10.16" y2="124.46" width="0.1524" layer="91"/>
 <pinref part="U$2" gate="G$1" pin="RXD"/>
 <wire x1="-10.16" y1="124.46" x2="-22.86" y2="124.46" width="0.1524" layer="91"/>
-<wire x1="-10.16" y1="101.6" x2="2.54" y2="101.6" width="0.1524" layer="91"/>
-<wire x1="2.54" y1="101.6" x2="5.08" y2="99.06" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="PTE17"/>
-<wire x1="5.08" y1="99.06" x2="25.4" y2="99.06" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$2" class="0">
-<segment>
-<wire x1="-12.7" y1="99.06" x2="-12.7" y2="121.92" width="0.1524" layer="91"/>
-<pinref part="U$2" gate="G$1" pin="TXD"/>
-<wire x1="-12.7" y1="121.92" x2="-22.86" y2="121.92" width="0.1524" layer="91"/>
+<wire x1="-10.16" y1="101.6" x2="25.4" y2="101.6" width="0.1524" layer="91"/>
 <pinref part="U$1" gate="G$1" pin="PTE16"/>
-<wire x1="25.4" y1="101.6" x2="5.08" y2="101.6" width="0.1524" layer="91"/>
-<wire x1="5.08" y1="101.6" x2="2.54" y2="99.06" width="0.1524" layer="91"/>
-<wire x1="2.54" y1="99.06" x2="-12.7" y2="99.06" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$4" class="0">
@@ -10629,6 +10616,15 @@ GND</text>
 <wire x1="66.04" y1="76.2" x2="66.04" y2="101.6" width="0.1524" layer="91"/>
 <pinref part="U$1" gate="G$1" pin="PTB9"/>
 <wire x1="66.04" y1="101.6" x2="76.2" y2="101.6" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$27" class="0">
+<segment>
+<pinref part="U$1" gate="G$1" pin="PTE17"/>
+<wire x1="-12.7" y1="99.06" x2="-12.7" y2="121.92" width="0.1524" layer="91"/>
+<pinref part="U$2" gate="G$1" pin="TXD"/>
+<wire x1="-12.7" y1="121.92" x2="-22.86" y2="121.92" width="0.1524" layer="91"/>
+<wire x1="25.4" y1="99.06" x2="-12.7" y2="99.06" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>

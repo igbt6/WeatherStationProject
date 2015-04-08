@@ -238,7 +238,7 @@
 <instances>
 <instance part="PAD1" gate="P" x="25.4" y="50.8"/>
 <instance part="PAD2" gate="P" x="25.4" y="48.26"/>
-<instance part="PAD3" gate="P" x="22.86" y="45.72"/>
+<instance part="PAD3" gate="P" x="25.4" y="45.72"/>
 <instance part="PAD4" gate="P" x="25.4" y="40.64"/>
 <instance part="PAD5" gate="P" x="25.4" y="38.1"/>
 <instance part="PAD6" gate="P" x="25.4" y="35.56"/>
@@ -255,7 +255,7 @@
 <net name="N$3" class="0">
 <segment>
 <pinref part="PAD3" gate="P" pin="P"/>
-<wire x1="25.4" y1="45.72" x2="33.02" y2="45.72" width="0.1524" layer="91"/>
+<wire x1="27.94" y1="45.72" x2="33.02" y2="45.72" width="0.1524" layer="91"/>
 <pinref part="U$1" gate="G$1" pin="GND"/>
 </segment>
 </net>
