@@ -188,7 +188,7 @@ clean:
 
 post-build:
 	-C:/TI/Energia/energia-0101E0014/hardware/tools/lm4f/bin/arm-none-eabi-objcopy -O binary WeatherStationWIFI.out WeatherStationWIFI.bin
-	-C:/TI/Energia/energia-0101E0014/hardware/tools/lm4f/bin/arm-none-eabi-siz.exe binary WeatherStationWIFI.out WeatherStationWIFI.bin
+	-C:/TI/Energia/energia-0101E0014/hardware/tools/lm4f/bin/arm-none-eabi-size.exe  WeatherStationWIFI.out
 	-@echo ' '
 
 .PHONY: all clean dependents

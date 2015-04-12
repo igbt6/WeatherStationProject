@@ -18,7 +18,7 @@ static void timerCounter(void const *arg)
 
 
 /////////////////////// MAIN APPLICATION ////////////////////////////////////////////////////////
-/*
+
 SENSORS sensors;
 
 void SensorsMeasurementFuncWrapper(void const* args)
@@ -48,11 +48,11 @@ int main()
     }
     return 0;
 }
-*/
+
 
 
 ///////////////////////GPS TESTS////////////////////////////////////////////////////////
-
+/*
 
 #include "mbed.h"
 #include "gts4E60.h"
@@ -63,6 +63,7 @@ int main()
     GTS4E60 gps(GPS_PIN_TX,GPS_PIN_RX,GPS_PIN_SHUTDOWN);
     Serial debug(USBTX, USBRX);
     debug.baud(115200);
+    debug.printf("hello world");
     while(1) {
         if(gps.isDataAvailable()) {
             if(gps.parseData()) {
@@ -76,13 +77,15 @@ int main()
                 debug.printf("NO GPS FIX FOUND\r\n");
             }
         }
+        else {debug.printf("No Gps data available\r\n "); 
+        wait_ms(500);}
     }
     return 0;
 }
 
 
 
-
+*/
 
 /////////////////////// RFM23 MODULES TESTS////////////////////////////////////////////////////////
 

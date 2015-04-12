@@ -62,7 +62,7 @@
 #define RFM_PIN_nIRQ  PTA6    //(as IRQ)
 #define RFM_PIN_SDN   PTB9
 
-#define CLIENT_ADDRESS 1
+#define STATION_ADDRESS 1
 #define SERVER_ADDRESS 2
 
 

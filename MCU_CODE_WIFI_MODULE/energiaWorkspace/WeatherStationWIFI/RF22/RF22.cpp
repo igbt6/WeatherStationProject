@@ -100,7 +100,6 @@ boolean RF22::init()
     // Get the device type and check it
     // This also tests whether we are really connected to a device
     _deviceType = spiRead(RF22_REG_00_DEVICE_TYPE);
-    Serial.println("BEFOREINITIIIIIIIIIIIIIIIIIIIIIIIIIII");
     if (   _deviceType != RF22_DEVICE_TYPE_RX_TRX
         && _deviceType != RF22_DEVICE_TYPE_TX){
 	Serial.println("Device Type =" );
@@ -108,7 +107,6 @@ boolean RF22::init()
     return false;
 
     }
-   Serial.println("AFTERINITIIIIIIIIIIIIIIIIIIIIIIIIIII");
     // Set up interrupt handler
     // Use FALLING instead of LOW for Uno32 compatibility, where LOW is not implemented
    // if (_interrupt == 0)

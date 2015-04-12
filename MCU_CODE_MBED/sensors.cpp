@@ -42,7 +42,7 @@ SENSORS::SENSORS():usbDebug(USBTX, USBRX)
 #endif
 
 #ifdef RFM23_ENABLED
-    rfm23b =new RF22ReliableDatagram(CLIENT_ADDRESS,RFM_PIN_nSEL, RFM_PIN_SDI ,RFM_PIN_SDO,RFM_PIN_SCLK,RFM_PIN_nIRQ,RFM_PIN_SDN  );
+    rfm23b =new RF22ReliableDatagram(STATION_ADDRESS,RFM_PIN_nSEL, RFM_PIN_SDI ,RFM_PIN_SDO,RFM_PIN_SCLK,RFM_PIN_nIRQ,RFM_PIN_SDN  );
     if(!rfm23b->init()) {
         usbDebug.printf("rfm23b init failed");
         while(1);
@@ -256,24 +256,21 @@ void SENSORS::waitForEvents(void const*args)
 
 
 #ifdef RFM23_ENABLED
-        uint8_t data[] = "HelloWorld!";
+        uint8_t data[] = "METEO_DATA";
         uint8_t buf[20];
-        // Send a message to rf23_server
-        usbDebug.printf("Sending to rf23_datagram_server\r\n");
-        if (!rfm23b->sendtoWait(data, sizeof(data), SERVER_ADDRESS))
-            usbDebug.printf("Sending failed....\r\n");
-        else {
             uint8_t len = sizeof(buf);
             uint8_t from;
-            if (rfm23b->recvfromAckTimeout(buf, &len,1000, &from)) {
+        
+        if (rfm23b->recvfromAck(buf, &len, &from)) {
                 usbDebug.printf("got request from : 0x%x",from);
                 usbDebug.printf(": ");
                 usbDebug.printf((char*)buf);
-                // Send a reply back to the originator client
+                // Send a reply to wifi module
+                if (!rfm23b->sendtoWait(data, sizeof(data), from))
+                    usbDebug.printf("sendtoWait failed"); 
+        }  
+        
 
-            } else
-                usbDebug.printf("No reply, is rf22_datagram_server running?\n");
-        }
 #endif
     Thread::wait(200);
     }
