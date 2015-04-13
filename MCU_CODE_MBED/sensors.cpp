@@ -1,5 +1,7 @@
 
 #include "sensors.h"
+#include "MbedJSONValue.h"
+
 
 /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// ///////////////////////////////////////////////
 
@@ -44,10 +46,10 @@ SENSORS::SENSORS():usbDebug(USBTX, USBRX)
 #ifdef RFM23_ENABLED
     rfm23b =new RF22ReliableDatagram(STATION_ADDRESS,RFM_PIN_nSEL, RFM_PIN_SDI ,RFM_PIN_SDO,RFM_PIN_SCLK,RFM_PIN_nIRQ,RFM_PIN_SDN  );
     if(!rfm23b->init()) {
-        usbDebug.printf("rfm23b init failed");
+        DEBUG("rfm23b init failed");
         while(1);
     } else
-        usbDebug.printf("rfm23b init succes");
+        DEBUG("rfm23b init succes");
 #endif
 
 }
@@ -85,60 +87,60 @@ void SENSORS:: measurement (void const* args)
             }
             uint8_t ret= gps->parseData(lastReadGpsParam);
             if(ret==ERROR) {
-                usbDebug.printf("ERROR INCORRECT DATA\r\n");
+                DEBUG("ERROR INCORRECT DATA\r\n");
             } else if(ret==NO_FIX_FOUND) {
-                usbDebug.printf("NO GPS FIX FOUND\r\n");
+                DEBUG("NO GPS FIX FOUND\r\n");
             } else if(ret==NO_SATELLITES) {
-                usbDebug.printf("NO SATELLITES FOUND\r\n");
+                DEBUG("NO SATELLITES FOUND\r\n");
             } else if(ret==INVALID_STATUS) {
-                usbDebug.printf("STATUS INVALID\r\n");
+                DEBUG("STATUS INVALID\r\n");
             } else {
                 struct UTC_Time utcTime= gps->getTime();
                 struct Date date= gps->getDate();
-                usbDebug.printf("GPS_UTC_TIME: %02d:%02d:%02.3f\r\n",utcTime.hours, utcTime.minutes, utcTime.seconds);
-                usbDebug.printf("GPS_DATE: %02d.%02d.%02d\r\n", date.day, date.month, date.year);
-                usbDebug.printf("GPS_DATA: fixtype: %d, satelites: %d, altitude: %f, speed: %f, heading: %f\r\n",gps->getFixType(), gps->getSatellites(), gps->getAltitude(), gps->getSpeedKm(), gps->getHeading());
-                usbDebug.printf("GPS_DATA: status: %c, latitude: %f, ns :%c, longitude: %f, ew: %c\r\n",gps->getStatus(), gps->getLatitude(), gps->getNS(), gps->getLongitude(), gps->getEW());
+                DEBUG("GPS_UTC_TIME: %02d:%02d:%02.3f\r\n",utcTime.hours, utcTime.minutes, utcTime.seconds);
+                DEBUG("GPS_DATE: %02d.%02d.%02d\r\n", date.day, date.month, date.year);
+                DEBUG("GPS_DATA: fixtype: %d, satelites: %d, altitude: %f, speed: %f, heading: %f\r\n",gps->getFixType(), gps->getSatellites(), gps->getAltitude(), gps->getSpeedKm(), gps->getHeading());
+                DEBUG("GPS_DATA: status: %c, latitude: %f, ns :%c, longitude: %f, ew: %c\r\n",gps->getStatus(), gps->getLatitude(), gps->getNS(), gps->getLongitude(), gps->getEW());
             }
         }
 #endif
 
 
 #ifdef BMP180_ENABLED
-        if (!bmp180->readData()) usbDebug.printf("BMP180_DATA_Reading Fuck UP\r\n");
+        if (!bmp180->readData()) DEBUG("BMP180_DATA_Reading Fuck UP\r\n");
 
 #endif
 
 #ifdef MAX9611_ENABLED
-        if(!max9611->readCSAOutputValue())  usbDebug.printf("MAX9611_CSA_Reading Fuck UP\r\n");
+        if(!max9611->readCSAOutputValue())  DEBUG("MAX9611_CSA_Reading Fuck UP\r\n");
 #endif
 
 #ifdef SI7020_ENABLED
 
-        if(!si7020->readTemp())  usbDebug.printf("SI7020_TEMP_READ Fuck UP \r\n");
-        if(!si7020->readHumidity())  usbDebug.printf("SI7020_HUMIDREAD Fuck UP \r\n");
+        if(!si7020->readTemp())  DEBUG("SI7020_TEMP_READ Fuck UP \r\n");
+        if(!si7020->readHumidity())  DEBUG("SI7020_HUMIDREAD Fuck UP \r\n");
 
 #endif
 
 #ifdef ADT7410_ENABLED
 
         if(!adt7410->readTemp()) {
-            usbDebug.printf("ADT7410_TEMP_READ Fuck UP \r\n");
+            DEBUG("ADT7410_TEMP_READ Fuck UP \r\n");
         }
 #endif
 
 
 
 #ifdef MAX44009_ENABLED
-        if(!max44009->readLuxIntensity())usbDebug.printf("MAX44009_LUX_READ Fuck UP \r\n");
+        if(!max44009->readLuxIntensity())DEBUG("MAX44009_LUX_READ Fuck UP \r\n");
 
 #endif
 
 #ifdef DS2782_ENABLED
-        if(!ds2782->readTemperature())  usbDebug.printf("DS2782_TEMP_READ Fuck UP \r\n");
-        //else usbDebug.printf("DS2782_TEMP_READ  Fucking OK!\r\n");
-        if(!ds2782->readCurrent())  usbDebug.printf("DS2782_CURRENT_READ Fuck UP \r\n");
-        if(!ds2782->readVoltage())  usbDebug.printf("DS2782_VOLTAGE_READ Fuck UP \r\n");
+        if(!ds2782->readTemperature())  DEBUG("DS2782_TEMP_READ Fuck UP \r\n");
+        //else DEBUG("DS2782_TEMP_READ  Fucking OK!\r\n");
+        if(!ds2782->readCurrent())  DEBUG("DS2782_CURRENT_READ Fuck UP \r\n");
+        if(!ds2782->readVoltage())  DEBUG("DS2782_VOLTAGE_READ Fuck UP \r\n");
 
 #endif
 
@@ -163,48 +165,48 @@ void SENSORS::getResults (void const* args)
 
 #ifdef BMP180_ENABLED
         if(bmp180->getPressure()!=-999&&bmp180->getTemperature()!=-999)
-            usbDebug.printf("BMP180_PRESSURE: %5.2f [hPa]\r\nBMP180_TEMPERATURE: %5.2f [C]\r\n", bmp180->getPressure(), bmp180->getTemperature());
+            DEBUG("BMP180_PRESSURE: %5.2f [hPa]\r\nBMP180_TEMPERATURE: %5.2f [C]\r\n", bmp180->getPressure(), bmp180->getTemperature());
         else
-            usbDebug.printf("BMP180_ERROR\r\n");
+            DEBUG("BMP180_ERROR\r\n");
 #endif
 
 #ifdef MAX9611_ENABLED
-        //usbDebug.printf("MAX9611_Temperature[C]:   %5.2f\r\n", max9611->getTemp());
-        usbDebug.printf("MAX9611_CSA  %5.2f [mA]\r\n", max9611->getCSAOutput());
-        //usbDebug.printf("MAX9611_CSA_RAW:   0x%04x\r\n", max9611->mRawInt);
+        //DEBUG("MAX9611_Temperature[C]:   %5.2f\r\n", max9611->getTemp());
+        DEBUG("MAX9611_CSA  %5.2f [mA]\r\n", max9611->getCSAOutput());
+        //DEBUG("MAX9611_CSA_RAW:   0x%04x\r\n", max9611->mRawInt);
 #endif
 
 #ifdef SI7020_ENABLED
-        usbDebug.printf("SI7020_TEMPERATURE: %3.2f [C]\r\n", si7020->getTemp());
-        usbDebug.printf("SI7020_HUMIDITY: %3.2f ['/.]\r\n", si7020->getHumidity());
+        DEBUG("SI7020_TEMPERATURE: %3.2f [C]\r\n", si7020->getTemp());
+        DEBUG("SI7020_HUMIDITY: %3.2f ['/.]\r\n", si7020->getHumidity());
 #endif
 
 
 #ifdef DS2782_ENABLED
-        usbDebug.printf("DS2782_TEMP: %3.2f [C]\r\n", ds2782->getTemperature());
-        usbDebug.printf("DS2782_CURRENT: %3.2f [mA]\r\n", ds2782->getCurrent());
-        usbDebug.printf("DS2782_VOLTAGE=: %3.2f [mV]\r\n", ds2782->getVoltage());
-        usbDebug.printf("DS2782_ACR: %3.2f [uV]\r\n", ds2782->readAcrReg());
-        usbDebug.printf("DS2782_RARC: %3d [./']\r\n", ds2782->readRarcReg());
-        //usbDebug.printf("DS2782_STATUS= 0x%02d \r\n", ds2782->readStatusReg());
+        DEBUG("DS2782_TEMP: %3.2f [C]\r\n", ds2782->getTemperature());
+        DEBUG("DS2782_CURRENT: %3.2f [mA]\r\n", ds2782->getCurrent());
+        DEBUG("DS2782_VOLTAGE=: %3.2f [mV]\r\n", ds2782->getVoltage());
+        DEBUG("DS2782_ACR: %3.2f [uV]\r\n", ds2782->readAcrReg());
+         DEBUG("DS2782_RARC: %3d [./']\r\n", ds2782->readRarcReg());
+        //DEBUG("DS2782_STATUS= 0x%02d \r\n", ds2782->readStatusReg());
         uint8_t statusReg = ds2782->readStatusReg();
-        usbDebug.printf("DS2782_STATUS: 0x%02x \r\n", statusReg);
+        DEBUG("DS2782_STATUS: 0x%02x \r\n", statusReg);
         if(statusReg & DS2782::LEARNF)
-            usbDebug.printf("LEARNF flag is SET\r\n");
+             DEBUG("LEARNF flag is SET\r\n");
         else
-            usbDebug.printf("LEARNF flag is NOT SET\r\n");
+             DEBUG("LEARNF flag is NOT SET\r\n");
         if(statusReg & DS2782::SEF)
-            usbDebug.printf("SEF flag is SET\r\n");
+             DEBUG("SEF flag is SET\r\n");
         else
-            usbDebug.printf("SEF flag is NOT SET\r\n");
+            DEBUG("SEF flag is NOT SET\r\n");
         if(statusReg & DS2782::AEF)
-            usbDebug.printf("AEF flag is SET\r\n");
+             DEBUG("AEF flag is SET\r\n");
         else
-            usbDebug.printf("AEF flag is NOT SET\r\n");
+            DEBUG("AEF flag is NOT SET\r\n");
         if(statusReg & DS2782::CHGTF)
-            usbDebug.printf("CHGTF flag is SET\r\n");
+             DEBUG("CHGTF flag is SET\r\n");
         else
-            usbDebug.printf("CHGTF flag is NOT SET\r\n");
+             DEBUG("CHGTF flag is NOT SET\r\n");
 
 #endif
 
@@ -213,9 +215,9 @@ void SENSORS::getResults (void const* args)
 #ifdef ADT7410_ENABLED
 
         if(adt7410->getTemperature()!=-999)
-            usbDebug.printf("ADT7410_TEMPERATURE: %5.2f [C]\r\n", adt7410->getTemperature());
+            DEBUG("ADT7410_TEMPERATURE: %5.2f [C]\r\n", adt7410->getTemperature());
         else
-            usbDebug.printf("ADT7410_ERROR\r\n");
+            DEBUG("ADT7410_ERROR\r\n");
 
 #endif
 
@@ -224,13 +226,13 @@ void SENSORS::getResults (void const* args)
 #ifdef MAX44009_ENABLED
 
         if(max44009->getLuxIntensity()!=-999)
-            usbDebug.printf("MAX44009_LUX_INTESITY: %5.2f [lx]\r\n\n",max44009->getLuxIntensity());
+            DEBUG("MAX44009_LUX_INTESITY: %5.2f [lx]\r\n\n",max44009->getLuxIntensity());
         else
-            usbDebug.printf("MAX44009_ERROR\r\n\n");
+            DEBUG("MAX44009_ERROR\r\n\n");
 #endif
 
 #endif
-        // usbDebug.printf("TEST_STRING_1_2_3_4_5_6_7_8_9_10_A_B_C_D_E_F_G_H_I_J_K_L_M_N_O_P_Q_R_S_T_U_V_X_Y_Z\r\n");
+        // DEBUG("TEST_STRING_1_2_3_4_5_6_7_8_9_10_A_B_C_D_E_F_G_H_I_J_K_L_M_N_O_P_Q_R_S_T_U_V_X_Y_Z\r\n");
         Thread::wait(1500);
     }
 }
@@ -247,33 +249,75 @@ void SENSORS::waitForEvents(void const*args)
         if(as3935Event.status==osEventMessage) {
 
             uint8_t *distance = (uint8_t*)as3935Event.value.p;
-            usbDebug.printf("AS3935_DISTANCE: %3d\r\n",distance);
+            DEBUG("AS3935_DISTANCE: %3d\r\n",distance);
         } else {
-            usbDebug.printf("AS3935 NO phenomenon occured");
+            DEBUG("AS3935 NO phenomenon occured");
         }
-        // usbDebug.printf("AS3935_DISTANCE: %d \r\n", as3935->getLightningDistanceKm());
+        // DEBUG("AS3935_DISTANCE: %d \r\n", as3935->getLightningDistanceKm());
 #endif
 
 
 #ifdef RFM23_ENABLED
         uint8_t data[] = "METEO_DATA";
         uint8_t buf[20];
-            uint8_t len = sizeof(buf);
-            uint8_t from;
-        
+        uint8_t len = sizeof(buf);
+        uint8_t from;
+
         if (rfm23b->recvfromAck(buf, &len, &from)) {
-                usbDebug.printf("got request from : 0x%x",from);
-                usbDebug.printf(": ");
-                usbDebug.printf((char*)buf);
-                // Send a reply to wifi module
-                if (!rfm23b->sendtoWait(data, sizeof(data), from))
-                    usbDebug.printf("sendtoWait failed"); 
-        }  
-        
+            DEBUG("got request from : 0x%x",from);
+            DEBUG(": ");
+            DEBUG((char*)buf);
+            // Send a reply to wifi module
+            DEBUG(serializeDataPacket().c_str());
+            if (!rfm23b->sendtoWait(data, sizeof(data), from))
+                DEBUG("sendtoWait failed");
+        }
+
 
 #endif
-    Thread::wait(200);
+        Thread::wait(200);
+        
     }
 }
 
 
+
+
+
+std::string SENSORS:: serializeDataPacket(void)
+{
+
+    MbedJSONValue meteoData;
+    std::string s;
+
+#ifdef SI7020_ENABLED
+        meteoData["HUM"]=si7020->getHumidity();
+#endif
+
+#ifdef AS3935_ENABLED
+
+#endif
+#ifdef DS2782_ENABLED
+        meteoData["BAT_C"][0]=ds2782->getCurrent();
+        meteoData["BAT_V"][1]= ds2782->getVoltage();
+#endif
+#ifdef MAX9611_ENABLED
+        meteoData["CUR"] =max9611->getCSAOutput();
+#endif
+#ifdef BMP180_ENABLED
+        meteoData["PRE"]= bmp180->getPressure(); 
+#endif
+#ifdef ADT7410_ENABLED
+        meteoData["TEM"]=adt7410->getTemperature();
+
+#endif
+#ifdef MAX44009_ENABLED
+        meteoData["LHT"]=max44009->getLuxIntensity();
+#endif
+#ifdef GPS_ENABLED
+
+#endif
+
+ return meteoData.serialize();
+
+}

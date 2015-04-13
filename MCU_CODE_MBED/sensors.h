@@ -1,5 +1,5 @@
 #include "mbed.h"
-
+#include <string>
 #include "rtos.h"
 #include "USBSerial.h"
 #include "BufferedSerial.h"
@@ -15,6 +15,8 @@
 #define NR_OF_THREADS 3
 #define USB_DEBUG
 
+#define DEBUG_ENABLED 1
+#define DEBUG(...) do{if(DEBUG_ENABLED) usbDebug.printf(__VA_ARGS__);} while(0)
 
 #define SI7020_ENABLED
 #define AS3935_ENABLEDx
@@ -96,5 +98,7 @@ private:
 //USBSerial usbDebug;
 Serial usbDebug;
 
+void debugPrint(const char* format,...);
+std::string serializeDataPacket(void);
     
 };
