@@ -5,6 +5,12 @@
 #include "CC3000/WiFi.h"
 #include "CC3000/WiFiUdp.h"
 #include "RF22/RF22ReliableDatagram.h"
+#include <driverlib/timer.h>
+#include <driverlib/sysctl.h>
+#include <driverlib/interrupt.h>
+#include <driverlib/rom.h>
+#include <driverlib/rom_map.h>
+#include <inc/hw_ints.h>
 
 void setup();
 void loop();
@@ -15,15 +21,63 @@ void loop();
 #define RFM23B_SHUTDOWN_PIN PE_2
 #define RFM23B_INTERRUPT_PIN PE_3
 
+static volatile uint32_t timer0Counter = 0;
+//private functions
+
+static void initTimer0(void) {
+	SysCtlPeripheralEnable (SYSCTL_PERIPH_TIMER0);
+	TimerConfigure(TIMER0_BASE, TIMER_CFG_SPLIT_PAIR | TIMER_CFG_B_PERIODIC_UP);
+	TimerPrescaleSet(TIMER0_BASE, TIMER_B, 8000);
+	// Set the Timer0B load value to 1ms.
+	TimerLoadSet(TIMER0_BASE, TIMER_B, SysCtlClockGet()/1000);
+	// Enable processor interrupts.
+	IntMasterEnable();
+	// Configure the Timer0B interrupt for timer timeout.
+	TimerIntEnable(TIMER0_BASE, TIMER_TIMB_TIMEOUT);
+	// Enable the Timer0B interrupt on the processor (NVIC).
+	IntEnable (INT_TIMER0B);
+	// Initialize the interrupt counter.
+	timer0Counter = 0;
+	// Enable Timer0B.
+	TimerEnable(TIMER0_BASE, TIMER_B);
+	// Loop forever while the Timer0B runs.
+
+}
+
+//extern "C" void Timer0BIntHandler(void);
+extern "C" void Timer0BIntHandler(void) {
+	// Clear the timer interrupt flag.
+	TimerIntClear(TIMER0_BASE, TIMER_TIMB_TIMEOUT);
+	// Update the periodic interrupt counter.
+	timer0Counter++;
+	//if(timer0Counter>=1000){
+	Serial.print("INT");
+	timer0Counter=0;
+	//}
+	/*
+	 // Disable the Timer0B interrupt.
+	 IntDisable(INT_TIMER0B);
+	 // Turn off Timer0B interrupt.
+	 TimerIntDisable(TIMER0_BASE, TIMER_TIMB_TIMEOUT);
+	 // Clear any pending interrupt flag.
+	 TimerIntClear(TIMER0_BASE, TIMER_TIMB_TIMEOUT);
+	 */
+}
+
 // RELIABLE DATAGRAMMMMM
 RF22ReliableDatagram rfm23b(SERVER_ADDRESS, RFM23B_SLAVE_SELECT_PIN,
 RFM23B_SHUTDOWN_PIN, RFM23B_INTERRUPT_PIN);
 
 void setup() {
+    //  Run at system clock at 80MHz
+    //
+   SysCtlClockSet(SYSCTL_SYSDIV_2_5 | SYSCTL_USE_PLL | SYSCTL_OSC_MAIN |
+	                   SYSCTL_XTAL_16MHZ); //in wiring.c clock 80MHZ enabled
 	Serial.begin(115200);
 	if (!rfm23b.init())
 		Serial.println("RF22 init failed");
 	// Defaults after init are 434.0MHz, 0.05MHz AFC pull-in, modulation FSK_Rb2_4Fd36
+	initTimer0();
 }
 
 uint8_t data[] = "DATA";
@@ -35,7 +89,7 @@ void loop() {
 		// Wait for a message addressed to us from the client
 		uint8_t len = sizeof(buf);
 		uint8_t from;
-
+/*
 		if (!rfm23b.sendtoWait(data, sizeof(data), STATION_ADDRESS)) {
 			Serial.print("sending request to station failed...");
 		} else {
@@ -51,6 +105,7 @@ void loop() {
 						"No response from station, is station running?\n\n");
 			}
 		}
+		*/
 		delay(500);
 	}
 }
