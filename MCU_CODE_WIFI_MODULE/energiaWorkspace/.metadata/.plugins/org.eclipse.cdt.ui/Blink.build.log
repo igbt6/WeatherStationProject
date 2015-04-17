@@ -1,3 +1,0 @@
-Buildfile generation error occurred..
-Build-configuration 'com.ti.ccstudio.buildDefinitions.MSP430.Debug.1739707840' does not exist in the referenced project 'lpmsp430fr5739_core'. Use the 'Properties > Build > Dependencies' page to select an existing build-configuration.
-Build stopped..
