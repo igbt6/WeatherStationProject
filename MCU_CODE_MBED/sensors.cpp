@@ -262,14 +262,17 @@ void SENSORS::waitForEvents(void const*args)
         uint8_t buf[20];
         uint8_t len = sizeof(buf);
         uint8_t from;
+        std::string serializedData;
 
         if (rfm23b->recvfromAck(buf, &len, &from)) {
             DEBUG("got request from : 0x%x",from);
             DEBUG(": ");
-            DEBUG((char*)buf);
+            DEBUG("%s",(char*)buf);
             // Send a reply to wifi module
             DEBUG(serializeDataPacket().c_str());
-            if (!rfm23b->sendtoWait(data, sizeof(data), from))
+
+            serializedData = serializeDataPacket();
+            if (!rfm23b->sendtoWait((uint8_t*)serializedData.c_str(), serializedData.length(), from))
                 DEBUG("sendtoWait failed");
         }
 
@@ -288,7 +291,6 @@ std::string SENSORS:: serializeDataPacket(void)
 {
 
     MbedJSONValue meteoData;
-    std::string s;
 
 #ifdef SI7020_ENABLED
         meteoData["HUM"]=si7020->getHumidity();
@@ -317,6 +319,9 @@ std::string SENSORS:: serializeDataPacket(void)
 #ifdef GPS_ENABLED
 
 #endif
+
+
+   
 
  return meteoData.serialize();
 
