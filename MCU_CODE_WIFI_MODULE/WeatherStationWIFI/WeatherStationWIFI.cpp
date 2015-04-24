@@ -5,16 +5,19 @@
 #include "CC3000/WiFi.h"
 #include "CC3000/WiFiUdp.h"
 #include "RF22/RF22ReliableDatagram.h"
+#include "MbedJSONValue/MbedJSONValue.h"
 #include <driverlib/timer.h>
 #include <driverlib/sysctl.h>
 #include <driverlib/interrupt.h>
 #include <driverlib/rom.h>
 #include <driverlib/rom_map.h>
 #include <inc/hw_ints.h>
+#include <string.h>
+#include <string>
 
 void setup();
 void loop();
-////////////////////////////////////////RFM23B MODULE TESTS ///////////////////////////////////////////////////////
+
 #define STATION_ADDRESS 1
 #define SERVER_ADDRESS 2
 #define RFM23B_SLAVE_SELECT_PIN  PE_1
@@ -24,7 +27,9 @@ void loop();
 #define SET 1
 #define NOTSET 0
 
-/*
+#define CC3000_ENABLEDx
+
+/*////////////////////////////////////////RFM23B MODULE TESTS ///////////////////////////////////////////////////////
  static volatile uint32_t askStationFlag = 0;
  //private functions
 
@@ -295,8 +300,8 @@ static RF22ReliableDatagram* rfm23b;
 WiFiClient client;
 
 uint8_t data[] = "DATA_FROM_WIFI_MODULE";
-// Dont put this on the stack:
-uint8_t buf[30]; //RF22_MAX_MESSAGE_LEN
+// Dont put this on the stack better:
+uint8_t buf[RF22_MAX_MESSAGE_LEN];
 
 static void printWifiStatus() {
 	// print the SSID of the network you're attached to:
@@ -370,7 +375,7 @@ static void initTimer0(void) {
 
 void setup() {
 	//  Run at system clock at 80MHz
-   SysCtlClockSet(SYSCTL_SYSDIV_2_5 | SYSCTL_USE_PLL | SYSCTL_OSC_MAIN |
+	SysCtlClockSet(SYSCTL_SYSDIV_2_5 | SYSCTL_USE_PLL | SYSCTL_OSC_MAIN |
 	SYSCTL_XTAL_16MHZ); //in wiring.c clock 80MHZ enabled
 	Serial.begin(115200);
 	// attempt to connect to Wifi network:
@@ -381,11 +386,13 @@ void setup() {
 
 	// attempt to connect to Wifi network:
 	// smartConfig();
-
+#ifdef CC3000_ENABLED
 	Serial.print("Attempting to connect to SSID: ");
 	Serial.println(ssid);
 	// Connect to WPA/WPA2 network. Change this line if using open or WEP network:
+
 	WiFi.begin(ssid, pass);
+
 	Serial.println("Connected to wifi");
 	Serial.println("Waiting for DHCP address....");
 	// wait for 3 seconds for connection:
@@ -393,10 +400,11 @@ void setup() {
 	printWifiStatus();
 
 	delay(1000);
-	digitalWrite(PB_5,LOW);
+#endif
+	//digitalWrite(PB_5, LOW);
 	rfm23b = new RF22ReliableDatagram(SERVER_ADDRESS, RFM23B_SLAVE_SELECT_PIN,
 	RFM23B_SHUTDOWN_PIN, RFM23B_INTERRUPT_PIN);
-    //noInterrupts();
+	//noInterrupts();
 	if (!rfm23b->init()) { // Defaults after init are 434.0MHz, 0.05MHz AFC pull-in, modulation FSK_Rb2_4Fd36
 		Serial.println("RF23D init failed");
 		while (1)
@@ -407,53 +415,67 @@ void setup() {
 }
 
 void loop() {
-	while (1) {
-		if (askStationFlag == SET) {
-			// Wait for a message addressed to us from the client
-			uint8_t len = sizeof(buf);
-			uint8_t from;
-			// Turn off Timer0B interrupt.
-			TimerIntDisable(TIMER0_BASE, TIMER_TIMB_TIMEOUT);
-			// Clear any pending interrupt flag.
-			TimerIntClear(TIMER0_BASE, TIMER_TIMB_TIMEOUT);
-			IntDisable(INT_TIMER0B);
-			if (!rfm23b->sendtoWait(data, sizeof(data), STATION_ADDRESS)) {
-				Serial.print("sending request to station failed...");
-			} else {
-				if (rfm23b->recvfromAckTimeout(buf, &len, 1000, &from)) {
-					Serial.print("got data from Station : 0x");
-					Serial.print(from, HEX);
-					Serial.print(": ");
-					Serial.print((char*) buf);
-					Serial.print("\r\n");
-					httpRequest();
-					// if there are incoming bytes available
-					// from the server, read them and print them:
-					while (client.available()) {
-						char c = client.read();
-						Serial.write(c);
-					}
+	if (askStationFlag == SET) {
+		// Wait for a message addressed to us from the client
+		uint8_t len = sizeof(buf);
+		uint8_t from;
+		// Turn off Timer0B interrupt.
+		TimerIntDisable(TIMER0_BASE, TIMER_TIMB_TIMEOUT);
+		// Clear any pending interrupt flag.
+		TimerIntClear(TIMER0_BASE, TIMER_TIMB_TIMEOUT);
+		IntDisable(INT_TIMER0B);
+		if (!rfm23b->sendtoWait(data, sizeof(data), STATION_ADDRESS)) {
+			Serial.print("sending request to station failed...");
+		} else {
+			if (rfm23b->recvfromAckTimeout(buf, &len, 1000, &from)) {
+				Serial.print("got data from Station : 0x");
+				Serial.print(from, HEX);
+				Serial.print(": ");
+				Serial.print((char*) buf);
+				Serial.print("\r\n");
 
-					// if the server's disconnected, stop the client:
-					if (!client.connected()) {
-						Serial.println();
-						Serial.println("disconnecting from server.");
-						client.stop();
+				//MbedJSONValue *jsonDataObj = new MbedJSONValue();
+				/* MbedJSONValue jsonDataObj ;
+				 parse(jsonDataObj, (const char*)buf);
 
-					} else {
-						Serial.print(
-								"No response from station, is station running?\n\n");
-					}
+				 float humidity;
+				 float temp;
+				 float pressure;
+
+				  humidity = jsonDataObj["TEM"].get<double>();
+				  temp = jsonDataObj["HUM"].get<double>();
+				  pressure = jsonDataObj["TEM"].get<double>();
+				  */
+#ifdef CC3000_ENABLED
+				httpRequest();
+				// if there are incoming bytes available
+				// from the server, read them and print them:
+				while (client.available()) {
+					char c = client.read();
+					Serial.write(c);
 				}
-				TimerIntEnable(TIMER0_BASE, TIMER_TIMB_TIMEOUT);
-				// Enable Timer0B.
-				TimerEnable(TIMER0_BASE, TIMER_B);
-				IntEnable(INT_TIMER0B);
-				askStationFlag = NOTSET;
+
+				// if the server's disconnected, stop the client:
+				if (!client.connected()) {
+					Serial.println();
+					Serial.println("disconnecting from server.");
+					client.stop();
+				}
+#endif
+			} else {
+				Serial.print(
+						"No response from station, is station running?\n\n");
 			}
-			delay(500);
+
+			TimerIntEnable(TIMER0_BASE, TIMER_TIMB_TIMEOUT);
+			// Enable Timer0B.
+			TimerEnable(TIMER0_BASE, TIMER_B);
+			IntEnable(INT_TIMER0B);
+			askStationFlag = NOTSET;
 		}
+
 	}
+	//delay(3000);
 }
 
 //extern "C" void Timer0BIntHandler(void);
