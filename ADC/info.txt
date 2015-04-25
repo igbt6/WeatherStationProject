@@ -1,0 +1,14 @@
+LTC2460  --------   BORD
+
+SCK --->   SCK (PTD1)
+SDI ---> MOSI (PTD2)
+SDO ---> MISO (PTD3)
+/CS ---> PTD0
+
+
+
+dzielnik napiêcia rezystancje:
+
+GND---- 2180R ----- ADC-----6180R
+
+napiêcie referenyjne wewnêtrzne zajebiœcie dok³adne 1.25V. Dla naszego dzielnika bêdzie max scale dla ok. 5V
