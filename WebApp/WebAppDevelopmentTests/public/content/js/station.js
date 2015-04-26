@@ -26,7 +26,8 @@ function loadStationTemplate(stationData){
                 .always(function() {
                     console.log( "finished" );
                 });
-}
+} 
+
 
 */
 
@@ -73,7 +74,8 @@ $(function(){
                                 $(".menu-choser #charts-btn").click(function(){
                                     console.log("Charts Opened");
                                     $.get("/content/templates/charts.html",function(data){
-                                            $("#charts").replaceWith(data);
+                                           // $("#charts").replaceWith("<b></b>");
+                                            $(".tab-pane").html(data);
                                                                             $("#scripts").append(   '<script src="/flot/excanvas.min.js"></script>'+
                                                         '<script src="/flot/jquery.flot.js"></script>'+
                                                         '<script src="/flot/jquery.flot.pie.js"></script>'+
@@ -83,9 +85,21 @@ $(function(){
                                                         '<script src="/js/flot-data.js"></script>');
                                     });
                                  
-
                                 });
+                                
 
+
+
+
+                                $(".menu-choser #infodata-btn").click(function(){
+                                    //console.log("Charts Opened");
+                                    $.get("/content/templates/infodata.html",function(data){
+
+                                        //$("#data").replaceWith(data);
+                                         $(".tab-pane").html(data);
+
+                                    });
+                                });
 
 
                 })
