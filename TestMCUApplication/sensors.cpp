@@ -98,6 +98,10 @@ SENSORS::SENSORS():usbDebug(USBTX, USBRX),lcd(PTD7,PTE31,PTD6, PTC17,PTC16,PTC13
     ds2782= new DS2782( DS2782_PIN_SDA, DS2782_PIN_SCL);
 #endif
 
+#ifdef LTC2460_ENABLED
+    ltc2460= new LTC2460(LTC2460_PIN_CS,LTC2460_PIN_MOSI,LTC2460_PIN_MISO,LTC2460_PIN_SCK ,6180/2180); //our resistors in the divider are: GND---- 2180R ----- ADC-----6180R
+#endif
+
 
     msd = new  USBHostMSD("usb");
 #ifdef USB_DEBUG
@@ -155,6 +159,7 @@ SENSORS::~SENSORS()
     delete si7020;
     delete as3935;
     delete ds2782;
+    delete ltc2460;
 
 }
 
@@ -173,7 +178,7 @@ void SENSORS:: measurement (void const* args)
         //results.MAX4070chargerCurrent=max4070->getResult();
 
         max4070Voltage->readValueFromInput();
-        results.MAX4070chargerVoltage=max4070Voltage->getResult();
+       
 #endif
 #ifdef BMP180_ENABLED
         if (bmp180->ReadData( &results.BMP180temperature,&results.BMP180pressure)) {
@@ -218,6 +223,15 @@ void SENSORS:: measurement (void const* args)
         counter++;
         lcd.cls();
         //lcd.printf("%d[A]",counter);
+#ifdef MAX4070_ENABLED
+        lcd.printf("%3.2f[V]\n",  max4070Voltage->getResult());
+#endif
+
+#ifdef LTC2460_ENABLED
+    lcd.printf("%3.2f[V]\n", ltc2460->readVoltage());
+#endif
+
+
 #ifdef MAX9611_ENABLED
         lcd.printf("%3.2f[mA]", max9611->getCSAOutput());
 #endif
@@ -258,6 +272,11 @@ void SENSORS::getResults (void const* args)
         else
             usbDebug.printf("BMP180_ERROR\r\n");
 #endif
+
+#ifdef LTC2460_ENABLED
+    usbDebug.printf("%3.2f[V]\n", ltc2460->readVoltage());
+#endif
+
 
 #ifdef MAX9611_ENABLED
         //usbDebug.printf("MAX9611_Temperature[C]:   %5.2f\r\n", max9611->getTemp());
@@ -373,7 +392,7 @@ int SENSORS::saveDataToUSB(void const* args)
                 fileVoltage=fopen("/usb/Voltage.txt", "a");
             } else {
 #ifdef MAX4070_ENABLED
-                fprintf(fileVoltage,"%5.2f\r\n", max4070Voltage->getResult());
+                fprintf(fileVoltage,"%5.2f\r\n", /*max4070Voltage->getResult()*/ ltc2460->readVoltage());
 #endif
                 fclose(fileVoltage);
                 fileVoltage=NULL;
