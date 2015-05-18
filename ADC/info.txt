@@ -1,6 +1,6 @@
 LTC2460  --------   BORD
 
-SCK --->   SCK (PTD1)
+SCK ---> SCK (PTD1)
 SDI ---> MOSI (PTD2)
 SDO ---> MISO (PTD3)
 /CS ---> PTD0

@@ -4115,7 +4115,9 @@ DOUT
 CS
 GND
 </text>
-<text x="27.94" y="111.76" size="1.778" layer="92">RFM23</text>
+<text x="27.94" y="109.22" size="5.08" layer="92">RFM23</text>
+<text x="99.314" y="109.728" size="3.302" layer="92">CC3000 TEXAS WI-FI</text>
+<text x="25.4" y="25.4" size="3.556" layer="92">TI LAUNCHPAD</text>
 </plain>
 <instances>
 <instance part="A1" gate="G$1" x="27.94" y="43.18"/>
