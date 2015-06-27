@@ -105,10 +105,11 @@ typedef enum {
     GSV = 3,
     NR_OF_SUPPORTED_NMEA_SENTENCES,
     //parseData() return paramteters
-    ERROR =5,
+    INCORRECT_DATA =5,
     NO_FIX_FOUND= 6,
     NO_SATELLITES= 7,
-    INVALID_STATUS= 8
+    INVALID_STATUS= 8,
+    IDLE_STATE
 } GTS4E60_Utility;
 static const char* nmeaSentencesString[NR_OF_SUPPORTED_NMEA_SENTENCES]= {"GPGGA","GPGSA","GPRMC","GPGSV"};
 
@@ -152,9 +153,6 @@ public:
     void init();
     uint8_t parseData(uint8_t param =NULL);
     int isDataAvailable();
-    inline int getDataFromRx() {
-        return mGpsSerial.getc();
-    }
 
 //getters
     UTC_Time getTime();
@@ -173,12 +171,25 @@ public:
     char  getNS();
     char  getEW();
     float getHeading();
+    
+    inline int getDataFromRx() {
+        return mGpsSerial.getc();
+    }
+    
+    inline GTS4E60_Utility getStatusType(void){
+        return mStatus;
+    }
+    
+    inline void setStatusType(GTS4E60_Utility error){
+             mStatus=error;
+    }
 
 // navigational functions - maybe in future
     float calcCourseTo(float, float);
     double calcDistToKm(float, float);
     double calcDistToM(float, float);
 
+  
 
 private:
     // shutdown pin
@@ -219,6 +230,8 @@ private:
     //useful variables
     string mFix;
     string mCardinal;
+    
+    GTS4E60_Utility mStatus;
 
 };
 

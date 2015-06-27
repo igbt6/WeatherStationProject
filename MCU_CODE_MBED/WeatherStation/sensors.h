@@ -12,19 +12,19 @@
 #include "max44009.h"
 #include "gts4E60.h"  //gps module
 #include "RF22ReliableDatagram.h"
-#define NR_OF_THREADS 3
+#define NR_OF_THREADS 5
 #define USB_DEBUG
 
-#define DEBUG_ENABLED 1
+#define DEBUG_ENABLED 0
 #define DEBUG(...) do{if(DEBUG_ENABLED) usbDebug.printf(__VA_ARGS__);} while(0)
 
-#define SI7020_ENABLEDx
-#define AS3935_ENABLEDx
+#define SI7020_ENABLED
+#define AS3935_ENABLED
 #define DS2782_ENABLEDx
 #define MAX9611_ENABLEDx
-#define BMP180_ENABLEDx
-#define ADT7410_ENABLEDx
-#define MAX44009_ENABLEDx
+#define BMP180_ENABLED
+#define ADT7410_ENABLED
+#define MAX44009_ENABLED
 #define BTM222_ENABLEDx
 #define GPS_ENABLED
 #define RFM23_ENABLED
@@ -81,6 +81,8 @@ SENSORS();
  void measurement (void const* args);  
  void getResults (void const* args);  // get or print all results from the sensors 
  void waitForEvents(void const*args); // handle here all asynch events that come from irqs mainly
+ void gpsHandler(void const*args);  // thread that handles all data from gps
+ void radioHandler(void const*args);  // thread that handles all radio operations
 
     
 private:
@@ -93,7 +95,8 @@ private:
  MAX44009* max44009;
  GTS4E60 * gps;
  RF22ReliableDatagram *rfm23b;
- Mutex measPrintMutex;
+ Mutex gpsDataMutex;
+ Semaphore gpsSemphr;
 
 Serial usbDebug;
 

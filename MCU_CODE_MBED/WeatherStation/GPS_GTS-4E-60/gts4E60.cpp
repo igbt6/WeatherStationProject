@@ -124,6 +124,7 @@ void GTS4E60::init()
     mMsgNumber=0;
     mSatellitesInView=0;
     wait(1);
+    setStatusType(IDLE_STATE);
 }
 
 
@@ -135,7 +136,7 @@ int GTS4E60::isDataAvailable()
 
 uint8_t GTS4E60::parseData(uint8_t param)
 {
-    uint8_t retVal=ERROR;
+    uint8_t retVal=INCORRECT_DATA;
     if(param==NULL)
         readData();
     else

@@ -2,14 +2,15 @@
 #include "sensors.h"
 #include "MbedJSONValue.h"
 
+#define READ_GPS_DATA_SIG 0x02
 
 /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// /////////////////////////////////////////////// ///////////////////////////////////////////////
 //Serial SENSORS::usbDebug(USBTX, USBRX);
 
-SENSORS::SENSORS():usbDebug(USBTX, USBRX)
+SENSORS::SENSORS():usbDebug(USBTX, USBRX),gpsSemphr(2),gpsDataMutex()
 {
-    
-   usbDebug.baud(115200);
+
+    usbDebug.baud(115200);
 
 #ifdef GPS_ENABLED
     gps = new GTS4E60(GPS_PIN_TX,GPS_PIN_RX,GPS_PIN_SHUTDOWN);
@@ -37,7 +38,7 @@ SENSORS::SENSORS():usbDebug(USBTX, USBRX)
 #endif
 
 #ifdef AS3935_ENABLED
-     DEBUG(" AS3935 init.....\r\n");
+    DEBUG(" AS3935 init.....\r\n");
     as3935= new AS3935( AS3935_PIN_SDA, AS3935_PIN_SCL,AS3935_PIN_INTERRUPT);
     DEBUG(" AS3935 init FINISHED\r\n");
 #endif
@@ -77,37 +78,7 @@ SENSORS::~SENSORS()
 
 void SENSORS:: measurement (void const* args)
 {
-
-    static uint8_t lastReadGpsParam=GGA;
     while(1) {
-
-#ifdef GPS_ENABLED
-        if(gps->isDataAvailable()) {
-            if(lastReadGpsParam==RMC) { //i'll only read GGA and RMC nmea sentences
-                lastReadGpsParam=GGA;
-            } else {
-                lastReadGpsParam=RMC;
-            }
-            uint8_t ret= gps->parseData(lastReadGpsParam);
-            if(ret==ERROR) {
-                DEBUG("ERROR INCORRECT DATA\r\n");
-            } else if(ret==NO_FIX_FOUND) {
-                DEBUG("NO GPS FIX FOUND\r\n");
-            } else if(ret==NO_SATELLITES) {
-                DEBUG("NO SATELLITES FOUND\r\n");
-            } else if(ret==INVALID_STATUS) {
-                DEBUG("STATUS INVALID\r\n");
-            } else {
-                struct UTC_Time utcTime= gps->getTime();
-                struct Date date= gps->getDate();
-                DEBUG("GPS_UTC_TIME: %02d:%02d:%02.3f\r\n",utcTime.hours, utcTime.minutes, utcTime.seconds);
-                DEBUG("GPS_DATE: %02d.%02d.%02d\r\n", date.day, date.month, date.year);
-                DEBUG("GPS_DATA: fixtype: %d, satelites: %d, altitude: %f, speed: %f, heading: %f\r\n",gps->getFixType(), gps->getSatellites(), gps->getAltitude(), gps->getSpeedKm(), gps->getHeading());
-                DEBUG("GPS_DATA: status: %c, latitude: %f, ns :%c, longitude: %f, ew: %c\r\n",gps->getStatus(), gps->getLatitude(), gps->getNS(), gps->getLongitude(), gps->getEW());
-            }
-        }
-#endif
-
 
 #ifdef BMP180_ENABLED
         if (!bmp180->readData()) DEBUG("BMP180_DATA_Reading Fuck UP\r\n");
@@ -146,18 +117,185 @@ void SENSORS:: measurement (void const* args)
         if(!ds2782->readVoltage())  DEBUG("DS2782_VOLTAGE_READ Fuck UP \r\n");
 
 #endif
-
-
-
-        Thread::wait(2000);
+        Thread::wait(4000);
 
     }
+}
+
+void SENSORS::gpsHandler(void const*args){
+    
+    #ifdef GPS_ENABLED
+    static uint8_t lastReadGpsParam=GGA;
+    #endif
+    while(1) {
+       gpsDataMutex.lock();
+        #ifdef GPS_ENABLED
+       // if(gps->getStatusType()==IDLE_STATE){
+                int count =200;
+            while((--count)>0){
+                if(gps->isDataAvailable()) {
+                    if(lastReadGpsParam==RMC) { //i'll only read GGA and RMC nmea sentences
+                        lastReadGpsParam=GGA;
+                    } else {
+                        lastReadGpsParam=RMC;
+                    }
+                    uint8_t ret= gps->parseData();
+                    gps->setStatusType((GTS4E60_Utility)ret);
+                    if(ret==INCORRECT_DATA) {
+                        DEBUG("ERROR INCORRECT DATA\r\n");
+                        continue;
+                    } else if(ret==NO_FIX_FOUND) {
+                        DEBUG("NO GPS FIX FOUND\r\n");
+                    } else if(ret==NO_SATELLITES) {
+                        DEBUG("NO SATELLITES FOUND\r\n");
+                    } else if(ret==INVALID_STATUS) {
+                        DEBUG("STATUS INVALID\r\n");
+                    } else {
+                        struct UTC_Time utcTime= gps->getTime();
+                        struct Date date= gps->getDate();
+                        DEBUG("GPS_UTC_TIME: %02d:%02d:%02.3f\r\n",utcTime.hours, utcTime.minutes, utcTime.seconds);
+                        DEBUG("GPS_DATE: %02d.%02d.%02d\r\n", date.day, date.month, date.year);
+                        DEBUG("GPS_DATA: fixtype: %d, satelites: %d, altitude: %f, speed: %f, heading: %f\r\n",gps->getFixType(), gps->getSatellites(), gps->getAltitude(), gps->getSpeedKm(), gps->getHeading());
+                        DEBUG("GPS_DATA: status: %c, latitude: %f, ns :%c, longitude: %f, ew: %c\r\n",gps->getStatus(), gps->getLatitude(), gps->getNS(), gps->getLongitude(), gps->getEW());
+                    }
+                    break;
+                }
+                
+             
+         }
+#endif
+     gpsDataMutex.unlock();
+    Thread::wait(150);      
+    }    
 }
 
 
 
 
 
+
+
+
+
+void SENSORS::waitForEvents(void const*args)
+{
+    while(1) {
+#ifdef AS3935_ENABLED
+        osEvent as3935Event = as3935->checkQueueState();
+        if(as3935Event.status==osEventMessage) {
+
+            uint8_t *distance = (uint8_t*)as3935Event.value.p;
+            DEBUG("AS3935_DISTANCE: %d\r\n",distance);
+        } else {
+            DEBUG("AS3935 NO phenomenon occured");
+        }
+        // DEBUG("AS3935_DISTANCE: %d \r\n", as3935->getLightningDistanceKm());
+#endif
+        Thread::wait(500);
+    }
+}
+
+void SENSORS::radioHandler(void const*args)
+{
+
+#ifdef RFM23_ENABLED
+    uint8_t data[] = "METEO_DATA";
+    uint8_t buf[20];
+    uint8_t len = sizeof(buf);
+    uint8_t from;
+    std::string serializedData;
+    while(1) {
+        if (rfm23b->recvfromAck(buf, &len, &from)) {
+            DEBUG("got request from : 0x%x",from);
+            DEBUG(": ");
+            DEBUG("%s",(char*)buf);
+            // Send a reply to wifi module
+            DEBUG(serializeDataPacket().c_str());
+
+            serializedData = serializeDataPacket();
+            if (!rfm23b->sendtoWait((uint8_t*)serializedData.c_str(), serializedData.length(), from))
+                DEBUG("sendtoWait failed");
+        }
+#endif
+        Thread::wait(300);
+    }
+}
+
+
+
+std::string SENSORS:: serializeDataPacket(void)
+{
+
+    MbedJSONValue meteoData;
+
+#ifdef SI7020_ENABLED
+    meteoData["HUM"]=si7020->getHumidity();
+#endif
+
+#ifdef AS3935_ENABLED
+
+#endif
+#ifdef DS2782_ENABLED
+    meteoData["BAT_C"][0]=ds2782->getCurrent();
+    meteoData["BAT_V"][1]= ds2782->getVoltage();
+#endif
+#ifdef MAX9611_ENABLED
+    meteoData["CUR"] =max9611->getCSAOutput();
+#endif
+#ifdef BMP180_ENABLED
+    meteoData["PRE"]= bmp180->getPressure();
+#endif
+#ifdef ADT7410_ENABLED
+    meteoData["TEM"]=adt7410->getTemperature();
+
+#endif
+#ifdef MAX44009_ENABLED
+    meteoData["LHT"]=max44009->getLuxIntensity();
+#endif
+#ifdef GPS_ENABLED
+    GTS4E60_Utility status = gps->getStatusType();
+    if(status>=  GGA &&status<=GSV) {
+        struct UTC_Time utcTime= gps->getTime();
+        struct Date date= gps->getDate();
+        meteoData["GPS_E"]= status;
+        meteoData["GPS_T"][0]=utcTime.hours;
+        meteoData["GPS_T"][1]=utcTime.minutes;
+        meteoData["GPS_T"][2]=utcTime.minutes;
+        meteoData["GPS_D"][0]=date.day;
+        meteoData["GPS_D"][1]=date.month;
+        meteoData["GPS_D"][2]=date.year;
+        meteoData["GPS_P"][0]=gps->getAltitude();
+        meteoData["GPS_P"][1]=gps->getLatitude();
+        meteoData["GPS_P"][2]=gps->getLongitude();
+        meteoData["GPS_P"][3]=gps->getNS();
+        meteoData["GPS_P"][4]=gps->getEW();
+        gps->setStatusType(IDLE_STATE);
+    }
+    //else if(status>=INCORRECT_DATA &&status<NO_ERROR)
+    //    meteoData["GPS_E"]=status;
+    else 
+       meteoData["GPS_E"]=status;
+    
+
+#endif
+
+    return meteoData.serialize();
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////useful for debugging, prints all data////////////////////////////////////////////////////////////////////////////////////
 
 void SENSORS::getResults (void const* args)
 {
@@ -190,26 +328,26 @@ void SENSORS::getResults (void const* args)
         DEBUG("DS2782_CURRENT: %3.2f [mA]\r\n", ds2782->getCurrent());
         DEBUG("DS2782_VOLTAGE=: %3.2f [mV]\r\n", ds2782->getVoltage());
         DEBUG("DS2782_ACR: %3.2f [uV]\r\n", ds2782->readAcrReg());
-         DEBUG("DS2782_RARC: %3d [./']\r\n", ds2782->readRarcReg());
+        DEBUG("DS2782_RARC: %3d [./']\r\n", ds2782->readRarcReg());
         //DEBUG("DS2782_STATUS= 0x%02d \r\n", ds2782->readStatusReg());
         uint8_t statusReg = ds2782->readStatusReg();
         DEBUG("DS2782_STATUS: 0x%02x \r\n", statusReg);
         if(statusReg & DS2782::LEARNF)
-             DEBUG("LEARNF flag is SET\r\n");
+            DEBUG("LEARNF flag is SET\r\n");
         else
-             DEBUG("LEARNF flag is NOT SET\r\n");
+            DEBUG("LEARNF flag is NOT SET\r\n");
         if(statusReg & DS2782::SEF)
-             DEBUG("SEF flag is SET\r\n");
+            DEBUG("SEF flag is SET\r\n");
         else
             DEBUG("SEF flag is NOT SET\r\n");
         if(statusReg & DS2782::AEF)
-             DEBUG("AEF flag is SET\r\n");
+            DEBUG("AEF flag is SET\r\n");
         else
             DEBUG("AEF flag is NOT SET\r\n");
         if(statusReg & DS2782::CHGTF)
-             DEBUG("CHGTF flag is SET\r\n");
+            DEBUG("CHGTF flag is SET\r\n");
         else
-             DEBUG("CHGTF flag is NOT SET\r\n");
+            DEBUG("CHGTF flag is NOT SET\r\n");
 
 #endif
 
@@ -236,96 +374,6 @@ void SENSORS::getResults (void const* args)
 
 #endif
         // DEBUG("TEST_STRING_1_2_3_4_5_6_7_8_9_10_A_B_C_D_E_F_G_H_I_J_K_L_M_N_O_P_Q_R_S_T_U_V_X_Y_Z\r\n");
-        Thread::wait(1500);
+        Thread::wait(6666);
     }
-}
-
-
-
-
-
-void SENSORS::waitForEvents(void const*args)
-{
-    while(1) {
-#ifdef AS3935_ENABLED
-        osEvent as3935Event = as3935->checkQueueState();
-        if(as3935Event.status==osEventMessage) {
-
-            uint8_t *distance = (uint8_t*)as3935Event.value.p;
-            DEBUG("AS3935_DISTANCE: %d\r\n",distance);
-        } else {
-            DEBUG("AS3935 NO phenomenon occured");
-        }
-        // DEBUG("AS3935_DISTANCE: %d \r\n", as3935->getLightningDistanceKm());
-#endif
-
-
-#ifdef RFM23_ENABLED
-        uint8_t data[] = "METEO_DATA";
-        uint8_t buf[20];
-        uint8_t len = sizeof(buf);
-        uint8_t from;
-        std::string serializedData;
-
-        if (rfm23b->recvfromAck(buf, &len, &from)) {
-            DEBUG("got request from : 0x%x",from);
-            DEBUG(": ");
-            DEBUG("%s",(char*)buf);
-            // Send a reply to wifi module
-            DEBUG(serializeDataPacket().c_str());
-
-            serializedData = serializeDataPacket();
-            if (!rfm23b->sendtoWait((uint8_t*)serializedData.c_str(), serializedData.length(), from))
-                DEBUG("sendtoWait failed");
-        }
-
-
-#endif
-        Thread::wait(200);
-        
-    }
-}
-
-
-
-
-
-std::string SENSORS:: serializeDataPacket(void)
-{
-
-    MbedJSONValue meteoData;
-
-#ifdef SI7020_ENABLED
-        meteoData["HUM"]=si7020->getHumidity();
-#endif
-
-#ifdef AS3935_ENABLED
-
-#endif
-#ifdef DS2782_ENABLED
-        meteoData["BAT_C"][0]=ds2782->getCurrent();
-        meteoData["BAT_V"][1]= ds2782->getVoltage();
-#endif
-#ifdef MAX9611_ENABLED
-        meteoData["CUR"] =max9611->getCSAOutput();
-#endif
-#ifdef BMP180_ENABLED
-        meteoData["PRE"]= bmp180->getPressure(); 
-#endif
-#ifdef ADT7410_ENABLED
-        meteoData["TEM"]=adt7410->getTemperature();
-
-#endif
-#ifdef MAX44009_ENABLED
-        meteoData["LHT"]=max44009->getLuxIntensity();
-#endif
-#ifdef GPS_ENABLED
-
-#endif
-
-
-   
-
- return meteoData.serialize();
-
 }

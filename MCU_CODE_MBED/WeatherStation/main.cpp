@@ -15,24 +15,34 @@ static void timerCounter(void const *arg)
 }
 
 
-
+#if 10
 
 /////////////////////// MAIN APPLICATION ////////////////////////////////////////////////////////
 
 SENSORS sensors;
 
-void SensorsMeasurementFuncWrapper(void const* args)
+static void SensorsMeasurementFuncWrapper(void const* args)
 {
     sensors.measurement(args);
 }
-void SensorsPrintfDataFuncWrapper(void const* args)
+static void SensorsPrintfDataFuncWrapper(void const* args)
 {
     sensors.getResults(args);
 }
 
-void SensorsWaitAsyncEventsWrapper(void const* args)
+static void SensorsWaitAsyncEventsWrapper(void const* args)
 {
     sensors.waitForEvents(args);
+}
+
+static void SensorsGpsHandlerWrapper(void const* args)
+{
+    sensors.gpsHandler(args);
+}
+
+static void SensorsRadioHandlerWrapper(void const* args)
+{
+    sensors.radioHandler(args);
 }
 
 
@@ -40,20 +50,22 @@ void SensorsWaitAsyncEventsWrapper(void const* args)
 int main()
 {
     RtosTimer debugTimer(timerCounter, osTimerPeriodic, (void *)0);
-    Thread measThread(SensorsMeasurementFuncWrapper,NULL,osPriorityAboveNormal);
-    Thread printResultsThread(SensorsPrintfDataFuncWrapper,NULL,osPriorityNormal);
-    Thread waitForEventsThread(SensorsWaitAsyncEventsWrapper,NULL,osPriorityHigh);
-    debugTimer.start(1000);
+    Thread measThread(SensorsMeasurementFuncWrapper,NULL,osPriorityNormal);
+    //Thread printResultsThread(SensorsPrintfDataFuncWrapper,NULL,osPriorityBelowNormal);
+    Thread waitForEventsThread(SensorsWaitAsyncEventsWrapper,NULL,osPriorityAboveNormal);
+    Thread radioHandlerThread(SensorsRadioHandlerWrapper,NULL,osPriorityHigh);
+    Thread gpsHandlerThread(SensorsGpsHandlerWrapper,NULL,osPriorityHigh);
+    //debugTimer.start(1000);
     while(1) {
     }
     return 0;
 }
 
-
+#endif
 
 ///////////////////////GPS TESTS////////////////////////////////////////////////////////
 
-/*
+#if 0
 #include "mbed.h"
 #include "gts4E60.h"
 #define GPS_PIN_RX  PTE17    //UART2 on frdmkl46z
@@ -79,6 +91,8 @@ int main()
         }
         else {debug.printf("No Gps data available\r\n "); 
         wait_ms(500);}
+        
+        wait_ms(555);
     }
     return 0;
 }
@@ -86,7 +100,7 @@ int main()
 
 
 
-*/
+#endif
 /////////////////////// RFM23 MODULES TESTS////////////////////////////////////////////////////////
 
 
