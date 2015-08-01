@@ -92,29 +92,28 @@ int WiFiClass::begin(char* ssid, const char* pass)
 {
 	uint8_t status=0;
 	pio_init();
-	init_spi();
+	if(init_spi()!=ESUCCESS)
+		return -6;
 
 	ulCC3000WasConnected = 0;
 
 	wlan_init(CC3000_UsynchCallback, sendWLFWPatch, sendDriverPatch, sendBootLoaderPatch, ReadWlanInterruptPin, WlanInterruptEnable, WlanInterruptDisable, WriteWlanPin);
-
 	
 	wlan_start(0);
-
-	/* This will ensure that CC3000 does not attempt to connect to a previously configuration from SmartConfig session */
+	// This will ensure that CC3000 does not attempt to connect to a previously configuration from SmartConfig session
 	wlan_ioctl_set_connection_policy(DISABLE, DISABLE, DISABLE);
 
 	wlan_set_event_mask(HCI_EVNT_WLAN_KEEPALIVE|HCI_EVNT_WLAN_UNSOL_INIT|HCI_EVNT_WLAN_ASYNC_PING_REPORT);
 
 	init();
 
-	wlan_connect(WLAN_SEC_WPA2, ssid, strlen(ssid), NULL, (unsigned char *)pass, strlen((char *)(pass)));
+  /*  wlan_connect(WLAN_SEC_WPA2, ssid, strlen(ssid), NULL, (unsigned char *)pass, strlen((char *)(pass)));
 
 	while (ulCC3000Connected  == 0)
 	{
 		delay(100);
 	}
-
+*/
 	return status;
 }
 

@@ -404,8 +404,7 @@
 // Define this to include Serial printing in diagnostic routines
 #define RF22_HAVE_SERIAL
 
-#include "GenericSPI.h"
-#include "HardwareSPI.h"
+#include "../SPI/HardwareSPI.h"
 /////////////////////////////////////////////////////////////////////
 /// \class RF22 RF22.h <RF22.h>
 /// \brief Send and receive unaddressed, unreliable datagrams.

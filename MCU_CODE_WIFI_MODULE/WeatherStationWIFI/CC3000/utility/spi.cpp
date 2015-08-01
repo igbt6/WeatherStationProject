@@ -40,13 +40,12 @@
 //! @{
 //
 //*****************************************************************************
-#include "SPI.h"
 #include "hci.h"
 #include "interface.h"
 
 #include "evnt_handler.h"
 #include "board.h"
-#include "../../RF22/HardwareSPI.h"
+#include "../../SPI/HardwareSPI.h"
 
 
 #define READ                    3
@@ -195,12 +194,10 @@ SpiOpen(gcSpiHandleRx pfRxHandler)
 int init_spi(void)
 {
 
-
-	HardwareSpiCC3000.begin();
 	DEASSERT_CS();
-	HardwareSpiCC3000.setBitOrder(MSBFIRST);
+	HardwareSpiCC3000.begin();
 	HardwareSpiCC3000.setDataMode(SPI_MODE1);
-
+	HardwareSpiCC3000.setBitOrder(MSBFIRST);
 	return(ESUCCESS);
 	
 }

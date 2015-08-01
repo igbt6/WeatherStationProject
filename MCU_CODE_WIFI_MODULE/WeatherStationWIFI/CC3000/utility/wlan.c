@@ -176,13 +176,13 @@ static void SimpleLink_Init_Start(unsigned short usPatchesAvailableAtHost)
 //*****************************************************************************
 
 void wlan_init(		tWlanCB	 	sWlanCB,
-							 tFWPatches sFWPatches,
-							 tDriverPatches sDriverPatches,
-							 tBootLoaderPatches sBootLoaderPatches,
-							 tWlanReadInteruptPin  sReadWlanInterruptPin,
-							 tWlanInterruptEnable  sWlanInterruptEnable,
-							 tWlanInterruptDisable sWlanInterruptDisable,
-							 tWriteWlanPin         sWriteWlanPin)
+					tFWPatches sFWPatches,
+					tDriverPatches sDriverPatches,
+					tBootLoaderPatches sBootLoaderPatches,
+					tWlanReadInteruptPin  sReadWlanInterruptPin,
+					tWlanInterruptEnable  sWlanInterruptEnable,
+					tWlanInterruptDisable sWlanInterruptDisable,
+					tWriteWlanPin         sWriteWlanPin)
 {
 	
 	tSLInformation.sFWPatches = sFWPatches;

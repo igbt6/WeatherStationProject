@@ -12,7 +12,7 @@
 // $Id: RF22ReliableDatagram.cpp,v 1.9 2014/04/01 05:06:44 mikem Exp mikem $
 
 #include "RF22ReliableDatagram.h"
-#include <SPI.h>
+
 
 ////////////////////////////////////////////////////////////////////
 // Constructors

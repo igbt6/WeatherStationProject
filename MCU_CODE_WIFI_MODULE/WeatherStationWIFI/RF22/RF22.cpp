@@ -91,7 +91,7 @@ boolean RF22::init()
     _spi->begin();
     _spi->setDataMode(SPI_MODE0);
     _spi->setBitOrder(MSBFIRST);
-    _spi->setClockDivider(SPI_CLOCK_DIV16);  // (16 Mhz / 16) = 1 MHz
+   // _spi->setClockDivider(SPI_CLOCK_DIV16);  // (16 Mhz / 16) = 1 MHz
     delay(100);
 
     // Software reset the device

@@ -4,7 +4,6 @@
 // $Id: RF22Datagram.cpp,v 1.4 2014/04/01 05:06:44 mikem Exp mikem $
 
 #include "RF22Datagram.h"
-#include <SPI.h>
 
 RF22Datagram::RF22Datagram(uint8_t thisAddress, uint8_t slaveSelectPin,uint8_t shutdownPin, uint8_t interruptPin)
     : RF22(slaveSelectPin,shutdownPin, interruptPin)
