@@ -8,3 +8,10 @@
 
 
 
+DataParser::DataParser(const char* data){
+
+	if(data!=NULL &&strlen(data)<256)
+		rootJson= aJson.parse(data);
+
+
+}

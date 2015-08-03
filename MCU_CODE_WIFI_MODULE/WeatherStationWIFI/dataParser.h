@@ -14,9 +14,10 @@
 class DataParser{
 
 
+
 private:
 
-	enum DataTypes {
+	typedef enum  {
 
 		Humidity,
 		Temperature,
@@ -26,13 +27,19 @@ private:
 		GpsTime,
 		GpsDate,
 		GpsPosition,
-		BatteryCurrent,
-		BatterVoltage,
-		LightningDetection;
-	}
+		BatteryData, //current, voltage
+		LightningDetection,
+		MaxNrOfTypes;
+	}DataTypes;
 
-	static const** dataDescriptors= {"HUM","TEM","LHT","PRE","GPS_E","GPS_T","GPS_D","GPS_P","BAT_C","BAT_V","LGT_D"};
+	static const** dataDescriptors= {"HUM","TEM","LHT","PRE","GPS_E","GPS_T","GPS_D","GPS_P","BAT","LGT_D"};
 
+
+	aJsonObject* rootJson;
+public:
+
+	DataParser(char* data);
+	bool (*validateData)(DataTypes type)
 
 
 
