@@ -12,6 +12,7 @@
 #include <inc/hw_ints.h>
 #include <string.h>
 #include "aJson/aJSON.h"
+#include "dataParser.h"
 
 void setup();
 void loop();
@@ -471,10 +472,26 @@ void loop() {
 				*/
 #endif
 
-				aJsonObject* jsonObject = aJson.parse((char*)buf);
-				 aJsonObject* humidity = aJson.getObjectItem(jsonObject, "HUM");
-				 Serial.print(humidity->type);
-				 Serial.print(humidity->valuefloat);
+				//aJsonObject* jsonObject = aJson.parse((char*)buf);
+				 //aJsonObject* humidity = aJson.getObjectItem(jsonObject, "HUM");
+				 //Serial.print(humidity->type);
+				 //Serial.print(humidity->valuefloat);
+
+				DataParser dataParser((char*)buf);
+				for(int dataIdx=DataParser::eHumidity; dataIdx<DataParser::eMaxNrOfTypes;++dataIdx){
+
+					if(dataParser.validateData((DataParser::DataTypes)dataIdx)==true){
+
+						if(dataIdx==DataParser::eHumidity){
+							dataParser.createHumObj(dataParser.obtainDataObject<Humidity<double>>((DataParser::DataTypes)dataIdx));
+							Serial.print("humidity: ");
+							Serial.print(dataParser.getHumObj()->getDataValue());
+						}
+					}
+
+
+
+				}
 				//MbedJSONValue *jsonDataObj = new MbedJSONValue();
 				//MbedJSONValue jsonDataObj ;
 				//parse(jsonDataObj, (const char*)buf);
