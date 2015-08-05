@@ -31,36 +31,3 @@ bool DataParser::validateData(DataTypes type){
 };
 
 
-
-template <typename Type> Type DataParser::obtainDataObject(DataTypes type){
-
-	if(type>=eMaxNrOfTypes|| !rootJson)
-		return NULL;
-
-	aJsonObject* temp=  aJson.getObjectItem(rootJson,dataDescriptors[type]);
-		switch(type){
-
-		case eHumidity:
-			return new Humidity<double>(temp->valuefloat);
-		break;
-
-		case eLight:
-			return new Light<double>(temp->valuefloat);
-		break;
-
-		case eTemperature:
-			return new Temperature<double>(temp->valuefloat);
-		break;
-
-		case ePressure:
-			return new Pressure<double>(temp->valuefloat);
-		break;
-
-
-
-		}
-
-}
-
-
-

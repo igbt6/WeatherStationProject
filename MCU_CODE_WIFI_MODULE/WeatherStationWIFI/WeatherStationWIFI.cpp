@@ -483,9 +483,9 @@ void loop() {
 					if(dataParser.validateData((DataParser::DataTypes)dataIdx)==true){
 
 						if(dataIdx==DataParser::eHumidity){
-							dataParser.createHumObj(dataParser.obtainDataObject<Humidity<double>>((DataParser::DataTypes)dataIdx));
+							dataParser.createHumObj(dataParser.obtainDataObject<HUMIDITY_DATA_TYPE>((DataParser::DataTypes)dataIdx));
 							Serial.print("humidity: ");
-							Serial.print(dataParser.getHumObj()->getDataValue());
+							//Serial.print(dataParser.getHumObj()->getDataValue());
 						}
 					}
 

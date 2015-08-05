@@ -11,7 +11,7 @@
 #include "aJson/aJSON.h"
 
 
-
+typedef double HUMIDITY_DATA_TYPE ;
 
 static const char* dataDescriptors[]= {"HUM","TEM","LHT","PRE","GPS_E","GPS_T","GPS_D","GPS_P","BAT","LGT_D"};
 
@@ -119,6 +119,12 @@ private:
 };
 
 
+
+
+
+
+
+
 class DataParser{
 
 
@@ -144,22 +150,52 @@ public:
 
 
 	//setters
-	inline void createHumObj(Humidity<double>* humObj){	if(humObj!= NULL)
-		hum= humObj;}
-	inline Humidity<double>* getHumObj(){
+	inline void createHumObj(HUMIDITY_DATA_TYPE val){
+		hum= new Humidity<HUMIDITY_DATA_TYPE>(val);
+	}
+	inline Humidity<HUMIDITY_DATA_TYPE>* getHumObj(){
 		return hum;
 	}
+
+protected:
 
 
 private:
 
-	Humidity<double>* hum;
+	Humidity<HUMIDITY_DATA_TYPE>* hum;
 	Light<double>* light;
 	Temperature<double>* temp;
 	Pressure<double>*press;
 	aJsonObject* rootJson;
 
+
 };
+
+
+
+
+template <typename Type> Type DataParser::obtainDataObject(DataTypes type){
+
+	if(type>=eMaxNrOfTypes|| !rootJson)
+		return (Type)-1;
+
+	aJsonObject* temp=  aJson.getObjectItem(rootJson,dataDescriptors[type]);
+		switch(type){
+
+		case eHumidity:
+		case eLight:
+		case eTemperature:
+		case ePressure:
+				return (Type)(temp->valuefloat);
+		break;
+
+		default:
+			return (Type)-1;
+
+		}
+
+}
+
 
 
 
