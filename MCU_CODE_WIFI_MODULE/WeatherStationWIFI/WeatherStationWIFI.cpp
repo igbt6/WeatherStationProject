@@ -29,6 +29,10 @@ void loop();
 #define CC3000_ENABLEDx
 #define RFM23D_ENABLED
 
+#define DEBUG_ENABLED true
+#define INIT_DEBUG() (DEBUG_ENABLED? Serial.begin(115200): (void)0)
+#define PRINT_DEBUG(data) do{if(DEBUG_ENABLED) Serial.print(data);} while(0)
+
 /*////////////////////////////////////////RFM23B MODULE TESTS ///////////////////////////////////////////////////////
  static volatile uint32_t askStationFlag = 0;
  //private functions
@@ -317,18 +321,18 @@ uint8_t buf[RF22_MAX_MESSAGE_LEN];
 
 static void printWifiStatus() {
 	// print the SSID of the network you're attached to:
-	Serial.print("SSID: ");
-	Serial.println(WiFi.SSID());
+	PRINT_DEBUG("SSID: ");
+	PRINT_DEBUG(WiFi.SSID());
 	// print your WiFi shield's IP address:
 	IPAddress ip = WiFi.localIP();
-	Serial.print("IP Address: ");
-	Serial.println(ip);
+	PRINT_DEBUG("IP Address: ");
+	PRINT_DEBUG(ip);
 }
 
 static void httpRequest() {
 	// if there's a successful connection:
 	if (client.connect(server, 80)) {
-		Serial.println("connecting...");
+		PRINT_DEBUG("connecting...");
 		// send the HTTP PUT request:
 		client.println("GET /latest.txt HTTP/1.1");
 		client.println("Host: energia.nu");
@@ -340,8 +344,8 @@ static void httpRequest() {
 		lastConnectionTime = millis();
 	} else {
 		// if you couldn't make a connection:
-		Serial.println("connection failed");
-		Serial.println("disconnecting.");
+		PRINT_DEBUG("connection failed");
+		PRINT_DEBUG("disconnecting.");
 		client.stop();
 	}
 }
@@ -353,12 +357,12 @@ static bool smartConfig(void) {
 	if (digitalRead(configButton) == LOW) {
 		digitalWrite(RED_LED, 1);
 		WiFi.begin();
-		Serial.print("SMART Config started");
+		PRINT_DEBUG("SMART Config started");
 		if (WiFi.startSmartConfig() == 0) {
-			Serial.print("SMART Config Finished Succesfully");
+			PRINT_DEBUG("SMART Config Finished Succesfully");
 			digitalWrite(RED_LED, 0);
 		} else {
-			Serial.print("SMART Config Failed");
+			PRINT_DEBUG("SMART Config Failed");
 			return false;
 		}
 	}
@@ -389,7 +393,7 @@ void setup() {
 	//  Run at system clock at 80MHz
 	SysCtlClockSet(SYSCTL_SYSDIV_2_5 | SYSCTL_USE_PLL | SYSCTL_OSC_MAIN |
 			SYSCTL_XTAL_16MHZ);//in wiring.c clock 80MHZ enabled
-	Serial.begin(115200);
+	INIT_DEBUG();
 
 
 #ifdef CC3000_ENABLED
@@ -461,11 +465,11 @@ void loop() {
 		IntDisable(INT_TIMER0B);
 
 		if (!rfm23b->sendtoWait(data, sizeof(data), STATION_ADDRESS)) {
-			Serial.print("sending request to station failed...");
+			PRINT_DEBUG("sending request to station failed...");
 		} else {
 			if (rfm23b->recvfromAckTimeout(buf, &len, 1000, &from)) {
-				Serial.print("received data from Station : 0x");
-				Serial.print(from, HEX);
+				PRINT_DEBUG("received data from Station : 0x");
+				PRINT_DEBUG((from, HEX));
 				/*Serial.print(": ");
 				Serial.print((char*) buf);
 				Serial.print("\r\n");
@@ -477,33 +481,42 @@ void loop() {
 				 //Serial.print(humidity->type);
 				 //Serial.print(humidity->valuefloat);
 
-				DataParser dataParser((char*)buf);
+				DataParser *dataParser =new DataParser((char*)buf);
 				for(int dataIdx=DataParser::eHumidity; dataIdx<DataParser::eMaxNrOfTypes;++dataIdx){
 
-					if(dataParser.validateData((DataParser::DataTypes)dataIdx)==true){
+					if(dataParser->validateData((DataParser::DataTypes)dataIdx)==true){
 
 						if(dataIdx==DataParser::eHumidity){
-							dataParser.createHumObj(dataParser.obtainDataObject<HUMIDITY_DATA_TYPE>((DataParser::DataTypes)dataIdx));
-							Serial.print("humidity: ");
-							//Serial.print(dataParser.getHumObj()->getDataValue());
+							dataParser->createHumObj(dataParser->obtainDataObject<HUMIDITY_DATA_TYPE>((DataParser::DataTypes)dataIdx));
+							PRINT_DEBUG("humidity: ");
+							PRINT_DEBUG((HUMIDITY_DATA_TYPE)dataParser->getHumObj()->getDataValue());
 						}
+
+						else if(dataIdx==DataParser::eTemperature){
+							dataParser->createTempObj(dataParser->obtainDataObject<TEMPERATURE_DATA_TYPE>((DataParser::DataTypes)dataIdx));
+							PRINT_DEBUG("temp: ");
+							PRINT_DEBUG((TEMPERATURE_DATA_TYPE)dataParser->getTempObj()->getDataValue());
+						}
+
+						else if(dataIdx==DataParser::ePressure){
+							dataParser->createPressObj(dataParser->obtainDataObject<PRESSURE_DATA_TYPE>((DataParser::DataTypes)dataIdx));
+							PRINT_DEBUG("pressure: ");
+							PRINT_DEBUG((PRESSURE_DATA_TYPE)dataParser->getPressObj()->getDataValue());
+						}
+
+						else if(dataIdx==DataParser::eLight){
+							dataParser->createLightObj(dataParser->obtainDataObject<LIGHT_DATA_TYPE>((DataParser::DataTypes)dataIdx));
+							PRINT_DEBUG("light: ");
+							PRINT_DEBUG((LIGHT_DATA_TYPE)dataParser->getLightObj()->getDataValue());
+						}
+
 					}
 
 
 
 				}
-				//MbedJSONValue *jsonDataObj = new MbedJSONValue();
-				//MbedJSONValue jsonDataObj ;
-				//parse(jsonDataObj, (const char*)buf);
-				 /*
-				 float humidity;
-				 float temp;
-				 float pressure;
+				delete dataParser;
 
-				 humidity = jsonDataObj["TEM"].get<double>();
-				 temp = jsonDataObj["HUM"].get<double>();
-				 pressure = jsonDataObj["TEM"].get<double>();
-				 */
 #ifdef CC3000_ENABLED
 				httpRequest();
 				// if there are incoming bytes available
@@ -522,7 +535,7 @@ void loop() {
 #endif
 #ifdef RFM23D_ENABLED
 			} else {
-				Serial.print(
+				PRINT_DEBUG(
 						"No response from station, is station running?\n\n");
 			}
 

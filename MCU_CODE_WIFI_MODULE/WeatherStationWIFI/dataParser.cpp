@@ -17,6 +17,22 @@ DataParser::DataParser(const char* data){
 };
 
 
+ DataParser::~DataParser(){
+
+	if(rootJson!=NULL){
+		aJson.deleteItem(rootJson);
+	}
+
+	if(hum)
+		delete hum;
+	if(light)
+		delete light;
+	if(press)
+		delete press;
+	if(temp)
+		delete temp;
+};
+
 bool DataParser::validateData(DataTypes type){
 
 
