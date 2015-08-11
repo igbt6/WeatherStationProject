@@ -18,11 +18,13 @@ typedef double PRESSURE_DATA_TYPE;
 static const char* dataDescriptors[] = { "HUM", "TEM", "LHT", "PRE", "GPS_E",
 		"GPS_T", "GPS_D", "GPS_P", "BAT", "LGT_D" };
 
+
 template<typename T> class DataType {
 
 protected:
 	virtual T getDataValue(void)=0;
 	virtual char* getDataStrValue(void)=0;
+	virtual bool isDataValid(void)=0;
 
 };
 
@@ -39,6 +41,15 @@ public:
 	}
 	char* getDataStrValue(void) {
 		return strVal;
+	}
+
+
+	bool isDataValid(void){
+
+		if(value>=0&&value<=100){
+			return true;
+		}
+		return false;
 	}
 
 private:
@@ -61,6 +72,15 @@ public:
 		return strVal;
 	}
 
+	bool isDataValid(void){
+
+		if(value>=0&&value<=500000){
+			return true;
+		}
+		return false;
+	}
+
+
 private:
 	T value;
 	char* strVal;
@@ -79,6 +99,14 @@ public:
 	}
 	char* getDataStrValue(void) {
 		return strVal;
+	}
+
+	bool isDataValid(void){
+
+		if(value>=-70&&value<=150){
+			return true;
+		}
+		return false;
 	}
 
 private:
@@ -101,12 +129,22 @@ public:
 		return strVal;
 	}
 
+	bool isDataValid(void){
+
+		if(value>=500&&value<=1500){
+			return true;
+		}
+		return false;
+	}
+
 private:
 	T value;
 	char* strVal;
 };
 
 class DataParser {
+
+	friend 	class DataSerializer;
 
 public:
 	typedef enum {

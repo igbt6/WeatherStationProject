@@ -500,6 +500,10 @@ void loop() {
 
 						else if(dataIdx==DataParser::ePressure){
 							dataParser->createPressObj(dataParser->obtainDataObject<PRESSURE_DATA_TYPE>((DataParser::DataTypes)dataIdx));
+							if(!(dataParser->getPressObj()->isDataValid())){
+
+
+							}
 							PRINT_DEBUG("pressure: ");
 							PRINT_DEBUG((PRESSURE_DATA_TYPE)dataParser->getPressObj()->getDataValue());
 						}

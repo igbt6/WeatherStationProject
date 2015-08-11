@@ -27,6 +27,7 @@ ORDERED_OBJS += \
 "./CC3000/WiFi.o" \
 "./CC3000/WiFiUdp.o" \
 "./dataParser.o" \
+"./dataSerializer.o" \
 "./RF22/RF22.o" \
 "./RF22/RF22Datagram.o" \
 "./RF22/RF22ReliableDatagram.o" \
@@ -166,7 +167,7 @@ BIN_OUTPUTS__QUOTED += \
 all: WeatherStationWIFI.out
 
 dependents:
-	-cd C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug && $(MAKE) clean all
+	-cd C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug && $(MAKE) all
 
 # Tool invocations
 WeatherStationWIFI.out: $(OBJS) $(GEN_CMDS) C:/TI/Energia/energiaWorkspace/lplm4f120h5qr_core/Debug/liblplm4f120h5qr_core.a
@@ -186,9 +187,9 @@ WeatherStationWIFI.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)$(BIN_OUTPUTS__QUOTED)
-	-$(RM) "WeatherStationWIFI.d" "dataParser.d" "aJson\aJSON.d" "SPI\HardwareSPI.d" "SPI\SPI.d" "RF22\RF22.d" "RF22\RF22Datagram.d" "RF22\RF22ReliableDatagram.d" "CC3000\utility\spi.d" "CC3000\TCPclient.d" "CC3000\TCPserver.d" "CC3000\WiFi.d" "CC3000\WiFiUdp.d" 
+	-$(RM) "WeatherStationWIFI.d" "dataParser.d" "dataSerializer.d" "aJson\aJSON.d" "SPI\HardwareSPI.d" "SPI\SPI.d" "RF22\RF22.d" "RF22\RF22Datagram.d" "RF22\RF22ReliableDatagram.d" "CC3000\utility\spi.d" "CC3000\TCPclient.d" "CC3000\TCPserver.d" "CC3000\WiFi.d" "CC3000\WiFiUdp.d" 
 	-$(RM) "aJson\utility\stringbuffer.d" "CC3000\utility\SimplelinkWifi.d" "CC3000\utility\board.d" "CC3000\utility\cc3000_common.d" "CC3000\utility\evnt_handler.d" "CC3000\utility\hci.d" "CC3000\utility\netapp.d" "CC3000\utility\nvmem.d" "CC3000\utility\patch.d" "CC3000\utility\security.d" "CC3000\utility\socket.d" "CC3000\utility\tcp.d" "CC3000\utility\wlan.d" 
-	-$(RM) "WeatherStationWIFI.o" "dataParser.o" "aJson\utility\stringbuffer.o" "aJson\aJSON.o" "SPI\HardwareSPI.o" "SPI\SPI.o" "RF22\RF22.o" "RF22\RF22Datagram.o" "RF22\RF22ReliableDatagram.o" "CC3000\utility\SimplelinkWifi.o" "CC3000\utility\board.o" "CC3000\utility\cc3000_common.o" "CC3000\utility\evnt_handler.o" "CC3000\utility\hci.o" "CC3000\utility\netapp.o" "CC3000\utility\nvmem.o" "CC3000\utility\patch.o" "CC3000\utility\security.o" "CC3000\utility\socket.o" "CC3000\utility\spi.o" "CC3000\utility\tcp.o" "CC3000\utility\wlan.o" "CC3000\TCPclient.o" "CC3000\TCPserver.o" "CC3000\WiFi.o" "CC3000\WiFiUdp.o" 
+	-$(RM) "WeatherStationWIFI.o" "dataParser.o" "dataSerializer.o" "aJson\utility\stringbuffer.o" "aJson\aJSON.o" "SPI\HardwareSPI.o" "SPI\SPI.o" "RF22\RF22.o" "RF22\RF22Datagram.o" "RF22\RF22ReliableDatagram.o" "CC3000\utility\SimplelinkWifi.o" "CC3000\utility\board.o" "CC3000\utility\cc3000_common.o" "CC3000\utility\evnt_handler.o" "CC3000\utility\hci.o" "CC3000\utility\netapp.o" "CC3000\utility\nvmem.o" "CC3000\utility\patch.o" "CC3000\utility\security.o" "CC3000\utility\socket.o" "CC3000\utility\spi.o" "CC3000\utility\tcp.o" "CC3000\utility\wlan.o" "CC3000\TCPclient.o" "CC3000\TCPserver.o" "CC3000\WiFi.o" "CC3000\WiFiUdp.o" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
