@@ -27,6 +27,7 @@ aJsonClass aJsonModel;
 
 public:
 	DataSerializer();
+	~DataSerializer();
 	bool serializeData(DataParser* dataToBeParsed);
 
 };

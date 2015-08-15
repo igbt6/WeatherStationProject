@@ -9,8 +9,12 @@
 DataSerializer::DataSerializer() :
 		aJsonModel() {
 
-}
-;
+};
+
+DataSerializer::~DataSerializer() {
+	if(jsonDataPacket!=NULL)
+		aJson.deleteItem(jsonDataPacket);
+};
 
 bool DataSerializer::serializeData(DataParser* dataToBeParsed) {
 
@@ -22,14 +26,14 @@ bool DataSerializer::serializeData(DataParser* dataToBeParsed) {
 
 	aJsonModel.addItemToObject(jsonDataPacket, "name", aJsonModel.createItem(
 					"METEO"));
-	aJsonObject* fmt= aJsonModel.createObject();
-	if (fmt != NULL) {
-		aJsonModel.addItemToObject(jsonDataPacket, "D", fmt);
-		//aJsonModel.addStringToObject(fmt, "type", "TEST");
-		aJsonModel.addNumberToObject(fmt, "HUM", dataToBeParsed->hum->getDataValue());
-		aJsonModel.addNumberToObject(fmt, "TEMP", dataToBeParsed->temp->getDataValue());
-		aJsonModel.addBooleanToObject(fmt, "PRE", dataToBeParsed->press->getDataValue());
-		aJsonModel.addNumberToObject(fmt, "LHT", dataToBeParsed->light->getDataValue());
+	aJsonObject* meteoData= aJsonModel.createObject();
+	if (meteoData != NULL) {
+		aJsonModel.addItemToObject(jsonDataPacket, "data", meteoData);
+		aJsonModel.addNumberToObject(meteoData, "HUM", dataToBeParsed->hum->getDataValue());
+		aJsonModel.addNumberToObject(meteoData, "TEMP", dataToBeParsed->temp->getDataValue());
+		aJsonModel.addBooleanToObject(meteoData, "PRE", dataToBeParsed->press->getDataValue());
+		aJsonModel.addNumberToObject(meteoData, "LHT", dataToBeParsed->light->getDataValue());
 	}
+	else return false;
 	return true;
 };

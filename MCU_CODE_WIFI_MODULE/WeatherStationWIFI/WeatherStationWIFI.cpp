@@ -169,145 +169,144 @@ void loop();
  }
  */
 
-
 /*
-////////////////////////////////////////WIFI MODULE TESTS ///////////////////////////////////////////////////////
-//useful variables
-unsigned long lastConnectionTime = 0; // last time you connected to the server, in milliseconds
-boolean lastConnected = false; // state of the connection last time through the main loop
-const unsigned long postingInterval = 10 * 1000; // delay between updates, in milliseconds
-IPAddress server(50, 62, 217, 1); // numeric IP for Energia.nu (no DNS)
-// Initialize the WiFi client library
-// with the IP address and port of the server
-// that you want to connect to (port 80 is default for HTTP):
-WiFiClient client;
+ ////////////////////////////////////////WIFI MODULE TESTS ///////////////////////////////////////////////////////
+ //useful variables
+ unsigned long lastConnectionTime = 0; // last time you connected to the server, in milliseconds
+ boolean lastConnected = false; // state of the connection last time through the main loop
+ const unsigned long postingInterval = 10 * 1000; // delay between updates, in milliseconds
+ IPAddress server(50, 62, 217, 1); // numeric IP for Energia.nu (no DNS)
+ // Initialize the WiFi client library
+ // with the IP address and port of the server
+ // that you want to connect to (port 80 is default for HTTP):
+ WiFiClient client;
 
-static void printWifiStatus() {
-	// print the SSID of the network you're attached to:
-	Serial.print("SSID-------: ");
-	Serial.println(WiFi.SSID());
-	// print your WiFi shield's IP address:
-	IPAddress ip = WiFi.localIP();
-	Serial.print("IP Address: ");
-	Serial.println(ip);
-}
+ static void printWifiStatus() {
+ // print the SSID of the network you're attached to:
+ Serial.print("SSID-------: ");
+ Serial.println(WiFi.SSID());
+ // print your WiFi shield's IP address:
+ IPAddress ip = WiFi.localIP();
+ Serial.print("IP Address: ");
+ Serial.println(ip);
+ }
 
-static void httpRequest() {
-	// if there's a successful connection:
-	if (client.connect(server, 80)) {
-		Serial.println("connecting...");
-		// send the HTTP PUT request:
-		client.println("GET /latest.txt HTTP/1.1");
-		client.println("Host: energia.nu");
-		client.println("User-Agent: WeatherStationWIFI");
-		client.println("Connection: close");
-		client.println();
+ static void httpRequest() {
+ // if there's a successful connection:
+ if (client.connect(server, 80)) {
+ Serial.println("connecting...");
+ // send the HTTP PUT request:
+ client.println("GET /latest.txt HTTP/1.1");
+ client.println("Host: energia.nu");
+ client.println("User-Agent: WeatherStationWIFI");
+ client.println("Connection: close");
+ client.println();
 
-		// note the time that the connection was made:
-		lastConnectionTime = millis();
-	} else {
-		// if you couldn't make a connection:
-		Serial.println("connection failed");
-		Serial.println("disconnecting.");
-		client.stop();
-	}
-}
+ // note the time that the connection was made:
+ lastConnectionTime = millis();
+ } else {
+ // if you couldn't make a connection:
+ Serial.println("connection failed");
+ Serial.println("disconnecting.");
+ client.stop();
+ }
+ }
 
-static bool smartConfig(void) {
-	pinMode(RED_LED, OUTPUT);
-	uint8_t configButton = PF_1;
-	pinMode(configButton, INPUT_PULLUP);
-	if (digitalRead(configButton) == LOW) {
-		digitalWrite(RED_LED, 1);
-		WiFi.begin();
-		Serial.print("SMART Config started");
-		if (WiFi.startSmartConfig() == 0) {
-			Serial.print("SMART Config Finished Succesfully");
-			digitalWrite(RED_LED, 0);
-		} else {
-			Serial.print("SMART Config Failed");
-			return false;
-		}
-	}
-	return true;
-}
+ static bool smartConfig(void) {
+ pinMode(RED_LED, OUTPUT);
+ uint8_t configButton = PF_1;
+ pinMode(configButton, INPUT_PULLUP);
+ if (digitalRead(configButton) == LOW) {
+ digitalWrite(RED_LED, 1);
+ WiFi.begin();
+ Serial.print("SMART Config started");
+ if (WiFi.startSmartConfig() == 0) {
+ Serial.print("SMART Config Finished Succesfully");
+ digitalWrite(RED_LED, 0);
+ } else {
+ Serial.print("SMART Config Failed");
+ return false;
+ }
+ }
+ return true;
+ }
 
-char ssid[] = "UPC1512586";     //  your network SSID (name)
-char pass[] = "TRRANEXG";      //  your network password
-int keyIndex = 0;         // your network key Index number (needed only for WEP)
+ char ssid[] = "UPC1512586";     //  your network SSID (name)
+ char pass[] = "TRRANEXG";      //  your network password
+ int keyIndex = 0;         // your network key Index number (needed only for WEP)
 
-void setup() {
-	//Initialize serial and wait for port to open:
-	Serial.begin(115200);
+ void setup() {
+ //Initialize serial and wait for port to open:
+ Serial.begin(115200);
 
-	// Set communication pins for CC3000
-	WiFi.setCSpin(18);  // 18: P2_2 @ F5529, PE_0 @ LM4F/TM4C
-	WiFi.setENpin(2);   //  2: P6_5 @ F5529, PB_5 @ LM4F/TM4C
-	WiFi.setIRQpin(19); // 19: P2_0 @ F5529, PB_2 @ LM4F/TM4C
+ // Set communication pins for CC3000
+ WiFi.setCSpin(18);  // 18: P2_2 @ F5529, PE_0 @ LM4F/TM4C
+ WiFi.setENpin(2);   //  2: P6_5 @ F5529, PB_5 @ LM4F/TM4C
+ WiFi.setIRQpin(19); // 19: P2_0 @ F5529, PB_2 @ LM4F/TM4C
 
-	// attempt to connect to Wifi network:
+ // attempt to connect to Wifi network:
 
-	// smartConfig();
+ // smartConfig();
 
-	Serial.print("Attempting to connect to SSID: ");
-	Serial.println(ssid);
-	// Connect to WPA/WPA2 network. Change this line if using open or WEP network:
-	uint8_t mac[6]={1,2,3,4,5,6};
+ Serial.print("Attempting to connect to SSID: ");
+ Serial.println(ssid);
+ // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
+ uint8_t mac[6]={1,2,3,4,5,6};
 
-	if(WiFi.begin(ssid, pass)==-6){
-		Serial.print("INIT SPI FUCKED UP ");
-	}
-	WiFi.macAddress(mac);
-	for (int i= 0;i<6;i++){
-		Serial.print(mac[i]);
-	}
+ if(WiFi.begin(ssid, pass)==-6){
+ Serial.print("INIT SPI FUCKED UP ");
+ }
+ WiFi.macAddress(mac);
+ for (int i= 0;i<6;i++){
+ Serial.print(mac[i]);
+ }
 
 
-	Serial.println("Connected to wifi");
-	Serial.println("Waiting for DHCP address....");
-	// wait for 5 seconds for connection:
-	delay(5000);
-	printWifiStatus();
+ Serial.println("Connected to wifi");
+ Serial.println("Waiting for DHCP address....");
+ // wait for 5 seconds for connection:
+ delay(5000);
+ printWifiStatus();
 
-}
+ }
 
-void loop() {
-	// if there are incoming bytes available
-	// from the server, read them and print them:
-	while (client.available()) {
-		char c = client.read();
-		Serial.write(c);
-	}
+ void loop() {
+ // if there are incoming bytes available
+ // from the server, read them and print them:
+ while (client.available()) {
+ char c = client.read();
+ Serial.write(c);
+ }
 
-	// if the server's disconnected, stop the client:
-	if (!client.connected() && lastConnected) {
-		Serial.println();
-		Serial.println("disconnecting from server.");
-		client.stop();
+ // if the server's disconnected, stop the client:
+ if (!client.connected() && lastConnected) {
+ Serial.println();
+ Serial.println("disconnecting from server.");
+ client.stop();
 
-	}
+ }
 
-	if (!client.connected()
-			&& (millis() - lastConnectionTime > postingInterval)) {
-		httpRequest();
+ if (!client.connected()
+ && (millis() - lastConnectionTime > postingInterval)) {
+ httpRequest();
 
-	}
+ }
 
-	lastConnected = client.connected();
-}
-*/
+ lastConnected = client.connected();
+ }
+ */
 #if 1
 
 //MAIN APPLICATION##########################################
 //Useful Variables
 //CC3000
-char ssid[] = "UPC1512586";//  your network SSID (name)
-char pass[] = "TRRANEXG";//  your network password
-int keyIndex = 0;// your network key Index number (needed only for WEP)
-unsigned long lastConnectionTime = 0;// last time you connected to the server, in milliseconds
-boolean lastConnected = false;// state of the connection last time through the main loop
-const unsigned long postingInterval = 10 * 1000;// delay between updates, in milliseconds
-IPAddress server(50, 62, 217, 1);// numeric IP for Energia.nu (no DNS)
+char ssid[] = "UPC1512586"; //  your network SSID (name)
+char pass[] = "TRRANEXG"; //  your network password
+int keyIndex = 0; // your network key Index number (needed only for WEP)
+unsigned long lastConnectionTime = 0; // last time you connected to the server, in milliseconds
+boolean lastConnected = false; // state of the connection last time through the main loop
+const unsigned long postingInterval = 10 * 1000; // delay between updates, in milliseconds
+IPAddress server(50, 62, 217, 1); // numeric IP for Energia.nu (no DNS)
 
 // create singleton objects
 //RFM23B
@@ -392,9 +391,8 @@ static void initTimer0(void) {
 void setup() {
 	//  Run at system clock at 80MHz
 	SysCtlClockSet(SYSCTL_SYSDIV_2_5 | SYSCTL_USE_PLL | SYSCTL_OSC_MAIN |
-			SYSCTL_XTAL_16MHZ);//in wiring.c clock 80MHZ enabled
+	SYSCTL_XTAL_16MHZ); //in wiring.c clock 80MHZ enabled
 	INIT_DEBUG();
-
 
 #ifdef CC3000_ENABLED
 
@@ -420,35 +418,30 @@ void setup() {
 
 #endif
 
-
 	//digitalWrite(PB_5, LOW);
 #ifdef RFM23D_ENABLED
 	rfm23b = new RF22ReliableDatagram(SERVER_ADDRESS, RFM23B_SLAVE_SELECT_PIN,
-			RFM23B_SHUTDOWN_PIN, RFM23B_INTERRUPT_PIN);
+	RFM23B_SHUTDOWN_PIN, RFM23B_INTERRUPT_PIN);
 	//HardwareSpiCC3000.end();
 	//pinMode(PB_2, OUTPUT);
 	//digitalWrite(PB_5,LOW);
 	//noInt
-/*
-	if (!rfm23b->init()) { // Defaults after init are 434.0MHz, 0.05MHz AFC pull-in, modulation FSK_Rb2_4Fd36
-		Serial.println("RF23D init failed");
-		//	while (1)
-		//		;
-	} else
-	Serial.println("RF23D init succeded");
-*/
+	/*
+	 if (!rfm23b->init()) { // Defaults after init are 434.0MHz, 0.05MHz AFC pull-in, modulation FSK_Rb2_4Fd36
+	 Serial.println("RF23D init failed");
+	 //	while (1)
+	 //		;
+	 } else
+	 Serial.println("RF23D init succeded");
+	 */
 
-	while(!rfm23b->init()) { // Defaults after init are 434.0MHz, 0.05MHz AFC pull-in, modulation FSK_Rb2_4Fd36
+	while (!rfm23b->init()) { // Defaults after init are 434.0MHz, 0.05MHz AFC pull-in, modulation FSK_Rb2_4Fd36
 		delay(100);
 		Serial.println("RF23D init failed");
 	}
 	Serial.println("RF23D init succeded");
 	initTimer0();
 #endif
-
-
-
-
 
 }
 
@@ -471,56 +464,75 @@ void loop() {
 				PRINT_DEBUG("received data from Station : 0x");
 				PRINT_DEBUG((from, HEX));
 				/*Serial.print(": ");
-				Serial.print((char*) buf);
-				Serial.print("\r\n");
-				*/
+				 Serial.print((char*) buf);
+				 Serial.print("\r\n");
+				 */
 #endif
 
 				//aJsonObject* jsonObject = aJson.parse((char*)buf);
-				 //aJsonObject* humidity = aJson.getObjectItem(jsonObject, "HUM");
-				 //Serial.print(humidity->type);
-				 //Serial.print(humidity->valuefloat);
+				//aJsonObject* humidity = aJson.getObjectItem(jsonObject, "HUM");
+				//Serial.print(humidity->type);
+				//Serial.print(humidity->valuefloat);
 
-				DataParser *dataParser =new DataParser((char*)buf);
-				for(int dataIdx=DataParser::eHumidity; dataIdx<DataParser::eMaxNrOfTypes;++dataIdx){
+				DataParser *dataParser = new DataParser((char*) buf);
+				for (int dataIdx = DataParser::eHumidity;
+						dataIdx < DataParser::eMaxNrOfTypes; ++dataIdx) {
 
-					if(dataParser->validateData((DataParser::DataTypes)dataIdx)==true){
 
-						if(dataIdx==DataParser::eHumidity){
-							dataParser->createHumObj(dataParser->obtainDataObject<HUMIDITY_DATA_TYPE>((DataParser::DataTypes)dataIdx));
+
+						if (dataIdx == DataParser::eHumidity) {
+							dataParser->createHumObj(
+									dataParser->obtainDataObject<
+											HUMIDITY_DATA_TYPE>(
+											(DataParser::DataTypes) dataIdx));
 							PRINT_DEBUG("humidity: ");
-							PRINT_DEBUG((HUMIDITY_DATA_TYPE)dataParser->getHumObj()->getDataValue());
-						}
-
-						else if(dataIdx==DataParser::eTemperature){
-							dataParser->createTempObj(dataParser->obtainDataObject<TEMPERATURE_DATA_TYPE>((DataParser::DataTypes)dataIdx));
-							PRINT_DEBUG("temp: ");
-							PRINT_DEBUG((TEMPERATURE_DATA_TYPE)dataParser->getTempObj()->getDataValue());
-						}
-
-						else if(dataIdx==DataParser::ePressure){
-							dataParser->createPressObj(dataParser->obtainDataObject<PRESSURE_DATA_TYPE>((DataParser::DataTypes)dataIdx));
-							if(!(dataParser->getPressObj()->isDataValid())){
-
-
+							PRINT_DEBUG(
+									(HUMIDITY_DATA_TYPE )dataParser->getHumObj()->getDataValue());
+							if(!(dataParser->getHumObj()->isDataValid())){
+								dataParser->getHumObj()->setDataValue(INVALID_VALUE);
 							}
-							PRINT_DEBUG("pressure: ");
-							PRINT_DEBUG((PRESSURE_DATA_TYPE)dataParser->getPressObj()->getDataValue());
 						}
 
-						else if(dataIdx==DataParser::eLight){
-							dataParser->createLightObj(dataParser->obtainDataObject<LIGHT_DATA_TYPE>((DataParser::DataTypes)dataIdx));
+						else if (dataIdx == DataParser::eTemperature) {
+							dataParser->createTempObj(
+									dataParser->obtainDataObject<
+											TEMPERATURE_DATA_TYPE>(
+											(DataParser::DataTypes) dataIdx));
+							PRINT_DEBUG("temp: ");
+							PRINT_DEBUG(
+									(TEMPERATURE_DATA_TYPE )dataParser->getTempObj()->getDataValue());
+							if(!(dataParser->getTempObj()->isDataValid())){
+								dataParser->getTempObj()->setDataValue(INVALID_VALUE);
+							}
+						}
+
+						else if (dataIdx == DataParser::ePressure) {
+							dataParser->createPressObj(
+									dataParser->obtainDataObject<
+											PRESSURE_DATA_TYPE>(
+											(DataParser::DataTypes) dataIdx));
+							PRINT_DEBUG("pressure: ");
+							PRINT_DEBUG(
+									(PRESSURE_DATA_TYPE )dataParser->getPressObj()->getDataValue());
+							if(!(dataParser->getPressObj()->isDataValid())){
+								dataParser->getPressObj()->setDataValue(INVALID_VALUE);
+							}
+						}
+
+						else if (dataIdx == DataParser::eLight) {
+							dataParser->createLightObj(
+									dataParser->obtainDataObject<LIGHT_DATA_TYPE>(
+											(DataParser::DataTypes) dataIdx));
 							PRINT_DEBUG("light: ");
-							PRINT_DEBUG((LIGHT_DATA_TYPE)dataParser->getLightObj()->getDataValue());
+							PRINT_DEBUG(
+									(LIGHT_DATA_TYPE )dataParser->getLightObj()->getDataValue());
+							if(!(dataParser->getLightObj()->isDataValid())){
+								dataParser->getLightObj()->setDataValue(INVALID_VALUE);
+							}
 						}
 
 					}
-
-
-
-				}
 				delete dataParser;
-
 #ifdef CC3000_ENABLED
 				httpRequest();
 				// if there are incoming bytes available
@@ -548,9 +560,8 @@ void loop() {
 			TimerEnable(TIMER0_BASE, TIMER_B);
 			IntEnable(INT_TIMER0B);
 			askStationFlag = NOTSET;
-		}
-
 	}
+}
 	//delay(3000);
 #endif
 }

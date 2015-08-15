@@ -15,14 +15,16 @@ typedef double TEMPERATURE_DATA_TYPE;
 typedef double LIGHT_DATA_TYPE;
 typedef double PRESSURE_DATA_TYPE;
 
+#define INVALID_VALUE 0xFFFFFFFF
+
 static const char* dataDescriptors[] = { "HUM", "TEM", "LHT", "PRE", "GPS_E",
 		"GPS_T", "GPS_D", "GPS_P", "BAT", "LGT_D" };
-
 
 template<typename T> class DataType {
 
 protected:
 	virtual T getDataValue(void)=0;
+	virtual void setDataValue(T val)=0;
 	virtual char* getDataStrValue(void)=0;
 	virtual bool isDataValid(void)=0;
 
@@ -39,14 +41,18 @@ public:
 	T getDataValue(void) {
 		return value;
 	}
+
+	void setDataValue(T value) {
+		this->value = value;
+	}
+
 	char* getDataStrValue(void) {
 		return strVal;
 	}
 
+	bool isDataValid(void) {
 
-	bool isDataValid(void){
-
-		if(value>=0&&value<=100){
+		if (value >= 0 && value <= 100) {
 			return true;
 		}
 		return false;
@@ -68,18 +74,22 @@ public:
 	T getDataValue(void) {
 		return value;
 	}
+
+	void setDataValue(T value) {
+		this->value = value;
+	}
+
 	char* getDataStrValue(void) {
 		return strVal;
 	}
 
-	bool isDataValid(void){
+	bool isDataValid(void) {
 
-		if(value>=0&&value<=500000){
+		if (value >= 0 && value <= 500000) {
 			return true;
 		}
 		return false;
 	}
-
 
 private:
 	T value;
@@ -97,13 +107,18 @@ public:
 	T getDataValue(void) {
 		return value;
 	}
+
+	void setDataValue(T value) {
+		this->value = value;
+	}
+
 	char* getDataStrValue(void) {
 		return strVal;
 	}
 
-	bool isDataValid(void){
+	bool isDataValid(void) {
 
-		if(value>=-70&&value<=150){
+		if (value >= -70 && value <= 150) {
 			return true;
 		}
 		return false;
@@ -125,13 +140,18 @@ public:
 	T getDataValue(void) {
 		return value;
 	}
+
+	void setDataValue(T value) {
+		this->value = value;
+	}
+
 	char* getDataStrValue(void) {
 		return strVal;
 	}
 
-	bool isDataValid(void){
+	bool isDataValid(void) {
 
-		if(value>=500&&value<=1500){
+		if (value >= 500 && value <= 1500) {
 			return true;
 		}
 		return false;
@@ -144,9 +164,10 @@ private:
 
 class DataParser {
 
-	friend 	class DataSerializer;
+	friend class DataSerializer;
 
 public:
+	typedef
 	typedef enum {
 
 		eHumidity,
