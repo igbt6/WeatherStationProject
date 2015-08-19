@@ -13,6 +13,7 @@
 #include <string.h>
 #include "aJson/aJSON.h"
 #include "dataParser.h"
+#include "dataSerializer.h"
 
 void setup();
 void loop();
@@ -393,6 +394,7 @@ void setup() {
 	SysCtlClockSet(SYSCTL_SYSDIV_2_5 | SYSCTL_USE_PLL | SYSCTL_OSC_MAIN |
 	SYSCTL_XTAL_16MHZ); //in wiring.c clock 80MHZ enabled
 	INIT_DEBUG();
+	//Serial.begin(115200); /////////////////////////
 
 #ifdef CC3000_ENABLED
 
@@ -532,7 +534,17 @@ void loop() {
 						}
 
 					}
+				DataSerializer *serializer = new DataSerializer();
+				if(serializer->serializeData(dataParser)){
+					//delete dataParser;
+
+					//aJsonStream jsonStream(&Serial);
+					//jsonStream.printObject(serializer.getJson());
+
+				}
+				delete serializer;
 				delete dataParser;
+
 #ifdef CC3000_ENABLED
 				httpRequest();
 				// if there are incoming bytes available

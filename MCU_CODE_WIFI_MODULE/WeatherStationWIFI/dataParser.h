@@ -167,7 +167,7 @@ class DataParser {
 	friend class DataSerializer;
 
 public:
-	typedef
+
 	typedef enum {
 
 		eHumidity,

@@ -29,6 +29,7 @@ public:
 	DataSerializer();
 	~DataSerializer();
 	bool serializeData(DataParser* dataToBeParsed);
+	aJsonObject* getJson(void);
 
 };
 

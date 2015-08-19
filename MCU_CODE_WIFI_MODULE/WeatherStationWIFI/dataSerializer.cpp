@@ -13,14 +13,15 @@ DataSerializer::DataSerializer() :
 
 DataSerializer::~DataSerializer() {
 	if(jsonDataPacket!=NULL)
-		aJson.deleteItem(jsonDataPacket);
+		aJsonModel.deleteItem(jsonDataPacket);
 };
 
 bool DataSerializer::serializeData(DataParser* dataToBeParsed) {
 
+
 	if(jsonDataPacket==NULL)
 		jsonDataPacket = aJsonModel.createObject();
-	if (jsonDataPacket != NULL) {
+	if (jsonDataPacket == NULL||dataToBeParsed==NULL) {
 		return false;
 	}
 
@@ -37,3 +38,8 @@ bool DataSerializer::serializeData(DataParser* dataToBeParsed) {
 	else return false;
 	return true;
 };
+
+
+aJsonObject* DataSerializer::getJson(void){
+	return jsonDataPacket;
+}
