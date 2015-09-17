@@ -72,24 +72,20 @@ RF22::RF22(PinName slaveSelectPin, PinName mosi, PinName miso, PinName sclk, Pin
 
 }
 
-int RF22::init()
+bool RF22::init()
 {
     // Wait for RF22 POR (up to 16msec)
-    //delay(16);
     _shutdownPin= 0;  //power on
     wait_ms(16);
 
     // Initialise the slave select pin
-    //pinMode(_slaveSelectPin, OUTPUT);
-    //digitalWrite(_slaveSelectPin, HIGH);
     _slaveSelectPin = 1;
 
     wait_ms(100);
 
     // start the SPI library:
     // Note the RF22 wants mode 0, MSB first and default to 1 Mbps
-    /*SPI.begin();
-    SPI.setDataMode(SPI_MODE0);
+    /*SPI.setDataMode(SPI_MODE0);
     SPI.setBitOrder(MSBFIRST);
     SPI.setClockDivider(SPI_CLOCK_DIV16);  // (16 Mhz / 16) = 1 MHz
     */
@@ -97,7 +93,7 @@ int RF22::init()
     // Setup the spi for 8 bit data : 1RW-bit 7 adressbit and  8 databit
     // second edge capture, with a 10MHz clock rate
     _spi.format(8,0);
-    _spi.frequency(1000000);
+    _spi.frequency(10000000);
 
     // Software reset the device
     reset();
@@ -107,23 +103,9 @@ int RF22::init()
     _deviceType = spiRead(RF22_REG_00_DEVICE_TYPE);
     if (   _deviceType != RF22_DEVICE_TYPE_RX_TRX
             && _deviceType != RF22_DEVICE_TYPE_TX)
-        return 333;
-
-    // Set up interrupt handler
-//    if (_interrupt == 0)
-//    {
-    //_RF22ForInterrupt[0] = this;
-    //attachInterrupt(0, RF22::isr0, LOW);
-    _interrupt.fall(this, &RF22::isr0);
-    /*    }
-        else if (_interrupt == 1)
-        {
-        _RF22ForInterrupt[1] = this;
-        attachInterrupt(1, RF22::isr1, LOW);
-        }
-        else
         return false;
-    */
+
+    _interrupt.fall(this, &RF22::isr0);
     clearTxBuf();
     clearRxBuf();
 
@@ -185,9 +167,7 @@ int RF22::init()
    setTxPower(RF22_TXPOW_8DBM);
    //setTxPower(RF22_TXPOW_17DBM);
 
-
-     return 444;
-    //return true;
+    return true;
 }
 
 // C++ level interrupt handler for this instance

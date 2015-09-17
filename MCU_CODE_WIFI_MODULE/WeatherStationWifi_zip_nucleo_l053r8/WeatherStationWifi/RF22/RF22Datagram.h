@@ -32,7 +32,7 @@ public:
     
     /// Initialises this instance and the radio module connected to it.
     /// Overrides the init() function in RF22
-    int init();
+    bool init();
 
     /// Sets the address of this node. Defaults to 0. 
     /// This will be used to set the FROM address of all messages sent by this node.

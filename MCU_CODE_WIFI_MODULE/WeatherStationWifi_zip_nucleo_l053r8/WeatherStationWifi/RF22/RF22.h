@@ -807,7 +807,7 @@ public:
     /// - Sets the frequncy to 434.0 MHz
     /// - Sets the modem data rate to FSK_Rb2_4Fd36
     /// \return  true if everything was successful
-    int       init();
+    bool      init();
 
     /// Issues a software reset to the 
     /// RF22 module. Blocks for 1ms to ensure the reset is complete.

@@ -15,11 +15,11 @@ RF22Datagram::RF22Datagram(uint8_t thisAddress, PinName slaveSelectPin , PinName
 
 ////////////////////////////////////////////////////////////////////
 // Public methods
-int RF22Datagram::init()
+bool RF22Datagram::init()
 {
-    int ret = this->RF22::init();
-    //if (ret)
-    //setThisAddress(_thisAddress);
+    bool ret = this->RF22::init();
+    if (ret)
+        setThisAddress(_thisAddress);
     return ret;
 }
 

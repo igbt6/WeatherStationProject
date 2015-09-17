@@ -5,10 +5,11 @@
 Serial* usbDebug;
 
 #define RFM23D_ENABLED
-#define RFM_PIN_SDO  PB_14     //MISO
-#define RFM_PIN_SDI   PB_15   //MOSI
-#define RFM_PIN_SCLK  PB_13    //SCK
-#define RFM_PIN_nSEL  PB_12
+//SPI1 
+#define RFM_PIN_SDO   PA_6//PB_4     //MISO ON uC
+#define RFM_PIN_SDI   PA_7//PB_5     //MOSI
+#define RFM_PIN_SCLK  PA_5//PB_3     //SCK
+#define RFM_PIN_nSEL  PC_9     //PB12
 #define RFM_PIN_nIRQ  PB_2    //(as IRQ)
 #define RFM_PIN_SDN   PA_10
 
