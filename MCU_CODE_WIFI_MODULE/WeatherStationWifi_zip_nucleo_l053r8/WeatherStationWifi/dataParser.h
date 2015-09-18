@@ -10,6 +10,7 @@
 
 #include "MbedJSONValue.h"
 
+
 typedef double HUMIDITY_DATA_TYPE;
 typedef double TEMPERATURE_DATA_TYPE;
 typedef double LIGHT_DATA_TYPE;
@@ -20,147 +21,106 @@ typedef double PRESSURE_DATA_TYPE;
 static const char* dataDescriptors[] = { "HUM", "TEM", "LHT", "PRE", "GPS_E",
 		"GPS_T", "GPS_D", "GPS_P", "BAT", "LGT_D" };
 
-template<typename T> class DataType {
+template<typename T> class MeteoDataType {
+
+public:
+	
+	MeteoDataType(){
+		this->value = 0;
+		this->strVal = " ";
+	}
+	
+	MeteoDataType(T value, const char* strValue =" "){
+		this->value = value;
+		this->strVal = strValue;
+	}
+
+		T getDataValue(void) {
+		return value;
+	}
+
+	void setDataValue(T value) {
+		this->value = value;
+	}
 
 protected:
-	virtual T getDataValue(void)=0;
-	virtual void setDataValue(T val)=0;
-	virtual char* getDataStrValue(void)=0;
+	
+
+
+	std::string & getDataStrValue(void) {
+		return strVal;
+	}
+	
 	virtual bool isDataValid(void)=0;
 
+private: 
+	T value;
+	std::string  strVal;
+
 };
 
-template<typename T> class Humidity: public DataType<T> {
+template<typename T> class Humidity: public MeteoDataType<T> {
 
 public:
-	Humidity(T value, char* strValue = NULL) {
-		this->value = value;
-		this->strVal = strValue;
+
+	Humidity(T value, const char* strValue =" "):MeteoDataType<T>(value,strValue) {
 	}
-
-	T getDataValue(void) {
-		return value;
-	}
-
-	void setDataValue(T value) {
-		this->value = value;
-	}
-
-	char* getDataStrValue(void) {
-		return strVal;
-	}
-
-	bool isDataValid(void) {
-
-		if (value >= 0 && value <= 100) {
+	virtual bool isDataValid(void) {
+		if (this->getDataValue()>= 0 &&this->getDataValue() <= 100) {
 			return true;
 		}
 		return false;
 	}
-
-private:
-	T value;
-	char* strVal;
 };
 
-template<typename T> class Light: public DataType<T> {
+template<typename T> class Light: public MeteoDataType<T> {
 
 public:
-	Light(T value, char* strValue = NULL) {
-		this->value = value;
-		this->strVal = strValue;
+
+	Light(T value, const char* strValue =" "):MeteoDataType<T>(value,strValue) {
 	}
 
-	T getDataValue(void) {
-		return value;
-	}
+	virtual bool isDataValid(void) {
 
-	void setDataValue(T value) {
-		this->value = value;
-	}
-
-	char* getDataStrValue(void) {
-		return strVal;
-	}
-
-	bool isDataValid(void) {
-
-		if (value >= 0 && value <= 500000) {
+		if (this->getDataValue()>= 0 && this->getDataValue() <= 500000) {
 			return true;
 		}
 		return false;
 	}
-
-private:
-	T value;
-	char* strVal;
 };
 
-template<typename T> class Temperature: public DataType<T> {
+template<typename T> class Temperature: public MeteoDataType<T>{
 
 public:
-	Temperature(T value, char* strValue = NULL) {
-		this->value = value;
-		this->strVal = strValue;
+
+	Temperature(T value, const char* strValue =" "):MeteoDataType<T>(value,strValue) {
 	}
 
-	T getDataValue(void) {
-		return value;
-	}
+	virtual bool isDataValid(void) {
 
-	void setDataValue(T value) {
-		this->value = value;
-	}
-
-	char* getDataStrValue(void) {
-		return strVal;
-	}
-
-	bool isDataValid(void) {
-
-		if (value >= -70 && value <= 150) {
+		if (this->getDataValue()>= -70 && this->getDataValue() <= 150) {
 			return true;
 		}
 		return false;
 	}
-
-private:
-	T value;
-	char* strVal;
 };
 
-template<typename T> class Pressure: public DataType<T> {
+template<typename T> class Pressure: public MeteoDataType<T> {
 
 public:
-	Pressure(T value, char* strValue = NULL) {
-		this->value = value;
-		this->strVal = strValue;
+	Pressure(T value, const char* strValue =" "):MeteoDataType<T>(value,strValue) {
 	}
 
-	T getDataValue(void) {
-		return value;
-	}
+	virtual bool isDataValid(void) {
 
-	void setDataValue(T value) {
-		this->value = value;
-	}
-
-	char* getDataStrValue(void) {
-		return strVal;
-	}
-
-	bool isDataValid(void) {
-
-		if (value >= 500 && value <= 1500) {
+		if (this->getDataValue() >= 500 && this->getDataValue()<= 1500) {
 			return true;
 		}
 		return false;
 	}
-
-private:
-	T value;
-	char* strVal;
 };
+
+
 
 class DataParser {
 
@@ -186,23 +146,28 @@ public:
 	DataParser(const char* data);
 	virtual ~DataParser();
 	bool validateData(DataTypes type);
-	//template<typename Type> Type obtainDataObject(DataTypes type);
+	template<typename Type> Type extractDataFromJsonObj(DataTypes type);
 
 	//setters
-	inline void createHumObj(HUMIDITY_DATA_TYPE val) {
-		hum = new Humidity<HUMIDITY_DATA_TYPE>(val);
+	template<typename T> MeteoDataType<T>* createHumObj(T val) {
+		MeteoDataType<T>* ptr = new Humidity<T>(val);
+		hum =(Humidity<HUMIDITY_DATA_TYPE>*)ptr;
+		return ptr;
 	}
 
-	inline void createTempObj(TEMPERATURE_DATA_TYPE val) {
-		temp = new Temperature<TEMPERATURE_DATA_TYPE>(val);
+	template<typename T> MeteoDataType<T>* createTempObj(T val) {
+		MeteoDataType<T>* ptr = new Temperature<T>(val);
+		return ptr;
 	}
 
-	inline void createPressObj(PRESSURE_DATA_TYPE val) {
-		press = new Pressure<PRESSURE_DATA_TYPE>(val);
+	template<typename T> MeteoDataType<T>* createPressObj(T val) {
+		MeteoDataType<T>* ptr = new Pressure<T>(val);
+		return ptr;
 	}
 
-	inline void createLightObj(LIGHT_DATA_TYPE val) {
-		light = new Light<LIGHT_DATA_TYPE>(val);
+	template<typename T> MeteoDataType<T>*  createLightObj(T val) {
+		MeteoDataType<T>* ptr =  = new Light<T>(val);
+		return ptr;
 	}
 	//getters
 	inline Humidity<HUMIDITY_DATA_TYPE>* getHumObj() {
@@ -232,28 +197,25 @@ private:
 	MbedJSONValue rootJson;
 
 };
-/*
-template<typename Type> Type DataParser::obtainDataObject(DataTypes type) {
 
-	if (type >= eMaxNrOfTypes || !rootJson)
+template<typename Type> Type DataParser::extractDataFromJsonObj(DataTypes type) {
+	Type dataVal;
+	if (type >= eMaxNrOfTypes)
 		return (Type) -1;
-
-	aJsonObject* temp = aJson.getObjectItem(rootJson, dataDescriptors[type]);
+	dataVal = rootJson[dataDescriptors[type]].get<Type>();
 	switch (type) {
 
 	case eHumidity:
 	case eLight:
 	case eTemperature:
 	case ePressure:
-		return (Type) (temp->valuefloat);
+		return (Type) (dataVal);
 		break;
 
 	default:
 		return (Type) -1;
 	
 	}
-
 }
-*/
 #endif /* DATAPARSER_H_ */
 

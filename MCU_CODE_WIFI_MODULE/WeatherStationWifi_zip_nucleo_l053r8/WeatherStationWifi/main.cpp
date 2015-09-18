@@ -2,6 +2,7 @@
 #include <string.h>
 #include "main.h"
 #include "RF22ReliableDatagram.h"
+#include "dataParser.h"
  
 
 
@@ -34,8 +35,8 @@ static void debugInit(void)
 
 // create singleton objects
 //RFM23B
-static RF22ReliableDatagram* rfm23b;
-
+static RF22ReliableDatagram* rfm23b=NULL;
+static DataParser *dataParser=NULL;
 
 
 uint8_t data[] = "DATA_FROM_WIFI_MODULE";
@@ -63,7 +64,7 @@ int main() {
             uint8_t len = sizeof(buf);
             uint8_t from;
 
-    
+
             if (!rfm23b->sendtoWait(data, sizeof(data), STATION_ADDRESS)) 
             {
                 DEBUG("sending request to station failed...");
@@ -72,31 +73,33 @@ int main() {
             {
                 if (rfm23b->recvfromAckTimeout(buf, &len, 1000, &from)) {
                     DEBUG("received data from Station : 0x%d", from);
-                    DEBUG("DATA %s", buf);
+                    //DEBUG("DATA %s", buf);
 #endif
-            /*
+            
 
 
-                DataParser *dataParser = new DataParser((char*) buf);
-                for (int dataIdx = DataParser::eHumidity;
-                        dataIdx < DataParser::eMaxNrOfTypes; ++dataIdx) {
-
-
-
-                        if (dataIdx == DataParser::eHumidity) {
-                            dataParser->createHumObj(
-                                    dataParser->obtainDataObject<
-                                            HUMIDITY_DATA_TYPE>(
-                                            (DataParser::DataTypes) dataIdx));
-                           DEBUG("humidity: ");
-                           DEBUG(
-                                    (HUMIDITY_DATA_TYPE )dataParser->getHumObj()->getDataValue());
-                            if(!(dataParser->getHumObj()->isDataValid())){
-                                dataParser->getHumObj()->setDataValue(INVALID_VALUE);
+                dataParser= new DataParser((char*) buf);
+                if(dataParser!=NULL){
+                
+                    for (int dataIdx = DataParser::eHumidity;
+                            dataIdx < DataParser::eMaxNrOfTypes; ++dataIdx) {
+    
+                            if (dataIdx == DataParser::eHumidity) {
+                                dataParser->createHumObj(
+                                        dataParser->extractDataFromJsonObj<
+                                                HUMIDITY_DATA_TYPE>(
+                                                (DataParser::DataTypes) dataIdx));
+                               //DEBUG("humidity: ");
+                               DEBUG(" %.2f",(HUMIDITY_DATA_TYPE )dataParser->getHumObj()->getDataValue());
+                                if(!(dataParser->getHumObj()->isDataValid())){
+                                    dataParser->getHumObj()->setDataValue(INVALID_VALUE);
+                                }
                             }
-                        }
-
-                        else if (dataIdx == DataParser::eTemperature) {
+                     }
+                     delete dataParser;
+                     dataParser=NULL;
+                }
+   /*                      else if (dataIdx == DataParser::eTemperature) {
                             dataParser->createTempObj(
                                     dataParser->obtainDataObject<
                                             TEMPERATURE_DATA_TYPE>(

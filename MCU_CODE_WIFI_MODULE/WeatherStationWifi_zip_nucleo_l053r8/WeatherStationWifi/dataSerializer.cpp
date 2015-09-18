@@ -20,10 +20,10 @@ bool DataSerializer::serializeData(DataParser* dataToBeParsed) {
 	if (dataToBeParsed==NULL) {
 		return false;
 	}
-	jsonData["HUM"]=dataToBeParsed->hum->getDataValue();
-	jsonData["TEMP"]= dataToBeParsed->temp->getDataValue();
-	jsonData["PRE"]=dataToBeParsed->press->getDataValue();
-	jsonData["LHT"]=dataToBeParsed->light->getDataValue();
+	//jsonData["HUM"]=dataToBeParsed->hum->getDataValue();
+	//jsonData["TEMP"]= dataToBeParsed->temp->getDataValue();
+	//jsonData["PRE"]=dataToBeParsed->press->getDataValue();
+	//jsonData["LHT"]=dataToBeParsed->light->getDataValue();
 	jsonDataPacket =jsonData.serialize();
 
 	return true;
